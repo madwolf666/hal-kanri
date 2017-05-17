@@ -1,0 +1,53 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2017/05/01, 12:05:40
+    Author     : hal
+*/
+
+tr,td,th {
+    border: thin #000000 solid;
+}
+
+td {
+    font-size:13px;
+    /*word-break:break-all;*/   /*[2017.05.02]*/
+}
+
+/*[2017.05.02]*/
+td div.myover {
+    position: relative;
+    overflow: hidden;
+    height: 20px;
+}
+
+.myheader {
+    background-color: #6495ED;
+    color: white;
+    font-weight: bold;
+
+}
+
+.ClaimSide{
+    background-color: #FBFB86;
+    color: black;
+    font-weight: bold;
+}
+
+.paymentSide {
+    background-color: #87cefa;
+    color: black;
+    font-weight: bold;
+}
+
+.tableStyle {
+    background-color: black;
+    /*table-layout: fixed;*/    /*[2017.05.02]*/
+}
+
+.cell {
+    background-color: white;
+}

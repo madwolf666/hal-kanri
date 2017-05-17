@@ -1,0 +1,198 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+require_once('./header.php');
+
+if (!isset($_GET['MOD'])){
+    $a_mod = 0;
+}else{
+    $a_mod = $_GET['MOD'];
+}
+?>
+
+<link rel="stylesheet" href="css/hal-kanri-10504.css">
+
+<section>
+    
+<h2>契約書台帳</h2>
+<h3>就業条件明示書</h3>
+
+<form action="index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>" method="post">
+<center>
+    <div class="width">
+        <br>
+        <font size="+2"><B><u>就業条件明示書</u></B></font>
+        <p style="width:120px; margin-left:auto; text-align:left;">平成29年4月7日</p>
+        <p style="width:150px; margin-right:auto; text-align:right;"><u>　待谷　勇介　様</u></p>
+        <p style="width:270px; margin-left:auto; text-align:left;">
+                東京都渋谷区広尾１－１－３９<br>
+                恵比寿プライムスクエアタワー18階<br>
+                株式会社　ＨＡＬ<br>
+                代表取締役　　　寺　西　　信　夫<br>
+        </p>
+        <p style="width:260px; margin-right:auto; text-align:right;">次の条件で労働者派遣を行います。</p>
+    </div>
+    <table border="1" rules="all" width=100%>
+	<tr>
+            <td width=20%>業務内容</td>
+            <td class="remarks" colspan="5" width=80%>
+                    情報処理システム開発（１号）業務<br>
+                    ソフトウェア開発補助業務<br>
+                    派遣法施行令第４条第一項第一号<br>
+            </td>
+	</tr>
+	<tr>
+            <td rowspan="4" width=20%>就業場所</td>
+            <td class="remarks hiddencell_r hiddencell_b" width=10%>事業所名</td>
+            <td class="remarks hiddencell_b" colspan="4" width=70%>Sky株式会社</td>
+	</tr>
+	<tr>
+            <td class="remarks hiddencell_r hiddencell_b">部署名</td>
+            <td class="remarks hiddencell_b" colspan="4">クライアント・システム開発事業部　技術部ビジネスソリューショングループ</td>
+	</tr>
+	<tr>
+            <td class="remarks hiddencell_r hiddencell_b">所在地</td>
+            <td class="remarks hiddencell_b" colspan="4">兵庫県伊丹市高台4-18</td>
+	</tr>
+	<tr>
+            <td class="remarks hiddencell_r">電話番号</td>
+            <td class="remarks" colspan="4">０７２－７８２－８４９６</td>
+	</tr>
+	<tr>
+            <td width=20%>組織単位</td>
+            <td class="remarks" colspan="5" width=80%>クライアント・システム開発事業部　技術部ビジネスソリューショングループ</td>
+	</tr>
+	<tr>
+            <td width=20%>指揮命令者</td>
+            <td width=5% class="hiddencell_r">職名</td>
+            <td width=15% class="hiddencell_r remarks">次長</td>
+            <td width=10% class="hiddencell_r">氏名</td>
+            <td width=50% class="remarks" colspan="2">西野　弘人史</td>
+	</tr>
+	<tr>
+            <td width=20%>抵触日</td>
+            <td class="remarks" colspan="5" width=80%>平成30年10月1日</td>
+	</tr>
+	<tr>
+            <td width=20%>就業日</td>
+            <td class="remarks" colspan="5" width=80%>派遣先の就業日に準ずる</td>
+	</tr>
+	<tr>
+            <td width=20%>就業時間</td>
+            <td class="remarks" colspan="5" width=80%>
+                    09時30分から18時30分<br>
+    （うち休憩時間　12時00分から13時00分までの間60分間）</td>
+	</tr>
+	<tr>
+            <td width=20%>安全及び衛生</td>
+            <td class="remarks" colspan="5" width=80%>派遣先の安全衛生に関する規定を適用し、その他については、派遣元の安全衛生に関する規定を適用する。</td>
+	</tr>
+	<tr>
+            <td rowspan="2" width=20%>時間外勤務<br>及び休日勤務</td>
+            <td class="remarks hiddencell_r" colspan="2" width=20%>時間外勤務（有）</td>
+            <td class="remarks" colspan="3" width=60%>１日１５時間、週１５時間、年３６０時間</td>
+	</tr>
+	<tr>
+            <td class="remarks hiddencell_r" colspan="2" width=20%>休日勤務　（有）</td>
+            <td class="remarks" colspan="3" width=60%>法定休日につき２回</td>
+	</tr>
+	<tr>
+            <td width=20%>派遣先責任者</td>
+            <td width=3% class="hiddencell_r">職名</td>
+            <td width=7% class="hiddencell_r">チーフ</td>
+            <td width=3% class="hiddencell_r">氏名</td>
+            <td width=17% class="hiddencell_r">菅野　真一郎</td>
+            <td width=50%>（電話：０６－４８０７－６６２０）</td>
+	</tr>
+	<tr>
+            <td width=20%>派遣元責任者</td>
+            <td width=3% class="hiddencell_r">職名</td>
+            <td width=7% class="hiddencell_r">　</td>
+            <td width=3% class="hiddencell_r">氏名</td>
+            <td width=17% class="hiddencell_r">保木本　大貴</td>
+            <td width=50%>（電話：０６－６１３６－５７７２）</td>
+	</tr>
+	<tr>
+            <td width=20%>福利厚生施設<br>の利用等</td>
+            <td class="remarks" colspan="5" width=80%>派遣労働者に対し、派遣先が雇用する労働者が利用する施設または設備について、利用することができるように便宜供与するものとする。</td>
+	</tr>
+	<tr>
+            <td rowspan="3"  width=20%>苦情の処理・<br>申出先（1）</td>
+            <td colspan="5" width=80%  class="remarks hiddencell_b">申込先</td>
+	</tr>
+	<tr>
+            <td width=15% class="hiddencell_r hiddencell_b">派遣先：職名</td>
+            <td width=5% class="hiddencell_r hiddencell_b">チーフ</td>
+            <td width=5% class="hiddencell_r hiddencell_b">氏名</td>
+            <td width=10% class="hiddencell_r hiddencell_b">菅野　真一郎</td>
+            <td width=45% class="hiddencell_b">（電話：０６－４８０７－６６２０）</td>
+	</tr>
+	<tr>
+            <td width=15% class="hiddencell_r">派遣先：職名</td>
+            <td width=5% class="hiddencell_r">　</td>
+            <td width=5% class="hiddencell_r">氏名</td>
+            <td width=10% class="hiddencell_r">保木本　大貴</td>
+            <td width=45%>（電話：０６－６１３６－５７７２）</td>
+	</tr>
+	<tr>
+            <td width=20%>苦情処理方、<br>連携体制等</td>
+            <td colspan="5" class="remarks" width=80%>
+			①　派遣元における（１）記載者の者が苦情の申し出を受けたときは、ただちに<br>
+　　派遣元責任者へ連絡することとし、当該派遣元責任者が中心となって、<br>
+　　誠意をもって、遅滞なく、当該苦情の適切かつ迅速な処理を図ることとし、<br>
+　　その結果について必ず派遣労働者に通知することとする。<br>
+			<br>
+			②　派遣先における（1）記載者の者が苦情の申出を受けたときは、ただちに<br>
+　　派遣先責任者へ連絡することとし、当該派遣先責任者が中心となって、<br>
+　　誠意をもって、遅滞なく、当該苦情の適切かつ迅速な処理を図ることとし、<br>
+　　その結果について必ず派遣労働者に通知することとする。<br>
+			<br>
+			③　派遣元事業主及び派遣先は、自らでその解決が容易であり、即時に処理した<br>
+　　苦情の他は、相互に遅滞なく通知するとともに、密接に連絡調整を行いつつ、<br>
+　　その解決を図ることとする。<br>
+            </td>
+	</tr>
+	<tr>
+            <td width=20%>派遣契約解除<br>の場合の措置</td>
+            <td colspan="5" class="remarks" width=80%>
+                    派遣元事業主は、労働者派遣契約の契約期間が満了する前に派遣労働者の責に帰すべき事由以外の事由によって労働者派遣契約の解除が行われた場合には、
+                    当該労働者派遣契約に係る派遣先と連携して、当該派遣先からその関連会社での就業のあっせんを受けること、
+                    当該派遣元事業主において他の派遣先を確保すること等により、当該労働者派遣契約に係る派遣労働者の新たな就業機会の確保を図ることとする。
+                    また、当該派遣元事業主は、当該労働者派遣契約の解除に当たって、新たな就業機会の確保ができない場合は、まず休業等を行い、
+                    当該派遣労働者の雇用の維持を図るようにするとともに、休業手当の支払の労働基準法等に基づく責任を果たすこととする。
+                    さらに、やむを得ない事由によりこれができない場合において、当該派遣労働者を解雇しようとするときであっても、
+                    労働契約法の規定を遵守することはもとより、少なくとも30日前に予告することとし、
+                    30日前に予告しないときは労働基準法第20条第1項に基づく解雇予告手当を支払うこと、休業させる場合には労働基準法第26条に基づく休業手当を支払うこと等、
+                    雇用主に係る労働基準法等の責任を負うこととする。
+            </td>
+	</tr>
+	<tr>
+            <td width=20%>派遣料金</td>
+            <td colspan="2" width=40% class="hiddencell_r">６１０，０００円/月</td>
+            <td colspan="3" width=40% class="remarks">※HALと客先の契約金額</td>
+	</tr>
+	<tr>
+            <td width=20% height=300>備考</td>
+            <td class="remarks" colspan="5" width=80%>無期雇用労働者</td>
+	</tr>
+    </table>
+    <br>
+</center>
+
+<p class="c">
+<input type="button" value="Excelへ出力" onclick="return excel_out_10504();">
+<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>'">
+</p>
+
+</form>
+
+</section>
+
+<?php
+require_once('./footer.php');
+?>
