@@ -292,7 +292,7 @@ function make_input_text(h_cr_id, h_field, h_id)
     if (a_val != null) {
         a_str += a_val;
     }
-    a_str += '" style="width: 90%;"';
+    a_str += '" style="width: 96%;"';
     a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_field + '\',\'' + h_id + '\',1);"';
     a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\');"';
     a_str += '>';
