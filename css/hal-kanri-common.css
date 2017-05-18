@@ -35,6 +35,7 @@ table.tbl_list td div.myover {
 table.tbl_list tr.tr_title2 { background-color:#6495ED; color:#ffffff;}
 table.tbl_list td.td_title2 { text-align:center; padding: 0px 1px; }
 table.tbl_list td.td_line2 { text-align:left; padding: 0px 1px; }
+table.tbl_list td.td_lineI { text-align:left; padding: 0px 1px; border-color: #ff0000;}
 
 .popup {
 	display:none;

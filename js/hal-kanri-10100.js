@@ -1369,6 +1369,7 @@ function unregist_contract_report(h_no)
 
 }
 
+//入力変更チェック
 function check_value_changed_10102(h_kind, h_field, h_val, h_name)
 {
     if ($('#cr_id').val() == '') return;
@@ -1404,6 +1405,7 @@ function check_value_changed_10102(h_kind, h_field, h_val, h_name)
    });
 }
 
+//入力変更チェック
 function check_value_changed_10105(h_kind, h_field, h_val, h_name)
 {
     if ($('#cr_id').val() == '') return;
@@ -1439,6 +1441,7 @@ function check_value_changed_10105(h_kind, h_field, h_val, h_name)
    });
 }
 
+//入力変更チェック
 function check_value_changed_10107(h_kind, h_field, h_val, h_name)
 {
     if ($('#cr_id').val() == '') return;
@@ -1473,3 +1476,55 @@ function check_value_changed_10107(h_kind, h_field, h_val, h_name)
        }
    });
 }
+
+//Enterキー押下時の処理
+function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
+{
+    //alert(h_cr_id + "," + h_field + "," + h_id);
+
+    if(h_key == 13){
+        //alert("ENTERが押されました");
+        //alert($("#i_" + h_field + h_id).val());
+        var a_val = $("#i_" + h_field + h_id).val();
+        
+        //alert(h_cr_id + "," + h_kind + "," + h_field + "," + a_val);
+        //DBに登録する
+        // h_kind   1:文字、2:日付、3：時間
+        $.ajax({
+            url: m_parentURL + "update_value_10102.php",
+            type: 'POST',
+            dataType: "html",
+            async: false,
+            data:{
+                'cr_id': h_cr_id,
+                'kind': h_kind,
+                'field': h_field,
+                'val': a_val,
+            },
+            success: function(data, dataType){
+                //alert(data);
+                if (data == 'OK') {
+                    //$(h_name).css("background-color","#ffffff");
+                } else if ((data == 'NG')) {
+                    //$(h_name).css("background-color","#ffccff");
+                }else{
+                    alert(data);
+                    //$("#my-result").empty().append(data);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown.message);
+            },
+           complete: function (data) {
+                $("#" + h_field + h_id).empty().append(a_val);
+                g_input_click = false;
+                $.unblockUI();
+           }
+        });
+
+        //g_input_click = false;
+    }else{
+        //alert("ENTER以外が押されました");
+    }    
+}
+

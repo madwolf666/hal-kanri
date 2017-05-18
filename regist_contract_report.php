@@ -144,6 +144,7 @@ try{
             ,payment_middle_daily_manual
             ,payment_leaving_daily_auto
             ,payment_leaving_daily_manual
+            ,reg_id
             ";
         $a_sql .= ") VALUES(";
         $a_sql .= "
@@ -270,6 +271,7 @@ try{
             ,:payment_middle_daily_manual
             ,:payment_leaving_daily_auto
             ,:payment_leaving_daily_manual
+            ,:reg_id
             ";
         $a_sql .= ");";
     }else{
@@ -398,6 +400,7 @@ try{
             ,payment_middle_daily_manual=:payment_middle_daily_manual
             ,payment_leaving_daily_auto=:payment_leaving_daily_auto
             ,payment_leaving_daily_manual=:payment_leaving_daily_manual
+            ,upd_id=:upd_id
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -624,7 +627,10 @@ try{
     $a_stmt->bindParam(':payment_leaving_daily_manual', $_POST['inp_wariai_taijyo_c2'], PDO::PARAM_STR);
 
     if ($a_act == 'e'){
+        com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
         com_pdo_bindValue($a_stmt, ':cr_id', $_POST['cr_id']);
+    } else {
+        com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
     }
     
     $a_stmt->execute();

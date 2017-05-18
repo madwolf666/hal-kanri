@@ -254,3 +254,52 @@ function hide_popup()
 {
     $('.popup, #overlay').hide();
 }
+
+var g_input_click = false;
+
+//focus
+function after_focus(h_field, h_id)
+{
+    $("#i_" + h_field + h_id).focus();
+}
+
+//reset input 
+function reset_input(h_field, h_id)
+{
+    //alert(h_field + "," + h_id );
+    var a_val = $("#i_" + h_field + h_id).val();
+    $("#" + h_field + h_id).empty().append(a_val);
+
+    g_input_click = false;
+}
+//入力フィールド作成
+function make_input_text(h_cr_id, h_field, h_id)
+{
+    //alert(h_cr_id + "," + h_field + "," + h_id );
+    
+    if (g_input_click == true) {
+        //alert('ccc');
+        return;
+    }
+    
+    var a_str = '<input type="text"';
+    
+    a_str += ' id="i_' + h_field + h_id + '"';
+    a_str += ' value="';
+
+    var a_val = $("#" + h_field + h_id).text();
+    //alert(a_val);
+    if (a_val != null) {
+        a_str += a_val;
+    }
+    a_str += '" style="width: 90%;"';
+    a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_field + '\',\'' + h_id + '\',1);"';
+    a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\');"';
+    a_str += '>';
+    //alert(a_str);
+    $("#" + h_field + h_id).empty().append(a_str);
+    $("#" + h_field + h_id).focus();
+    //alert($("#" + h_field + h_id).text());
+     
+    g_input_click = true;
+}

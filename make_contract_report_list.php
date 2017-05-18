@@ -172,8 +172,8 @@ try{
         }
 
         $a_sRet_L .= "<td class='td_line2' style='width: 51px;'><div class='myover'>".$a_result['contract_number']."</td>";
-        //$a_sRet_L .= "<td class='td_line2' style='width: 51px;'><div class='myover'>".$a_result['contract_number']."</td>";
-
+        //$a_sRet_L .= "<td class='td_line2' style='width: 51px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'contract_number',$a_rec).">".$a_result['contract_number']."</td>";
+        
         $a_sRet_L .= "<td class='td_line2' style='width: 78px;'><div class='myover'>".com_replace_toDate($a_result['publication'])."</td>";
         $a_sRet_L .= "<td class='td_line2' style='width: 62px;'><div class='myover'>".$a_result['author']."</td>";
         

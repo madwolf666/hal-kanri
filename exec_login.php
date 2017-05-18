@@ -34,6 +34,7 @@ try{
         //print($a_result['person']);
 
         //認証OKの場合は、セッション変数にパスワードを保存する。
+        $_SESSION["hal_idx"] = $a_result['idx'];
         $_SESSION["hal_branch"] = $a_result['branch'];
         $_SESSION["hal_person"] = $a_result['person'];
         $_SESSION["hal_auth"] = $a_result['auth'];
@@ -41,11 +42,13 @@ try{
         //cookie
         if ($a_remember == 'true'){
             //cookieに保存
+            setcookie('hal_idx', $a_result['idx'], time() + 60 * 60 * 24 * 14);
             setcookie('hal_branch', $a_result['branch'], time() + 60 * 60 * 24 * 14);
             setcookie('hal_person', $a_result['person'], time() + 60 * 60 * 24 * 14);
             setcookie('hal_auth', $a_result['auth'], time() + 60 * 60 * 24 * 14);
         }else{
             //cookieから削除
+            setcookie('hal_idx', '', time() - 1800);
             setcookie('hal_branch', '', time() - 1800);
             setcookie('hal_person', '', time() - 1800);
             setcookie('hal_auth', '', time() - 1800);

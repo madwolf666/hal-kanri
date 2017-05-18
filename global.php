@@ -54,6 +54,8 @@ $g_DB_t_contract_estimate = "t_contract_estimate";
 $g_DB_t_contract_end_report = "t_contract_end_report";
 $g_DB_t_contract_report = "t_contract_report";
 
+$g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
+
 /*******************************************************************************
 * メニュー
 *******************************************************************************/
@@ -141,15 +143,34 @@ $g_NOW_URI = $g_URL_ARRAY[count($g_URL_ARRAY)-1];
 //echo $g_NOW_URI;
 //exit;
 
+//[2017.05.18]
+if ((isset($_COOKIE['hal_auth'])) &&
+    (isset($_COOKIE['hal_person'])) &&
+    (isset($_COOKIE['hal_branch'])) &&
+    (isset($_COOKIE['hal_idx']))) {
+    
+    if (($_COOKIE['hal_auth'] != '') &&
+        ($_COOKIE["hal_person"] != '') &&
+        ($_COOKIE["hal_branch"] != '') &&
+        ($_COOKIE["hal_idx"] != '')){
+        $_SESSION["hal_idx"] = $_COOKIE['hal_idx'];
+        $_SESSION["hal_branch"] = $_COOKIE['hal_branch'];
+        $_SESSION["hal_person"] = $_COOKIE['hal_person'];
+        $_SESSION["hal_auth"] = $_COOKIE['hal_auth'];
+    }
+}
+
 if ($g_NOW_URI == 'login.php'){
     //ログイン画面
     if ((!isset($_SESSION['hal_auth'])) ||
         (!isset($_SESSION["hal_person"])) ||
-        (!isset($_SESSION["hal_branch"]))){
+        (!isset($_SESSION["hal_branch"])) ||
+        (!isset($_SESSION["hal_idx"]))){
     }else{
         if (($_SESSION['hal_auth'] != '') &&
             ($_SESSION["hal_person"] != '') &&
-            ($_SESSION["hal_branch"] != '')){
+            ($_SESSION["hal_branch"] != '') &&
+            ($_SESSION["hal_idx"] != '')){
             //ログイン画面へ遷移
             header('Location: ./index.php');
             exit;
@@ -161,14 +182,16 @@ if ($g_NOW_URI == 'login.php'){
     //その他
     if ((!isset($_SESSION['hal_auth'])) ||
         (!isset($_SESSION["hal_person"])) ||
-        (!isset($_SESSION["hal_branch"]))){
+        (!isset($_SESSION["hal_branch"])) ||
+        (!isset($_SESSION["hal_idx"]))){
         //ログイン画面へ遷移
         header('Location: ./login.php');
         exit;
     }else{
         if (($_SESSION['hal_auth'] == '') ||
             ($_SESSION["hal_person"] == '') ||
-            ($_SESSION["hal_branch"] == '')){
+            ($_SESSION["hal_branch"] == '') ||
+            ($_SESSION["hal_idx"] == '')){
             //ログイン画面へ遷移
             header('Location: ./login.php');
             exit;
@@ -339,4 +362,12 @@ function com_replace_toNumber($h_val)
     return str_replace("￥", "", str_replace(",", "", $h_val));
 }
 
+//入力タグ生成
+function com_make_input_text($h_idx, $h_field, $h_rec)
+{
+    $a_sRet = "id='".$h_field.$h_rec."'";
+    $a_sRet .= " onClick='make_input_text(".$h_idx.",\"".$h_field."\",".$h_rec."); after_focus(\"".$h_field."\",".$h_rec.");'";
+    
+    return $a_sRet;
+}
 ?>

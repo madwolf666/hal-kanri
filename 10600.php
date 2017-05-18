@@ -10,6 +10,8 @@ require_once('./header.php');
 
 ?>
 
+<link rel="stylesheet" href="css/hal-kanri-common.css">
+
 <section>
 <h2>派遣元台帳</h2>
 
@@ -18,8 +20,29 @@ require_once('./header.php');
     <input type="button" value="Excelへ一覧出力" onclick="return excel_out_10600();">
 </p>
 
+<center>
+<div id="my-list" style="z-index:100; width: auto; padding-bottom: 4px;"></div>
+</center>
+
 </section>
 
 <?php
 require_once('./footer.php');
 ?>
+
+<script src="./js/hal-kanri-10600.js"></script>
+<script type="text/javascript">
+    make_dispatching_management_ledger_list(1);
+    resize_div2('leftColumn', 'right_title', 'right_record', 360); 
+    $(window).resize(function(){
+        resize_div2('leftColumn', 'right_title', 'right_record', 360); 
+    });
+/*
+    resize_div('right_title', 360+17); 
+    resize_div('right_record', 360); 
+    $(window).resize(function(){
+        resize_div('right_title', 360+17); 
+        resize_div('right_record', 360); 
+    });
+*/
+</script>
