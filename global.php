@@ -55,6 +55,7 @@ $g_DB_t_contract_end_report = "t_contract_end_report";
 $g_DB_t_contract_report = "t_contract_report";
 
 $g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
+$g_DB_t_purchase_order_ledger = "t_purchase_order_ledger";
 
 /*******************************************************************************
 * メニュー
