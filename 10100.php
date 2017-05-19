@@ -30,7 +30,7 @@ require_once('./header.php');
 </section>
 
 <div id="my-popup" class="popup">
-	<div id="my-contract-report" class="popup_inner" style="">
+	<div id="my-method" class="popup_inner" style="">
             <a href="#" onclick="hide_popup();">閉じる</a>
 	</div>
 </div>

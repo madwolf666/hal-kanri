@@ -190,46 +190,6 @@ function excel_out_10300(){
     location.href = m_parentURL + "excel_out_10300.php";
     return false;
 }
-//Excelへ注文書台帳出力
-function excel_out_10400(){
-    location.href = m_parentURL + "excel_out_10400.php";
-    return false;
-}
-//Excelへ注文書出力
-function excel_out_10402(){
-    location.href = m_parentURL + "excel_out_10402.php";
-    return false;
-}
-//Excelへ注文請書出力
-function excel_out_10403(){
-    location.href = m_parentURL + "excel_out_10403.php";
-    return false;
-}
-//Excelへ契約書台帳出力
-function excel_out_10500(){
-    location.href = m_parentURL + "excel_out_10500.php";
-    return false;
-}
-//Excelへ労働契約書出力
-function excel_out_10502(){
-    location.href = m_parentURL + "excel_out_10502.php";
-    return false;
-}
-//Excelへ労働契約書（再発行）出力
-function excel_out_10503(){
-    location.href = m_parentURL + "excel_out_10503.php";
-    return false;
-}
-//Excelへ就業条件書出力
-function excel_out_10504(){
-    location.href = m_parentURL + "excel_out_10504.php";
-    return false;
-}
-//Excelへ派遣元台帳出力
-function excel_out_10600(){
-    location.href = m_parentURL + "excel_out_10600.php";
-    return false;
-}
 
 //------------------------------------------------------------------------------
 //ポップアップ

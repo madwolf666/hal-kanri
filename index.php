@@ -57,10 +57,10 @@ if (!isset($_GET['mnu'])){
         header('Location: ./10401.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10402']:   //注文書
-        header('Location: ./10402.php');
+        header('Location: ./10402.php?ACT='.$_GET['ACT'].'&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10403']:   //注文請書
-        header('Location: ./10403.php');
+        header('Location: ./10403.php?ACT='.$_GET['ACT'].'&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10500']:   //契約書台帳
         header('Location: ./10500.php');
@@ -69,13 +69,13 @@ if (!isset($_GET['mnu'])){
         header('Location: ./10501.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10502']:   //労働契約書
-        header('Location: ./10502.php');
+        header('Location: ./10502.php?ACT='.$_GET['ACT'].'&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10503']:   //労働契約書（再発行）
-        header('Location: ./10503.php');
+        header('Location: ./10503.php?ACT='.$_GET['ACT'].'&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10504']:   //就業条件明示書
-        header('Location: ./10504.php');
+        header('Location: ./10504.php?ACT='.$_GET['ACT'].'&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10600']:   //派遣元台帳
         header('Location: ./10600.php');

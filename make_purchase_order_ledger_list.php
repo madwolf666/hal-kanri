@@ -163,7 +163,10 @@ try{
         //入力あり
         $a_sRet_L .= "<td class='td_lineI' style='width: 60px;'><div class='myover' ".com_make_input_text($cr_id,'publication',$a_rec).">".$publication."</td>";
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$engineer_number."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>";
+        $a_sRet_L .= "<a href='#' onclick='choice_purchase_order_ledger_method(\"".$a_result['cr_id']."\");'>".$a_result['engineer_number']."</a>";
+        $a_sRet_L .= "</td>";
+
         $a_sRet_L .= "<td class='td_line2' style='width: 60px;'><div class='myover'>".$engineer_name."</td>";
         $a_sRet_L .= "<td class='td_line2' style='width: 60px;'><div class='myover'>".$engneer_name_phonetic."</td>";
         

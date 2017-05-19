@@ -1166,7 +1166,7 @@ function choice_contract_report_method(h_no)
             'cr_id': h_no
         },
         success: function(data, dataType){
-            $("#my-contract-report").empty().append(data);
+            $("#my-method").empty().append(data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(errorThrown.message);

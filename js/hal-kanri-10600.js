@@ -30,6 +30,12 @@ function make_dispatching_management_ledger_list(h_pageNo)
    });
 }
 
+//Excelへ派遣元台帳出力
+function excel_out_10600(){
+    location.href = m_parentURL + "excel_out_10600.php";
+    return false;
+}
+
 //Enterキー押下時の処理
 function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
 {

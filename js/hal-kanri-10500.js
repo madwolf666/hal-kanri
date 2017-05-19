@@ -5,15 +5,16 @@
  */
 
 $(function () {
-    $('#publication').datepicker({});
+    $('#person_birthday').datepicker({});
+    $('#contact_date_org').datepicker({});
 });
 
-function make_purchase_order_ledger_list(h_pageNo)
+function make_agreement_ledger_list(h_pageNo)
 {
     m_ProgressMsg('データ取得中です......<br><img src="./images/upload.gif" /> ');
 
     $.ajax({
-        url: m_parentURL + "make_purchase_order_ledger_list.php",
+        url: m_parentURL + "make_agreement_ledger_list.php",
         type: 'POST',
         dataType: "html",
         async: false,
@@ -33,15 +34,15 @@ function make_purchase_order_ledger_list(h_pageNo)
    });
 }
 
-//注文書機能選択
-function choice_purchase_order_ledger_method(h_no)
+//契約書機能選択
+function choice_agreement_ledger_method(h_no)
 {
     //alert(h_no);
     /**/
     m_ProgressMsg('データ取得中です......<br><img src="./images/upload.gif" /> ');
     
     $.ajax({
-        url: m_parentURL + "choice_purchase_order_ledger_method.php",
+        url: m_parentURL + "choice_agreement_ledger_method.php",
         type: 'POST',
         dataType: "html",
         async: false,
@@ -62,8 +63,8 @@ function choice_purchase_order_ledger_method(h_no)
     show_popup();
 }
 
-//注文書
-function regist_purchase_order_10402(h_act, h_no)
+//労働契約書
+function regist_agreement_10502(h_act, h_no)
 {
     var a_idx = "";
     var a_sKind = "";
@@ -73,43 +74,31 @@ function regist_purchase_order_10402(h_act, h_no)
         a_sKind = '更新';
     }
 
-    if (check_IsRequired('#po_no', '注文書Noが入力されていません！') == false) return;
-    if (check_IsRequired('#publication', '発行日が入力されていません！') == false) return;
+    if (check_IsRequired('#po_no', '労働契約書Noが入力されていません！') == false) return;
 
-    if (!confirm("注文書を" + a_sKind + "します。よろしいですか？")) return;
-    /*
-    alert(h_act);
-    alert(h_no);
-    alert($('#po_no').val());
-    alert($('#publication').val());
-    alert($('#remarks1').val());
-    alert($('#remarks2').val());
-    alert($('#remarks3').val());
-    alert($('#remarks4').val());
-    */
+    if (!confirm("労働契約書を" + a_sKind + "します。よろしいですか？")) return;
+
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
     $.ajax({
-        url: m_parentURL + "regist_purchase_order_10402.php",
+        url: m_parentURL + "regist_agreement_10502.php",
         type: 'POST',
         dataType: "html",
         async: false,
         data:{
             'act': h_act,
             'no': h_no,
-            'po_no': $('#po_no').val(),
-            'publication': $('#publication').val(),
-            'remarks1': $('#remarks1').val(),
-            'remarks2': $('#remarks2').val(),
-            'remarks3': $('#remarks3').val(),
-            'remarks4': $('#remarks4').val(),
+            'ag_no': $('#ag_no').val(),
+            'person_birthday': $('#person_birthday').val(),
+            'person_post_no': $('#person_post_no').val(),
+            'person_address': $('#person_address').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){
                 alert(a_sKind + "しました。");
                 //$.unblockUI();
                 //document.location.href = "./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90100']; ?>";
-                location.href = "./index.php?mnu=10400";
+                location.href = "./index.php?mnu=10500";
             }else{
                 $("#my-result").empty().append(data);
             }
@@ -124,8 +113,8 @@ function regist_purchase_order_10402(h_act, h_no)
 
 }
 
-//注文請書
-function regist_purchase_order_10403(h_act, h_no)
+//労働契約書（再発行）
+function regist_agreement_10503(h_act, h_no)
 {
     var a_idx = "";
     var a_sKind = "";
@@ -135,10 +124,9 @@ function regist_purchase_order_10403(h_act, h_no)
         a_sKind = '更新';
     }
 
-    if (check_IsRequired('#po_no', '注文書Noが入力されていません！') == false) return;
-    if (check_IsRequired('#publication', '発行日が入力されていません！') == false) return;
+    if (check_IsRequired('#po_no', '労働契約書Noが入力されていません！') == false) return;
 
-    if (!confirm("注文書請書を" + a_sKind + "します。よろしいですか？")) return;
+    if (!confirm("労働契約書（再発行）を" + a_sKind + "します。よろしいですか？")) return;
     /*
     alert(h_act);
     alert(h_no);
@@ -152,26 +140,33 @@ function regist_purchase_order_10403(h_act, h_no)
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
     $.ajax({
-        url: m_parentURL + "regist_purchase_order_10403.php",
+        url: m_parentURL + "regist_agreement_10503.php",
         type: 'POST',
         dataType: "html",
         async: false,
         data:{
             'act': h_act,
             'no': h_no,
-            'po_no': $('#po_no').val(),
-            'publication': $('#publication').val(),
-            'remarks1': $('#remarks1').val(),
-            'remarks2': $('#remarks2').val(),
-            'remarks3': $('#remarks3').val(),
-            'remarks4': $('#remarks4').val(),
+            'ag_no': $('#ag_no').val(),
+            'person_birthday': $('#person_birthday').val(),
+            'person_post_no': $('#person_post_no').val(),
+            'person_address': $('#person_address').val(),
+            'dd_office': $('#dd_office').val(),
+            'dd_address': $('#dd_address').val(),
+            'dd_tel': $('#dd_tel').val(),
+            'ip_position': $('#ip_position').val(),
+            'ip_name': $('#ip_name').val(),
+            'dm_responsible_position': $('#dm_responsible_position').val(),
+            'dm_responsible_name': $('#dm_responsible_name').val(),
+            'dd_responsible_position': $('#dd_responsible_position').val(),
+            'dd_responsible_name': $('#dd_responsible_name').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){
                 alert(a_sKind + "しました。");
                 //$.unblockUI();
                 //document.location.href = "./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90100']; ?>";
-                location.href = "./index.php?mnu=10400";
+                location.href = "./index.php?mnu=10500";
             }else{
                 $("#my-result").empty().append(data);
             }
@@ -186,21 +181,94 @@ function regist_purchase_order_10403(h_act, h_no)
 
 }
 
-//Excelへ注文書台帳出力
-function excel_out_10400(){
-    location.href = m_parentURL + "excel_out_10400.php";
-    return false;
+//就業条件明示書
+function regist_agreement_10504(h_act, h_no)
+{
+    var a_idx = "";
+    var a_sKind = "";
+    if (h_act == 'n'){
+        a_sKind = '登録';
+    }else{
+        a_sKind = '更新';
+    }
+
+    //if (check_IsRequired('#po_no', '注文書Noが入力されていません！') == false) return;
+
+    if (!confirm("就業条件明示書を" + a_sKind + "します。よろしいですか？")) return;
+    /*
+    alert(h_act);
+    alert(h_no);
+    alert($('#po_no').val());
+    alert($('#publication').val());
+    alert($('#remarks1').val());
+    alert($('#remarks2').val());
+    alert($('#remarks3').val());
+    alert($('#remarks4').val());
+    */
+    m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
+    //alert($('#inp_engineer_no').val());
+    $.ajax({
+        url: m_parentURL + "regist_agreement_10504.php",
+        type: 'POST',
+        dataType: "html",
+        async: false,
+        data:{
+            'act': h_act,
+            'no': h_no,
+            'dd_office': $('#dd_office').val(),
+            'dd_address': $('#dd_address').val(),
+            'dd_tel': $('#dd_tel').val(),
+            'organization': $('organization').val(),
+            'ip_position': $('#ip_position').val(),
+            'ip_name': $('#ip_name').val(),
+            'contact_date_org': $('#contact_date_org').val(),
+            'dm_responsible_position': $('#dm_responsible_position').val(),
+            'dm_responsible_name': $('#dm_responsible_name').val(),
+            'dd_responsible_position': $('#dd_responsible_position').val(),
+            'dd_responsible_name': $('#dd_responsible_name').val(),
+            'chs_position1': $('#chs_position1').val(),
+            'chs_name1': $('#chs_name1').val(),
+            'chs_position2': $('#chs_position2').val(),
+            'chs_name2': $('#chs_name2').val(),
+        },
+        success: function(data, dataType){
+            if (data == 'OK'){
+                alert(a_sKind + "しました。");
+                //$.unblockUI();
+                //document.location.href = "./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90100']; ?>";
+                location.href = "./index.php?mnu=10500";
+            }else{
+                $("#my-result").empty().append(data);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown.message);
+        },
+       complete: function (data) {
+            $.unblockUI();
+       }
+   });
+
 }
 
-//Excelへ注文書出力
-function excel_out_10402(h_no){
-    location.href = m_parentURL + "excel_out_10402.php?NO=" + h_no;
+//Excelへ契約書台帳出力
+function excel_out_10500(){
+    location.href = m_parentURL + "excel_out_10500.php";
     return false;
 }
-
-//Excelへ注文請書出力
-function excel_out_10403(h_no){
-    location.href = m_parentURL + "excel_out_10403.php?NO=" + h_no;
+//Excelへ労働契約書出力
+function excel_out_10502(h_no){
+    location.href = m_parentURL + "excel_out_10502.php?NO=" + h_no;
+    return false;
+}
+//Excelへ労働契約書（再発行）出力
+function excel_out_10503(h_no){
+    location.href = m_parentURL + "excel_out_10503.php?NO=" + h_no;
+    return false;
+}
+//Excelへ就業条件書出力
+function excel_out_10504(h_no){
+    location.href = m_parentURL + "excel_out_10504.php?NO=" + h_no;
     return false;
 }
 
@@ -218,7 +286,7 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
         //DBに登録する
         // h_kind   1:文字、2:日付、3：時間
         $.ajax({
-            url: m_parentURL + "update_value_10402.php",
+            url: m_parentURL + "update_value_10502.php",
             type: 'POST',
             dataType: "html",
             async: false,

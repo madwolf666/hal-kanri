@@ -8,12 +8,58 @@
 
 require_once('./header.php');
 
-if (!isset($_GET['MOD'])){
-    $a_mod = 0;
+if (!isset($_GET['ACT'])){
+    $a_act = '';
 }else{
-    $a_mod = $_GET['MOD'];
+    $a_act = $_GET['ACT'];
 }
+
+require_once('./10400-com.php');
+
+if (isset($_GET['NO'])) {
+    $a_no = $_GET['NO'];
+    try{
+        //DBからユーザ情報取得
+        $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+        $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $a_sql = "SELECT t1.*,";
+        $a_sql .= "
+     t2.po_no				
+    ,t2.publication			
+    ,t2.remarks1			
+    ,t2.remarks2			
+    ,t2.remarks3				
+    ,t2.remarks4				
+    ,t2.inheriting			
+    ,t2.sending_back			
+            ";
+        $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
+        $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " WHERE (t1.cr_id=:cr_id);";
+
+        $a_stmt = $a_conn->prepare($a_sql);
+        $a_stmt->bindParam(':cr_id', $a_no, PDO::PARAM_STR);
+        $a_stmt->execute();
+
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            set_10400_fromDB($a_result);
+        }
+    } catch (PDOException $e){
+        echo 'Error:'.$e->getMessage();
+        die();
+    }
+}
+
 ?>
+
+<link rel="stylesheet" href="./jquery/jquery-ui.css">
+<link rel="stylesheet" href="./jquery/jquery.datetimepicker.css">
+<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.ui.datepicker-ja.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.datetimepicker.js"></script>
 
 <link rel="stylesheet" href="css/hal-kanri-10402.css">
 
@@ -30,8 +76,24 @@ if (!isset($_GET['MOD'])){
     <br>
     <div>
         <div style="float: left"><u><B>&nbsp;&nbsp;株式会社GOOYA&nbsp;&nbsp;</B>&nbsp;&nbsp;&nbsp;&nbsp;御中</u></div>
-        <div style="text-align: left; margin-left:auto; width:300px;"><u>発&nbsp;&nbsp;&nbsp;行&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;2017年03月31日&nbsp;</u></div>
-        <div style="text-align: left; margin-left:auto; width:300px;"><u>注文書番号&nbsp;&nbsp;&nbsp;&nbsp;3993&nbsp;&nbsp;-&nbsp;&nbsp;10993&nbsp;</u></div>
+        <div style="text-align: left; margin-left:auto; width:300px;"><u>発&nbsp;&nbsp;&nbsp;行&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;
+            <?php
+                if ($a_act == '') {
+                    echo $publication;
+                } else {
+                    echo com_make_tag_input($a_act, $publication, "publication", "width: 100px; text-align: center;");
+                }
+            ?>
+            </u></div>
+        <div style="text-align: left; margin-left:auto; width:300px;"><u>注文書番号&nbsp;&nbsp;
+            <?php
+                if ($a_act == '') {
+                    echo $po_no;
+                } else {
+                    echo com_make_tag_input($a_act, $po_no, "po_no", "width: 100px; text-align: center;");
+                }
+            ?>
+        </u></div>
         <div style="text-align: left; margin-left:auto; width:300px;">株式会社&nbsp;H A L</div>
         <div style="text-align: left; margin-left:auto; width:300px;">代表取締役&nbsp;&nbsp;寺&nbsp;西&nbsp;信&nbsp;夫</div>
         <div style="text-align: left; margin-left:auto; width:300px;"><font size="-2">東京都渋谷区広尾1-1-39&nbsp;恵比寿プライムスクエアタワー18F</font></div>
@@ -115,14 +177,44 @@ if (!isset($_GET['MOD'])){
             </tr>
             <tr>
                 <th colspan="4" height=400px>その他</th>
-                <td colspan="9"class="remarks">件名：コンビニ向け受発注システム開発</td>
+                <td colspan="9" class="remarks">
+                    <?php
+                        if ($a_act == ''){
+                            echo $remarks1."<br>";
+                        }else{
+                            echo com_make_tag_textarea($a_act, $remarks1, "remarks1", "width: 96%; height: 90px;");
+                        }
+                    ?>
+                    <?php
+                        if ($a_act == ''){
+                            echo $remarks2."<br>";
+                        }else{
+                            echo com_make_tag_textarea($a_act, $remarks2, "remarks2", "width: 96%; height: 90px;");
+                        }
+                    ?>
+                    <?php
+                        if ($a_act == ''){
+                            echo $remarks3."<br>";
+                        }else{
+                            echo com_make_tag_textarea($a_act, $remarks3, "remarks3", "width: 96%; height: 90px;");
+                        }
+                    ?>
+                    <?php
+                        if ($a_act == ''){
+                            echo $remarks4."<br>";
+                        }else{
+                            echo com_make_tag_textarea($a_act, $remarks4, "remarks4", "width: 96%; height: 90px;");
+                        }
+                    ?>
+                </td>
             </tr>
         </table>
     </div>
 </center>
 
 <p class="c">
-<input type="button" value="Excelへ出力" onclick="return excel_out_10402();">
+<input type="button" value="更新" onclick="return regist_purchase_order_10402('e',<?php echo $cr_id; ?>);">
+<input type="button" value="Excelへ出力" onclick="return excel_out_10402(<?php echo $cr_id; ?>);">
 <input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10400']; ?>'">
 </p>
 
@@ -133,3 +225,5 @@ if (!isset($_GET['MOD'])){
 <?php
 require_once('./footer.php');
 ?>
+
+<script src="./js/hal-kanri-10400.js"></script>

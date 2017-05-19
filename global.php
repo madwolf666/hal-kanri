@@ -50,10 +50,10 @@ $g_DB_m_contract_personality = "m_contract_personality";
 $g_DB_m_contract_projects_confirm = "m_contract_projects_confirm";
 $g_DB_m_contract_engineer_list = "m_contract_engineer_list";
 
+$g_DB_t_agreement_ledger = "t_agreement_ledger";
 $g_DB_t_contract_estimate = "t_contract_estimate";
 $g_DB_t_contract_end_report = "t_contract_end_report";
 $g_DB_t_contract_report = "t_contract_report";
-
 $g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
 $g_DB_t_purchase_order_ledger = "t_purchase_order_ledger";
 

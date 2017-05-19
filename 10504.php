@@ -8,12 +8,83 @@
 
 require_once('./header.php');
 
-if (!isset($_GET['MOD'])){
-    $a_mod = 0;
+if (!isset($_GET['ACT'])){
+    $a_act = '';
 }else{
-    $a_mod = $_GET['MOD'];
+    $a_act = $_GET['ACT'];
 }
+
+require_once('./10500-com.php');
+
+if (isset($_GET['NO'])) {
+    $a_no = $_GET['NO'];
+    try{
+        //DBからユーザ情報取得
+        $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+        $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $a_sql = "SELECT t1.*,";
+        $a_sql .= "
+     t2.ag_no
+    ,t2.publication
+    ,t2.dd_office
+    ,t2.dd_address
+    ,t2.dd_tel
+    ,t2.ip_position
+    ,t2.ip_name
+    ,t2.dm_responsible_position
+    ,t2.dm_responsible_name
+    ,t2.dd_responsible_position
+    ,t2.dd_responsible_name
+    ,t2.person_post_no
+    ,t2.person_address
+    ,t2.person_birthday
+    ,t2.contact_date_org
+    ,t2.contact_date_brn
+    ,t2.organization
+    ,t2.conflict_prevention
+    ,t2.thing1
+    ,t2.chs_position1
+    ,t2.chs_name1
+    ,t2.chs_position2
+    ,t2.chs_name2
+    ,t2.chs_tel2
+    ,t2.dd_responsible_tel
+    ,t2.reserve1
+    ,t2.reserve2
+    ,t2.reserve3
+    ,t2.reserve4
+    ,t2.reserve5
+    ,t2.reserve6
+    ,t2.reserve7
+    ,t2.guide_ships
+        ";
+        $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
+        $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " WHERE (t1.cr_id=:cr_id);";
+
+        $a_stmt = $a_conn->prepare($a_sql);
+        $a_stmt->bindParam(':cr_id', $a_no, PDO::PARAM_STR);
+        $a_stmt->execute();
+
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            set_10500_fromDB($a_result);
+        }
+    } catch (PDOException $e){
+        echo 'Error:'.$e->getMessage();
+        die();
+    }
+}
+
 ?>
+
+<link rel="stylesheet" href="./jquery/jquery-ui.css">
+<link rel="stylesheet" href="./jquery/jquery.datetimepicker.css">
+<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.ui.datepicker-ja.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.datetimepicker.js"></script>
 
 <link rel="stylesheet" href="css/hal-kanri-10504.css">
 
@@ -27,8 +98,8 @@ if (!isset($_GET['MOD'])){
     <div class="width">
         <br>
         <font size="+2"><B><u>就業条件明示書</u></B></font>
-        <p style="width:120px; margin-left:auto; text-align:left;">平成29年4月7日</p>
-        <p style="width:150px; margin-right:auto; text-align:right;"><u>　待谷　勇介　様</u></p>
+        <p style="width:120px; margin-left:auto; text-align:left;"><font color="#ff0000">平成29年4月7日</font></p>
+        <p style="width:150px; margin-right:auto; text-align:right;"><u>　<?php echo $engineer_name; ?>　様</u></p>
         <p style="width:270px; margin-left:auto; text-align:left;">
                 東京都渋谷区広尾１－１－３９<br>
                 恵比寿プライムスクエアタワー18階<br>
@@ -41,42 +112,100 @@ if (!isset($_GET['MOD'])){
 	<tr>
             <td width=20%>業務内容</td>
             <td class="remarks" colspan="5" width=80%>
+                <font color="#ff0000">
                     情報処理システム開発（１号）業務<br>
                     ソフトウェア開発補助業務<br>
                     派遣法施行令第４条第一項第一号<br>
+                    </font>
             </td>
 	</tr>
 	<tr>
             <td rowspan="4" width=20%>就業場所</td>
             <td class="remarks hiddencell_r hiddencell_b" width=10%>事業所名</td>
-            <td class="remarks hiddencell_b" colspan="4" width=70%>Sky株式会社</td>
+            <td class="remarks hiddencell_b" colspan="4" width=70%>
+            <?php
+                if ($a_act == '') {
+                    echo $dd_office;
+                } else {
+                    echo com_make_tag_input($a_act, $dd_office, "dd_office", "width: 90%; text-align: center;");
+                }
+            ?>
+                </td>
 	</tr>
 	<tr>
             <td class="remarks hiddencell_r hiddencell_b">部署名</td>
-            <td class="remarks hiddencell_b" colspan="4">クライアント・システム開発事業部　技術部ビジネスソリューショングループ</td>
+            <td class="remarks hiddencell_b" colspan="4"><font color="#ff0000">クライアント・システム開発事業部　技術部ビジネスソリューショングループ</font></td>
 	</tr>
 	<tr>
             <td class="remarks hiddencell_r hiddencell_b">所在地</td>
-            <td class="remarks hiddencell_b" colspan="4">兵庫県伊丹市高台4-18</td>
+            <td class="remarks hiddencell_b" colspan="4">
+            <?php
+                if ($a_act == '') {
+                    echo $dd_address;
+                } else {
+                    echo com_make_tag_input($a_act, $dd_address, "dd_address", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
 	</tr>
 	<tr>
             <td class="remarks hiddencell_r">電話番号</td>
-            <td class="remarks" colspan="4">０７２－７８２－８４９６</td>
+            <td class="remarks" colspan="4">
+            <?php
+                if ($a_act == '') {
+                    echo $dd_tel;
+                } else {
+                    echo com_make_tag_input($a_act, $dd_tel, "dd_tel", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
 	</tr>
 	<tr>
             <td width=20%>組織単位</td>
-            <td class="remarks" colspan="5" width=80%>クライアント・システム開発事業部　技術部ビジネスソリューショングループ</td>
+            <td class="remarks" colspan="5" width=80%>
+            <?php
+                if ($a_act == '') {
+                    echo $organization;
+                } else {
+                    echo com_make_tag_input($a_act, $organization, "organization", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
 	</tr>
 	<tr>
             <td width=20%>指揮命令者</td>
             <td width=5% class="hiddencell_r">職名</td>
-            <td width=15% class="hiddencell_r remarks">次長</td>
+            <td width=15% class="hiddencell_r remarks">
+            <?php
+                if ($a_act == '') {
+                    echo $ip_position;
+                } else {
+                    echo com_make_tag_input($a_act, $ip_position, "ip_position", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
             <td width=10% class="hiddencell_r">氏名</td>
-            <td width=50% class="remarks" colspan="2">西野　弘人史</td>
+            <td width=50% class="remarks" colspan="2">
+            <?php
+                if ($a_act == '') {
+                    echo $ip_name;
+                } else {
+                    echo com_make_tag_input($a_act, $ip_name, "ip_name", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
 	</tr>
 	<tr>
             <td width=20%>抵触日</td>
-            <td class="remarks" colspan="5" width=80%>平成30年10月1日</td>
+            <td class="remarks" colspan="5" width=80%>
+            <?php
+                if ($a_act == '') {
+                    echo $contact_date_org;
+                } else {
+                    echo com_make_tag_input($a_act, $contact_date_org, "contact_date_org", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
 	</tr>
 	<tr>
             <td width=20%>就業日</td>
@@ -85,8 +214,8 @@ if (!isset($_GET['MOD'])){
 	<tr>
             <td width=20%>就業時間</td>
             <td class="remarks" colspan="5" width=80%>
-                    09時30分から18時30分<br>
-    （うち休憩時間　12時00分から13時00分までの間60分間）</td>
+                   <?php echo $work_start; ?>から<?php echo $work_end; ?><br>
+    （うち休憩時間　<?php echo $break_start; ?>から<?php echo $break_end; ?>までの間<?php echo $break_hours; ?>）</td>
 	</tr>
 	<tr>
             <td width=20%>安全及び衛生</td>
@@ -104,18 +233,50 @@ if (!isset($_GET['MOD'])){
 	<tr>
             <td width=20%>派遣先責任者</td>
             <td width=3% class="hiddencell_r">職名</td>
-            <td width=7% class="hiddencell_r">チーフ</td>
+            <td width=7% class="hiddencell_r">
+            <?php
+                if ($a_act == '') {
+                    echo $dd_responsible_position;
+                } else {
+                    echo com_make_tag_input($a_act, $dd_responsible_position, "dd_responsible_position", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
             <td width=3% class="hiddencell_r">氏名</td>
-            <td width=17% class="hiddencell_r">菅野　真一郎</td>
-            <td width=50%>（電話：０６－４８０７－６６２０）</td>
+            <td width=17% class="hiddencell_r">
+            <?php
+                if ($a_act == '') {
+                    echo $dd_responsible_name;
+                } else {
+                    echo com_make_tag_input($a_act, $dd_responsible_name, "dd_responsible_name", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
+            <td width=50%>（電話：<font color="#ff0000">０６－４８０７－６６２０</font>）</td>
 	</tr>
 	<tr>
             <td width=20%>派遣元責任者</td>
             <td width=3% class="hiddencell_r">職名</td>
-            <td width=7% class="hiddencell_r">　</td>
+            <td width=7% class="hiddencell_r">
+            <?php
+                if ($a_act == '') {
+                    echo $dm_responsible_position;
+                } else {
+                    echo com_make_tag_input($a_act, $dm_responsible_position, "dm_responsible_position", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
             <td width=3% class="hiddencell_r">氏名</td>
-            <td width=17% class="hiddencell_r">保木本　大貴</td>
-            <td width=50%>（電話：０６－６１３６－５７７２）</td>
+            <td width=17% class="hiddencell_r">
+            <?php
+                if ($a_act == '') {
+                    echo $dm_responsible_name;
+                } else {
+                    echo com_make_tag_input($a_act, $dm_responsible_name, "dm_responsible_name", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
+            <td width=50%>（電話：<font color="#ff0000">０６－６１３６－５７７２</font>）</td>
 	</tr>
 	<tr>
             <td width=20%>福利厚生施設<br>の利用等</td>
@@ -126,18 +287,50 @@ if (!isset($_GET['MOD'])){
             <td colspan="5" width=80%  class="remarks hiddencell_b">申込先</td>
 	</tr>
 	<tr>
-            <td width=15% class="hiddencell_r hiddencell_b">派遣先：職名</td>
-            <td width=5% class="hiddencell_r hiddencell_b">チーフ</td>
+            <td width=15% class="hiddencell_r hiddencell_b">派遣先<font color="#ff0000">元？</font>：職名</td>
+            <td width=5% class="hiddencell_r hiddencell_b">
+            <?php
+                if ($a_act == '') {
+                    echo $chs_position1;
+                } else {
+                    echo com_make_tag_input($a_act, $chs_position1, "chs_position1", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
             <td width=5% class="hiddencell_r hiddencell_b">氏名</td>
-            <td width=10% class="hiddencell_r hiddencell_b">菅野　真一郎</td>
-            <td width=45% class="hiddencell_b">（電話：０６－４８０７－６６２０）</td>
+            <td width=10% class="hiddencell_r hiddencell_b">
+            <?php
+                if ($a_act == '') {
+                    echo $chs_name1;
+                } else {
+                    echo com_make_tag_input($a_act, $chs_name1, "chs_name1", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
+            <td width=45% class="hiddencell_b">（電話：<font color=#ff0000">０６－４８０７－６６２０</font>）</td>
 	</tr>
 	<tr>
             <td width=15% class="hiddencell_r">派遣先：職名</td>
-            <td width=5% class="hiddencell_r">　</td>
+            <td width=5% class="hiddencell_r">
+            <?php
+                if ($a_act == '') {
+                    echo $chs_position2;
+                } else {
+                    echo com_make_tag_input($a_act, $chs_position2, "chs_position2", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
             <td width=5% class="hiddencell_r">氏名</td>
-            <td width=10% class="hiddencell_r">保木本　大貴</td>
-            <td width=45%>（電話：０６－６１３６－５７７２）</td>
+            <td width=10% class="hiddencell_r">
+            <?php
+                if ($a_act == '') {
+                    echo $chs_name2;
+                } else {
+                    echo com_make_tag_input($a_act, $chs_name2, "chs_name2", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
+            <td width=45%>（電話：<font color=#ff0000">０６－６１３６－５７７２</font>）</td>
 	</tr>
 	<tr>
             <td width=20%>苦情処理方、<br>連携体制等</td>
@@ -173,19 +366,22 @@ if (!isset($_GET['MOD'])){
 	</tr>
 	<tr>
             <td width=20%>派遣料金</td>
-            <td colspan="2" width=40% class="hiddencell_r">６１０，０００円/月</td>
+            <td colspan="2" width=40% class="hiddencell_r"><?php echo com_db_number_format($claim_normal__unit_price); ?>/月</td>
             <td colspan="3" width=40% class="remarks">※HALと客先の契約金額</td>
 	</tr>
 	<tr>
             <td width=20% height=300>備考</td>
-            <td class="remarks" colspan="5" width=80%>無期雇用労働者</td>
+            <td class="remarks" colspan="5" width=80%>
+                <?php echo $remarks; ?>
+            </td>
 	</tr>
     </table>
     <br>
 </center>
 
 <p class="c">
-<input type="button" value="Excelへ出力" onclick="return excel_out_10504();">
+<input type="button" value="更新" onclick="return regist_agreement_10504('e',<?php echo $cr_id; ?>);">
+<input type="button" value="Excelへ出力" onclick="return excel_out_10504(<?php echo $cr_id; ?>);">
 <input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>'">
 </p>
 
@@ -196,3 +392,5 @@ if (!isset($_GET['MOD'])){
 <?php
 require_once('./footer.php');
 ?>
+
+<script src="./js/hal-kanri-10500.js"></script>

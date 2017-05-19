@@ -24,6 +24,13 @@ require_once('./header.php');
 <div id="my-list" style="z-index:100; width: auto; padding-bottom: 4px;"></div>
 </center>
 
+<div id="my-popup" class="popup">
+	<div id="my-method" class="popup_inner" style="">
+            <a href="#" onclick="hide_popup();">閉じる</a>
+	</div>
+</div>
+<div id="overlay"></div>
+
 </section>
 
 <?php
