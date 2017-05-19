@@ -106,7 +106,7 @@ $obj_sheet->setCellValue("W21", $claim_normal_upper_limit);
 $obj_sheet->setCellValue("W19", $claim_normal_deduction_unit_price);
 $obj_sheet->setCellValue("W17", $claim_normal_overtime_unit_price);
 
-//$obj_sheet->setCellValue("E22", $work_start."から".$work_end.chr(13)."（うち休憩時間　".$break_start."から".$break_end."までの間".$break_hours."）");
+$obj_sheet->setCellValue("E22", $work_start."から".$work_end.chr(13)."（うち休憩時間　".$break_start."から".$break_end."までの間".$break_hours."）");
 $obj_sheet->setCellValue("W29", $claim_settlement_closingday);
 $obj_sheet->setCellValue("W31", $claim_settlement_paymentday);
 
