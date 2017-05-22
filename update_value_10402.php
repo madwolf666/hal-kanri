@@ -34,15 +34,16 @@ try{
 
     if ($a_isExists == false){
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_purchase_order_ledger']." (";
-        $a_sql .= "cr_id,".$a_field.",reg_id";
+        $a_sql .= "cr_id,".$a_field.",reg_id,reg_date";
         $a_sql .= ") VALUES(";
-        $a_sql .= ":cr_id,:".$a_field.",:reg_id";
+        $a_sql .= ":cr_id,:".$a_field.",:reg_id,:reg_date";
         $a_sql .= ");";
         //DBからユーザ情報取得
     } else {
         $a_sql = "UPDATE ".$GLOBALS['g_DB_t_purchase_order_ledger']." SET ";
         $a_sql .= $a_field."=:".$a_field;
         $a_sql .= ",upd_id=:upd_id";
+        $a_sql .= ",upd_date=:upd_date";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
     
@@ -60,8 +61,10 @@ try{
    
     if ($a_isExists == false){
         com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
     } else {
         com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
     }
     
     com_pdo_bindValue($a_stmt, ':cr_id', $_POST['cr_id']);

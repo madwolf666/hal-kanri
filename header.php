@@ -64,7 +64,9 @@ echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_S
 <?php if ($_SESSION['hal_auth'] == 0){ ?>
 <li class="arrow1"><a href="">マスタ情報</a>
     <ul class="ddmenu">
+        <?php if ($_SESSION["hal_auth"] <= 0) { ?>
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90100']; ?>">ユーザ情報</a></li>
+        <?php } ?>
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90200']; ?>">エンジニア情報</a></li>
     </ul>
 </li>

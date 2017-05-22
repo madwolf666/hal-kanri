@@ -24,6 +24,7 @@ try{
     $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_report']." SET ";
     $a_sql .= $a_field."=:".$a_field;
     $a_sql .= ",upd_id=:upd_id";
+    $a_sql .= ",upd_date=:upd_date";
     $a_sql .= " WHERE (cr_id=:cr_id);";
     
     $a_stmt = $a_conn->prepare($a_sql);
@@ -39,6 +40,7 @@ try{
     }
    
     com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
+    com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
     com_pdo_bindValue($a_stmt, ':cr_id', $_POST['cr_id']);
 
     $a_stmt->execute();

@@ -63,21 +63,23 @@ if (isset($_GET['NO'])) {
 	<br>
 	<p style="width:300px; margin-left:auto; text-align:left;">
         <u>見積書No.</u>
+            <?php echo $inp_estimate_no; ?>
             <?php
-                if ($a_act == '') {
+                /*if ($a_act == '') {
                     echo $inp_estimate_no;
                 } else {
                     echo com_make_tag_input($a_act, $inp_estimate_no, "inp_estimate_no", "width: 100px; text-align: center;");
-                }
+                }*/
             ?>
         <br>
         <u>&nbsp;&nbsp;発行日&nbsp;&nbsp;&nbsp;</u>
+            <?php echo $inp_estimate_date; ?>
             <?php
-                if ($a_act == '') {
+                /*if ($a_act == '') {
                     echo $inp_estimate_date;
                 } else {
                     echo com_make_tag_input($a_act, $inp_estimate_date, "inp_estimate_date", "width: 100px; text-align: center;");
-                }
+                }*/
             ?>
          &nbsp;<br>
 	</p>
@@ -159,7 +161,7 @@ if (isset($_GET['NO'])) {
 <input type="hidden" id="cr_id" value="<?php echo $cr_id; ?>">
     
 <p class="c">
-<input type="button" value="更新" onclick="return regist_contract_estimate('e',<?php echo $cr_id; ?>);">
+<!-- input type="button" value="更新" onclick="return regist_contract_estimate('e',<?php echo $cr_id; ?>);" -->
 <input type="button" value="Excelへ出力" onclick="return excel_out_10107(<?php echo $cr_id; ?>);">
 <input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>'">
 </p>

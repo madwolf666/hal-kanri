@@ -39,6 +39,7 @@ try{
             ,person_post_no
             ,person_address
             ,reg_id
+            ,reg_date
             ";
         $a_sql .= ") VALUES(";
         $a_sql .= "
@@ -48,6 +49,7 @@ try{
             ,:person_post_no
             ,:person_address
             ,:reg_id
+            ,:reg_date
             ";
         $a_sql .= ");";
     }else{
@@ -58,6 +60,7 @@ try{
             ,person_post_no=:person_post_no
             ,person_address=:person_address
             ,upd_id=:upd_id
+            ,upd_date=:upd_date
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -72,8 +75,10 @@ try{
 
     if ($a_isExists == false) {
         com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
     } else {
         com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
     }
 
     $a_stmt->execute();

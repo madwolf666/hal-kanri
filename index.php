@@ -87,11 +87,15 @@ if (!isset($_GET['mnu'])){
         header('Location: ./90000.php');
         break;
     case $GLOBALS['g_MENU_MAINTENANCE_90100']:   //ユーザ情報：一覧
-        header('Location: ./90100.php');
+        if ($_SESSION["hal_auth"] <= 0) {
+            header('Location: ./90100.php');
+        }
         break;
     case $GLOBALS['g_MENU_MAINTENANCE_90102']:   //ユーザ：新規
     case $GLOBALS['g_MENU_MAINTENANCE_90103']:   //ユーザ：修正
-        header('Location: ./90102.php?ACT='.$_GET['ACT'].'&IDX='.$_GET['IDX']);
+        if ($_SESSION["hal_auth"] <= 0) {
+            header('Location: ./90102.php?ACT='.$_GET['ACT'].'&IDX='.$_GET['IDX']);
+        }
         break;
     case $GLOBALS['g_MENU_MAINTENANCE_90200']:   //エンジニア一覧
         header('Location: ./90200.php');

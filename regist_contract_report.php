@@ -145,6 +145,7 @@ try{
             ,payment_leaving_daily_auto
             ,payment_leaving_daily_manual
             ,reg_id
+            ,reg_date
             ";
         $a_sql .= ") VALUES(";
         $a_sql .= "
@@ -272,6 +273,7 @@ try{
             ,:payment_leaving_daily_auto
             ,:payment_leaving_daily_manual
             ,:reg_id
+            ,:reg_date
             ";
         $a_sql .= ");";
     }else{
@@ -401,6 +403,7 @@ try{
             ,payment_leaving_daily_auto=:payment_leaving_daily_auto
             ,payment_leaving_daily_manual=:payment_leaving_daily_manual
             ,upd_id=:upd_id
+            ,upd_date=:upd_date
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -628,9 +631,11 @@ try{
 
     if ($a_act == 'e'){
         com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
         com_pdo_bindValue($a_stmt, ':cr_id', $_POST['cr_id']);
     } else {
         com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
     }
     
     $a_stmt->execute();

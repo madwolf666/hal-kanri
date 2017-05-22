@@ -43,7 +43,7 @@ try{
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " ORDER BY t2.dm_no;";
+    $a_sql .= " ORDER BY t2.po_no;";
 
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->execute();

@@ -12,7 +12,9 @@ require_once('./header.php');
 
 <section>
 <h2>マスタ情報</h2>
+<?php if ($_SESSION["hal_auth"] <= 0) { ?>
 <p><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90100']; ?>">ユーザ情報</a></p>
+<?php } ?>
 <p><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90200']; ?>">エンジニア情報</a></p>
 </section>
 
