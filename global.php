@@ -81,6 +81,7 @@ $g_MENU_CONTRACT_10300 = 10300;    //検収台帳一覧
 $g_MENU_CONTRACT_10301 = 10301;    //検収台帳一覧：検索
 
 $g_MENU_CONTRACT_10310 = 10310;    //検収台帳一覧：行追加
+$g_MENU_CONTRACT_10311 = 10311;    //検収台帳一覧：現在行削除
 
 $g_MENU_CONTRACT_10400 = 10400;    //注文書台帳一覧
 $g_MENU_CONTRACT_10401 = 10401;    //注文書台帳一覧：検索

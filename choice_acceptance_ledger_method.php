@@ -29,7 +29,7 @@ try{
         $a_sRet .= "<table border='0'>";
         $a_sRet .= "<tr>";
         $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10310']."&NO=".$a_result['cr_id']."&SN=".$a_al_id."'>行を追加</a></td>";
-        $a_sRet .= "<td>&nbsp</td>";
+        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10311']."&NO=".$a_result['cr_id']."&SN=".$a_al_id."'>現在行を削除</a></td>";
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";

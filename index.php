@@ -196,6 +196,41 @@ cr_id
 
         header('Location: ./10300.php');
         break;
+    case $GLOBALS['g_MENU_CONTRACT_10311']:   //検収台帳：現在行削除
+        //POSTデータを取得
+        $a_cr_id = $_GET['NO'];
+        $a_al_id = $_GET['SN'];
+        $a_isExists = false;
+
+        try{
+            //DBからユーザ情報取得
+            $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+            $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_acceptance_ledger']." WHERE (cr_id=:cr_id);";
+            $a_stmt = $a_conn->prepare($a_sql);
+            $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+            $a_stmt->execute();
+
+            $a_num = 0;
+            while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+                $a_num++;
+            }
+
+            if ($a_num > 1) {
+                $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_acceptance_ledger']." WHERE (cr_id=:cr_id) AND (al_id=:al_id);";
+                $a_stmt = $a_conn->prepare($a_sql);
+                com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+                com_pdo_bindValue($a_stmt, ':al_id', $a_al_id);
+                $a_stmt->execute();
+            }
+        } catch (PDOException $e){
+            $a_sRet = 'Error:'.$e->getMessage();
+        }
+        $a_conn = null;
+
+        header('Location: ./10300.php');
+        break;
     case $GLOBALS['g_MENU_CONTRACT_10400']:   //注文書台帳
         header('Location: ./10400.php');
         break;
