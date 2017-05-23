@@ -10,6 +10,7 @@ require_once('./global.php');
 
 //POSTデータを取得
 $a_cr_id = $_POST['cr_id'];
+$a_al_id = $_POST['al_id'];
 
 $a_sRet = "";
 
@@ -27,19 +28,8 @@ try{
         $a_sRet = $a_result['contract_number']." ".$a_result['engineer_number']." ".$a_result['engineer_name']."<br>";
         $a_sRet .= "<table border='0'>";
         $a_sRet .= "<tr>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=e&NO=".$a_result['cr_id']."'>契約レポート参照・更新へ</a></td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a></td>";
-        $a_sRet .= "</tr>";
-        $a_sRet .= "<tr>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10107']."&NO=".$a_result['cr_id']."'>見積書へ</a></td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a></td>";
-        $a_sRet .= "</tr>";
-        $a_sRet .= "<tr>";
-        $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
+        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10310']."&NO=".$a_result['cr_id']."&SN=".$a_al_id."'>行を追加</a></td>";
+        $a_sRet .= "<td>&nbsp</td>";
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";

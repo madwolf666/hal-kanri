@@ -32,13 +32,13 @@ try{
     
     //固定列部分
     $a_sRet .= "        <td style='padding: 0 0;'>";
-    $a_sRet .= "            <table class='tbl_list' width='100%'>";
+    $a_sRet .= "            <table class='tbl_list' width='400px;'>";
     $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td rowspan='1' class='td_title2' style='width: 50px; height:86px;' nowrap>No</td>";
-    $a_sRet .= "                    <td rowspan='1' class='td_title2' style='width: 76px;' nowrap>発行日</td>";
-    $a_sRet .= "                    <td colspan='1' class='td_title2' style='width: 60px;' nowrap>作成者</td>";
-    $a_sRet .= "                    <td colspan='1' class='td_title2' style='width: 80px;' nowrap>ｴﾝｼﾞﾆｱ<br>番号</td>";
-    $a_sRet .= "                    <td colspan='1' class='td_title2' style='width: 60px;' nowrap>ｴﾝｼﾞﾆｱ名</td>";
+    $a_sRet .= "                    <td rowspan='1' class='td_title2' style='width: 52px; height:86px;' nowrap>No</td>";
+    $a_sRet .= "                    <td rowspan='1' class='td_title2' style='width: 90px;' nowrap>発行日</td>";
+    $a_sRet .= "                    <td colspan='1' class='td_title2' style='width: 80px;' nowrap>作成者</td>";
+    $a_sRet .= "                    <td colspan='1' class='td_title2' style='width: 100px;' nowrap>ｴﾝｼﾞﾆｱ<br>番号</td>";
+    $a_sRet .= "                    <td colspan='1' class='td_title2' style='width: 78px;' nowrap>ｴﾝｼﾞﾆｱ名</td>";
     $a_sRet .= "                </tr>";
     $a_sRet .= "            </table>";
     $a_sRet .= "        </td>";
@@ -152,7 +152,7 @@ try{
 
     $a_sRet_L = "       <td valign='top'>";
     $a_sRet_L .= "           <div id='leftColumn' style='overflow:hidden;height:433px;'>";
-    $a_sRet_L .= "               <table class='tbl_list' style='width: 100%;'>";
+    $a_sRet_L .= "               <table class='tbl_list' style='width: 400px;'>";
     
     $a_sRet_R = "       <td valign='top' style='padding: 0 0;'>";
     $a_sRet_R .= "          <div id='right_record' style='padding: 0 0; overflow:scroll;width:500px;height:450px;' onscroll='document.all.right_title.scrollLeft=this.scrollLeft;document.all.leftColumn.scrollTop=this.scrollTop;'>";
@@ -171,17 +171,17 @@ try{
             $a_sRet_R .= "<tr class='lineo'>";
         }
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 51px;'><div class='myover'>".$a_result['contract_number']."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$a_result['contract_number']."</td>";
         //$a_sRet_L .= "<td class='td_line2' style='width: 51px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'contract_number',$a_rec).">".$a_result['contract_number']."</td>";
         
-        $a_sRet_L .= "<td class='td_line2' style='width: 78px;'><div class='myover'>".com_replace_toDate($a_result['publication'])."</td>";
-        $a_sRet_L .= "<td class='td_line2' style='width: 62px;'><div class='myover'>".$a_result['author']."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 90px;'><div class='myover'>".com_replace_toDate($a_result['publication'])."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$a_result['author']."</td>";
         
-        $a_sRet_L .= "<td class='td_line2' style='width: 82px;'><div class='myover'>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>";
         $a_sRet_L .= "<a href='#' onclick='choice_contract_report_method(\"".$a_result['cr_id']."\");'>".$a_result['engineer_number']."</a>";
         $a_sRet_L .= "</td>";
         
-        $a_sRet_L .= "<td class='td_line2' style='width: 62px;'><div class='myover'>".$a_result['engineer_name']."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$a_result['engineer_name']."</td>";
         $a_sRet_L .= "</tr>";
 
         $a_sRet_R .= "<td class='td_line2' style='width: 250px;'><div class='myover'>".$a_result['customer_name']."</td>";

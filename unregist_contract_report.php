@@ -37,17 +37,27 @@ try{
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
     $a_stmt->execute();
 
+    $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_payroll']." WHERE (cr_id=:cr_id);";
+    $a_stmt = $a_conn->prepare($a_sql);
+    $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+    $a_stmt->execute();
+
+    $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_acceptance_ledger']." WHERE (cr_id=:cr_id);";
+    $a_stmt = $a_conn->prepare($a_sql);
+    $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+    $a_stmt->execute();
+
+    $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_purchase_order_ledger']." WHERE (cr_id=:cr_id);";
+    $a_stmt = $a_conn->prepare($a_sql);
+    $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+    $a_stmt->execute();
+
     $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_agreement_ledger']." WHERE (cr_id=:cr_id);";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
     $a_stmt->execute();
 
     $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_dispatching_management_ledger']." WHERE (cr_id=:cr_id);";
-    $a_stmt = $a_conn->prepare($a_sql);
-    $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
-    $a_stmt->execute();
-
-    $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_purchase_order_ledger']." WHERE (cr_id=:cr_id);";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
     $a_stmt->execute();

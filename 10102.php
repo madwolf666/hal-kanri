@@ -17,6 +17,12 @@ if (!isset($_GET['ACT'])){
 
 require_once('./10100-com.php');
 
+if ($a_act == 'c') {
+    //契約継続時
+    $cr_id = "";
+    $inp_keiyaku_no = "";
+    $a_act = 'n';
+}
 ?>
 
 <link rel="stylesheet" href="./jquery/jquery-ui.css">

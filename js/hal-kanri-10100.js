@@ -48,8 +48,8 @@ $(function () {
     $('#inp_wariai_nyujyo_c1').keyup(function(){calc_bill_middle_admission();});
     $('#inp_wariai_nyujyo_c2').keyup(function(){calc_bill_middle_admission(); calc_pay_middle_admission(); check_value_changed_10102(1, 'payment_middle_daily_manual', $('#inp_wariai_nyujyo_c2').val(), '#inp_wariai_nyujyo_c2');});
     //$('#inp_tankin_b1').keyup(function(){calc_bill_middle_admission();});
-    $('#opt_contract_lower_limit_b2').change(function(){$('#txt_contract_lower_limit_p12').val($('[name=opt_contract_lower_limit_b2] option:selected').text()); $('#txt_contract_lower_limit_p22').val($('[name=opt_contract_lower_limit_b2] option:selected').text()); check_value_changed_10102(1, 'claim_middle_lower_limit', $('[name=opt_contract_lower_limit_b2] option:selected').text(), '#opt_contract_lower_limit_b2');});
-    $('#opt_contract_upper_limit_b2').change(function(){$('#txt_contract_upper_limit_p12').val($('[name=opt_contract_upper_limit_b2] option:selected').text()); $('#txt_contract_upper_limit_p22').val($('[name=opt_contract_upper_limit_b2] option:selected').text()); check_value_changed_10102(1, 'claim_middle_upper_limit', $('[name=opt_contract_upper_limit_b2] option:selected').text(), '#opt_contract_upper_limit_b2');});
+    $('#opt_contract_lower_limit_b2').change(function(){calc_bill_middle_admission_lower_limit();});
+    $('#opt_contract_upper_limit_b2').change(function(){calc_bill_middle_admission_upper_limit();});
     //$('#txt_contract_kojyo_unit_b1').keyup(function(){alert('txt_contract_kojyo_unit_b1');calc_bill_middle_admission();});
     //$('#txt_contract_zangyo_unit_b1').keyup(function(){calc_bill_middle_admission();});
     $('#inp_syugyonisu_b2').keyup(function(){calc_bill_middle_admission(); calc_pay_middle_admission(); check_value_changed_10102(1, 'claim_middle_employment_day', $('#inp_syugyonisu_b2').val(), '#inp_syugyonisu_b2');});
@@ -59,8 +59,8 @@ $(function () {
     $('#opt_contract_calc_b3').change(function(){$('#opt_contract_calc_p13').val($('#opt_contract_calc_b3').val()); $('#opt_contract_calc_p23').val($('#opt_contract_calc_b3').val()); check_value_changed_10102(1, 'claim_leaving_calculation', $('[name=opt_contract_calc_b3] option:selected').text(), '#opt_contract_calc_b3');});
     $('#inp_wariai_taijyo_c1').keyup(function(){calc_bill_midway_retirement();});
     $('#inp_wariai_taijyo_c2').keyup(function(){calc_bill_midway_retirement(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'payment_leaving_daily_manual', $('#inp_wariai_taijyo_c2').val(), '#inp_wariai_taijyo_c2');});
-    $('#opt_contract_lower_limit_b3').change(function(){$('#txt_contract_lower_limit_p13').val($('[name=opt_contract_lower_limit_b3] option:selected').text()); $('#txt_contract_lower_limit_p23').val($('[name=opt_contract_lower_limit_b3] option:selected').text()); check_value_changed_10102(1, 'claim_leaving_lower_limit', $('[name=opt_contract_lower_limit_b3] option:selected').text(), '#opt_contract_lower_limit_b3');});
-    $('#opt_contract_upper_limit_b3').change(function(){$('#txt_contract_upper_limit_p13').val($('[name=opt_contract_upper_limit_b3] option:selected').text()); $('#txt_contract_upper_limit_p23').val($('[name=opt_contract_upper_limit_b3] option:selected').text()); check_value_changed_10102(1, 'claim_leaving_upper_limit', $('[name=opt_contract_upper_limit_b3] option:selected').text(), '#opt_contract_upper_limit_b3');});
+    $('#opt_contract_lower_limit_b3').change(function(){calc_bill_midway_retirement_lower_limit();});
+    $('#opt_contract_upper_limit_b3').change(function(){calc_bill_midway_retirement_upper_limit();});
     $('#inp_syugyonisu_b3').keyup(function(){calc_bill_midway_retirement(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_leaving_employment_day', $('#inp_syugyonisu_b3').val(), '#inp_syugyonisu_b3');});
     $('#inp_zeneigyonisu_b3').keyup(function(){calc_bill_midway_retirement(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_leaving_allbusiness_day', $('#inp_zeneigyonisu_b3').val(), '#inp_zeneigyonisu_b3');});
 
@@ -264,34 +264,61 @@ function calc_bill_normal_period()
 
     if (a_tankin != '') {
         //通常期間：控除単価
-        if ((a_lower_txt != '') && (isFinite(a_lower_txt) == true)) {
-            if (a_trunc_txt1 == '一円未満切捨') {
-                //  一円未満切り捨て⇒ROUNDDOWN(単金/下限時間,0)
-                $('#txt_contract_kojyo_unit_b1').val(Number(Math.floor(a_tankin/a_lower_txt)).toLocaleString());
-            } else if (a_trunc_txt1 == '十円未満切捨') {
-                //  十円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-1)
-                a_tmp = Math.floor((a_tankin/a_lower_txt)/10);
-                $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
-            } else if (a_trunc_txt1 == '百円未満切捨') {
-                //  百円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-2)
-                a_tmp = Math.floor((a_tankin/a_lower_txt)/100);
-                $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
+        if (a_lower_txt != '') {
+            if (isFinite(a_lower_txt) == true) {
+                if (a_trunc_txt1 == '一円未満切捨') {
+                    //  一円未満切り捨て⇒ROUNDDOWN(単金/下限時間,0)
+                    $('#txt_contract_kojyo_unit_b1').val(Number(Math.floor(a_tankin/a_lower_txt)).toLocaleString());
+                } else if (a_trunc_txt1 == '十円未満切捨') {
+                    //  十円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-1)
+                    a_tmp = Math.floor((a_tankin/a_lower_txt)/10);
+                    $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
+                } else if (a_trunc_txt1 == '百円未満切捨') {
+                    //  百円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-2)
+                    a_tmp = Math.floor((a_tankin/a_lower_txt)/100);
+                    $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
+                }
+                $('#txt_contract_kojyo_unit_b1').attr('readonly',true);
+                $('#txt_contract_kojyo_unit_p11').attr('readonly',true);
+                $('#txt_contract_kojyo_unit_p21').attr('readonly',true);
+            } else {
+                $('#txt_contract_kojyo_unit_b1').attr('readonly',false);
+                $('#txt_contract_kojyo_unit_p11').attr('readonly',false);
+                $('#txt_contract_kojyo_unit_p21').attr('readonly',false);
             }
+        } else {
+            $('#txt_contract_kojyo_unit_b1').attr('readonly',true);
+            $('#txt_contract_kojyo_unit_p11').attr('readonly',true);
+            $('#txt_contract_kojyo_unit_p21').attr('readonly',true);
         }
+        
         //通常期間：残業単価
-        if ((a_upper_txt != '') && (isFinite(a_upper_txt) == true)) {
-            if (a_trunc_txt2 == '一円未満切捨') {
-                //  一円未満切り捨て⇒ROUNDDOWN(単金/上限時間,0)
-                $('#txt_contract_zangyo_unit_b1').val(Number(Math.floor(a_tankin/a_upper_txt)).toLocaleString());
-            } else if (a_trunc_txt2 == '十円未満切捨') {
-                //  十円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-1)
-                a_tmp = Math.floor((a_tankin/a_upper_txt)/10);
-                $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
-            } else if (a_trunc_txt2 == '百円未満切捨') {
-                //  百円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-2)
-                a_tmp = Math.floor((a_tankin/a_upper_txt)/100);
-                $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
+        if (a_upper_txt != '') {
+            if (isFinite(a_upper_txt) == true) {
+                if (a_trunc_txt2 == '一円未満切捨') {
+                    //  一円未満切り捨て⇒ROUNDDOWN(単金/上限時間,0)
+                    $('#txt_contract_zangyo_unit_b1').val(Number(Math.floor(a_tankin/a_upper_txt)).toLocaleString());
+                } else if (a_trunc_txt2 == '十円未満切捨') {
+                    //  十円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-1)
+                    a_tmp = Math.floor((a_tankin/a_upper_txt)/10);
+                    $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
+                } else if (a_trunc_txt2 == '百円未満切捨') {
+                    //  百円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-2)
+                    a_tmp = Math.floor((a_tankin/a_upper_txt)/100);
+                    $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
+                }
+                $('#txt_contract_zangyo_unit_b1').attr('readonly',true);
+                $('#txt_contract_zangyo_unit_p11').attr('readonly',true);
+                $('#txt_contract_zangyo_unit_p21').attr('readonly',true);
+            } else {
+                $('#txt_contract_zangyo_unit_b1').attr('readonly',false);
+                $('#txt_contract_zangyo_unit_p11').attr('readonly',false);
+                $('#txt_contract_zangyo_unit_p21').attr('readonly',false);
             }
+        } else {
+            $('#txt_contract_zangyo_unit_b1').attr('readonly',true);
+            $('#txt_contract_zangyo_unit_p11').attr('readonly',true);
+            $('#txt_contract_zangyo_unit_p21').attr('readonly',true);
         }
     }
 }
@@ -338,59 +365,77 @@ function calc_bill_middle_admission()
     if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
         $('#opt_contract_lower_limit_b2').val(0);
     } else if (a_wariai_c2 != '') {
-        if ((a_lower_txt != '') && (isFinite(a_lower_txt) == true)) {
-            a_tmp = Math.floor(a_lower_txt*a_wariai_c2);
-            $("#opt_contract_lower_limit_b2").append( function(){
-                if($("#opt_contract_lower_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_lower_limit_b2').val(a_tmp);
+        if (a_lower_txt != '') {
+            if (isFinite(a_lower_txt) == true) {
+                a_tmp = Math.floor(a_lower_txt*a_wariai_c2);
+                $("#opt_contract_lower_limit_b2").append( function(){
+                    if($("#opt_contract_lower_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_lower_limit_b2').val(a_tmp);
+            } else {
+                $('#opt_contract_lower_limit_b2').val(0);
+            }
         } else {
             $('#opt_contract_lower_limit_b2').val(0);
         }
     } else {
-        if ((a_lower_txt != '') && (isFinite(a_lower_txt) == true)) {
-            a_tmp = Math.floor(a_lower_txt*a_wariai_c1);
-            $("#opt_contract_lower_limit_b2").append( function(){
-                if($("#opt_contract_lower_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_lower_limit_b2').val(a_tmp);
+        if (a_lower_txt != '') {
+            if (isFinite(a_lower_txt) == true) {
+                a_tmp = Math.floor(a_lower_txt*a_wariai_c1);
+                $("#opt_contract_lower_limit_b2").append( function(){
+                    if($("#opt_contract_lower_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_lower_limit_b2').val(a_tmp);
+            } else {
+                $('#opt_contract_lower_limit_b2').val(0);
+            }
         } else {
             $('#opt_contract_lower_limit_b2').val(0);
         }
     }
+    //$('#txt_contract_kojyo_unit_b2').attr('readonly',true);
     
     //上限時間⇒IF(就業日数="","",TRUNC(IF(OR(就業日数="",自動計算=""),"",IF(手入力<>"",通常上限時間*手入力,通常上限時間*自動計算))))
     if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
         $('#opt_contract_upper_limit_b2').val(0);
     } else if (a_wariai_c2 != '') {
-        if ((a_upper_txt != '') && (isFinite(a_upper_txt) == true)) {
-            a_tmp = Math.floor(a_upper_txt*a_wariai_c2);
-            $("#opt_contract_upper_limit_b2").append( function(){
-                if($("#opt_contract_upper_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_upper_limit_b2').val(a_tmp);
+        if (a_upper_txt != '') {
+            if (isFinite(a_upper_txt) == true) {
+                a_tmp = Math.floor(a_upper_txt*a_wariai_c2);
+                $("#opt_contract_upper_limit_b2").append( function(){
+                    if($("#opt_contract_upper_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_upper_limit_b2').val(a_tmp);
+            } else {
+                $('#opt_contract_upper_limit_b2').val(0);
+            }
         } else {
             $('#opt_contract_upper_limit_b2').val(0);
         }
     } else {
-        if ((a_upper_txt != '') && (isFinite(a_upper_txt) == true)) {
-            a_tmp = Math.floor(a_upper_txt*a_wariai_c1);
-            $("#opt_contract_upper_limit_b2").append( function(){
-                if($("#opt_contract_upper_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_upper_limit_b2').val(a_tmp);
+        if (a_upper_txt != '') {
+            if (isFinite(a_upper_txt) == true) {
+                a_tmp = Math.floor(a_upper_txt*a_wariai_c1);
+                $("#opt_contract_upper_limit_b2").append( function(){
+                    if($("#opt_contract_upper_limit_b2 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_upper_limit_b2').val(a_tmp);
+            } else {
+                $('#opt_contract_upper_limit_b2').val(0);
+            }
         } else {
             $('#opt_contract_upper_limit_b2').val(0);
         }
     }
+    //$('#txt_contract_zangyo_unit_b2').attr('readonly',true);
     
     //控除単価⇒IF(就業日数<>"",通常控除単価,"")
     if (a_syugyonisu != '') {
@@ -404,6 +449,56 @@ function calc_bill_middle_admission()
         $('#txt_contract_zangyo_unit_b2').val(a_zangyo_unit);
     } else {
         $('#txt_contract_zangyo_unit_b2').val('');
+    }
+}
+
+function calc_bill_middle_admission_lower_limit()
+{
+    var a_lower_txt = $('[name=opt_contract_lower_limit_b2] option:selected').text();
+
+    $('#txt_contract_lower_limit_p12').val($('[name=opt_contract_lower_limit_b2] option:selected').text());
+    $('#txt_contract_lower_limit_p22').val($('[name=opt_contract_lower_limit_b2] option:selected').text());
+    check_value_changed_10102(1, 'claim_middle_lower_limit', $('[name=opt_contract_lower_limit_b2] option:selected').text(), '#opt_contract_lower_limit_b2'); 
+    
+    if (a_lower_txt != '') {
+        if (isFinite(a_lower_txt) == true) {
+            $('#txt_contract_kojyo_unit_b2').attr('readonly',true);
+            $('#txt_contract_kojyo_unit_p12').attr('readonly',true);
+            $('#txt_contract_kojyo_unit_p22').attr('readonly',true);
+        } else {
+            $('#txt_contract_kojyo_unit_b2').attr('readonly',false);
+            $('#txt_contract_kojyo_unit_p12').attr('readonly',false);
+            $('#txt_contract_kojyo_unit_p22').attr('readonly',false);
+        }
+    } else {
+        $('#txt_contract_kojyo_unit_b2').attr('readonly',true);
+        $('#txt_contract_kojyo_unit_p12').attr('readonly',true);
+        $('#txt_contract_kojyo_unit_p22').attr('readonly',true);
+    }
+}
+
+function calc_bill_middle_admission_upper_limit()
+{
+    var a_upper_txt = $('[name=opt_contract_upper_limit_b2] option:selected').text();
+
+    $('#txt_contract_upper_limit_p12').val($('[name=opt_contract_upper_limit_b2] option:selected').text());
+    $('#txt_contract_upper_limit_p22').val($('[name=opt_contract_upper_limit_b2] option:selected').text());
+    check_value_changed_10102(1, 'claim_middle_upper_limit', $('[name=opt_contract_upper_limit_b2] option:selected').text(), '#opt_contract_upper_limit_b2'); 
+
+    if (a_upper_txt != '') {
+        if (isFinite(a_upper_txt) == true) {
+            $('#txt_contract_zangyo_unit_b2').attr('readonly',true);
+            $('#txt_contract_zangyo_unit_p12').attr('readonly',true);
+            $('#txt_contract_zangyo_unit_p22').attr('readonly',true);
+        } else {
+            $('#txt_contract_zangyo_unit_b2').attr('readonly',false);
+            $('#txt_contract_zangyo_unit_p12').attr('readonly',false);
+            $('#txt_contract_zangyo_unit_p22').attr('readonly',false);
+        }
+    } else {
+        $('#txt_contract_zangyo_unit_b2').attr('readonly',true);
+        $('#txt_contract_zangyo_unit_p12').attr('readonly',true);
+        $('#txt_contract_zangyo_unit_p22').attr('readonly',true);
     }
 }
 
@@ -449,59 +544,77 @@ function calc_bill_midway_retirement()
     if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
         $('#opt_contract_lower_limit_b3').val(0);
     } else if (a_wariai_c2 != '') {
-        if ((a_lower_txt != '') && (isFinite(a_lower_txt) == true)) {
-            a_tmp = Math.floor(a_lower_txt*a_wariai_c2);
-            $("#opt_contract_lower_limit_b3").append( function(){
-                if($("#opt_contract_lower_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_lower_limit_b3').val(a_tmp);
+        if (a_lower_txt != '') {
+            if (isFinite(a_lower_txt) == true) {
+                a_tmp = Math.floor(a_lower_txt*a_wariai_c2);
+                $("#opt_contract_lower_limit_b3").append( function(){
+                    if($("#opt_contract_lower_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_lower_limit_b3').val(a_tmp);
+            } else {
+                $('#opt_contract_lower_limit_b3').val(0);
+            }
         } else {
             $('#opt_contract_lower_limit_b3').val(0);
         }
     } else {
-        if ((a_lower_txt != '') && (isFinite(a_lower_txt) == true)) {
-            a_tmp = Math.floor(a_lower_txt*a_wariai_c1);
-            $("#opt_contract_lower_limit_b3").append( function(){
-                if($("#opt_contract_lower_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_lower_limit_b3').val(a_tmp);
+        if (a_lower_txt != '') {
+            if (isFinite(a_lower_txt) == true) {
+                a_tmp = Math.floor(a_lower_txt*a_wariai_c1);
+                $("#opt_contract_lower_limit_b3").append( function(){
+                    if($("#opt_contract_lower_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_lower_limit_b3').val(a_tmp);
+            } else {
+                $('#opt_contract_lower_limit_b3').val(0);
+            }
         } else {
             $('#opt_contract_lower_limit_b3').val(0);
         }
     }
+    //$('#txt_contract_kojyo_unit_b3').attr('readonly',true);
     
     //上限時間⇒IF(就業日数="","",TRUNC(IF(OR(就業日数="",自動計算=""),"",IF(手入力<>"",通常上限時間*手入力,通常上限時間*自動計算))))
     if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
         $('#opt_contract_upper_limit_b3').val(0);
     } else if (a_wariai_c2 != '') {
-        if ((a_upper_txt != '') && (isFinite(a_upper_txt) == true)) {
-            a_tmp = Math.floor(a_upper_txt*a_wariai_c2);
-            $("#opt_contract_upper_limit_b3").append( function(){
-                if($("#opt_contract_upper_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_upper_limit_b3').val(a_tmp);
+        if (a_upper_txt != '') {
+            if (isFinite(a_upper_txt) == true) {
+                a_tmp = Math.floor(a_upper_txt*a_wariai_c2);
+                $("#opt_contract_upper_limit_b3").append( function(){
+                    if($("#opt_contract_upper_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_upper_limit_b3').val(a_tmp);
+            } else {
+                $('#opt_contract_upper_limit_b3').val(0);
+            }
         } else {
             $('#opt_contract_upper_limit_b3').val(0);
         }
     } else {
-        if ((a_upper_txt != '') && (isFinite(a_upper_txt) == true)) {
-            a_tmp = Math.floor(a_upper_txt*a_wariai_c1);
-            $("#opt_contract_upper_limit_b3").append( function(){
-                if($("#opt_contract_upper_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
-                    return $("<option>").val(a_tmp).text(a_tmp);
-                }
-            });
-            $('#opt_contract_upper_limit_b3').val(a_tmp);
+        if (a_upper_txt != '') {
+            if (isFinite(a_upper_txt) == true) {
+                a_tmp = Math.floor(a_upper_txt*a_wariai_c1);
+                $("#opt_contract_upper_limit_b3").append( function(){
+                    if($("#opt_contract_upper_limit_b3 option[value='" + a_tmp +"']").size() == 0) {
+                        return $("<option>").val(a_tmp).text(a_tmp);
+                    }
+                });
+                $('#opt_contract_upper_limit_b3').val(a_tmp);
+            } else {
+                $('#opt_contract_upper_limit_b3').val(0);
+            }
         } else {
             $('#opt_contract_upper_limit_b3').val(0);
         }
     }
+    //$('#txt_contract_zangyo_unit_b3').attr('readonly',true);
     
     //控除単価⇒IF(就業日数<>"",通常控除単価,"")
     if (a_syugyonisu != '') {
@@ -514,6 +627,56 @@ function calc_bill_midway_retirement()
         $('#txt_contract_zangyo_unit_b3').val(a_zangyo_unit);
     } else {
         $('#txt_contract_zangyo_unit_b3').val('');
+    }
+}
+
+function calc_bill_midway_retirement_lower_limit()
+{
+    var a_lower_txt = $('[name=opt_contract_lower_limit_b3] option:selected').text();
+
+    $('#txt_contract_lower_limit_p13').val($('[name=opt_contract_lower_limit_b3] option:selected').text());
+    $('#txt_contract_lower_limit_p23').val($('[name=opt_contract_lower_limit_b3] option:selected').text());
+    check_value_changed_10102(1, 'claim_leaving_lower_limit', $('[name=opt_contract_lower_limit_b3] option:selected').text(), '#opt_contract_lower_limit_b3'); 
+    
+    if (a_lower_txt != '') {
+        if (isFinite(a_lower_txt) == true) {
+            $('#txt_contract_kojyo_unit_b3').attr('readonly',true);
+            $('#txt_contract_kojyo_unit_p13').attr('readonly',true);
+            $('#txt_contract_kojyo_unit_p23').attr('readonly',true);
+        } else {
+            $('#txt_contract_kojyo_unit_b3').attr('readonly',false);
+            $('#txt_contract_kojyo_unit_p13').attr('readonly',false);
+            $('#txt_contract_kojyo_unit_p23').attr('readonly',false);
+        }
+    } else {
+        $('#txt_contract_kojyo_unit_b3').attr('readonly',true);
+        $('#txt_contract_kojyo_unit_p13').attr('readonly',true);
+        $('#txt_contract_kojyo_unit_p23').attr('readonly',true);
+    }
+}
+
+function calc_bill_midway_retirement_upper_limit()
+{
+    var a_upper_txt = $('[name=opt_contract_upper_limit_b3] option:selected').text();
+
+    $('#txt_contract_upper_limit_p13').val($('[name=opt_contract_upper_limit_b3] option:selected').text());
+    $('#txt_contract_upper_limit_p23').val($('[name=opt_contract_upper_limit_b3] option:selected').text());
+    check_value_changed_10102(1, 'claim_leaving_upper_limit', $('[name=opt_contract_upper_limit_b3] option:selected').text(), '#opt_contract_upper_limit_b3'); 
+
+    if (a_upper_txt != '') {
+        if (isFinite(a_upper_txt) == true) {
+            $('#txt_contract_zangyo_unit_b3').attr('readonly',true);
+            $('#txt_contract_zangyo_unit_p13').attr('readonly',true);
+            $('#txt_contract_zangyo_unit_p23').attr('readonly',true);
+        } else {
+            $('#txt_contract_zangyo_unit_b3').attr('readonly',false);
+            $('#txt_contract_zangyo_unit_p13').attr('readonly',false);
+            $('#txt_contract_zangyo_unit_p23').attr('readonly',false);
+        }
+    } else {
+        $('#txt_contract_zangyo_unit_b3').attr('readonly',true);
+        $('#txt_contract_zangyo_unit_p13').attr('readonly',true);
+        $('#txt_contract_zangyo_unit_p23').attr('readonly',true);
     }
 }
 
@@ -582,7 +745,8 @@ function calc_pay_normal_period()
     a_tankin_p21 = $('#txt_tankin_p21').val().replace(",","");
     
     //下限時間⇒IF(請求サイド通常下限時間="","",請求サイド通常下限時間)
-    if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
+    //if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
+    if (a_lower_txt == '') {
         $('#txt_contract_lower_limit_p11').val('');
         $('#txt_contract_lower_limit_p21').val('');
     } else {
@@ -593,7 +757,8 @@ function calc_pay_normal_period()
     a_lower_p21 = $('#txt_contract_lower_limit_p21').val();
     
     //上限時間⇒IF(請求サイド通常上限時間="","",請求サイド通常上限時間)
-    if ((a_upper_txt == '') || (isFinite(a_upper_txt) == false)) {
+    //if ((a_upper_txt == '') || (isFinite(a_upper_txt) == false)) {
+    if (a_upper_txt == '') {
         $('#txt_contract_upper_limit_p11').val('');
         $('#txt_contract_upper_limit_p21').val('');
     } else {
@@ -611,7 +776,7 @@ function calc_pay_normal_period()
     if (a_tankin_p11 != '') {
         a_tankin_p11 = a_tankin_p11.replace(",","");
         //通常期間：控除単価
-        if (a_lower_p11 != '') {
+        if ((a_lower_p11 != '') && (isFinite(a_lower_p11) == true)) {
             if (a_trunc_txt1 == '一円未満切捨') {
                 //  一円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),0)
                 $('#txt_contract_kojyo_unit_p11').val(Number(Math.floor(a_tankin_p11/a_lower_p11)).toLocaleString());
@@ -626,7 +791,7 @@ function calc_pay_normal_period()
             }
         }
         //通常期間：残業単価
-        if (a_upper_p11 != '') {
+        if ((a_upper_p11 != '') && (isFinite(a_upper_p11) == true)) {
             if (a_trunc_txt2 == '一円未満切捨') {
                 //  一円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),0)
                 $('#txt_contract_zangyo_unit_p11').val(Number(Math.floor(a_tankin_p11/a_upper_p11)).toLocaleString());
@@ -656,7 +821,7 @@ function calc_pay_normal_period()
     if (a_tankin_p21 != '') {
         a_tankin_p21 = a_tankin_p21.replace(",","");
         //通常期間：控除単価
-        if (a_lower_p21 != '') {
+        if ((a_lower_p21 != '') && (isFinite(a_lower_p21) == true)) {
             if (a_trunc_txt1 == '一円未満切捨') {
                 //  一円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),0)
                 $('#txt_contract_kojyo_unit_p21').val(Number(Math.floor(a_tankin_p21/a_lower_p21)).toLocaleString());
@@ -671,7 +836,7 @@ function calc_pay_normal_period()
             }
         }
         //通常期間：残業単価
-        if (a_upper_p21 != '') {
+        if ((a_upper_p21 != '') && (isFinite(a_upper_p21) == true)) {
             if (a_trunc_txt2 == '一円未満切捨') {
                 //  一円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),0)
                 $('#txt_contract_zangyo_unit_p21').val(Number(Math.floor(a_tankin_p21/a_upper_p21)).toLocaleString());
@@ -712,6 +877,7 @@ function calc_pay_middle_admission()
     var a_lower_p22;
     var a_upper_p12;
     var a_upper_p22;
+    
     //就業日数⇒請求サイド就業日数
     $('#txt_syugyonisu_p12').val(a_syugyonisu);
     $('#txt_syugyonisu_p22').val(a_syugyonisu);
@@ -736,7 +902,8 @@ function calc_pay_middle_admission()
     a_tankin_p22 = $('#txt_tankin_p22').val().replace(",","");
 
     //下限時間⇒IF(請求サイド途中入場下限時間="","",請求サイド途中入場下限時間)
-    if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
+    //if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
+    if (a_lower_txt == '') {
         $('#txt_contract_lower_limit_p12').val('');
         $('#txt_contract_lower_limit_p22').val('');
     } else {
@@ -747,7 +914,8 @@ function calc_pay_middle_admission()
     a_lower_p22 = $('#txt_contract_lower_limit_p22').val();
     
     //上限時間⇒IF(請求サイド途中入場上限時間="","",請求サイド途中入場上限時間)
-    if ((a_upper_txt == '') || (isFinite(a_upper_txt) == false)) {
+    //if ((a_upper_txt == '') || (isFinite(a_upper_txt) == false)) {
+    if (a_upper_txt == '') {
         $('#txt_contract_upper_limit_p12').val('');
         $('#txt_contract_upper_limit_p22').val('');
     } else {
@@ -809,6 +977,7 @@ function calc_pay_midway_retirement()
     var a_lower_p23;
     var a_upper_p13;
     var a_upper_p23;
+    
     //就業日数⇒請求サイド就業日数
     $('#txt_syugyonisu_p13').val(a_syugyonisu);
     $('#txt_syugyonisu_p23').val(a_syugyonisu);
@@ -833,7 +1002,8 @@ function calc_pay_midway_retirement()
     a_tankin_p23 = $('#txt_tankin_p23').val().replace(",","");
     
     //下限時間⇒IF(請求サイド途中入場下限時間="","",請求サイド途中入場下限時間)
-    if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
+    //if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
+    if (a_lower_txt == '') {
         $('#txt_contract_lower_limit_p13').val('');
         $('#txt_contract_lower_limit_p23').val('');
     } else {
@@ -844,7 +1014,8 @@ function calc_pay_midway_retirement()
     a_lower_p23 = $('#txt_contract_lower_limit_p23').val();
     
     //上限時間⇒IF(請求サイド途中入場上限時間="","",請求サイド途中入場上限時間)
-    if ((a_upper_txt == '') || (isFinite(a_upper_txt) == false)) {
+    //if ((a_upper_txt == '') || (isFinite(a_upper_txt) == false)) {
+    if (a_upper_txt == '') {
         $('#txt_contract_upper_limit_p13').val('');
         $('#txt_contract_upper_limit_p23').val('');
     } else {

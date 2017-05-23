@@ -48,6 +48,8 @@ $claim_settlement_paymentday = "";
 $remarks = "";
 $claim_contract_form = "";
 
+$payment_absence_deduction_subject = "";
+
 $remarks1 = "";
 $remarks2 = "";
 $remarks3 = "";
@@ -98,6 +100,8 @@ function set_10400_fromDB($a_result)
     $GLOBALS['claim_settlement_paymentday'] = $a_result['claim_settlement_paymentday'];
     $GLOBALS['remarks'] = $a_result['remarks'];
     $GLOBALS['claim_contract_form'] = $a_result['claim_contract_form'];
+    
+    $GLOBALS['payment_absence_deduction_subject'] = $a_result['payment_absence_deduction_subject'];
     
     $GLOBALS['remarks1'] = $a_result['remarks1'];
     $GLOBALS['remarks2'] = $a_result['remarks2'];

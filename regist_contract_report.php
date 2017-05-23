@@ -640,6 +640,29 @@ try{
     
     $a_stmt->execute();
 
+    if ($a_act != 'e'){
+        //直近のcr_idを取得
+        $a_cr_id = "";
+        $a_sql = "SELECT last_insert_id() AS cr_id FROM ".$GLOBALS['g_DB_t_contract_report'];
+        $a_stmt = $a_conn->prepare($a_sql);
+        $a_stmt->execute();
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            $a_cr_id = $a_result['cr_id'];
+        }
+        
+        //検収元台帳を1レコード作成
+        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_acceptance_ledger']." (";
+        $a_sql .= "cr_id,reg_id,reg_date";
+        $a_sql .= ") VALUES(";
+        $a_sql .= ":cr_id,:reg_id,:reg_date";
+        $a_sql .= ");";
+        $a_stmt = $a_conn->prepare($a_sql);
+        com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
+        com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+        $a_stmt->execute();
+    }
+        
     $a_sRet = 'OK';
     //$a_sRet .= "--->".$inp_tankin_b1;
     

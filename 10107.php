@@ -63,7 +63,7 @@ if (isset($_GET['NO'])) {
 	<br>
 	<p style="width:300px; margin-left:auto; text-align:left;">
         <u>見積書No.</u>
-            <?php echo $inp_estimate_no; ?>
+            <?php //echo $inp_estimate_no; ?>
             <?php
                 /*if ($a_act == '') {
                     echo $inp_estimate_no;
@@ -73,7 +73,7 @@ if (isset($_GET['NO'])) {
             ?>
         <br>
         <u>&nbsp;&nbsp;発行日&nbsp;&nbsp;&nbsp;</u>
-            <?php echo $inp_estimate_date; ?>
+            <?php //echo $inp_estimate_date; ?>
             <?php
                 /*if ($a_act == '') {
                     echo $inp_estimate_date;

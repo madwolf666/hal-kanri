@@ -50,11 +50,13 @@ $g_DB_m_contract_personality = "m_contract_personality";
 $g_DB_m_contract_projects_confirm = "m_contract_projects_confirm";
 $g_DB_m_contract_engineer_list = "m_contract_engineer_list";
 
+$g_DB_t_acceptance_ledger = "t_acceptance_ledger";
 $g_DB_t_agreement_ledger = "t_agreement_ledger";
 $g_DB_t_contract_estimate = "t_contract_estimate";
 $g_DB_t_contract_end_report = "t_contract_end_report";
 $g_DB_t_contract_report = "t_contract_report";
 $g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
+$g_DB_t_payroll = "t_payroll";
 $g_DB_t_purchase_order_ledger = "t_purchase_order_ledger";
 
 /*******************************************************************************
@@ -77,6 +79,8 @@ $g_MENU_CONTRACT_10201 = 10201;    //給与台帳一覧：検索
 
 $g_MENU_CONTRACT_10300 = 10300;    //検収台帳一覧
 $g_MENU_CONTRACT_10301 = 10301;    //検収台帳一覧：検索
+
+$g_MENU_CONTRACT_10310 = 10310;    //検収台帳一覧：行追加
 
 $g_MENU_CONTRACT_10400 = 10400;    //注文書台帳一覧
 $g_MENU_CONTRACT_10401 = 10401;    //注文書台帳一覧：検索
@@ -368,6 +372,14 @@ function com_make_input_text($h_idx, $h_field, $h_rec)
 {
     $a_sRet = "id='".$h_field.$h_rec."'";
     $a_sRet .= " onClick='make_input_text(".$h_idx.",\"".$h_field."\",".$h_rec."); after_focus(\"".$h_field."\",".$h_rec.");'";
+    
+    return $a_sRet;
+}
+
+function com_make_input_text2($h_idx, $h_sidx, $h_field, $h_rec)
+{
+    $a_sRet = "id='".$h_field.$h_rec."'";
+    $a_sRet .= " onClick='make_input_text2(".$h_idx.",".$h_sidx.",\"".$h_field."\",".$h_rec."); after_focus(\"".$h_field."\",".$h_rec.");'";
     
     return $a_sRet;
 }

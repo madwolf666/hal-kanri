@@ -263,3 +263,34 @@ function make_input_text(h_cr_id, h_field, h_id)
      
     g_input_click = true;
 }
+
+function make_input_text2(h_cr_id, h_sub_id, h_field, h_id)
+{
+    //alert(h_cr_id + "," + h_field + "," + h_id );
+    
+    if (g_input_click == true) {
+        //alert('ccc');
+        return;
+    }
+    
+    var a_str = '<input type="text"';
+    
+    a_str += ' id="i_' + h_field + h_id + '"';
+    a_str += ' value="';
+
+    var a_val = $("#" + h_field + h_id).text();
+    //alert(a_val);
+    if (a_val != null) {
+        a_str += a_val;
+    }
+    a_str += '" style="width: 96%;"';
+    a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_sub_id + '\',\'' + h_field + '\',\'' + h_id + '\',1);"';
+    a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\');"';
+    a_str += '>';
+    //alert(a_str);
+    $("#" + h_field + h_id).empty().append(a_str);
+    $("#" + h_field + h_id).focus();
+    //alert($("#" + h_field + h_id).text());
+     
+    g_input_click = true;
+}

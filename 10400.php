@@ -44,9 +44,9 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-10400.js"></script>
 <script type="text/javascript">
     make_purchase_order_ledger_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 360); 
+    resize_div2('leftColumn', 'right_title', 'right_record', 450); 
     $(window).resize(function(){
-        resize_div2('leftColumn', 'right_title', 'right_record', 360); 
+        resize_div2('leftColumn', 'right_title', 'right_record', 450); 
     });
 /*
     resize_div('right_title', 360+17); 

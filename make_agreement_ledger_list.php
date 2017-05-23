@@ -75,17 +75,13 @@ try{
     
     //固定列部分
     $a_sRet .= "        <td style='width: 400px; padding: 0 0;' width='400px'>";
-    $a_sRet .= "            <table class='tbl_list' width='540px'>";
+    $a_sRet .= "            <table class='tbl_list' width='410px;'>";
     $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 50px;' nowrap>労働契約書<br>発行No</td>";
-    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 50px;' nowrap>契約管理<br>No.</td>";
-    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 50px;' nowrap>労働契約書<br>発行日</td>";
-    $a_sRet .= "                    <td colspan='3' class='td_title2' style='height:25px;' nowrap>労働者情報</td>";
-    $a_sRet .= "                </tr>";
-    $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 60px; height:25px;' nowrap>ｴﾝｼﾞﾆｱ番号</td>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 60px;' nowrap>ｴﾝｼﾞﾆｱ名</td>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 60px;' nowrap>ｴﾝｼﾞﾆｱｶﾅ</td>";
+    $a_sRet .= "                    <td rowspan='2' class='td_titleI' style='width: 80px;' nowrap>労働契約書<br>発行No</td>";
+    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 60px;' nowrap>契約管理<br>No.</td>";
+    $a_sRet .= "                    <td rowspan='2' class='td_titleI' style='width: 90px;' nowrap>労働契約書<br>発行日</td>";
+    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 100px; height:25px;' nowrap>ｴﾝｼﾞﾆｱ番号</td>";
+    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 80px;' nowrap>ｴﾝｼﾞﾆｱ名</td>";
     $a_sRet .= "                </tr>";
     $a_sRet .= "            </table>";
     $a_sRet .= "        </td>";
@@ -95,6 +91,7 @@ try{
     $a_sRet .= "            <div id='right_title' style='overflow:hidden; width: 500px; padding:0 0;'>";
     $a_sRet .= "                <table class='tbl_list' style='width: 8000px;'>";
     $a_sRet .= "                    <tr>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>ｴﾝｼﾞﾆｱｶﾅ</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='height: 25px;' nowrap>客先情報</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='' nowrap>期間</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>作業時間</td>";
@@ -113,22 +110,22 @@ try{
     $a_sRet .= "                        <td colspan='2' class='td_title2' nowrap>派遣先責任者</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>個人情報</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>抵触日(組)</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>抵触日(事)</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>組織単位</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>紛争防止措置</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>抵触日(組)</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>抵触日(事)</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>組織単位</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>紛争防止措置</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>苦情の処理・申出先(派遣元)</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>苦情の処理・申出先(派遣先)</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>派遣先責任者<br>電話番号</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>派遣の案内発送</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>派遣先責任者<br>電話番号</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>派遣の案内発送</td>";
     $a_sRet .= "                    </tr>";
     
     $a_sRet .= "                    <tr>";
@@ -168,30 +165,30 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>月次</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>〆日</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>支払日</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>名称</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>住所</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>電話</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>名称</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>住所</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>電話</td>";
 
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>（役職）</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>（氏名）</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>（役職）</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>（氏名）</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>役職</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>氏名</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>（役職）</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>（氏名）</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>（役職）</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>（氏名）</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>役職</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>氏名</td>";
     
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>郵便番号</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>現住所</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>生年月日</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>郵便番号</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>現住所</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>生年月日</td>";
     
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>その他</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>その他</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>&nbsp;</td>";
 
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>役職</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>氏名</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>役職</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>氏名</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>電話番号</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>役職</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>氏名</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>役職</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>氏名</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>電話番号</td>";
 
     $a_sRet .= "                    </tr>";
     $a_sRet .= "                </table>";
@@ -202,7 +199,7 @@ try{
 
     $a_sRet_L = "       <td valign='top'>";
     $a_sRet_L .= "           <div id='leftColumn' style='overflow:hidden;height:433px;'>";
-    $a_sRet_L .= "               <table class='tbl_list' style='' width='540px'>";
+    $a_sRet_L .= "               <table class='tbl_list' style='' width='410px'>";
     
     $a_sRet_R = "       <td valign='top' style='padding: 0 0;'>";
     $a_sRet_R .= "          <div id='right_record' style='padding: 0 0; overflow:scroll;width:00px;height:450px;' onscroll='document.all.right_title.scrollLeft=this.scrollLeft;document.all.leftColumn.scrollTop=this.scrollTop;'>";
@@ -227,20 +224,20 @@ try{
 
         //入力あり
         //$a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover' id='dm_no".$a_rec."' onClick='alert(\"chappy\");'>".$a_result['dm_no']."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 50px;'><div class='myover' ".com_make_input_text($cr_id,'ag_no',$a_rec).">".$ag_no."</td>";
+        $a_sRet_L .= "<td class='td_lineI' style='width: 80px;'><div class='myover' ".com_make_input_text($cr_id,'ag_no',$a_rec).">".$ag_no."</td>";
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$contract_number."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 50px;'><div class='myover' ".com_make_input_text($cr_id,'publication',$a_rec).">".$publication."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 60px;'><div class='myover'>".$contract_number."</td>";
+        $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text($cr_id,'publication',$a_rec).">".$publication."</td>";
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>";
         $a_sRet_L .= "<a href='#' onclick='choice_agreement_ledger_method(\"".$a_result['cr_id']."\");'>".$engineer_number."</a>";
         $a_sRet_L .= "</td>";
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 60px;'><div class='myover'>".$engineer_name."</td>";
-        $a_sRet_L .= "<td class='td_line2' style='width: 60px;'><div class='myover'>".$engneer_name_phonetic."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$engineer_name."</td>";
         
         $a_sRet_L .= "</tr>";
 
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engneer_name_phonetic."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$customer_name."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_contract_form."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_start."</td>";

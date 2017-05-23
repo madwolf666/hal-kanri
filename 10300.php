@@ -10,6 +10,8 @@ require_once('./header.php');
 
 ?>
 
+<link rel="stylesheet" href="css/hal-kanri-common.css">
+
 <section>
 <h2>検収台帳</h2>
 
@@ -18,8 +20,36 @@ require_once('./header.php');
     <input type="button" value="Excelへ一覧出力" onclick="return excel_out_10300();">
 </p>
 
+<center>
+<div id="my-list" style="z-index:100; width: auto; padding-bottom: 4px;"></div>
+</center>
+
+<div id="my-popup" class="popup">
+	<div id="my-method" class="popup_inner" style="">
+            <a href="#" onclick="hide_popup();">閉じる</a>
+	</div>
+</div>
+<div id="overlay"></div>
+
 </section>
 
 <?php
 require_once('./footer.php');
 ?>
+
+<script src="./js/hal-kanri-10300.js"></script>
+<script type="text/javascript">
+    make_acceptance_ledger_list(1);
+    resize_div2('leftColumn', 'right_title', 'right_record', 310); 
+    $(window).resize(function(){
+        resize_div2('leftColumn', 'right_title', 'right_record', 310); 
+    });
+/*
+    resize_div('right_title', 360+17); 
+    resize_div('right_record', 360); 
+    $(window).resize(function(){
+        resize_div('right_title', 360+17); 
+        resize_div('right_record', 360); 
+    });
+*/
+</script>

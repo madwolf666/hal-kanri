@@ -50,6 +50,152 @@ if (!isset($_GET['mnu'])){
     case $GLOBALS['g_MENU_CONTRACT_10301']:   //検収台帳：検索
         header('Location: ./10301.php');
         break;
+    case $GLOBALS['g_MENU_CONTRACT_10310']:   //検収台帳：行追加
+        //POSTデータを取得
+        $a_cr_id = $_GET['NO'];
+        $a_al_id = $_GET['SN'];
+        $a_isExists = false;
+
+        try{
+            //DBからユーザ情報取得
+            $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+            $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_acceptance_ledger']." WHERE (cr_id=:cr_id) AND (al_id=:al_id);";
+            $a_stmt = $a_conn->prepare($a_sql);
+            $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+            com_pdo_bindValue($a_stmt, ':al_id', $a_al_id);
+            $a_stmt->execute();
+
+            $a_sql2 = "";
+            while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+                $a_isExists = true;
+            }
+            
+            $a_rec = 1;
+            if ($a_isExists == false){
+                $a_rec = 2;
+            } else {
+                $a_sql2 = "INSERT INTO ".$GLOBALS['g_DB_t_acceptance_ledger']." (";
+                $a_sql2 .= "
+cr_id
+,reg_id
+,reg_date
+,accounts_estimate_no
+,accounts_contract_purchase_no
+,accounts_bai_previous_day
+,accounts_sales_will_amount
+,accounts_working_hours_manage
+,accounts_actual_working_hours
+,accounts_actual_amount_money
+,accounts_expenses
+,accounts_tax_meter_noinclude
+,accounts_tax_meter_include
+,accounts_invoicing
+,ordering_purchase_no
+,payment_acceptance_date
+,payment_schedule_amount
+,payment_actual_working_hours
+,payment_actual_amount_money
+,payment_commuting_expenses
+,payment_tax_meter_noinclude
+,payment_tax_meter_include
+,payment_bill_acceptance
+,payment_expenses
+,payment_else
+,payment_pre_paid
+,payment_advance
+,payment_commission
+,payment_total
+,payment_plan_month_after_next_1
+,payment_plan_next_month_15
+,payment_plan_month_after_next_15
+,payment_plan_else
+,payment_payroll_schedule
+,payment_transfer_processing_amount1
+,payment_transfer_processing_amount2
+,payment_difference
+,payment_actual_working_hours_difference
+,payment_gross_profit
+,payment_gross_profit_margin
+            ";
+                $a_sql2 .= ") SELECT";
+                $a_sql2 .= "
+:cr_id AS cr_id
+,:reg_id AS reg_id
+,:reg_date AS reg_date
+,accounts_estimate_no
+,accounts_contract_purchase_no
+,accounts_bai_previous_day
+,accounts_sales_will_amount
+,accounts_working_hours_manage
+,accounts_actual_working_hours
+,accounts_actual_amount_money
+,accounts_expenses
+,accounts_tax_meter_noinclude
+,accounts_tax_meter_include
+,accounts_invoicing
+,ordering_purchase_no
+,payment_acceptance_date
+,payment_schedule_amount
+,payment_actual_working_hours
+,payment_actual_amount_money
+,payment_commuting_expenses
+,payment_tax_meter_noinclude
+,payment_tax_meter_include
+,payment_bill_acceptance
+,payment_expenses
+,payment_else
+,payment_pre_paid
+,payment_advance
+,payment_commission
+,payment_total
+,payment_plan_month_after_next_1
+,payment_plan_next_month_15
+,payment_plan_month_after_next_15
+,payment_plan_else
+,payment_payroll_schedule
+,payment_transfer_processing_amount1
+,payment_transfer_processing_amount2
+,payment_difference
+,payment_actual_working_hours_difference
+,payment_gross_profit
+,payment_gross_profit_margin
+            ";
+                $a_sql2 .= " FROM ".$GLOBALS['g_DB_t_acceptance_ledger']." WHERE (cr_id=:cr_id) AND (al_id=:al_id);";
+            }
+
+            if ($a_isExists == false){
+                for ($a_i = 1; $a_i <= $a_rec; $a_i++) {
+                    $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_acceptance_ledger']." (";
+                    $a_sql .= "cr_id,reg_id,reg_date";
+                    $a_sql .= ") VALUES(";
+                    $a_sql .= ":cr_id,:reg_id,:reg_date";
+                    $a_sql .= ");";
+
+                    $a_stmt = $a_conn->prepare($a_sql);
+
+                    com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+                    com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
+                    com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+                    $a_stmt->execute();
+                }
+            } else {
+                    $a_stmt = $a_conn->prepare($a_sql2);
+
+                    com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+                    com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
+                    com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+                    com_pdo_bindValue($a_stmt, ':al_id', $a_al_id);
+                    $a_stmt->execute();
+            }
+        } catch (PDOException $e){
+            $a_sRet = 'Error:'.$e->getMessage();
+        }
+        $a_conn = null;
+
+        header('Location: ./10300.php');
+        break;
     case $GLOBALS['g_MENU_CONTRACT_10400']:   //注文書台帳
         header('Location: ./10400.php');
         break;
