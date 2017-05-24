@@ -197,6 +197,8 @@ if ($a_act == 'c') {
                     ?>
                 </td>
             </tr>
+            <input type="hidden" id="inp_kyakusaki_jimutantosya" readonly="true" value="" style="width: 160px; text-align: center;">
+            <!--
             <tr>
                 <td colspan="2" class="yellow" height=15>客先事務担当者名</td>
                 <td colspan="10">
@@ -209,6 +211,7 @@ if ($a_act == 'c') {
                     ?>
                 </td>
             </tr>
+            -->
             <tr>
                 <td colspan="2" class="yellow" height=15>担当者役職</td>
                 <td colspan="10">
