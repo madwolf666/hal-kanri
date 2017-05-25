@@ -266,16 +266,27 @@ function calc_bill_normal_period()
         //通常期間：控除単価
         if (a_lower_txt != '') {
             if (isFinite(a_lower_txt) == true) {
-                if (a_trunc_txt1 == '一円未満切捨') {
-                    //  一円未満切り捨て⇒ROUNDDOWN(単金/下限時間,0)
+                if (a_trunc_txt1 == '1円未満切捨') {
+                    //  1円未満切り捨て⇒ROUNDDOWN(単金/下限時間,0)
                     $('#txt_contract_kojyo_unit_b1').val(Number(Math.floor(a_tankin/a_lower_txt)).toLocaleString());
-                } else if (a_trunc_txt1 == '十円未満切捨') {
-                    //  十円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-1)
+                } else if (a_trunc_txt1 == '10円未満切捨') {
+                    //  10円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-1)
                     a_tmp = Math.floor((a_tankin/a_lower_txt)/10);
                     $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
-                } else if (a_trunc_txt1 == '百円未満切捨') {
-                    //  百円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-2)
+                } else if (a_trunc_txt1 == '100円未満切捨') {
+                    //  100円未満切り捨て⇒ROUNDDOWN(単金/下限時間,-2)
                     a_tmp = Math.floor((a_tankin/a_lower_txt)/100);
+                    $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
+                } else if (a_trunc_txt1 == '1円未満切上') {
+                    //  1円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                    $('#txt_contract_kojyo_unit_b1').val(Number(Math.ceil(a_tankin/a_lower_txt)).toLocaleString());
+                } else if (a_trunc_txt1 == '10円未満切上') {
+                    //  10円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                    a_tmp = Math.ceil((a_tankin/a_lower_txt)/10);
+                    $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
+                } else if (a_trunc_txt1 == '100円未満切上') {
+                    //  100円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                    a_tmp = Math.ceil((a_tankin/a_lower_txt)/100);
                     $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
                 }
                 $('#txt_contract_kojyo_unit_b1').attr('readonly',true);
@@ -295,16 +306,27 @@ function calc_bill_normal_period()
         //通常期間：残業単価
         if (a_upper_txt != '') {
             if (isFinite(a_upper_txt) == true) {
-                if (a_trunc_txt2 == '一円未満切捨') {
-                    //  一円未満切り捨て⇒ROUNDDOWN(単金/上限時間,0)
+                if (a_trunc_txt2 == '1円未満切捨') {
+                    //  1円未満切り捨て⇒ROUNDDOWN(単金/上限時間,0)
                     $('#txt_contract_zangyo_unit_b1').val(Number(Math.floor(a_tankin/a_upper_txt)).toLocaleString());
-                } else if (a_trunc_txt2 == '十円未満切捨') {
-                    //  十円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-1)
+                } else if (a_trunc_txt2 == '10円未満切捨') {
+                    //  10円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-1)
                     a_tmp = Math.floor((a_tankin/a_upper_txt)/10);
                     $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
-                } else if (a_trunc_txt2 == '百円未満切捨') {
-                    //  百円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-2)
+                } else if (a_trunc_txt2 == '100円未満切捨') {
+                    //  100円未満切り捨て⇒ROUNDDOWN(単金/上限時間,-2)
                     a_tmp = Math.floor((a_tankin/a_upper_txt)/100);
+                    $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
+                } else if (a_trunc_txt2 == '1円未満切上') {
+                    //  1円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                    $('#txt_contract_zangyo_unit_b1').val(Number(Math.ceil(a_tankin/a_upper_txt)).toLocaleString());
+                } else if (a_trunc_txt2 == '10円未満切上') {
+                    //  10円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                    a_tmp = Math.ceil((a_tankin/a_upper_txt)/10);
+                    $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*10).toLocaleString());
+                } else if (a_trunc_txt2 == '100円未満切上') {
+                    //  100円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                    a_tmp = Math.ceil((a_tankin/a_upper_txt)/100);
                     $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
                 }
                 $('#txt_contract_zangyo_unit_b1').attr('readonly',true);
@@ -777,31 +799,53 @@ function calc_pay_normal_period()
         a_tankin_p11 = a_tankin_p11.replace(",","");
         //通常期間：控除単価
         if ((a_lower_p11 != '') && (isFinite(a_lower_p11) == true)) {
-            if (a_trunc_txt1 == '一円未満切捨') {
-                //  一円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),0)
+            if (a_trunc_txt1 == '1円未満切捨') {
+                //  1円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),0)
                 $('#txt_contract_kojyo_unit_p11').val(Number(Math.floor(a_tankin_p11/a_lower_p11)).toLocaleString());
-            } else if (a_trunc_txt1 == '十円未満切捨') {
-                //  十円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-1)
+            } else if (a_trunc_txt1 == '10円未満切捨') {
+                //  10円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-1)
                 a_tmp = Math.floor((a_tankin_p11/a_lower_p11)/10);
                 $('#txt_contract_kojyo_unit_p11').val(Number(a_tmp*10).toLocaleString());
-            } else if (a_trunc_txt1 == '百円未満切捨') {
-                //  百円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-2)
+            } else if (a_trunc_txt1 == '100円未満切捨') {
+                //  100円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-2)
                 a_tmp = Math.floor((a_tankin_p11/a_lower_p11)/100);
+                $('#txt_contract_kojyo_unit_p11').val(Number(a_tmp*100).toLocaleString());
+            } else if (a_trunc_txt1 == '1円未満切上') {
+                //  1円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                $('#txt_contract_kojyo_unit_p11').val(Number(Math.ceil(a_tankin_p11/a_lower_p11)).toLocaleString());
+            } else if (a_trunc_txt1 == '10円未満切上') {
+                //  10円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p11/a_lower_p11)/10);
+                $('#txt_contract_kojyo_unit_p11').val(Number(a_tmp*10).toLocaleString());
+            } else if (a_trunc_txt1 == '100円未満切上') {
+                //  100円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p11/a_lower_p11)/100);
                 $('#txt_contract_kojyo_unit_p11').val(Number(a_tmp*100).toLocaleString());
             }
         }
         //通常期間：残業単価
         if ((a_upper_p11 != '') && (isFinite(a_upper_p11) == true)) {
-            if (a_trunc_txt2 == '一円未満切捨') {
-                //  一円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),0)
+            if (a_trunc_txt2 == '1円未満切捨') {
+                //  1円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),0)
                 $('#txt_contract_zangyo_unit_p11').val(Number(Math.floor(a_tankin_p11/a_upper_p11)).toLocaleString());
-            } else if (a_trunc_txt2 == '十円未満切捨') {
-                //  十円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-1)
+            } else if (a_trunc_txt2 == '10円未満切捨') {
+                //  10円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-1)
                 a_tmp = Math.floor((a_tankin_p11/a_upper_p11)/10);
                 $('#txt_contract_zangyo_unit_p11').val(Number(a_tmp*10).toLocaleString());
-            } else if (a_trunc_txt2 == '百円未満切捨') {
-                //  百円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-2)
+            } else if (a_trunc_txt2 == '100円未満切捨') {
+                //  100円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-2)
                 a_tmp = Math.floor((a_tankin_p11/a_upper_p11)/100);
+                $('#txt_contract_zangyo_unit_p11').val(Number(a_tmp*100).toLocaleString());
+            } else if (a_trunc_txt2 == '1円未満切上') {
+                //  1円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                $('#txt_contract_zangyo_unit_p11').val(Number(Math.ceil(a_tankin_p11/a_upper_p11)).toLocaleString());
+            } else if (a_trunc_txt2 == '10円未満切上') {
+                //  10円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p11/a_upper_p11)/10);
+                $('#txt_contract_zangyo_unit_p11').val(Number(a_tmp*10).toLocaleString());
+            } else if (a_trunc_txt2 == '100円未満切上') {
+                //  100円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p11/a_upper_p11)/100);
                 $('#txt_contract_zangyo_unit_p11').val(Number(a_tmp*100).toLocaleString());
             }
         }
@@ -822,31 +866,53 @@ function calc_pay_normal_period()
         a_tankin_p21 = a_tankin_p21.replace(",","");
         //通常期間：控除単価
         if ((a_lower_p21 != '') && (isFinite(a_lower_p21) == true)) {
-            if (a_trunc_txt1 == '一円未満切捨') {
-                //  一円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),0)
+            if (a_trunc_txt1 == '1円未満切捨') {
+                //  1円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),0)
                 $('#txt_contract_kojyo_unit_p21').val(Number(Math.floor(a_tankin_p21/a_lower_p21)).toLocaleString());
-            } else if (a_trunc_txt1 == '十円未満切捨') {
-                //  十円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-1)
+            } else if (a_trunc_txt1 == '10円未満切捨') {
+                //  10円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-1)
                 a_tmp = Math.floor((a_tankin_p21/a_lower_p21)/10);
                 $('#txt_contract_kojyo_unit_p21').val(Number(a_tmp*10).toLocaleString());
-            } else if (a_trunc_txt1 == '百円未満切捨') {
-                //  百円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-2)
+            } else if (a_trunc_txt1 == '100円未満切捨') {
+                //  100円未満切り捨て⇒ROUNDDOWN(単金/下限時間*(還元率/100),-2)
                 a_tmp = Math.floor((a_tankin_p21/a_lower_p21)/100);
+                $('#txt_contract_kojyo_unit_p21').val(Number(a_tmp*100).toLocaleString());
+            } else if (a_trunc_txt1 == '1円未満切上') {
+                //  1円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                $('#txt_contract_kojyo_unit_p21').val(Number(Math.ceil(a_tankin_p21/a_lower_p21)).toLocaleString());
+            } else if (a_trunc_txt1 == '10円未満切上') {
+                //  10円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p21/a_lower_p21)/10);
+                $('#txt_contract_kojyo_unit_p21').val(Number(a_tmp*10).toLocaleString());
+            } else if (a_trunc_txt1 == '100円未満切上') {
+                //  100円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p21/a_lower_p21)/100);
                 $('#txt_contract_kojyo_unit_p21').val(Number(a_tmp*100).toLocaleString());
             }
         }
         //通常期間：残業単価
         if ((a_upper_p21 != '') && (isFinite(a_upper_p21) == true)) {
-            if (a_trunc_txt2 == '一円未満切捨') {
-                //  一円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),0)
+            if (a_trunc_txt2 == '1円未満切捨') {
+                //  1円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),0)
                 $('#txt_contract_zangyo_unit_p21').val(Number(Math.floor(a_tankin_p21/a_upper_p21)).toLocaleString());
-            } else if (a_trunc_txt2 == '十円未満切捨') {
-                //  十円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-1)
+            } else if (a_trunc_txt2 == '10円未満切捨') {
+                //  10円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-1)
                 a_tmp = Math.floor((a_tankin_p21/a_upper_p21)/10);
                 $('#txt_contract_zangyo_unit_p21').val(Number(a_tmp*10).toLocaleString());
-            } else if (a_trunc_txt2 == '百円未満切捨') {
-                //  百円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-2)
+            } else if (a_trunc_txt2 == '100円未満切捨') {
+                //  100円未満切り捨て⇒ROUNDDOWN(単金/上限時間*(還元率/100),-2)
                 a_tmp = Math.floor((a_tankin_p21/a_upper_p21)/100);
+                $('#txt_contract_zangyo_unit_p21').val(Number(a_tmp*100).toLocaleString());
+            } else if (a_trunc_txt2 == '1円未満切上') {
+                //  1円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                $('#txt_contract_zangyo_unit_p21').val(Number(Math.ceil(a_tankin_p21/a_upper_p21)).toLocaleString());
+            } else if (a_trunc_txt2 == '10円未満切上') {
+                //  10円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p21/a_upper_p21)/10);
+                $('#txt_contract_zangyo_unit_p21').val(Number(a_tmp*10).toLocaleString());
+            } else if (a_trunc_txt2 == '100円未満切上') {
+                //  100円未満切上⇒ROUNDDOWN(単金/下限時間,-2)
+                a_tmp = Math.ceil((a_tankin_p21/a_upper_p21)/100);
                 $('#txt_contract_zangyo_unit_p21').val(Number(a_tmp*100).toLocaleString());
             }
         }

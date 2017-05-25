@@ -383,7 +383,7 @@ if ($a_act == 'c') {
             </tr>
             <tr>
                 <td colspan="2" class="yellow">控除単価</td>
-                <td colspan="3" class="yellow">切捨単位</td>
+                <td colspan="3" class="yellow">単位</td>
                 <td colspan="3">
                     <?php
                         if ($a_act == ''){
@@ -407,7 +407,7 @@ if ($a_act == 'c') {
             </tr>
             <tr>
                 <td colspan="2" class="yellow">残業単価</td>
-                <td colspan="3" class="yellow">切捨単位</td>
+                <td colspan="3" class="yellow">単位</td>
                 <td colspan="3">
                     <?php
                         if ($a_act == ''){
