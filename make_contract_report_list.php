@@ -46,14 +46,16 @@ try{
     //可変部分
     $a_sRet .= "        <td style='width: 440px; padding:0 0'>";
     $a_sRet .= "            <div id='right_title' style='overflow:hidden; width: 500px; padding:0 0;'>";
-    $a_sRet .= "                <table class='tbl_list' style='width: 7600px;'>";
+    $a_sRet .= "                <table class='tbl_list' style='width: 8000px;'>";
     $a_sRet .= "                    <tr>";
-    $a_sRet .= "                        <td colspan='39' class='td_title2' style='height: 25px;' nowrap>請求サイド</td>";
-    $a_sRet .= "                        <td colspan='33' class='td_title2' style='' nowrap>支払サイド</td>";
+    $a_sRet .= "                        <td colspan='41' class='td_title2' style='height: 25px;' nowrap>請求サイド</td>";
+    $a_sRet .= "                        <td colspan='34' class='td_title2' style='' nowrap>支払サイド</td>";
     $a_sRet .= "                    </tr>";
     
     $a_sRet .= "                    <tr>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px; height: 25px;' nowrap>客先名</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>件名</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>作業場所</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' style='width: 100px;' nowrap>作業時間</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' style='width: 100px;' nowrap>休憩時間</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>客先担当部署</td>";
@@ -76,6 +78,7 @@ try{
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>担当者名</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>開始日</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>終了日</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>還元率</td>";
     $a_sRet .= "                        <td colspan='6' class='td_title2' style='width: 100px;' nowrap>通常期間</td>";
     $a_sRet .= "                        <td colspan='6' class='td_title2' style='width: 100px;' nowrap>期中入場</td>";
     $a_sRet .= "                        <td colspan='6' class='td_title2' style='width: 100px;' nowrap>期中退場</td>";
@@ -162,7 +165,7 @@ try{
     
     $a_sRet_R = "       <td valign='top' style='padding: 0 0;'>";
     $a_sRet_R .= "          <div id='right_record' style='padding: 0 0; overflow:scroll;width:500px;height:450px;' onscroll='document.all.right_title.scrollLeft=this.scrollLeft;document.all.leftColumn.scrollTop=this.scrollTop;'>";
-    $a_sRet_R .= "              <table class='tbl_list' style='width: 7600px;'>";
+    $a_sRet_R .= "              <table class='tbl_list' style='width: 8000px;'>";
 
 /**/
     //while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
@@ -191,6 +194,8 @@ try{
         $a_sRet_L .= "</tr>";
 
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['customer_name']."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['subject']."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['workplace']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['work_start']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['work_end']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['work_hours']."</td>";
@@ -235,6 +240,8 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['business_charge_name']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".str_replace("-", "/", $a_result['payment_agreement_start'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".str_replace("-", "/", $a_result['payment_agreement_end'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['redemption_ratio']."</td>";
+
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['payment_normal_calculation_1']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format_symbol($a_result['payment_normal_unit_price_1'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['payment_normal_lower_limit_1']."</td>";
