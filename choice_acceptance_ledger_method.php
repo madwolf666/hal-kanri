@@ -39,7 +39,6 @@ try{
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";
-        $a_sRet .= "<div id='chart_div' style='width: 320px; height: 240px; display: block;'></div>";
         $a_sRet .= "<center><a href='#' onclick='hide_popup();'>閉じる</a></center>";
 
     }
