@@ -113,7 +113,7 @@ function drawChart() {
         series: {
             0: {targetAxisIndex:0},
             1: {targetAxisIndex:0},
-            2: {targetAxisIndex:1},
+            2: {targetAxisIndex:1, lineDashStyle: [4, 4]},
         },
         vAxes: [
             {
