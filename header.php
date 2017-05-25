@@ -38,6 +38,8 @@ require_once('./global.php');
 <link href="http://fonts.googleapis.com/css?family=Oxygen:400,300,700" rel="stylesheet" type="text/css"/>
 <link href="http://code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 <script src="./js/hal-kanri-common.js"></script>
 
 <div id="container">

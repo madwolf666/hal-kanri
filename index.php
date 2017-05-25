@@ -287,6 +287,9 @@ cr_id
     case $GLOBALS['g_MENU_MAINTENANCE_90211']:   //エンジニア：アップロード
         header('Location: ./90211.php');
         break;
+    case $GLOBALS['g_MENU_CONTRACT_SHOW_CHART']:   //エンジニア：アップロード
+        header('Location: ./show_chart.php?BAK='.$_GET['BAK'].'&NO='.$_GET['NO']);
+        break;
     default:
         break;
     }

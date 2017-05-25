@@ -29,10 +29,17 @@ try{
         $a_sRet .= "<table border='0'>";
         $a_sRet .= "<tr>";
         $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10310']."&NO=".$a_result['cr_id']."&SN=".$a_al_id."'>行を追加</a></td>";
+        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10311']."&NO=".$a_result['cr_id']."&SN=".$a_al_id."'>現在行を削除</a></td>";
+        $a_sRet .= "</tr>";
+        $a_sRet .= "<tr>";
+        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_SHOW_CHART']."&BAK=".$GLOBALS['g_MENU_CONTRACT_10300']."&NO=".$a_result['cr_id']."&SN=".$a_al_id."'>グラフを表示</a></td>";
+        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
+        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";
+        $a_sRet .= "<div id='chart_div' style='width: 320px; height: 240px; display: block;'></div>";
         $a_sRet .= "<center><a href='#' onclick='hide_popup();'>閉じる</a></center>";
 
     }
