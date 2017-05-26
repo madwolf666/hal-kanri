@@ -92,7 +92,7 @@ $obj_sheet->setCellValue("E4", $engneer_name_phonetic);
 
 $obj_sheet->setCellValue("E5", $engineer_name);
 
-$obj_sheet->setCellValue("X5", $person_birthday);
+com_setValue_Date($person_birthday,  $obj_sheet, "X5", "yyyy年MM月dd日");
 
 $obj_sheet->setCellValue("G11", $person_post_no);
 $obj_sheet->setCellValue("E12", $person_address);
@@ -111,6 +111,8 @@ $obj_sheet->setCellValue("W29", $claim_settlement_closingday);
 $obj_sheet->setCellValue("W31", $claim_settlement_paymentday);
 
 $obj_sheet->setCellValue("E41", $remarks);
+
+com_setValue_Date($publication,  $obj_sheet, "B58", "yyyy年MM月dd日");
 
 header("Content-Type: application/vnd.ms-excel");
 header("Content-Disposition: attachment;filename='".$GLOBALS['g_EXCEL_CONTRACT_10502']."'");

@@ -7,6 +7,7 @@
 $(function () {
     $('#person_birthday').datepicker({});
     $('#contact_date_org').datepicker({});
+    $('#publication').datepicker({});
 });
 
 function make_agreement_ledger_list(h_pageNo)
@@ -92,6 +93,7 @@ function regist_agreement_10502(h_act, h_no)
             'person_birthday': $('#person_birthday').val(),
             'person_post_no': $('#person_post_no').val(),
             'person_address': $('#person_address').val(),
+            'publication': $('#publication').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){
@@ -128,14 +130,26 @@ function regist_agreement_10503(h_act, h_no)
 
     if (!confirm("労働契約書（再発行）を" + a_sKind + "します。よろしいですか？")) return;
     /*
-    alert(h_act);
-    alert(h_no);
-    alert($('#po_no').val());
-    alert($('#publication').val());
-    alert($('#remarks1').val());
-    alert($('#remarks2').val());
-    alert($('#remarks3').val());
-    alert($('#remarks4').val());
+    alert('ag_no:', $('#ag_no').val());
+    alert('person_birthday:', $('#person_birthday').val());
+    alert('person_post_no:', $('#person_post_no').val());
+    alert('person_address:', $('#person_address').val());
+    alert('contact_date_org:', $('#contact_date_org').val());
+    alert('dd_office:', $('#dd_office').val());
+    alert('organization:', $('#organization').val());
+    alert('dd_address:', $('#dd_address').val());
+    alert('dd_tel:', $('#dd_tel').val());
+    alert('ip_position:', $('#ip_position').val());
+    alert('ip_name:', $('#ip_name').val());
+    alert('dm_responsible_position:', $('#dm_responsible_position').val());
+    alert('dm_responsible_name:', $('#dm_responsible_name').val());
+    alert('dd_responsible_position:', $('#dd_responsible_position').val());
+    alert('dd_responsible_name:', $('#dd_responsible_name').val());
+    alert('chs_position1:', $('#chs_position1').val());
+    alert('chs_name1:', $('#chs_name1').val());
+    alert('chs_position2:', $('#chs_position2').val());
+    alert('chs_name2:', $('#chs_name2').val());
+    alert('publication:', $('#publication').val());
     */
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
@@ -151,7 +165,9 @@ function regist_agreement_10503(h_act, h_no)
             'person_birthday': $('#person_birthday').val(),
             'person_post_no': $('#person_post_no').val(),
             'person_address': $('#person_address').val(),
+            'contact_date_org': $('#contact_date_org').val(),
             'dd_office': $('#dd_office').val(),
+            'organization': $('#organization').val(),
             'dd_address': $('#dd_address').val(),
             'dd_tel': $('#dd_tel').val(),
             'ip_position': $('#ip_position').val(),
@@ -160,6 +176,11 @@ function regist_agreement_10503(h_act, h_no)
             'dm_responsible_name': $('#dm_responsible_name').val(),
             'dd_responsible_position': $('#dd_responsible_position').val(),
             'dd_responsible_name': $('#dd_responsible_name').val(),
+            'chs_position1': $('#chs_position1').val(),
+            'chs_name1': $('#chs_name1').val(),
+            'chs_position2': $('#chs_position2').val(),
+            'chs_name2': $('#chs_name2').val(),
+            'publication': $('#publication').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

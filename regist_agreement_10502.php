@@ -38,6 +38,7 @@ try{
             ,person_birthday
             ,person_post_no
             ,person_address
+            ,publication
             ,reg_id
             ,reg_date
             ";
@@ -48,6 +49,7 @@ try{
             ,:person_birthday
             ,:person_post_no
             ,:person_address
+            ,:publication
             ,:reg_id
             ,:reg_date
             ";
@@ -59,6 +61,7 @@ try{
             ,person_birthday=:person_birthday
             ,person_post_no=:person_post_no
             ,person_address=:person_address
+            ,publication=:publication
             ,upd_id=:upd_id
             ,upd_date=:upd_date
             ";
@@ -72,6 +75,7 @@ try{
     com_pdo_bindValue($a_stmt, ':person_birthday', $_POST['person_birthday']);
     $a_stmt->bindParam(':person_post_no', $_POST['person_post_no'], PDO::PARAM_STR);
     $a_stmt->bindParam(':person_address', $_POST['person_address'], PDO::PARAM_STR);
+    com_pdo_bindValue($a_stmt, ':publication', $_POST['publication']);
 
     if ($a_isExists == false) {
         com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);

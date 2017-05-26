@@ -98,22 +98,40 @@ $obj_sheet->setCellValue("E12", $person_address);
 com_setValue_Date($claim_agreement_start,  $obj_sheet, "E15", "yyyy年MM月dd日");
 com_setValue_Date($claim_agreement_end,  $obj_sheet, "E17", "yyyy年MM月dd日");
 
-//$obj_sheet->setCellValue("E22", $work_start."から".$work_end.chr(13)."（うち休憩時間　".$break_start."から".$break_end."までの間".$break_hours."）");
+$obj_sheet->setCellValue("W15", $claim_normal__unit_price);
+$obj_sheet->setCellValue("W23", $claim_normal_lower_limit);
+$obj_sheet->setCellValue("W21", $claim_normal_upper_limit);
+$obj_sheet->setCellValue("W19", $claim_normal_deduction_unit_price);
+$obj_sheet->setCellValue("W17", $claim_normal_overtime_unit_price);
+
+$obj_sheet->setCellValue("E22", $work_start."から".$work_end.chr(13)."（うち休憩時間　".$break_start."から".$break_end."までの間".$break_hours."）");
+
 $obj_sheet->setCellValue("W29", $claim_settlement_closingday);
-$obj_sheet->setCellValue("W31", $claim_settlement_paymentday);
+$obj_sheet->setCellValue("AB29", $claim_settlement_paymentday);
+$obj_sheet->setCellValue("W31", $payment_settlement_closingday);
+$obj_sheet->setCellValue("AB31", $payment_settlement_paymentday);
 
+com_setValue_Date($contact_date_org,  $obj_sheet, "H31", "yyyy年MM月dd日");
 $obj_sheet->setCellValue("Q33", $dd_office);
-$obj_sheet->setCellValue("Q35", $dd_address);
-$obj_sheet->setCellValue("Q37", $dd_tel);
+$obj_sheet->setCellValue("Q35", $organization);
+$obj_sheet->setCellValue("Q37", $dd_address);
+$obj_sheet->setCellValue("Q39", $dd_tel);
 
-$obj_sheet->setCellValue("Q39", $ip_position);
-$obj_sheet->setCellValue("U39", $ip_name);
-$obj_sheet->setCellValue("Q41", $dd_responsible_position);
-$obj_sheet->setCellValue("U41", $dd_responsible_name);
-$obj_sheet->setCellValue("Q43", $dm_responsible_position);
-$obj_sheet->setCellValue("U43", $dm_responsible_name);
+$obj_sheet->setCellValue("Q41", $ip_position);
+$obj_sheet->setCellValue("U41", $ip_name);
+$obj_sheet->setCellValue("Q43", $dd_responsible_position);
+$obj_sheet->setCellValue("U43", $dd_responsible_name);
+$obj_sheet->setCellValue("Q45", $dm_responsible_position);
+$obj_sheet->setCellValue("U45", $dm_responsible_name);
 
-$obj_sheet->setCellValue("E57", $remarks);
+$obj_sheet->setCellValue("Q47", $chs_position1);
+$obj_sheet->setCellValue("U47", $chs_name1);
+$obj_sheet->setCellValue("Q49", $chs_position2);
+$obj_sheet->setCellValue("U49", $chs_name2);
+
+$obj_sheet->setCellValue("E70", $remarks);
+
+com_setValue_Date($publication,  $obj_sheet, "B84", "yyyy年MM月dd日");
 
 header("Content-Type: application/vnd.ms-excel");
 header("Content-Disposition: attachment;filename='".$GLOBALS['g_EXCEL_CONTRACT_10503']."'");

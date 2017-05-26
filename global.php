@@ -271,10 +271,12 @@ function com_make_tag_option(
         $h_val,
         $h_name,
         $h_table,
-        $h_style
+        $h_style,
+        &$h_selected
         )
 {
     $a_sRet = "";
+    $h_selected = false;
     
     try{
         //DBから契約情報取得
@@ -298,16 +300,18 @@ function com_make_tag_option(
                 {
                     $a_sRet .= 'selected';
                     $a_isFound = true;
+                    $h_selected = true;
+                    //echo '$h_selected:'.$h_selected;
                 }
             //}
             $a_sRet .= ">".$a_result['m_name']."</option>";
         }
-        
+        /*
         if (($h_val != '') && ($a_isFound == false)) {
             $a_sRet .= "<option value='".$h_val."'";
             $a_sRet .= " selected>".$h_val."</option>";
         }
-        
+        */
         $a_sRet .= "</select>";
     
     } catch (PDOException $e){

@@ -58,6 +58,9 @@ $claim_settlement_closingday = "";
 $claim_settlement_paymentday = "";
 $remarks = "";
 
+$payment_settlement_closingday  = "";
+$payment_settlement_paymentday = "";
+
 $dd_office = "";
 $dd_address = "";
 $dd_tel = "";
@@ -152,6 +155,9 @@ function set_10500_fromDB($a_result)
     $GLOBALS['claim_settlement_paymentday'] = $a_result['claim_settlement_paymentday'];
     $GLOBALS['remarks'] = $a_result['remarks'];
     
+    $GLOBALS['payment_settlement_closingday'] = $a_result['payment_settlement_closingday'];
+    $GLOBALS['payment_settlement_paymentday'] = $a_result['payment_settlement_paymentday'];
+
     $GLOBALS['dd_office'] = $a_result['dd_office'];
     $GLOBALS['dd_address'] = $a_result['dd_address'];
     $GLOBALS['dd_tel'] = $a_result['dd_tel'];

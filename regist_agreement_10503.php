@@ -38,7 +38,9 @@ try{
             ,person_birthday
             ,person_post_no
             ,person_address
+            ,contact_date_org
             ,dd_office
+            ,organization
             ,dd_address
             ,dd_tel
             ,ip_position
@@ -47,6 +49,11 @@ try{
             ,dm_responsible_name
             ,dd_responsible_position
             ,dd_responsible_name
+            ,chs_position1
+            ,chs_name1
+            ,chs_position2
+            ,chs_name2
+            ,publication
             ,reg_id
             ,reg_date
             ";
@@ -57,7 +64,9 @@ try{
             ,:person_birthday
             ,:person_post_no
             ,:person_address
+            ,:contact_date_org
             ,:dd_office
+            ,:organization
             ,:dd_address
             ,:dd_tel
             ,:ip_position
@@ -66,6 +75,11 @@ try{
             ,:dm_responsible_name
             ,:dd_responsible_position
             ,:dd_responsible_name
+            ,:chs_position1
+            ,:chs_name1
+            ,:chs_position2
+            ,:chs_name2
+            ,:publication
             ,:reg_id
             ,:reg_date
             ";
@@ -77,7 +91,9 @@ try{
             ,person_birthday=:person_birthday
             ,person_post_no=:person_post_no
             ,person_address=:person_address
+            ,contact_date_org=:contact_date_org
             ,dd_office=:dd_office
+            ,organization=:organization
             ,dd_address=:dd_address
             ,dd_tel=:dd_tel
             ,ip_position=:ip_position
@@ -86,6 +102,11 @@ try{
             ,dm_responsible_name=:dm_responsible_name
             ,dd_responsible_position=:dd_responsible_position
             ,dd_responsible_name=:dd_responsible_name
+            ,chs_position1=:chs_position1
+            ,chs_name1=:chs_name1
+            ,chs_position2=:chs_position2
+            ,chs_name2=:chs_name2
+            ,publication=:publication
             ,upd_id=:upd_id
             ,upd_date=:upd_date
             ";
@@ -100,7 +121,9 @@ try{
     $a_stmt->bindParam(':person_post_no', $_POST['person_post_no'], PDO::PARAM_STR);
     $a_stmt->bindParam(':person_address', $_POST['person_address'], PDO::PARAM_STR);
 
+    com_pdo_bindValue($a_stmt, ':contact_date_org', $_POST['contact_date_org']);
     $a_stmt->bindParam(':dd_office', $_POST['dd_office'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':organization', $_POST['organization'], PDO::PARAM_STR);
     $a_stmt->bindParam(':dd_address', $_POST['dd_address'], PDO::PARAM_STR);
     $a_stmt->bindParam(':dd_tel', $_POST['dd_tel'], PDO::PARAM_STR);
 
@@ -110,6 +133,13 @@ try{
     $a_stmt->bindParam(':dm_responsible_name', $_POST['dm_responsible_name'], PDO::PARAM_STR);
     $a_stmt->bindParam(':dd_responsible_position', $_POST['dd_responsible_position'], PDO::PARAM_STR);
     $a_stmt->bindParam(':dd_responsible_name', $_POST['dd_responsible_name'], PDO::PARAM_STR);
+
+    $a_stmt->bindParam(':chs_position1', $_POST['chs_position1'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':chs_name1', $_POST['chs_name1'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':chs_position2', $_POST['chs_position2'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':chs_name2', $_POST['chs_name2'], PDO::PARAM_STR);
+
+    com_pdo_bindValue($a_stmt, ':publication', $_POST['publication']);
 
     if ($a_isExists == false) {
         com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);

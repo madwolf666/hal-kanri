@@ -28,6 +28,8 @@ $inp_kyakusaki_syuryo = "";
 
 $opt_contract_calc_b1 = "";
 $inp_tankin_b1 = "";
+$contract_lower_limit_b1 = "";
+$contract_upper_limit_b1 = "";
 $opt_contract_lower_limit_b1 = "";
 $opt_contract_upper_limit_b1 = "";
 $opt_contract_trunc_unit_kojyo = "";
@@ -39,6 +41,8 @@ $inp_syugyonisu_b2 = "";
 $inp_zeneigyonisu_b2 = "";
 $opt_contract_calc_b2 = "";
 $txt_tankin_b2 = "";
+$contract_lower_limit_b2 = "";
+$contract_upper_limit_b2 = "";
 $opt_contract_lower_limit_b2 = "";
 $opt_contract_upper_limit_b2 = "";
 $txt_contract_kojyo_unit_b2 = "";
@@ -48,6 +52,8 @@ $inp_syugyonisu_b3 = "";
 $inp_zeneigyonisu_b3 = "";
 $opt_contract_calc_b3 = "";
 $txt_tankin_b3 = "";
+$contract_lower_limit_b3 = "";
+$contract_upper_limit_b3 = "";
 $opt_contract_lower_limit_b3 = "";
 $opt_contract_upper_limit_b3 = "";
 $txt_contract_kojyo_unit_b3 = "";
@@ -205,6 +211,8 @@ if ($a_act == 'n'){
                 //通常期間など
                 $opt_contract_calc_b1 = $a_result['claim_normal_calculation'];
                 $inp_tankin_b1 = $a_result['claim_normal__unit_price'];
+                $contract_lower_limit_b1 = $a_result['claim_normal_lower_limit'];
+                $contract_upper_limit_b1 = $a_result['claim_normal_upper_limit'];
                 $opt_contract_lower_limit_b1 = $a_result['claim_normal_lower_limit'];
                 $opt_contract_upper_limit_b1 = $a_result['claim_normal_upper_limit'];
                 $opt_contract_trunc_unit_kojyo = $a_result['claim_normal_deduction_unit_price_truncation_unit'];
@@ -216,6 +224,8 @@ if ($a_act == 'n'){
                 $inp_zeneigyonisu_b2 = $a_result['claim_middle_allbusiness_day'];
                 $opt_contract_calc_b2 = $a_result['claim_middle_calculation'];
                 $txt_tankin_b2 = com_db_number_format($a_result['claim_middle_unit_price']);
+                $contract_lower_limit_b2 = $a_result['claim_middle_lower_limit'];
+                $contract_upper_limit_b2 = $a_result['claim_middle_upper_limit'];
                 $opt_contract_lower_limit_b2 = $a_result['claim_middle_lower_limit'];
                 $opt_contract_upper_limit_b2 = $a_result['claim_middle_upper_limit'];
                 $txt_contract_kojyo_unit_b2 = com_db_number_format($a_result['claim_middle_deduction_unit_price']);
@@ -225,6 +235,8 @@ if ($a_act == 'n'){
                 $inp_zeneigyonisu_b3 = $a_result['claim_leaving_allbusiness_day'];
                 $opt_contract_calc_b3 = $a_result['claim_leaving_calculation'];
                 $txt_tankin_b3 = com_db_number_format($a_result['claim_leaving_unit_price']);
+                $contract_lower_limit_b3 = $a_result['claim_leaving_lower_limit'];
+                $contract_upper_limit_b3 = $a_result['claim_leaving_upper_limit'];
                 $opt_contract_lower_limit_b3 = $a_result['claim_leaving_lower_limit'];
                 $opt_contract_upper_limit_b3 = $a_result['claim_leaving_upper_limit'];
                 $txt_contract_kojyo_unit_b3 = com_db_number_format($a_result['claim_leaving_deduction_unit_price']);

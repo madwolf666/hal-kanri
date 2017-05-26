@@ -23,6 +23,9 @@ if ($a_act == 'c') {
     $inp_keiyaku_no = "";
     $a_act = 'n';
 }
+
+$a_selected = false;
+
 ?>
 
 <link rel="stylesheet" href="./jquery/jquery-ui.css">
@@ -82,7 +85,7 @@ if ($a_act == 'c') {
                         if ($a_act == '') {
                             echo $opt_contarct_bill_form;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_bill_form, "opt_contarct_bill_form", $GLOBALS['g_DB_m_contract_bill_form'], "width: 260px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_bill_form, "opt_contarct_bill_form", $GLOBALS['g_DB_m_contract_bill_form'], "width: 260px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -340,7 +343,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_b1;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_b1, "opt_contract_calc_b1", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_b1, "opt_contract_calc_b1", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -362,9 +365,15 @@ if ($a_act == 'c') {
                 <td colspan="9">
                     <?php
                         if ($a_act == ''){
-                            echo $opt_contract_lower_limit_b1;
+                            echo $contract_lower_limit_b1;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_lower_limit_b1, "opt_contract_lower_limit_b1", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $contract_lower_limit_b1, "opt_contract_lower_limit_b1", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 110px;", $a_selected);
+                            echo '&nbsp;&nbsp;';
+                            //echo '$a_selected:'.$a_selected;
+                            if ($a_selected == true){
+                                $contract_lower_limit_b1 = "";
+                            }
+                            echo com_make_tag_input($a_act, $contract_lower_limit_b1, "txt_contract_lower_limit_b1", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -374,9 +383,14 @@ if ($a_act == 'c') {
                 <td colspan="9">
                     <?php
                         if ($a_act == ''){
-                            echo $opt_contract_upper_limit_b1;
+                            echo $contract_upper_limit_b1;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_upper_limit_b1, "opt_contract_upper_limit_b1", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $contract_upper_limit_b1, "opt_contract_upper_limit_b1", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 110px;", $a_selected);
+                            echo '&nbsp;&nbsp;';
+                            if ($a_selected == true){
+                                $contract_upper_limit_b1 = "";
+                            }
+                            echo com_make_tag_input($a_act, $contract_upper_limit_b1, "txt_contract_upper_limit_b1", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -389,7 +403,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_trunc_unit_kojyo;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_trunc_unit_kojyo, "opt_contract_trunc_unit_kojyo", $GLOBALS['g_DB_m_contract_trunc_unit'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_trunc_unit_kojyo, "opt_contract_trunc_unit_kojyo", $GLOBALS['g_DB_m_contract_trunc_unit'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -413,7 +427,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_trunc_unit_zangyo;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_trunc_unit_zangyo, "opt_contract_trunc_unit_zangyo", $GLOBALS['g_DB_m_contract_trunc_unit'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_trunc_unit_zangyo, "opt_contract_trunc_unit_zangyo", $GLOBALS['g_DB_m_contract_trunc_unit'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -461,7 +475,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_b2;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_b2, "opt_contract_calc_b2", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_b2, "opt_contract_calc_b2", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -485,9 +499,14 @@ if ($a_act == 'c') {
                 <td colspan="9">
                     <?php
                         if ($a_act == ''){
-                            echo $opt_contract_lower_limit_b2;
+                            echo $contract_lower_limit_b2;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_lower_limit_b2, "opt_contract_lower_limit_b2", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $contract_lower_limit_b2, "opt_contract_lower_limit_b2", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 110px;", $a_selected);
+                            echo '&nbsp;&nbsp;';
+                            if ($a_selected == true){
+                                $contract_lower_limit_b2 = "";
+                            }
+                            echo com_make_tag_input($a_act, $contract_lower_limit_b2, "txt_contract_lower_limit_b2", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -497,9 +516,14 @@ if ($a_act == 'c') {
                 <td colspan="9">
                     <?php
                         if ($a_act == ''){
-                            echo $opt_contract_upper_limit_b2;
+                            echo $contract_upper_limit_b2;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_upper_limit_b2, "opt_contract_upper_limit_b2", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $contract_upper_limit_b2, "opt_contract_upper_limit_b2", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 110px;", $a_selected);
+                            echo '&nbsp;&nbsp;';
+                            if ($a_selected == true){
+                                $contract_upper_limit_b2 = "";
+                            }
+                            echo com_make_tag_input($a_act, $contract_upper_limit_b2, "txt_contract_upper_limit_b2", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -564,7 +588,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_b3;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_b3, "opt_contract_calc_b3", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_b3, "opt_contract_calc_b3", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -588,9 +612,14 @@ if ($a_act == 'c') {
                 <td colspan="9">
                     <?php
                         if ($a_act == ''){
-                            echo $opt_contract_lower_limit_b3;
+                            echo $contract_lower_limit_b3;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_lower_limit_b3, "opt_contract_lower_limit_b3", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $contract_lower_limit_b3, "opt_contract_lower_limit_b3", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 110px;", $a_selected);
+                            echo '&nbsp;&nbsp;';
+                            if ($a_selected == true){
+                                $contract_lower_limit_b3 = "";
+                            }
+                            echo com_make_tag_input($a_act, $contract_lower_limit_b3, "txt_contract_lower_limit_b3", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -600,9 +629,14 @@ if ($a_act == 'c') {
                 <td colspan="9">
                     <?php
                         if ($a_act == ''){
-                            echo $opt_contract_upper_limit_b3;
+                            echo $contract_upper_limit_b3;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_upper_limit_b3, "opt_contract_upper_limit_b3", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 230px;");
+                            echo com_make_tag_option($a_act, $contract_upper_limit_b3, "opt_contract_upper_limit_b3", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 110px;", $a_selected);
+                            echo '&nbsp;&nbsp;';
+                            if ($a_selected == true){
+                                $contract_upper_limit_b3 = "";
+                            }
+                            echo com_make_tag_input($a_act, $contract_upper_limit_b3, "txt_contract_upper_limit_b3", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -647,7 +681,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_bd;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_bd, "opt_m_contract_time_inc_bd", $GLOBALS['g_DB_m_contract_time_inc'], "width: 50px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_bd, "opt_m_contract_time_inc_bd", $GLOBALS['g_DB_m_contract_time_inc'], "width: 50px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -657,7 +691,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_bm;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_bm, "opt_m_contract_time_inc_bm", $GLOBALS['g_DB_m_contract_time_inc'], "width: 100px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_bm, "opt_m_contract_time_inc_bm", $GLOBALS['g_DB_m_contract_time_inc'], "width: 100px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -670,7 +704,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_tighten_b;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_tighten_b, "opt_contract_tighten_b", $GLOBALS['g_DB_m_contract_tighten'], "width: 50px;");
+                            echo com_make_tag_option($a_act, $opt_contract_tighten_b, "opt_contract_tighten_b", $GLOBALS['g_DB_m_contract_tighten'], "width: 50px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -680,7 +714,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_bill_pay;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_bill_pay, "opt_contract_bill_pay", $GLOBALS['g_DB_m_contract_bill_pay'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_bill_pay, "opt_contract_bill_pay", $GLOBALS['g_DB_m_contract_bill_pay'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -692,7 +726,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b1;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b1, "opt_m_contract_yesno_b1", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b1, "opt_m_contract_yesno_b1", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -702,7 +736,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b2;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b2, "opt_m_contract_yesno_b2", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b2, "opt_m_contract_yesno_b2", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -714,7 +748,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b3;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b3, "opt_m_contract_yesno_b3", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b3, "opt_m_contract_yesno_b3", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -724,7 +758,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b4;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b4, "opt_m_contract_yesno_b4", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_yesno_b4, "opt_m_contract_yesno_b4", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -759,7 +793,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_kind;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_kind, "opt_contract_kind", $GLOBALS['g_DB_m_contract_kind'], "width: 130px;");
+                            echo com_make_tag_option($a_act, $opt_contract_kind, "opt_contract_kind", $GLOBALS['g_DB_m_contract_kind'], "width: 130px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -868,7 +902,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_pay_form;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_pay_form, "opt_contract_pay_form", $GLOBALS['g_DB_m_contract_pay_form'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_pay_form, "opt_contract_pay_form", $GLOBALS['g_DB_m_contract_pay_form'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -905,7 +939,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_social_insurance;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_social_insurance, "opt_social_insurance", $GLOBALS['g_DB_m_contract_yesno'], "width: 40px;");
+                            echo com_make_tag_option($a_act, $opt_social_insurance, "opt_social_insurance", $GLOBALS['g_DB_m_contract_yesno'], "width: 40px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -915,7 +949,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_tax_withholding;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_tax_withholding, "opt_tax_withholding", $GLOBALS['g_DB_m_contract_yesno'], "width: 40px;");
+                            echo com_make_tag_option($a_act, $opt_tax_withholding, "opt_tax_withholding", $GLOBALS['g_DB_m_contract_yesno'], "width: 40px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -924,7 +958,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_reduction;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_reduction, "opt_contract_reduction", $GLOBALS['g_DB_m_contract_reduction'], "width: 40px;");
+                            echo com_make_tag_option($a_act, $opt_contract_reduction, "opt_contract_reduction", $GLOBALS['g_DB_m_contract_reduction'], "width: 40px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1002,7 +1036,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_p11;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_p11, "opt_contract_calc_p11", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_p11, "opt_contract_calc_p11", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1011,7 +1045,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_p21;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_p21, "opt_contract_calc_p21", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_p21, "opt_contract_calc_p21", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1199,7 +1233,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_p12;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_p12, "opt_contract_calc_p12", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_p12, "opt_contract_calc_p12", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1208,7 +1242,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_p22;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_p22, "opt_contract_calc_p22", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_p22, "opt_contract_calc_p22", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1396,7 +1430,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_p13;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_p13, "opt_contract_calc_p13", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_p13, "opt_contract_calc_p13", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1405,7 +1439,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_calc_p23;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_calc_p23, "opt_contract_calc_p23", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contract_calc_p23, "opt_contract_calc_p23", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1547,7 +1581,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_pd;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_pd, "opt_m_contract_time_inc_pd", $GLOBALS['g_DB_m_contract_time_inc'], "width: 50px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_pd, "opt_m_contract_time_inc_pd", $GLOBALS['g_DB_m_contract_time_inc'], "width: 50px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1557,7 +1591,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_pm;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_pm, "opt_m_contract_time_inc_pm", $GLOBALS['g_DB_m_contract_time_inc'], "width: 90px;");
+                            echo com_make_tag_option($a_act, $opt_m_contract_time_inc_pm, "opt_m_contract_time_inc_pm", $GLOBALS['g_DB_m_contract_time_inc'], "width: 90px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1571,7 +1605,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_tighten_p;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_tighten_p, "opt_contract_tighten_p", $GLOBALS['g_DB_m_contract_tighten'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_tighten_p, "opt_contract_tighten_p", $GLOBALS['g_DB_m_contract_tighten'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -1581,7 +1615,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_pay_pay;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_pay_pay, "opt_contract_pay_pay", $GLOBALS['g_DB_m_contract_pay_pay'], "width: 90px;");
+                            echo com_make_tag_option($a_act, $opt_contract_pay_pay, "opt_contract_pay_pay", $GLOBALS['g_DB_m_contract_pay_pay'], "width: 90px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1594,7 +1628,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p1;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_yesno_p1, "opt_contract_yesno_p1", $GLOBALS['g_DB_m_contract_absence_deduction'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_yesno_p1, "opt_contract_yesno_p1", $GLOBALS['g_DB_m_contract_absence_deduction'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -1604,7 +1638,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p2;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_yesno_p2, "opt_contract_yesno_p2", $GLOBALS['g_DB_m_contract_yesno'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_yesno_p2, "opt_contract_yesno_p2", $GLOBALS['g_DB_m_contract_yesno'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -1616,7 +1650,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p3;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_yesno_p3, "opt_contract_yesno_p3", $GLOBALS['g_DB_m_contract_yesno'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_yesno_p3, "opt_contract_yesno_p3", $GLOBALS['g_DB_m_contract_yesno'], "", $a_selected);
                         }
                     ?>
                 </td>
@@ -1626,7 +1660,7 @@ if ($a_act == 'c') {
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p4;
                         }else{
-                            echo com_make_tag_option($a_act, $opt_contract_yesno_p4, "opt_contract_yesno_p4", $GLOBALS['g_DB_m_contract_yesno'], "");
+                            echo com_make_tag_option($a_act, $opt_contract_yesno_p4, "opt_contract_yesno_p4", $GLOBALS['g_DB_m_contract_yesno'], "", $a_selected);
                         }
                     ?>
                 </td>
