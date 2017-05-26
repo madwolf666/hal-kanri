@@ -70,6 +70,8 @@ if (isset($_GET['NO'])) {
     }
 }
 
+$a_selected = false;
+
 ?>
 
 <link rel="stylesheet" href="./jquery/jquery-ui.css">
@@ -251,7 +253,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_replace;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_replace, "opt_contarct_replace", $GLOBALS['g_DB_m_contract_replace'], "width: 220px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_replace, "opt_contarct_replace", $GLOBALS['g_DB_m_contract_replace'], "width: 220px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -270,7 +272,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_end_status;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_end_status, "opt_contarct_end_status", $GLOBALS['g_DB_m_contract_end_status'], "width: 120px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_end_status, "opt_contarct_end_status", $GLOBALS['g_DB_m_contract_end_status'], "width: 120px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -455,7 +457,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_insurance_crad;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_insurance_crad, "opt_contarct_insurance_crad", $GLOBALS['g_DB_m_contract_insurance_crad'], "width: 90px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_insurance_crad, "opt_contarct_insurance_crad", $GLOBALS['g_DB_m_contract_insurance_crad'], "width: 90px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -464,7 +466,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_employ_insurance;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_employ_insurance, "opt_contarct_employ_insurance", $GLOBALS['g_DB_m_contract_employ_insurance'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_employ_insurance, "opt_contarct_employ_insurance", $GLOBALS['g_DB_m_contract_employ_insurance'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -483,7 +485,7 @@ if (isset($_GET['NO'])) {
                 if ($a_act == '') {
                     echo $opt_contarct_end_reason1;
                 } else {
-                    echo com_make_tag_option($a_act, $opt_contarct_end_reason1, "opt_contarct_end_reason1", $GLOBALS['g_DB_m_contract_end_reason'], "width: 140px;");
+                    echo com_make_tag_option($a_act, $opt_contarct_end_reason1, "opt_contarct_end_reason1", $GLOBALS['g_DB_m_contract_end_reason'], "width: 140px;", $a_selected);
                 }
             ?>
         </td>
@@ -492,7 +494,7 @@ if (isset($_GET['NO'])) {
                 if ($a_act == '') {
                     echo $opt_contarct_end_reason2;
                 } else {
-                    echo com_make_tag_option($a_act, $opt_contarct_end_reason2, "opt_contarct_end_reason2", $GLOBALS['g_DB_m_contract_end_reason'], "width: 140px;");
+                    echo com_make_tag_option($a_act, $opt_contarct_end_reason2, "opt_contarct_end_reason2", $GLOBALS['g_DB_m_contract_end_reason'], "width: 140px;", $a_selected);
                 }
             ?>
         </td>
@@ -501,7 +503,7 @@ if (isset($_GET['NO'])) {
                 if ($a_act == '') {
                     echo $opt_contarct_end_reason3;
                 } else {
-                    echo com_make_tag_option($a_act, $opt_contarct_end_reason3, "opt_contarct_end_reason3", $GLOBALS['g_DB_m_contract_end_reason'], "width: 140px;");
+                    echo com_make_tag_option($a_act, $opt_contarct_end_reason3, "opt_contarct_end_reason3", $GLOBALS['g_DB_m_contract_end_reason'], "width: 140px;", $a_selected);
                 }
             ?>
         </td>
@@ -533,7 +535,7 @@ if (isset($_GET['NO'])) {
                             if ($a_act == '') {
                                 echo $opt_contarct_from_now;
                             } else {
-                                echo com_make_tag_option($a_act, $opt_contarct_from_now, "opt_contarct_from_now", $GLOBALS['g_DB_m_contract_from_now'], "width: 100px;");
+                                echo com_make_tag_option($a_act, $opt_contarct_from_now, "opt_contarct_from_now", $GLOBALS['g_DB_m_contract_from_now'], "width: 100px;", $a_selected);
                             }
                         ?>
                     </td>
@@ -544,7 +546,7 @@ if (isset($_GET['NO'])) {
                             if ($a_act == '') {
                                 echo $opt_contarct_skill;
                             } else {
-                                echo com_make_tag_option($a_act, $opt_contarct_skill, "opt_contarct_skill", $GLOBALS['g_DB_m_contract_skill'], "width: 100px;");
+                                echo com_make_tag_option($a_act, $opt_contarct_skill, "opt_contarct_skill", $GLOBALS['g_DB_m_contract_skill'], "width: 100px;", $a_selected);
                             }
                         ?>
                     </td>
@@ -579,7 +581,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_conversation;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_conversation, "opt_contarct_conversation", $GLOBALS['g_DB_m_contract_conversation'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_conversation, "opt_contarct_conversation", $GLOBALS['g_DB_m_contract_conversation'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -588,7 +590,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_work_attitude;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_work_attitude, "opt_contarct_work_attitude", $GLOBALS['g_DB_m_contract_work_attitude'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_work_attitude, "opt_contarct_work_attitude", $GLOBALS['g_DB_m_contract_work_attitude'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -597,7 +599,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_personality;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_personality, "opt_contarct_personality", $GLOBALS['g_DB_m_contract_personality'], "width: 110px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_personality, "opt_contarct_personality", $GLOBALS['g_DB_m_contract_personality'], "width: 110px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -614,7 +616,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_projects_confirm;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_projects_confirm, "opt_contarct_projects_confirm", $GLOBALS['g_DB_m_contract_projects_confirm'], "width: 100px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_projects_confirm, "opt_contarct_projects_confirm", $GLOBALS['g_DB_m_contract_projects_confirm'], "width: 100px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -624,7 +626,7 @@ if (isset($_GET['NO'])) {
                         if ($a_act == '') {
                             echo $opt_contarct_engineer_list;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_engineer_list, "opt_contarct_engineer_list", $GLOBALS['g_DB_m_contract_engineer_list'], "width: 100px;");
+                            echo com_make_tag_option($a_act, $opt_contarct_engineer_list, "opt_contarct_engineer_list", $GLOBALS['g_DB_m_contract_engineer_list'], "width: 100px;", $a_selected);
                         }
                     ?>
                 </td>
