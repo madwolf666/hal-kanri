@@ -73,6 +73,7 @@ echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_S
     </ul>
 </li>
 <?php } ?>
+<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_LOGOUT_00000']; ?>">ログアウト</a></li>
 </ul>
 </nav>
 </header>

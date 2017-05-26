@@ -290,6 +290,17 @@ cr_id
     case $GLOBALS['g_MENU_CONTRACT_SHOW_CHART']:   //エンジニア：アップロード
         header('Location: ./show_chart.php?BAK='.$_GET['BAK'].'&NO='.$_GET['NO']);
         break;
+    case $GLOBALS['g_MENU_LOGOUT_00000']:       //ログアウト
+        $_SESSION["hal_idx"] = -1;
+        $_SESSION["hal_branch"] = "";
+        $_SESSION["hal_person"] = "";
+        $_SESSION["hal_auth"] = -1;
+        setcookie('hal_idx', '', time() - 1800);
+        setcookie('hal_branch', '', time() - 1800);
+        setcookie('hal_person', '', time() - 1800);
+        setcookie('hal_auth', '', time() - 1800);
+        header('Location: ./login.php');
+        break;
     default:
         break;
     }
