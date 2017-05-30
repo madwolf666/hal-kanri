@@ -43,16 +43,8 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-10100.js"></script>
 <script type="text/javascript">
     make_contract_report_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 400); 
+    resize_div2('leftColumn', 'right_title', 'right_record', 400, 194); 
     $(window).resize(function(){
-        resize_div2('leftColumn', 'right_title', 'right_record', 400); 
+        resize_div2('leftColumn', 'right_title', 'right_record', 400, 194); 
     });
-/*
-    resize_div('right_title', 360+17); 
-    resize_div('right_record', 360); 
-    $(window).resize(function(){
-        resize_div('right_title', 360+17); 
-        resize_div('right_record', 360); 
-    });
-*/
 </script>

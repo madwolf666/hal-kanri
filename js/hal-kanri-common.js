@@ -103,14 +103,14 @@ function resize_div(dname, lwidth){
 }
 
 //divリサイズ
-function resize_div2(h_leftColumn, h_right_title, h_right_record, h_width){
+function resize_div2(h_leftColumn, h_right_title, h_right_record, h_width, h_height){
     //alert(dname + "," + lwidth);
     $('#' + h_right_record).width($('#main').width() - h_width);
     $('#' + h_right_title).width($('#main').width() - h_width - 17);
     var a_h = window.innerHeight ? window.innerHeight: $(window).height();
     var a_rn = $('#my-recnum').offset().top;
-    $('#' + h_right_record).height(a_h - a_rn - 184);
-    $('#' + h_leftColumn).height(a_h - a_rn - 184 - 17);
+    $('#' + h_right_record).height(a_h - a_rn - h_height);
+    $('#' + h_leftColumn).height(a_h - a_rn - h_height - 17);
 }
 
 //ログイン認証

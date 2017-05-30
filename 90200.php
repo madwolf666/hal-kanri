@@ -41,16 +41,8 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-90200.js"></script>
 <script type="text/javascript">
     make_m_engineer_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 400); 
+    resize_div2('leftColumn', 'right_title', 'right_record', 400, 184); 
     $(window).resize(function(){
-        resize_div2('leftColumn', 'right_title', 'right_record', 400); 
+        resize_div2('leftColumn', 'right_title', 'right_record', 400, 184); 
     });
-    /*
-    resize_div('right_title', 400+17, false); 
-    resize_div('right_record', 400, true); 
-    $(window).resize(function(){
-        resize_div('right_title', 400+17, false); 
-        resize_div('right_record', 400, true); 
-    });
-    */
 </script>

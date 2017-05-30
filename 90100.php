@@ -32,10 +32,4 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-90100.js"></script>
 <script type="text/javascript">
     make_m_user_list(1);
-    resize_div('right_title', 360+17); 
-    resize_div('right_record', 360); 
-    $(window).resize(function(){
-        resize_div('right_title', 360+17); 
-        resize_div('right_record', 360); 
-    });
 </script>

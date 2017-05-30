@@ -40,16 +40,8 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-10600.js"></script>
 <script type="text/javascript">
     make_dispatching_management_ledger_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 320); 
+    resize_div2('leftColumn', 'right_title', 'right_record', 320, 184); 
     $(window).resize(function(){
-        resize_div2('leftColumn', 'right_title', 'right_record', 320); 
+        resize_div2('leftColumn', 'right_title', 'right_record', 320, 184); 
     });
-/*
-    resize_div('right_title', 360+17); 
-    resize_div('right_record', 360); 
-    $(window).resize(function(){
-        resize_div('right_title', 360+17); 
-        resize_div('right_record', 360); 
-    });
-*/
 </script>

@@ -45,16 +45,8 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-10500.js"></script>
 <script type="text/javascript">
     make_agreement_ledger_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 410); 
+    resize_div2('leftColumn', 'right_title', 'right_record', 410, 184); 
     $(window).resize(function(){
-        resize_div2('leftColumn', 'right_title', 'right_record', 410); 
+        resize_div2('leftColumn', 'right_title', 'right_record', 410, 184); 
     });
-/*
-    resize_div('right_title', 360+17); 
-    resize_div('right_record', 360); 
-    $(window).resize(function(){
-        resize_div('right_title', 360+17); 
-        resize_div('right_record', 360); 
-    });
-*/
 </script>
