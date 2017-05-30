@@ -10,10 +10,18 @@ require_once('./header.php');
 
 ?>
 
-<section id="new">
-<h2 id="newinfo_hdr" class="close">更新情報・お知らせ</h2>
+<link rel="stylesheet" href="css/hal-kanri-common.css">
+
+<section>
+    
+<h2>お知らせ情報</h2>
+<center>
+<p class="c">
+<input type="button" value="新規" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90302']; ?>&ACT=n'">
+</p>
 
 <div id="my-list" style="z-index:100; width: auto; padding-bottom: 10px;"></div>
+</center>
 
 </section>
 
@@ -21,9 +29,9 @@ require_once('./header.php');
 require_once('./footer.php');
 ?>
 
-<script src="./js/hal-kanri-top.js"></script>
+<script src="./js/hal-kanri-90300.js"></script>
 <script type="text/javascript">
-    make_top_information_list(1);
+    make_m_information_list(1);
     resize_div('right_title', 360+17); 
     resize_div('right_record', 360); 
     $(window).resize(function(){

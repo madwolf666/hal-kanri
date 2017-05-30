@@ -50,6 +50,8 @@ $g_DB_m_contract_personality = "m_contract_personality";
 $g_DB_m_contract_projects_confirm = "m_contract_projects_confirm";
 $g_DB_m_contract_engineer_list = "m_contract_engineer_list";
 
+$g_DB_m_information = "m_information";
+
 $g_DB_t_acceptance_ledger = "t_acceptance_ledger";
 $g_DB_t_agreement_ledger = "t_agreement_ledger";
 $g_DB_t_contract_estimate = "t_contract_estimate";
@@ -108,6 +110,11 @@ $g_MENU_MAINTENANCE_90104 = 90104;    //ユーザ：削除
 $g_MENU_MAINTENANCE_90200 = 90200;    //エンジニア一覧
 $g_MENU_MAINTENANCE_90201 = 90201;    //エンジニア検索
 $g_MENU_MAINTENANCE_90211 = 90211;    //エンジニアExcelアップロード
+
+$g_MENU_MAINTENANCE_90300 = 90300;    //お知らせ一覧
+$g_MENU_MAINTENANCE_90302 = 90302;    //お知らせ：新規
+$g_MENU_MAINTENANCE_90303 = 90303;    //お知らせ：修正
+$g_MENU_MAINTENANCE_90304 = 90304;    //お知らせ：削除
 
 //グラフ表示
 $g_MENU_CONTRACT_SHOW_CHART = 10001;
@@ -391,5 +398,27 @@ function com_make_input_text2($h_idx, $h_sidx, $h_field, $h_rec)
     $a_sRet .= " onClick='make_input_text2(".$h_idx.",".$h_sidx.",\"".$h_field."\",".$h_rec."); after_focus(\"".$h_field."\",".$h_rec.");'";
     
     return $a_sRet;
+}
+
+//***************************************
+// 日時の差を計算
+//***************************************
+function com_time_diff($time_from, $time_to, $mode) 
+{
+    // 日時差を秒数で取得
+    $dif = $time_to - $time_from;
+    #echo '$dif：'.$dif.'<br>';
+    // 時間単位の差
+    $dif_time = date("H:i:s", $dif);
+    #echo '$dif_time：'.$dif_time.'<br>';
+    // 日付単位の差
+    $dif_days = (strtotime(date("Y-m-d", $dif)) - strtotime("1970-01-01")) / 86400;
+    #echo '$dif_days：'.$dif_days.'<br>';
+    
+    if ($mode == 'd'){
+        return $dif_days;
+    }else{
+        return $dif_time;
+    }
 }
 ?>

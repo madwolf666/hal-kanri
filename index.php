@@ -290,6 +290,17 @@ cr_id
     case $GLOBALS['g_MENU_CONTRACT_SHOW_CHART']:   //エンジニア：アップロード
         header('Location: ./show_chart.php?BAK='.$_GET['BAK'].'&NO='.$_GET['NO']);
         break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90300']:   //お知らせ情報：一覧
+        if ($_SESSION["hal_auth"] <= 0) {
+            header('Location: ./90300.php');
+        }
+        break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90302']:   //お知らせ：新規
+    case $GLOBALS['g_MENU_MAINTENANCE_90303']:   //お知らせ：修正
+        if ($_SESSION["hal_auth"] <= 0) {
+            header('Location: ./90302.php?ACT='.$_GET['ACT'].'&IDX='.$_GET['IDX']);
+        }
+        break;
     case $GLOBALS['g_MENU_LOGOUT_00000']:       //ログアウト
         $_SESSION["hal_idx"] = -1;
         $_SESSION["hal_branch"] = "";
