@@ -123,7 +123,7 @@ if (isset($_GET['NO'])) {
             </tr>
             <tr>
                 <th colspan="4" rowspan="2">作&nbsp;業&nbsp;料&nbsp;金<br>(外税)</th>
-                <td colspan="3" rowspan="2"><font size="-1">※小数点以下が発生する場合は<br>切捨てとする。</font><br>￥579,500&nbsp;／月</td>
+                <td colspan="3" rowspan="2"><font size="-1">※小数点以下が発生する場合は<br>切捨てとする。</font><br><?php echo $payment_normal_unit_price_1; ?>&nbsp;／月</td>
                 <td colspan="3">&nbsp;</td>
                 <td colspan="3">&nbsp;</td>
             </tr>
@@ -133,33 +133,33 @@ if (isset($_GET['NO'])) {
             </tr>
             <tr>
                 <th colspan="4">計&nbsp;算&nbsp;方&nbsp;法</th>
-                <td colspan="3">日割稼働率</td>
+                <td colspan="3"><?php echo $payment_normal_calculation_1; ?></td>
                 <td colspan="3">&nbsp;</td>
                 <td colspan="3">&nbsp;</td>
             </tr>
             <tr>
                 <th colspan="2" rowspan="2">基準時間</th>
                 <td colspan="2">下限時間</td>
-                <td colspan="3">143</td>
+                <td colspan="3"><?php echo $payment_normal_lower_limit_1; ?></td>
                 <td colspan="3">&nbsp;</td>
                 <td colspan="3">&nbsp;</td>
             </tr>
             <tr>
                 <td colspan="2">上限時間</td>
-                <td colspan="3">190</td>
+                <td colspan="3"><?php echo $payment_normal_upper_limit_1; ?></td>
                 <td colspan="3">&nbsp;</td>
                 <td colspan="3">&nbsp;</td>
             </tr>
             <tr>
                 <th colspan="2" rowspan="2">清算単価</th>
                 <td colspan="2">控除単価</td>
-                <td colspan="3">￥4,050&nbsp;／&nbsp;H</td>
+                <td colspan="3"><?php echo $payment_normal_deduction_unit_price_1; ?>&nbsp;／&nbsp;H</td>
                 <td colspan="3">&nbsp;</td>
                 <td colspan="3">&nbsp;</td>
             </tr>
             <tr>
                 <td colspan="2">残業単価</td>
-                <td colspan="3">￥3,050&nbsp;／&nbsp;H</td>
+                <td colspan="3"><?php echo $payment_normal_overtime_unit_price_1; ?>&nbsp;／&nbsp;H</td>
                 <td colspan="3">&nbsp;</td>
                 <td colspan="3">&nbsp;</td>
             </tr>
@@ -170,10 +170,10 @@ if (isset($_GET['NO'])) {
             <tr>
                 <th colspan="4">支払サイト</th>
                 <td colspan="1">締日：毎月</td>
-                <td colspan="3"class="hiddencell_l">月末</td>
+                <td colspan="3"class="hiddencell_l"><?php echo $payment_settlement_closingday; ?></td>
                 <td colspan="1"class="hiddencell_l">／</td>
                 <td colspan="2"class="hiddencell_l">支払日：</td>
-                <td colspan="2"class="hiddencell_l">翌々月25日</td>
+                <td colspan="2"class="hiddencell_l"><?php echo $payment_settlement_paymentday; ?></td>
             </tr>
             <tr>
                 <th colspan="4" height=400px>その他</th>

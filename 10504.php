@@ -366,7 +366,7 @@ if (isset($_GET['NO'])) {
 	</tr>
 	<tr>
             <td width=20%>派遣料金</td>
-            <td colspan="2" width=40% class="hiddencell_r"><?php echo com_db_number_format($claim_normal__unit_price); ?>/月</td>
+            <td colspan="2" width=40% class="hiddencell_r"><?php echo com_db_number_format($payment_normal_unit_price_2); ?>/月</td>
             <td colspan="3" width=40% class="remarks">※HALと客先の契約金額</td>
 	</tr>
 	<tr>

@@ -31,31 +31,31 @@ $break_hours = "";
 $social_insurance = "";
 $tax_withholding = "";
 
-$claim_normal_calculation = "";
-$claim_normal__unit_price = "";
-$claim_normal_lower_limit = "";
-$claim_normal_upper_limit = "";
-$claim_normal_deduction_unit_price = "";
-$claim_normal_overtime_unit_price = "";
+$payment_normal_calculation_2 = "";
+$payment_normal_unit_price_2 = "";
+$payment_normal_lower_limit_2 = "";
+$payment_normal_upper_limit_2 = "";
+$payment_normal_deduction_unit_price_2 = "";
+$payment_normal_overtime_unit_price_2 = "";
 
-$claim_middle_calculation = "";
-$claim_middle_unit_price = "";
-$claim_middle_lower_limit = "";
-$claim_middle_upper_limit = "";
-$claim_middle_deduction_unit_price = "";
-$claim_middle_overtime_unit_price = "";
+$payment_middle_calculation_2 = "";
+$payment_middle_unit_price_2 = "";
+$payment_middle_lower_limit_2 = "";
+$payment_middle_upper_limit_2 = "";
+$payment_middle_deduction_unit_price_2 = "";
+$payment_middle_overtime_unit_price_2 = "";
 
-$claim_leaving_calculation = "";
-$claim_leaving_unit_price = "";
-$claim_leaving_lower_limit = "";
-$claim_leaving_upper_limit = "";
-$claim_leaving_deduction_unit_price = "";
-$claim_leaving_overtime_unit_price = "";
+$payment_leaving_calculation_2 = "";
+$payment_leaving_unit_price_2 = "";
+$payment_leaving_lower_limit_2 = "";
+$payment_leaving_upper_limit_2 = "";
+$payment_leaving_deduction_unit_price_2 = "";
+$payment_leaving_overtime_unit_price_2 = "";
 
-$claim_hourly_daily = "";
-$claim_hourly_monthly = "";
-$claim_settlement_closingday = "";
-$claim_settlement_paymentday = "";
+$payment_hourly_daily = "";
+$payment_hourly_monthly = "";
+$payment_settlement_closingday = "";
+$payment_settlement_paymentday = "";
 $remarks = "";
 
 $payment_settlement_closingday  = "";
@@ -128,31 +128,31 @@ function set_10500_fromDB($a_result)
     $GLOBALS['social_insurance'] = $a_result['social_insurance'];
     $GLOBALS['tax_withholding'] = $a_result['tax_withholding'];
 
-    $GLOBALS['claim_normal_calculation'] = $a_result['claim_normal_calculation'];
-    $GLOBALS['claim_normal__unit_price'] = com_replace_toNumber($a_result['claim_normal__unit_price']);
-    $GLOBALS['claim_normal_lower_limit'] = $a_result['claim_normal_lower_limit'];
-    $GLOBALS['claim_normal_upper_limit'] = $a_result['claim_normal_upper_limit'];
-    $GLOBALS['claim_normal_deduction_unit_price'] = com_replace_toNumber($a_result['claim_normal_deduction_unit_price']);
-    $GLOBALS['claim_normal_overtime_unit_price'] = com_replace_toNumber($a_result['claim_normal_overtime_unit_price']);
+    $GLOBALS['payment_normal_calculation_2'] = $a_result['payment_normal_calculation_2'];
+    $GLOBALS['payment_normal_unit_price_2'] = com_db_number_format_symbol($a_result['payment_normal_unit_price_2']);
+    $GLOBALS['payment_normal_lower_limit_2'] = $a_result['payment_normal_lower_limit_2'];
+    $GLOBALS['payment_normal_upper_limit_2'] = $a_result['payment_normal_upper_limit_2'];
+    $GLOBALS['payment_normal_deduction_unit_price_2'] = com_db_number_format_symbol($a_result['payment_normal_deduction_unit_price_2']);
+    $GLOBALS['payment_normal_overtime_unit_price_2'] = com_db_number_format_symbol($a_result['payment_normal_overtime_unit_price_2']);
 
-    $GLOBALS['claim_middle_calculation'] = $a_result['claim_middle_calculation'];
-    $GLOBALS['claim_middle_unit_price'] = com_replace_toNumber($a_result['claim_middle_unit_price']);
-    $GLOBALS['claim_middle_lower_limit'] = $a_result['claim_middle_lower_limit'];
-    $GLOBALS['claim_middle_upper_limit'] = $a_result['claim_middle_upper_limit'];
-    $GLOBALS['claim_middle_deduction_unit_price'] = com_replace_toNumber($a_result['claim_middle_deduction_unit_price']);
-    $GLOBALS['claim_middle_overtime_unit_price'] = com_replace_toNumber($a_result['claim_middle_overtime_unit_price']);
+    $GLOBALS['payment_middle_calculation_2'] = $a_result['payment_middle_calculation_2'];
+    $GLOBALS['payment_middle_unit_price_2'] = com_db_number_format_symbol($a_result['payment_middle_unit_price_2']);
+    $GLOBALS['payment_middle_lower_limit_2'] = $a_result['payment_middle_lower_limit_2'];
+    $GLOBALS['payment_middle_upper_limit_2'] = $a_result['payment_middle_upper_limit_2'];
+    $GLOBALS['payment_middle_deduction_unit_price_2'] = com_db_number_format_symbol($a_result['payment_middle_deduction_unit_price_2']);
+    $GLOBALS['payment_middle_overtime_unit_price_2'] = com_db_number_format_symbol($a_result['payment_middle_overtime_unit_price_2']);
 
-    $GLOBALS['claim_leaving_calculation'] = $a_result['claim_leaving_calculation'];
-    $GLOBALS['claim_leaving_unit_price'] = com_replace_toNumber($a_result['claim_leaving_unit_price']);
-    $GLOBALS['claim_leaving_lower_limit'] = $a_result['claim_leaving_lower_limit'];
-    $GLOBALS['claim_leaving_upper_limit'] = $a_result['claim_leaving_upper_limit'];
-    $GLOBALS['claim_leaving_deduction_unit_price'] = com_replace_toNumber($a_result['claim_leaving_deduction_unit_price']);
-    $GLOBALS['claim_leaving_overtime_unit_price'] = com_replace_toNumber($a_result['claim_leaving_overtime_unit_price']);
+    $GLOBALS['payment_leaving_calculation_2'] = $a_result['payment_leaving_calculation_2'];
+    $GLOBALS['payment_leaving_unit_price_2'] = com_db_number_format_symbol($a_result['payment_leaving_unit_price_2']);
+    $GLOBALS['payment_leaving_lower_limit_2'] = $a_result['payment_leaving_lower_limit_2'];
+    $GLOBALS['payment_leaving_upper_limit_2'] = $a_result['payment_leaving_upper_limit_2'];
+    $GLOBALS['payment_leaving_deduction_unit_price_2'] = com_db_number_format_symbol($a_result['payment_leaving_deduction_unit_price_2']);
+    $GLOBALS['payment_leaving_overtime_unit_price_2'] = com_db_number_format_symbol($a_result['payment_leaving_overtime_unit_price_2']);
 
-    $GLOBALS['claim_hourly_daily'] = $a_result['claim_hourly_daily'];
-    $GLOBALS['claim_hourly_monthly'] = $a_result['claim_hourly_monthly'];
-    $GLOBALS['claim_settlement_closingday'] = $a_result['claim_settlement_closingday'];
-    $GLOBALS['claim_settlement_paymentday'] = $a_result['claim_settlement_paymentday'];
+    $GLOBALS['payment_hourly_daily'] = $a_result['payment_hourly_daily'];
+    $GLOBALS['payment_hourly_monthly'] = $a_result['payment_hourly_monthly'];
+    $GLOBALS['payment_settlement_closingday'] = $a_result['payment_settlement_closingday'];
+    $GLOBALS['payment_settlement_paymentday'] = $a_result['payment_settlement_paymentday'];
     $GLOBALS['remarks'] = $a_result['remarks'];
     
     $GLOBALS['payment_settlement_closingday'] = $a_result['payment_settlement_closingday'];

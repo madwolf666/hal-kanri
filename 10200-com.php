@@ -13,24 +13,24 @@ $engineer_name = "";
 $payment_settlement_closingday = "";
 $payment_settlement_paymentday = "";
 
-$payment_normal_calculation_1 = "";
-$payment_normal_unit_price_1 = "";
-$payment_normal_overtime_unit_price_1 = "";
-$payment_normal_deduction_unit_price_1 = "";
-$payment_normal_upper_limit_1 = "";
-$payment_normal_lower_limit_1 = "";
+$payment_normal_calculation_2 = "";
+$payment_normal_unit_price_2 = "";
+$payment_normal_overtime_unit_price_2 = "";
+$payment_normal_deduction_unit_price_2 = "";
+$payment_normal_upper_limit_2 = "";
+$payment_normal_lower_limit_2 = "";
 
-$payment_middle_unit_price_1 = "";
-$payment_middle_overtime_unit_price_1 = "";
-$payment_middle_deduction_unit_price_1 = "";
-$payment_middle_upper_limit_1 = "";
-$payment_middle_lower_limit_1 = "";
+$payment_middle_unit_price_2 = "";
+$payment_middle_overtime_unit_price_2 = "";
+$payment_middle_deduction_unit_price_2 = "";
+$payment_middle_upper_limit_2 = "";
+$payment_middle_lower_limit_2 = "";
 
-$payment_leaving_unit_price_1 = "";
-$payment_leaving_overtime_unit_price_1 = "";
-$payment_leaving_deduction_unit_price_1 = "";
-$payment_leaving_upper_limit_1 = "";
-$payment_leaving_lower_limit_1 = "";
+$payment_leaving_unit_price_2 = "";
+$payment_leaving_overtime_unit_price_2 = "";
+$payment_leaving_deduction_unit_price_2 = "";
+$payment_leaving_upper_limit_2 = "";
+$payment_leaving_lower_limit_2 = "";
 
 $redemption_ratio = "";
 
@@ -68,24 +68,24 @@ function set_10200_fromDB($a_result)
     $GLOBALS['payment_settlement_closingday'] = $a_result['payment_settlement_closingday'];
     $GLOBALS['payment_settlement_paymentday'] = $a_result['payment_settlement_paymentday'];
     
-    $GLOBALS['payment_normal_calculation_1'] = $a_result['payment_normal_calculation_1'];
-    $GLOBALS['payment_normal_unit_price_1'] = com_db_number_format_symbol($a_result['payment_normal_unit_price_1']);
-    $GLOBALS['payment_normal_overtime_unit_price_1'] = com_db_number_format_symbol($a_result['payment_normal_overtime_unit_price_1']);
-    $GLOBALS['payment_normal_deduction_unit_price_1'] = com_db_number_format_symbol($a_result['payment_normal_deduction_unit_price_1']);
-    $GLOBALS['payment_normal_upper_limit_1'] = $a_result['payment_normal_upper_limit_1'];
-    $GLOBALS['payment_normal_lower_limit_1'] = $a_result['payment_normal_lower_limit_1'];
+    $GLOBALS['payment_normal_calculation_2'] = $a_result['payment_normal_calculation_2'];
+    $GLOBALS['payment_normal_unit_price_2'] = com_db_number_format_symbol($a_result['payment_normal_unit_price_2']);
+    $GLOBALS['payment_normal_overtime_unit_price_2'] = com_db_number_format_symbol($a_result['payment_normal_overtime_unit_price_2']);
+    $GLOBALS['payment_normal_deduction_unit_price_2'] = com_db_number_format_symbol($a_result['payment_normal_deduction_unit_price_2']);
+    $GLOBALS['payment_normal_upper_limit_2'] = $a_result['payment_normal_upper_limit_2'];
+    $GLOBALS['payment_normal_lower_limit_2'] = $a_result['payment_normal_lower_limit_2'];
     
-    $GLOBALS['payment_middle_unit_price_1'] = com_db_number_format_symbol($a_result['payment_middle_unit_price_1']);
-    $GLOBALS['payment_middle_overtime_unit_price_1'] = com_db_number_format_symbol($a_result['payment_middle_overtime_unit_price_1']);
-    $GLOBALS['payment_middle_deduction_unit_price_1'] = com_db_number_format_symbol($a_result['payment_middle_deduction_unit_price_1']);
-    $GLOBALS['payment_middle_upper_limit_1'] = $a_result['payment_middle_upper_limit_1'];
-    $GLOBALS['payment_middle_lower_limit_1'] = $a_result['payment_middle_lower_limit_1'];
+    $GLOBALS['payment_middle_unit_price_2'] = com_db_number_format_symbol($a_result['payment_middle_unit_price_2']);
+    $GLOBALS['payment_middle_overtime_unit_price_2'] = com_db_number_format_symbol($a_result['payment_middle_overtime_unit_price_2']);
+    $GLOBALS['payment_middle_deduction_unit_price_2'] = com_db_number_format_symbol($a_result['payment_middle_deduction_unit_price_2']);
+    $GLOBALS['payment_middle_upper_limit_2'] = $a_result['payment_middle_upper_limit_2'];
+    $GLOBALS['payment_middle_lower_limit_2'] = $a_result['payment_middle_lower_limit_2'];
 
-    $GLOBALS['payment_leaving_unit_price_1'] = com_db_number_format_symbol($a_result['payment_leaving_unit_price_1']);
-    $GLOBALS['payment_leaving_overtime_unit_price_1'] = com_db_number_format_symbol($a_result['payment_leaving_overtime_unit_price_1']);
-    $GLOBALS['payment_leaving_deduction_unit_price_1'] = com_db_number_format_symbol($a_result['payment_leaving_deduction_unit_price_1']);
-    $GLOBALS['payment_leaving_upper_limit_1'] = $a_result['payment_leaving_upper_limit_1'];
-    $GLOBALS['payment_leaving_lower_limit_1'] = $a_result['payment_leaving_lower_limit_1'];
+    $GLOBALS['payment_leaving_unit_price_2'] = com_db_number_format_symbol($a_result['payment_leaving_unit_price_2']);
+    $GLOBALS['payment_leaving_overtime_unit_price_2'] = com_db_number_format_symbol($a_result['payment_leaving_overtime_unit_price_2']);
+    $GLOBALS['payment_leaving_deduction_unit_price_2'] = com_db_number_format_symbol($a_result['payment_leaving_deduction_unit_price_2']);
+    $GLOBALS['payment_leaving_upper_limit_2'] = $a_result['payment_leaving_upper_limit_2'];
+    $GLOBALS['payment_leaving_lower_limit_2'] = $a_result['payment_leaving_lower_limit_2'];
 
     $GLOBALS['redemption_ratio'] = $a_result['redemption_ratio'];
 

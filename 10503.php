@@ -162,28 +162,28 @@ if (isset($_GET['NO'])) {
             <td  rowspan="2">雇用期間<br>（派遣期間）</td>
             <td colspan="8"><?php echo $claim_agreement_start; ?>　より</td>
             <td colspan="4">基本給</td>
-            <td class="remarksR" colspan="4"><?php echo com_db_number_format($claim_normal__unit_price); ?>円</td>
+            <td class="remarksR" colspan="4"><?php echo com_db_number_format($payment_normal_unit_price_2); ?>円</td>
 	</tr>
 	<tr>
             <td colspan="8"><?php echo $claim_agreement_end; ?>　まで</td>
             <td colspan="4">残業単価</td>
-            <td class="remarksR" colspan="4"><?php echo com_db_number_format($claim_normal_overtime_unit_price); ?>円</td>
+            <td class="remarksR" colspan="4"><?php echo com_db_number_format($payment_normal_overtime_unit_price_2); ?>円</td>
 	</tr>
 	<tr>
             <td  rowspan="2">従事する<br>業務の種類</td>
             <td class="remarks" rowspan="2" colspan="8"><font color="#ff0000">システム開発（第4条第1項1号業務）</font></td>
             <td colspan="4">控除単価</td>
-            <td class="remarksR" colspan="4"><?php echo com_db_number_format($claim_normal_deduction_unit_price); ?>円</td>
+            <td class="remarksR" colspan="4"><?php echo com_db_number_format($payment_normal_deduction_unit_price_2); ?>円</td>
 	</tr>
 	<tr>
             <td colspan="4">上限時間</td>
-            <td class="remarksR" colspan="4"><?php echo $claim_normal_upper_limit; ?>時間</td>
+            <td class="remarksR" colspan="4"><?php echo $payment_normal_upper_limit_2; ?>時間</td>
 	</tr>
 	<tr>
             <td rowspan="2">就業時間</td>
             <td class="remarks" rowspan="2" colspan="8"><?php echo $work_start; ?>から<?php echo $work_end; ?><br>　（うち休憩時間　<?php echo $break_start; ?>から<?php echo $break_end; ?>までの間<?php echo $break_hours; ?>分間）</td>
             <td colspan="4">下限時間</td>
-            <td class="remarksR" colspan="4"><?php echo $claim_normal_lower_limit; ?>時間</td>
+            <td class="remarksR" colspan="4"><?php echo $payment_normal_lower_limit_2; ?>時間</td>
 	</tr>
 	<tr>
             <td class="remarks" colspan="8">　</td>
@@ -197,8 +197,8 @@ if (isset($_GET['NO'])) {
             <td>契約更新の<br>有無</td>
             <td colspan="8">イ．更新する場合がありえる<br>ロ．更新しない</td>
             <td colspan="4">賃金締切日</td>
-            <td class="hiddencell_r" colspan="2" class="hiddencell_r"><?php echo $claim_settlement_closingday; ?></td>
-            <td class="remarks" colspan="2"><?php echo $claim_settlement_paymentday; ?></td>
+            <td class="hiddencell_r" colspan="2" class="hiddencell_r"><?php echo $payment_settlement_closingday; ?></td>
+            <td class="remarks" colspan="2"><?php echo $payment_settlement_paymentday; ?></td>
 	</tr>
 	<tr>
             <td>抵触日</td>

@@ -20,7 +20,20 @@ require_once('./10100-com.php');
 if ($a_act == 'c') {
     //契約継続時
     $cr_id = "";
+    
+    
+    
+    $inp_kyakusaki_kaishi = "";
+    if ($inp_kyakusaki_syuryo != '') {
+        //1日プラス
+        $inp_kyakusaki_kaishi = date("Y/m/d", strtotime($inp_kyakusaki_syuryo." 1 day"));
+    }
+    $inp_kyakusaki_syuryo = "";
+    $opt_contract_kind = "継続契約";
     $inp_keiyaku_no = "";
+    $inp_hakkobi = "";
+    $txt_kyakusaki_kaishi = $inp_kyakusaki_kaishi;
+    $txt_kyakusaki_syuryo = "";
     $a_act = 'n';
 }
 
