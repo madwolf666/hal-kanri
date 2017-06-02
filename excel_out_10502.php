@@ -100,15 +100,15 @@ $obj_sheet->setCellValue("E12", $person_address);
 com_setValue_Date($claim_agreement_start,  $obj_sheet, "E15", "yyyy年MM月dd日");
 com_setValue_Date($claim_agreement_end,  $obj_sheet, "E17", "yyyy年MM月dd日");
 
-$obj_sheet->setCellValue("W15", $claim_normal__unit_price);
-$obj_sheet->setCellValue("W23", $claim_normal_lower_limit);
-$obj_sheet->setCellValue("W21", $claim_normal_upper_limit);
-$obj_sheet->setCellValue("W19", $claim_normal_deduction_unit_price);
-$obj_sheet->setCellValue("W17", $claim_normal_overtime_unit_price);
+$obj_sheet->setCellValue("W15", $payment_normal_unit_price_2);
+$obj_sheet->setCellValue("W23", $payment_normal_lower_limit_2);
+$obj_sheet->setCellValue("W21", $payment_normal_upper_limit_2);
+$obj_sheet->setCellValue("W19", $payment_normal_deduction_unit_price_2);
+$obj_sheet->setCellValue("W17", $payment_normal_overtime_unit_price_2);
 
 $obj_sheet->setCellValue("E22", $work_start."から".$work_end.chr(13)."（うち休憩時間　".$break_start."から".$break_end."までの間".$break_hours."）");
-$obj_sheet->setCellValue("W29", $claim_settlement_closingday);
-$obj_sheet->setCellValue("W31", $claim_settlement_paymentday);
+$obj_sheet->setCellValue("W29", $payment_settlement_closingday);
+$obj_sheet->setCellValue("W31", $payment_settlement_paymentday);
 
 $obj_sheet->setCellValue("E41", $remarks);
 

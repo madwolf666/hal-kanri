@@ -83,25 +83,25 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(10, $a_row, $payment_settlement_paymentday);
         $obj_sheet->setCellValueByColumnAndRow(11, $a_row, $date_modify_salary );
         $obj_sheet->setCellValueByColumnAndRow(12, $a_row, $date_first_salary);
-        $obj_sheet->setCellValueByColumnAndRow(13, $a_row, $payment_normal_calculation_1);
+        $obj_sheet->setCellValueByColumnAndRow(13, $a_row, $payment_normal_calculation_2);
         
-        $obj_sheet->setCellValueByColumnAndRow(15, $a_row, $payment_normal_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(23, $a_row, $payment_normal_overtime_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(24, $a_row, $payment_normal_deduction_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(25, $a_row, $payment_normal_upper_limit_1);
-        $obj_sheet->setCellValueByColumnAndRow(26, $a_row, $payment_normal_lower_limit_1);
+        $obj_sheet->setCellValueByColumnAndRow(15, $a_row, $payment_normal_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(23, $a_row, $payment_normal_overtime_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(24, $a_row, $payment_normal_deduction_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(25, $a_row, $payment_normal_upper_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(26, $a_row, $payment_normal_lower_limit_2);
         
-        $obj_sheet->setCellValueByColumnAndRow(27, $a_row, $payment_middle_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(28, $a_row, $payment_middle_overtime_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(29, $a_row, $payment_middle_deduction_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(30, $a_row, $payment_middle_upper_limit_1);
-        $obj_sheet->setCellValueByColumnAndRow(31, $a_row, $payment_middle_lower_limit_1);
+        $obj_sheet->setCellValueByColumnAndRow(27, $a_row, $payment_middle_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(28, $a_row, $payment_middle_overtime_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(29, $a_row, $payment_middle_deduction_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(30, $a_row, $payment_middle_upper_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(31, $a_row, $payment_middle_lower_limit_2);
         
-        $obj_sheet->setCellValueByColumnAndRow(32, $a_row, $payment_leaving_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $payment_leaving_overtime_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(34, $a_row, $payment_leaving_deduction_unit_price_1);
-        $obj_sheet->setCellValueByColumnAndRow(35, $a_row, $payment_leaving_upper_limit_1);
-        $obj_sheet->setCellValueByColumnAndRow(36, $a_row, $payment_leaving_lower_limit_1);
+        $obj_sheet->setCellValueByColumnAndRow(32, $a_row, $payment_leaving_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $payment_leaving_overtime_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(34, $a_row, $payment_leaving_deduction_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(35, $a_row, $payment_leaving_upper_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(36, $a_row, $payment_leaving_lower_limit_2);
         
         $obj_sheet->setCellValueByColumnAndRow(37, $a_row, $status_employ_insurance);
         $obj_sheet->setCellValueByColumnAndRow(38, $a_row, $status_compensation_insurance);

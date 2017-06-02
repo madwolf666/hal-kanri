@@ -112,7 +112,7 @@ $obj_sheet->setCellValue("Q69", $chs_name1);
 $obj_sheet->setCellValue("L71", $chs_position1);
 $obj_sheet->setCellValue("Q71", $chs_name1);
 
-$obj_sheet->setCellValue("I113", com_db_number_format($claim_normal__unit_price));
+$obj_sheet->setCellValue("I113", com_db_number_format($payment_normal_unit_price_2));
 
 $obj_sheet->setCellValue("H118", $remarks);
 

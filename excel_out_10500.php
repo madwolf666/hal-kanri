@@ -101,31 +101,31 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(16, $a_row, $social_insurance);
         $obj_sheet->setCellValueByColumnAndRow(17, $a_row, $tax_withholding);
 
-        $obj_sheet->setCellValueByColumnAndRow(18, $a_row, $claim_normal_calculation);
-        $obj_sheet->setCellValueByColumnAndRow(19, $a_row, $claim_normal__unit_price);
-        $obj_sheet->setCellValueByColumnAndRow(20, $a_row, $claim_normal_lower_limit);
-        $obj_sheet->setCellValueByColumnAndRow(21, $a_row, $claim_normal_upper_limit);
-        $obj_sheet->setCellValueByColumnAndRow(22, $a_row, $claim_normal_deduction_unit_price);
-        $obj_sheet->setCellValueByColumnAndRow(23, $a_row, $claim_normal_overtime_unit_price);
+        $obj_sheet->setCellValueByColumnAndRow(18, $a_row, $payment_normal_calculation_2);
+        $obj_sheet->setCellValueByColumnAndRow(19, $a_row, $payment_normal_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(20, $a_row, $payment_normal_lower_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(21, $a_row, $payment_normal_upper_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(22, $a_row, $payment_normal_deduction_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(23, $a_row, $payment_normal_overtime_unit_price_2);
         
-        $obj_sheet->setCellValueByColumnAndRow(24, $a_row, $claim_middle_calculation);
-        $obj_sheet->setCellValueByColumnAndRow(25, $a_row, $claim_middle_unit_price);
-        $obj_sheet->setCellValueByColumnAndRow(26, $a_row, $claim_middle_lower_limit);
-        $obj_sheet->setCellValueByColumnAndRow(27, $a_row, $claim_middle_upper_limit);
-        $obj_sheet->setCellValueByColumnAndRow(28, $a_row, $claim_middle_deduction_unit_price);
-        $obj_sheet->setCellValueByColumnAndRow(29, $a_row, $claim_middle_overtime_unit_price);
+        $obj_sheet->setCellValueByColumnAndRow(24, $a_row, $payment_middle_calculation_2);
+        $obj_sheet->setCellValueByColumnAndRow(25, $a_row, $payment_middle_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(26, $a_row, $payment_middle_lower_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(27, $a_row, $payment_middle_upper_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(28, $a_row, $payment_middle_deduction_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(29, $a_row, $payment_middle_overtime_unit_price_2);
         
-        $obj_sheet->setCellValueByColumnAndRow(30, $a_row, $claim_leaving_calculation);
-        $obj_sheet->setCellValueByColumnAndRow(31, $a_row, $claim_leaving_unit_price);
-        $obj_sheet->setCellValueByColumnAndRow(32, $a_row, $claim_leaving_lower_limit);
-        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $claim_leaving_upper_limit);
-        $obj_sheet->setCellValueByColumnAndRow(34, $a_row, $claim_leaving_deduction_unit_price);
-        $obj_sheet->setCellValueByColumnAndRow(35, $a_row, $claim_leaving_overtime_unit_price);
+        $obj_sheet->setCellValueByColumnAndRow(30, $a_row, $payment_leaving_calculation_2);
+        $obj_sheet->setCellValueByColumnAndRow(31, $a_row, $payment_leaving_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(32, $a_row, $payment_leaving_lower_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $payment_leaving_upper_limit_2);
+        $obj_sheet->setCellValueByColumnAndRow(34, $a_row, $payment_leaving_deduction_unit_price_2);
+        $obj_sheet->setCellValueByColumnAndRow(35, $a_row, $payment_leaving_overtime_unit_price_2);
         
-        $obj_sheet->setCellValueByColumnAndRow(36, $a_row, $claim_hourly_daily);
-        $obj_sheet->setCellValueByColumnAndRow(37, $a_row, $claim_hourly_monthly);
-        $obj_sheet->setCellValueByColumnAndRow(38, $a_row, $claim_settlement_closingday);
-        $obj_sheet->setCellValueByColumnAndRow(39, $a_row, $claim_settlement_paymentday);
+        $obj_sheet->setCellValueByColumnAndRow(36, $a_row, $payment_hourly_daily);
+        $obj_sheet->setCellValueByColumnAndRow(37, $a_row, $payment_hourly_monthly);
+        $obj_sheet->setCellValueByColumnAndRow(38, $a_row, $payment_settlement_closingday);
+        $obj_sheet->setCellValueByColumnAndRow(39, $a_row, $payment_settlement_paymentday);
         $obj_sheet->setCellValueByColumnAndRow(40, $a_row, $remarks);
 
         $obj_sheet->setCellValueByColumnAndRow(41, $a_row, $dd_office);

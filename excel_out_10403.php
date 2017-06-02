@@ -68,17 +68,17 @@ $obj_sheet->setCellValue("L10", $claim_contract_form);
 com_setValue_Date($claim_agreement_start,  $obj_sheet, "L11", "yyyy年MM月dd日");
 com_setValue_Date($claim_agreement_end,  $obj_sheet, "L12", "yyyy年MM月dd日");
 $obj_sheet->setCellValue("L13", $engineer_name);
-$obj_sheet->setCellValue("M16", $claim_normal__unit_price);
-$obj_sheet->setCellValue("M17", $claim_normal_calculation);
+$obj_sheet->setCellValue("M16", $payment_normal_unit_price_1);
+$obj_sheet->setCellValue("M17", $payment_normal_calculation_1);
 
-$obj_sheet->setCellValue("M18", $claim_normal_lower_limit);
-$obj_sheet->setCellValue("M19", $claim_normal_upper_limit);
-$obj_sheet->setCellValue("M20", $claim_normal_deduction_unit_price);
-$obj_sheet->setCellValue("M21", $claim_normal_overtime_unit_price);
+$obj_sheet->setCellValue("M18", $payment_normal_lower_limit_1);
+$obj_sheet->setCellValue("M19", $payment_normal_upper_limit_1);
+$obj_sheet->setCellValue("M20", $payment_normal_deduction_unit_price_1);
+$obj_sheet->setCellValue("M21", $payment_normal_overtime_unit_price_1);
 
-$obj_sheet->setCellValue("O22", $claim_hourly_monthly);
-$obj_sheet->setCellValue("R23", $claim_settlement_closingday);
-$obj_sheet->setCellValue("AE23", $claim_settlement_paymentday);
+$obj_sheet->setCellValue("O22", $payment_hourly_monthly);
+$obj_sheet->setCellValue("R23", $payment_settlement_closingday);
+$obj_sheet->setCellValue("AE23", $payment_settlement_paymentday);
 
 $obj_sheet->setCellValue("L24", $remarks1.chr(13).$remarks2.chr(13).$remarks3.chr(13).$remarks4);
 //$obj_sheet->setCellValue("L24", $remarks1.chr(18).chr(13).$remarks2.chr(18).chr(13).$remarks3.chr(18).chr(13).$remarks4);
