@@ -490,21 +490,22 @@ function com_time_diff($time_from, $time_to, $mode)
     }
 }
 
-function com_make_where_session($h_mode, $h_where, $h_column, $h_sess, $h_table){
+function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table){
     $a_where = "";
-    if (isset($h_sess)){
-        if ($h_sess != ""){
+    if (isset($_SESSION[$h_sname])){
+        $a_sess = $_SESSION[$h_sname];
+        if ($a_sess != ""){
             if ($h_mode == 1){
                 #text
-                $a_where .= "(".$h_column." LIKE '".$h_sess."%')";
+                $a_where .= "(".$h_column." LIKE '".$a_sess."%')";
             }
             elseif ($h_mode == 2){
                 #date
-                $a_where .= "(".$h_column."='".$h_sess."')";
+                $a_where .= "(".$h_column."='".$a_sess."')";
             }elseif ($h_mode == 3){
                 #option
-                if ($h_sess != 0){
-                    $a_where .= "(".$h_column."=(SELECT m_name FROM ".$h_table." WHERE (idx=".$h_sess.")))";
+                if ($a_sess != 0){
+                    $a_where .= "(".$h_column."=(SELECT m_name FROM ".$h_table." WHERE (idx=".$a_sess.")))";
                 }
             }
 
