@@ -262,7 +262,7 @@ function make_input_text(h_cr_id, h_field, h_id, h_kind)
     //alert($("#" + h_field + h_id).text());
     
     if (h_kind == 2){
-        $('#i_' + h_field + h_id).datepicker({});
+        $('#i_' + h_field + h_id).datepicker({autoclose: 'true'});
     }
     
     g_input_click = true;
@@ -297,7 +297,7 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id, h_kind)
     //alert($("#" + h_field + h_id).text());
      
     if (h_kind == 2){
-        $('#i_' + h_field + h_id).datepicker({});
+        $('#i_' + h_field + h_id).datepicker({autoclose: 'true'});
     }
 
     g_input_click = true;
