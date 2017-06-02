@@ -13,6 +13,8 @@ require_once('./global.php');
 $a_PageNo = $_POST['PageNo'];
 
 try{
+    $a_today = date("Y/m/d");
+    
     //DBからユーザ情報取得
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -46,10 +48,15 @@ try{
     //可変部分
     $a_sRet .= "        <td style='width: 440px; padding:0 0'>";
     $a_sRet .= "            <div id='right_title' style='overflow:hidden; width: 500px; padding:0 0;'>";
-    $a_sRet .= "                <table class='tbl_list' style='width: 8000px;'>";
+    $a_sRet .= "                <table class='tbl_list' style='width: 8400px;'>";
     $a_sRet .= "                    <tr>";
     $a_sRet .= "                        <td colspan='41' class='td_title2' style='height: 25px;' nowrap>請求サイド</td>";
-    $a_sRet .= "                        <td colspan='34' class='td_title2' style='' nowrap>支払サイド</td>";
+    $a_sRet .= "                        <td colspan='33' class='td_title2' style='' nowrap>支払サイド</td>";
+    $a_sRet .= "                        <td colspan='2' class='td_title2' style='' nowrap>&nbsp;</td>";
+    #$a_sRet .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_date_start',$a_rec).">".str_replace("-", "/", $a_result['check_date_start'])."</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>".""."</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>".$a_today."</td>";
+    $a_sRet .= "                        <td colspan='3' class='td_title2' style='' nowrap>&nbsp;</td>";
     $a_sRet .= "                    </tr>";
     
     $a_sRet .= "                    <tr>";
@@ -90,6 +97,15 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>注文請書</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>備考</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>契約</td>";
+    
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>確認日付</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>確認担当者</td>";
+    #$a_sRet .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_date_end',$a_rec).">".str_replace("-", "/", $a_result['check_date_end'])."</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>現在稼働</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>稼働累計</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>営業支援費</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>管理メモ</td>";
     $a_sRet .= "                    </tr>";
 
     $a_sRet .= "                    <tr>";
@@ -151,6 +167,8 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>受理</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>発送</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>受理</td>";
+    
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
 
     $a_sRet .= "                    </tr>";
     $a_sRet .= "                </table>";
@@ -165,13 +183,26 @@ try{
     
     $a_sRet_R = "       <td valign='top' style='padding: 0 0;'>";
     $a_sRet_R .= "          <div id='right_record' style='padding: 0 0; overflow:scroll;width:500px;height:450px;' onscroll='document.all.right_title.scrollLeft=this.scrollLeft;document.all.leftColumn.scrollTop=this.scrollTop;'>";
-    $a_sRet_R .= "              <table class='tbl_list' style='width: 8000px;'>";
+    $a_sRet_R .= "              <table class='tbl_list' style='width: 8400px;'>";
 
 /**/
+    #現在稼働
+    $a_active_now = 0;
+    $a_active_sum = 0;
     //while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
     while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
         $a_rec++;
 
+        #現在稼働
+        $a_date_start = str_replace("-", "/", $a_result['claim_agreement_start']);
+        $a_date_end = str_replace("-", "/", $a_result['claim_agreement_end']);
+        if (($a_today>=$a_date_start) && ($a_today<=$a_date_end)){
+            $a_active_now = 1;
+            $a_active_sum++;
+        } else {
+            $a_active_now = 0;
+        }
+        
         if (($a_rec % 2)==0){
             $a_sRet_L .= "<tr class='linee' style='background-color: #fffff0;'>";
             $a_sRet_R .= "<tr class='linee' style='background-color: #fffff0;'>";
@@ -270,6 +301,14 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['payment_confirmation_order']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['remarks']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['payment_contract_form']."</td>";
+
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_correct_date',$a_rec,1).">".str_replace("-", "/", $a_result['check_correct_date'])."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_correct_person',$a_rec,1).">".$a_result['check_correct_person']."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".""."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_active_now."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_active_sum."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_remarks1',$a_rec,1).">".$a_result['check_remarks1']."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_remarks2',$a_rec,1).">".$a_result['check_remarks2']."</td>";
 
         $a_sRet_R .= "</tr>";
     }

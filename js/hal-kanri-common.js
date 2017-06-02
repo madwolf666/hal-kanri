@@ -233,7 +233,7 @@ function reset_input(h_field, h_id)
     g_input_click = false;
 }
 //入力フィールド作成
-function make_input_text(h_cr_id, h_field, h_id)
+function make_input_text(h_cr_id, h_field, h_id, h_kind)
 {
     //alert(h_cr_id + "," + h_field + "," + h_id );
     
@@ -253,18 +253,22 @@ function make_input_text(h_cr_id, h_field, h_id)
         a_str += a_val;
     }
     a_str += '" style="width: 96%;"';
-    a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_field + '\',\'' + h_id + '\',1);"';
+    a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ');"';
     a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\');"';
     a_str += '>';
     //alert(a_str);
     $("#" + h_field + h_id).empty().append(a_str);
     $("#" + h_field + h_id).focus();
     //alert($("#" + h_field + h_id).text());
-     
+    
+    if (h_kind == 2){
+        $('#i_' + h_field + h_id).datepicker({});
+    }
+    
     g_input_click = true;
 }
 
-function make_input_text2(h_cr_id, h_sub_id, h_field, h_id)
+function make_input_text2(h_cr_id, h_sub_id, h_field, h_id, h_kind)
 {
     //alert(h_cr_id + "," + h_field + "," + h_id );
     
@@ -284,7 +288,7 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id)
         a_str += a_val;
     }
     a_str += '" style="width: 96%;"';
-    a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_sub_id + '\',\'' + h_field + '\',\'' + h_id + '\',1);"';
+    a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_sub_id + '\',\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ');"';
     a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\');"';
     a_str += '>';
     //alert(a_str);
@@ -292,5 +296,9 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id)
     $("#" + h_field + h_id).focus();
     //alert($("#" + h_field + h_id).text());
      
+    if (h_kind == 2){
+        $('#i_' + h_field + h_id).datepicker({});
+    }
+
     g_input_click = true;
 }

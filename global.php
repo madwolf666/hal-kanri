@@ -384,18 +384,27 @@ function com_replace_toNumber($h_val)
 }
 
 //入力タグ生成
-function com_make_input_text($h_idx, $h_field, $h_rec)
+function com_make_input_text($h_idx, $h_field, $h_rec, $h_kind)
 {
     $a_sRet = "id='".$h_field.$h_rec."'";
-    $a_sRet .= " onClick='make_input_text(".$h_idx.",\"".$h_field."\",".$h_rec."); after_focus(\"".$h_field."\",".$h_rec.");'";
+    $a_sRet .= " onClick='make_input_text(".$h_idx.",\"".$h_field."\",".$h_rec.",".$h_kind."); after_focus(\"".$h_field."\",".$h_rec.");'";
     
+    /*
+    if ($h_kind == 2) {
+        #$a_sRet .= "<script type='text/javascript'>";
+        #$a_sRet .= "$(function () {";
+        $a_sRet .= "$('#i_".$h_field.$h_idx."').datepicker({});";
+        #$a_sRet .= "});";
+        #$a_sRet .= "</script>";
+    }
+     */
     return $a_sRet;
 }
 
-function com_make_input_text2($h_idx, $h_sidx, $h_field, $h_rec)
+function com_make_input_text2($h_idx, $h_sidx, $h_field, $h_rec, $h_kind)
 {
     $a_sRet = "id='".$h_field.$h_rec."'";
-    $a_sRet .= " onClick='make_input_text2(".$h_idx.",".$h_sidx.",\"".$h_field."\",".$h_rec."); after_focus(\"".$h_field."\",".$h_rec.");'";
+    $a_sRet .= " onClick='make_input_text2(".$h_idx.",".$h_sidx.",\"".$h_field."\",".$h_rec.",".$h_kind."); after_focus(\"".$h_field."\",".$h_rec.");'";
     
     return $a_sRet;
 }

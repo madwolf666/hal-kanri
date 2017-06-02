@@ -10,6 +10,12 @@ require_once('./header.php');
 
 ?>
 
+<link rel="stylesheet" href="./jquery/jquery-ui.css">
+<link rel="stylesheet" href="./jquery/jquery.datetimepicker.css">
+<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.ui.datepicker-ja.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.datetimepicker.js"></script>
+
 <link rel="stylesheet" href="css/hal-kanri-common.css">
 <!-- link rel="stylesheet" href="css/hal-kanri-10100.css" -->
 

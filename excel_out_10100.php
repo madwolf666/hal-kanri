@@ -30,6 +30,8 @@ $obj_sheet = $obj_book->getSheet(0);
 //$obj_sheet->setCellValue("A1", "Hello, PHPExcel!");
 
 try{
+    $a_today = date("Y/m/d");
+
     //DBからユーザ情報取得
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,9 +41,23 @@ try{
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->execute();
 
+    #現在稼働
+    $a_active_now = 0;
+    $a_active_sum = 0;
+
     //PHPExcelでは、rowは1始まり、colは0始まりのようである。
     $a_row = 4;
     while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+        #現在稼働
+        $a_date_start = str_replace("-", "/", $a_result['claim_agreement_start']);
+        $a_date_end = str_replace("-", "/", $a_result['claim_agreement_end']);
+        if (($a_today>=$a_date_start) && ($a_today<=$a_date_end)){
+            $a_active_now = 1;
+            $a_active_sum++;
+        } else {
+            $a_active_now = 0;
+        }
+
         //客先名など
         $inp_kyakusaki = $a_result['customer_name'];
         $inp_kenmei = $a_result['subject'];
@@ -178,6 +194,11 @@ try{
         $inp_wariai_nyujyo_c2 = $a_result['payment_middle_daily_manual'];
         $inp_wariai_taijyo_c1 = $a_result['payment_leaving_daily_auto'];
         $inp_wariai_taijyo_c2 = $a_result['payment_leaving_daily_manual'];
+
+        $check_correct_date = str_replace("-", "/", $a_result['check_correct_date']);
+        $check_correct_person = $a_result['check_correct_person'];
+        $check_remarks1 = $a_result['check_remarks1'];
+        $check_remarks2 = $a_result['check_remarks2'];
         
         $obj_sheet->setCellValueByColumnAndRow(0, $a_row, $inp_keiyaku_no);
         $obj_sheet->setCellValueByColumnAndRow(1, $a_row, $inp_hakkobi);
@@ -264,6 +285,13 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(76, $a_row, $opt_contract_yesno_p4);
         $obj_sheet->setCellValueByColumnAndRow(77, $a_row, $inp_biko);
         $obj_sheet->setCellValueByColumnAndRow(78, $a_row, $opt_contract_pay_form);
+
+        $obj_sheet->setCellValueByColumnAndRow(79, $a_row, $check_correct_date);
+        $obj_sheet->setCellValueByColumnAndRow(80, $a_row, $check_correct_person);
+        $obj_sheet->setCellValueByColumnAndRow(82, $a_row, $a_active_now);
+        $obj_sheet->setCellValueByColumnAndRow(83, $a_row, $a_active_sum);
+        $obj_sheet->setCellValueByColumnAndRow(84, $a_row, $check_remarks1);
+        $obj_sheet->setCellValueByColumnAndRow(85, $a_row, $check_remarks2);
         
         $a_row++;
     }
