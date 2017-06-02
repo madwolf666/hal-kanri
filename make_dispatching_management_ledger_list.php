@@ -23,9 +23,6 @@ try{
     $a_sql .= "
  t2.dm_no				
 ,t2.dd_office			
-,t2.dd_place			
-,t2.dd_address			
-,t2.dd_tel				
 ,t2.dd_fax				
 ,t2.chs_date1			
 ,t2.chs_status1			
@@ -55,12 +52,18 @@ try{
 ,t2.health_insurance	
 ,t2.welfare_pension		
 ,t2.jurisdiction		
-,t2.specified_worker	
+,t2.specified_worker
+,t3.dd_office AS dd_place
+,t3.dd_address
+,t3.dd_tel
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
     $a_sql .= " ORDER BY t2.dm_no;";
     
     $a_stmt = $a_conn->prepare($a_sql);
@@ -113,9 +116,9 @@ try{
     $a_sRet .= "                    <tr>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px; height: 25px;' nowrap>名称</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>名称</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>名称</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>住所</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>電話</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>名称</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>住所</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>電話</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>FAX</td>";
     
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>開始日</td>";

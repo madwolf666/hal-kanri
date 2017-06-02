@@ -28,13 +28,17 @@ try{
 ,t2.remarks3				
 ,t2.remarks4				
 ,t2.inheriting			
-,t2.sending_back			
+,t2.sending_back
+,t3.ag_no
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " ORDER BY t2.po_no;";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    $a_sql .= " ORDER BY t3.ag_no;";
     
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
@@ -56,7 +60,7 @@ try{
     $a_sRet .= "                    <td colspan='3' class='td_title2' style='' nowrap>エンジニア情報</td>";
     $a_sRet .= "                </tr>";
     $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td class='td_titleI' style='width: 50px; height:50px;' nowrap>注文書<br>台帳<br>No.</td>";
+    $a_sRet .= "                    <td class='td_title2' style='width: 50px; height:50px;' nowrap>注文書<br>台帳<br>No.</td>";
     $a_sRet .= "                    <td class='td_title2' style='width: 50px;' nowrap>契約<br>管理<br>No.</td>";
     $a_sRet .= "                    <td class='td_titleI' style='width: 90px;' nowrap>注文書<br>発行日</td>";
     $a_sRet .= "                    <td class='td_title2' style='width: 100px; height:50px;' nowrap>HALｴﾝｼﾞﾆｱ<br>番号</td>";
@@ -156,7 +160,8 @@ try{
 
         //入力あり
         //$a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover' id='dm_no".$a_rec."' onClick='alert(\"chappy\");'>".$a_result['dm_no']."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 50px;'><div class='myover' ".com_make_input_text($cr_id,'po_no',$a_rec,1).">".$po_no."</td>";
+        #$a_sRet_L .= "<td class='td_lineI' style='width: 50px;'><div class='myover' ".com_make_input_text($cr_id,'po_no',$a_rec,1).">".$po_no."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$ag_no."</td>";
 
         $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$contract_number."</td>";
 

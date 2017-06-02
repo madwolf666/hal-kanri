@@ -63,6 +63,8 @@ $payment_actual_working_hours_difference = "";
 $payment_gross_profit = "";
 $payment_gross_profit_margin = "";
 
+$ag_no = "";
+
 function set_10300_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];
@@ -125,6 +127,7 @@ function set_10300_fromDB($a_result)
     $GLOBALS['payment_gross_profit'] = $a_result['payment_gross_profit'];
     $GLOBALS['payment_gross_profit_margin'] = $a_result['payment_gross_profit_margin'];
 
+    $GLOBALS['ag_no'] = $a_result['ag_no'];
 }
 
 ?>

@@ -32,9 +32,6 @@ try{
     $a_sql .= "
  t2.dm_no				
 ,t2.dd_office			
-,t2.dd_place			
-,t2.dd_address			
-,t2.dd_tel				
 ,t2.dd_fax				
 ,t2.chs_date1			
 ,t2.chs_status1			
@@ -65,11 +62,17 @@ try{
 ,t2.welfare_pension		
 ,t2.jurisdiction		
 ,t2.specified_worker	
+,t3.dd_office AS dd_place
+,t3.dd_address
+,t3.dd_tel
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
     $a_sql .= " ORDER BY t2.dm_no;";
 
     $a_stmt = $a_conn->prepare($a_sql);

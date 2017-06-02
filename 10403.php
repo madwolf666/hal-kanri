@@ -33,11 +33,15 @@ if (isset($_GET['NO'])) {
     ,t2.remarks4				
     ,t2.inheriting			
     ,t2.sending_back			
+    ,t3.ag_no
             ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
         $a_sql .= " LEFT JOIN ";
         $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
         $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+        $a_sql .= " ON (t1.cr_id=t3.cr_id)";
         $a_sql .= " WHERE (t1.cr_id=:cr_id);";
 
         $a_stmt = $a_conn->prepare($a_sql);
@@ -80,13 +84,7 @@ if (isset($_GET['NO'])) {
             ?>
             </u></div>
     <div style="text-align: left; margin-left:auto; width:300px;"><u>注文書番号&nbsp;&nbsp;
-            <?php
-                if ($a_act == '') {
-                    echo $po_no;
-                } else {
-                    echo com_make_tag_input($a_act, $po_no, "po_no", "width: 100px; text-align: center;");
-                }
-            ?>
+            <?php echo $ag_no; ?>
             </u></div>
     <br>
     <div style="text-align: left; margin-left:auto; width:300px;"><住所></div>

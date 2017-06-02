@@ -68,12 +68,16 @@ try{
 ,t2.payment_actual_working_hours_difference
 ,t2.payment_gross_profit
 ,t2.payment_gross_profit_margin
+,t3.ag_no
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_acceptance_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " ORDER BY t1.contract_number,t2.al_id;";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    $a_sql .= " ORDER BY t1.contract_number,t3.ag_no,t2.al_id;";
 
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->execute();
@@ -95,7 +99,8 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(8, $a_row, $claim_agreement_end);
         
         $obj_sheet->setCellValueByColumnAndRow(9, $a_row, $accounts_estimate_no);
-        $obj_sheet->setCellValueByColumnAndRow(10, $a_row, $accounts_contract_purchase_no);
+        #$obj_sheet->setCellValueByColumnAndRow(10, $a_row, $accounts_contract_purchase_no);
+        $obj_sheet->setCellValueByColumnAndRow(10, $a_row, $ag_no);
         
         $obj_sheet->setCellValueByColumnAndRow(11, $a_row, $accounts_bai_previous_day);
         $obj_sheet->setCellValueByColumnAndRow(12, $a_row, $accounts_sales_will_amount);

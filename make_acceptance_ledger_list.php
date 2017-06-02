@@ -59,12 +59,16 @@ try{
 ,t2.payment_actual_working_hours_difference
 ,t2.payment_gross_profit
 ,t2.payment_gross_profit_margin
+,t3.ag_no
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_acceptance_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " ORDER BY t1.contract_number,t2.al_id;";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    $a_sql .= " ORDER BY t1.contract_number,t3.ag_no,t2.al_id;";
     
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
@@ -101,7 +105,7 @@ try{
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>開始日</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>終了日</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>見積No.</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>注文書/<br>契約書No.</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>注文書/<br>契約書No.</td>";
     $a_sRet .= "                        <td colspan='9' class='td_title2' style='width: 100px; height: 25px;' nowrap>売掛</td>";
     $a_sRet .= "                        <td colspan='8' class='td_title2' style='width: 100px; ' nowrap>発注</td>";
     $a_sRet .= "                        <td colspan='26' class='td_title2' style='width: 100px; ' nowrap>支払</td>";
@@ -205,7 +209,8 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_start."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_end."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_estimate_no',$a_rec,1).">".$accounts_estimate_no."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_contract_purchase_no',$a_rec,1).">".$accounts_contract_purchase_no."</td>";
+        #$a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_contract_purchase_no',$a_rec,1).">".$accounts_contract_purchase_no."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$ag_no."</td>";
 
         //入力あり
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_bai_previous_day',$a_rec,1).">".$accounts_bai_previous_day."</td>";

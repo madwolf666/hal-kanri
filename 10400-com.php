@@ -57,6 +57,8 @@ $remarks4 = "";
 $inheriting = "";
 $sending_back = "";
 
+$ag_no = "";
+
 function set_10400_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];
@@ -109,6 +111,8 @@ function set_10400_fromDB($a_result)
     $GLOBALS['remarks4'] = $a_result['remarks4'];
     $GLOBALS['inheriting'] = $a_result['inheriting'];
     $GLOBALS['sending_back'] = $a_result['sending_back'];
+    
+    $GLOBALS['ag_no'] = $a_result['ag_no'];
 }
 
 ?>

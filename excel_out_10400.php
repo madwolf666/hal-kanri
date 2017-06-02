@@ -38,12 +38,16 @@ try{
 ,t2.remarks4				
 ,t2.inheriting			
 ,t2.sending_back			
+,t3.ag_no
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " ORDER BY t2.po_no;";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    $a_sql .= " ORDER BY t3.ag_no;";
 
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->execute();
@@ -54,7 +58,8 @@ try{
 
         set_10400_fromDB($a_result);
         
-        $obj_sheet->setCellValueByColumnAndRow(0, $a_row, $po_no);
+        #$obj_sheet->setCellValueByColumnAndRow(0, $a_row, $po_no);
+        $obj_sheet->setCellValueByColumnAndRow(0, $a_row, $ag_no);
         
         $obj_sheet->setCellValueByColumnAndRow(1, $a_row, $contract_number);
         

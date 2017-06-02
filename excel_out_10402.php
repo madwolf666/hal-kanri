@@ -29,11 +29,15 @@ if (isset($_GET['NO'])) {
     ,t2.remarks4				
     ,t2.inheriting			
     ,t2.sending_back			
+    ,t3.ag_no
             ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
         $a_sql .= " LEFT JOIN ";
         $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
         $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+        $a_sql .= " ON (t1.cr_id=t3.cr_id)";
         $a_sql .= " WHERE (t1.cr_id=:cr_id);";
 
         $a_stmt = $a_conn->prepare($a_sql);
@@ -62,7 +66,8 @@ $obj_sheet = $obj_book->getSheet(0);
 $obj_sheet->setCellValue("A3", $customer_name);
 
 com_setValue_Date($publication,  $obj_sheet, "AE3", "yyyy年MM月dd日");
-$obj_sheet->setCellValue("AE4", $po_no);
+#$obj_sheet->setCellValue("AE4", $po_no);
+$obj_sheet->setCellValue("AE4", $ag_no);
 
 $obj_sheet->setCellValue("L10", $claim_contract_form);
 com_setValue_Date($claim_agreement_start,  $obj_sheet, "L11", "yyyy年MM月dd日");

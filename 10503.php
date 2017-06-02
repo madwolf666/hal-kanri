@@ -340,7 +340,7 @@ if (isset($_GET['NO'])) {
                     if ($a_act == '') {
                         echo $chs_position1;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_position1, "chs_position1", "width: 90%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_position1, "chs_position2", "width: 90%; text-align: center;");
                     }
                 ?>
             </td>
@@ -349,19 +349,19 @@ if (isset($_GET['NO'])) {
                     if ($a_act == '') {
                         echo $chs_name1;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_name1, "chs_name1", "width: 90%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_name1, "chs_name2", "width: 90%; text-align: center;");
                     }
                 ?>
             </td>
 	</tr>
 	<tr>
-            <td colspan="4">派遣先：職名・氏名</td>
+            <td colspan="4">派遣元：職名・氏名</td>
             <td class="hiddencell_r" colspan="2">
                 <?php
                     if ($a_act == '') {
                         echo $chs_position2;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_position2, "chs_position2", "width: 90%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_position2, "chs_position1", "width: 90%; text-align: center;");
                     }
                 ?>
             </td>
@@ -370,7 +370,7 @@ if (isset($_GET['NO'])) {
                     if ($a_act == '') {
                         echo $chs_name2;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_name2, "chs_name2", "width: 90%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_name2, "chs_name1", "width: 90%; text-align: center;");
                     }
                 ?>
             </td>

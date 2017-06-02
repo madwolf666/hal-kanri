@@ -124,10 +124,10 @@ $obj_sheet->setCellValue("U43", $dd_responsible_name);
 $obj_sheet->setCellValue("Q45", $dm_responsible_position);
 $obj_sheet->setCellValue("U45", $dm_responsible_name);
 
-$obj_sheet->setCellValue("Q47", $chs_position1);
-$obj_sheet->setCellValue("U47", $chs_name1);
-$obj_sheet->setCellValue("Q49", $chs_position2);
-$obj_sheet->setCellValue("U49", $chs_name2);
+$obj_sheet->setCellValue("Q47", $chs_position2);
+$obj_sheet->setCellValue("U47", $chs_name2);
+$obj_sheet->setCellValue("Q49", $chs_position1);
+$obj_sheet->setCellValue("U49", $chs_name1);
 
 $obj_sheet->setCellValue("E70", $remarks);
 
