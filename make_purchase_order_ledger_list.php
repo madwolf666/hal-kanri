@@ -156,12 +156,12 @@ try{
 
         //入力あり
         //$a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover' id='dm_no".$a_rec."' onClick='alert(\"chappy\");'>".$a_result['dm_no']."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 50px;'><div class='myover' ".com_make_input_text($cr_id,'po_no',$a_rec).">".$po_no."</td>";
+        $a_sRet_L .= "<td class='td_lineI' style='width: 50px;'><div class='myover' ".com_make_input_text($cr_id,'po_no',$a_rec,1).">".$po_no."</td>";
 
         $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$contract_number."</td>";
 
         //入力あり
-        $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text($cr_id,'publication',$a_rec).">".$publication."</td>";
+        $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text($cr_id,'publication',$a_rec,1).">".$publication."</td>";
 
         $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>";
         $a_sRet_L .= "<a href='#' onclick='choice_purchase_order_ledger_method(\"".$a_result['cr_id']."\");'>".$a_result['engineer_number']."</a>";
@@ -208,12 +208,12 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_contract_form."</td>";
         
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks1',$a_rec).">".$remarks1."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks2',$a_rec).">".$remarks2."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks3',$a_rec).">".$remarks3."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks4',$a_rec).">".$remarks4."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'inheriting',$a_rec).">".$inheriting."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'sending_back',$a_rec).">".$sending_back."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks1',$a_rec,1).">".$remarks1."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks2',$a_rec,1).">".$remarks2."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks3',$a_rec,1).">".$remarks3."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'remarks4',$a_rec,1).">".$remarks4."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'inheriting',$a_rec,1).">".$inheriting."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'sending_back',$a_rec,1).">".$sending_back."</td>";
 
         $a_sRet_R .= "</tr>";
     }

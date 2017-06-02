@@ -204,20 +204,20 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$subject."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_start."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_end."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_estimate_no',$a_rec).">".$accounts_estimate_no."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_contract_purchase_no',$a_rec).">".$accounts_contract_purchase_no."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_estimate_no',$a_rec,1).">".$accounts_estimate_no."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_contract_purchase_no',$a_rec,1).">".$accounts_contract_purchase_no."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_bai_previous_day',$a_rec).">".$accounts_bai_previous_day."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_sales_will_amount',$a_rec).">".$accounts_sales_will_amount."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_working_hours_manage',$a_rec).">".$accounts_working_hours_manage."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_actual_working_hours',$a_rec).">".$accounts_actual_working_hours."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_actual_amount_money',$a_rec).">".$accounts_actual_amount_money."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_bai_previous_day',$a_rec,1).">".$accounts_bai_previous_day."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_sales_will_amount',$a_rec,1).">".$accounts_sales_will_amount."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_working_hours_manage',$a_rec,1).">".$accounts_working_hours_manage."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_actual_working_hours',$a_rec,1).">".$accounts_actual_working_hours."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_actual_amount_money',$a_rec,1).">".$accounts_actual_amount_money."</td>";
 
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_expenses',$a_rec).">".$accounts_expenses."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_tax_meter_noinclude',$a_rec).">".$accounts_tax_meter_noinclude."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_tax_meter_include',$a_rec).">".$accounts_tax_meter_include."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_invoicing',$a_rec).">".$accounts_invoicing."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_expenses',$a_rec,1).">".$accounts_expenses."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_tax_meter_noinclude',$a_rec,1).">".$accounts_tax_meter_noinclude."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_tax_meter_include',$a_rec,1).">".$accounts_tax_meter_include."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_invoicing',$a_rec,1).">".$accounts_invoicing."</td>";
 
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engineer_name."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engneer_name_phonetic."</td>";
@@ -226,38 +226,38 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_absence_deduction_subject."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_start."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_end."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'ordering_purchase_no',$a_rec).">".$ordering_purchase_no."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'ordering_purchase_no',$a_rec,1).">".$ordering_purchase_no."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_acceptance_date',$a_rec).">".$payment_acceptance_date."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_schedule_amount',$a_rec).">".$payment_schedule_amount."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_working_hours',$a_rec).">".$payment_actual_working_hours."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_amount_money',$a_rec).">".$payment_actual_amount_money."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_commuting_expenses',$a_rec).">".$payment_commuting_expenses."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_tax_meter_noinclude',$a_rec).">".$payment_tax_meter_noinclude."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_tax_meter_include',$a_rec).">".$payment_tax_meter_include."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_acceptance_date',$a_rec,1).">".$payment_acceptance_date."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_schedule_amount',$a_rec,1).">".$payment_schedule_amount."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_working_hours',$a_rec,1).">".$payment_actual_working_hours."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_amount_money',$a_rec,1).">".$payment_actual_amount_money."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_commuting_expenses',$a_rec,1).">".$payment_commuting_expenses."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_tax_meter_noinclude',$a_rec,1).">".$payment_tax_meter_noinclude."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_tax_meter_include',$a_rec,1).">".$payment_tax_meter_include."</td>";
         
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_bill_acceptance',$a_rec).">".$payment_bill_acceptance."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_expenses',$a_rec).">".$payment_expenses."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_else',$a_rec).">".$payment_else."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_pre_paid',$a_rec).">".$payment_pre_paid."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_advance',$a_rec).">".$payment_advance."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_commission',$a_rec).">".$payment_commission."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_total',$a_rec).">".$payment_total."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_bill_acceptance',$a_rec,1).">".$payment_bill_acceptance."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_expenses',$a_rec,1).">".$payment_expenses."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_else',$a_rec,1).">".$payment_else."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_pre_paid',$a_rec,1).">".$payment_pre_paid."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_advance',$a_rec,1).">".$payment_advance."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_commission',$a_rec,1).">".$payment_commission."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_total',$a_rec,1).">".$payment_total."</td>";
 
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_settlement_paymentday."</td>";
 
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_month_after_next_1',$a_rec).">".$payment_plan_month_after_next_1."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_next_month_15',$a_rec).">".$payment_plan_next_month_15."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_month_after_next_15',$a_rec).">".$payment_plan_month_after_next_15."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_else',$a_rec).">".$payment_plan_else."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_payroll_schedule',$a_rec).">".$payment_payroll_schedule."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_transfer_processing_amount1',$a_rec).">".$payment_transfer_processing_amount1."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_transfer_processing_amount2',$a_rec).">".$payment_transfer_processing_amount2."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_difference',$a_rec).">".$payment_difference."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_working_hours_difference',$a_rec).">".$payment_actual_working_hours_difference."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_gross_profit',$a_rec).">".$payment_gross_profit."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_gross_profit_margin',$a_rec).">".$payment_gross_profit_margin."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_month_after_next_1',$a_rec,1).">".$payment_plan_month_after_next_1."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_next_month_15',$a_rec,1).">".$payment_plan_next_month_15."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_month_after_next_15',$a_rec,1).">".$payment_plan_month_after_next_15."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_plan_else',$a_rec,1).">".$payment_plan_else."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_payroll_schedule',$a_rec,1).">".$payment_payroll_schedule."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_transfer_processing_amount1',$a_rec,1).">".$payment_transfer_processing_amount1."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_transfer_processing_amount2',$a_rec,1).">".$payment_transfer_processing_amount2."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_difference',$a_rec,1).">".$payment_difference."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_working_hours_difference',$a_rec,1).">".$payment_actual_working_hours_difference."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_gross_profit',$a_rec,1).">".$payment_gross_profit."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_gross_profit_margin',$a_rec,1).">".$payment_gross_profit_margin."</td>";
 
         $a_sRet_R .= "</tr>";
     }
