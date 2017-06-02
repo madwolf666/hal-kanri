@@ -29,8 +29,8 @@ try{
     $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', $_SESSION['f_claim_agreement_start'], "");
     $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', $_SESSION['f_claim_agreement_end'], "");
     $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', $_SESSION['f_claim_contract_form'], $GLOBALS['g_DB_m_contract_bill_form']);
-    $a_where = com_make_where_session(3, $a_where, 'claim_hourly_monthly', $_SESSION['f_claim_hourly_monthly'], $GLOBALS['g_DB_m_contract_tighten']);
-    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', $_SESSION['f_claim_settlement_closingday'], $GLOBALS['g_DB_m_contract_bill_pay']);
+    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', $_SESSION['f_claim_settlement_closingday'], $GLOBALS['g_DB_m_contract_tighten']);
+    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', $_SESSION['f_claim_settlement_paymentday'], $GLOBALS['g_DB_m_contract_bill_pay']);
     $a_where = com_make_where_session(1, $a_where, 'remarks', $_SESSION['f_remarks'], "");
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;

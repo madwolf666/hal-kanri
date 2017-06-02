@@ -39,11 +39,11 @@ if (!isset($_GET['mnu'])){
         if (isset($_POST['f_claim_contract_form'])){
             $_SESSION['f_claim_contract_form'] = $_POST['f_claim_contract_form'];
         }
-        if (isset($_POST['f_claim_hourly_monthly'])){
-            $_SESSION['f_claim_hourly_monthly'] = $_POST['f_claim_hourly_monthly'];
-        }
         if (isset($_POST['f_claim_settlement_closingday'])){
             $_SESSION['f_claim_settlement_closingday'] = $_POST['f_claim_settlement_closingday'];
+        }
+        if (isset($_POST['f_claim_settlement_paymentday'])){
+            $_SESSION['f_claim_settlement_paymentday'] = $_POST['f_claim_settlement_paymentday'];
         }
         if (isset($_POST['f_remarks'])){
             $_SESSION['f_remarks'] = $_POST['f_remarks'];

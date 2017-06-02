@@ -89,7 +89,7 @@ require_once('./10100-com.php');
 <td class="td_titlee">決済（締）</td>
 <td>
     <?php
-        echo com_make_tag_option2($a_act, $f_claim_hourly_monthly, "f_claim_hourly_monthly", $GLOBALS['g_DB_m_contract_tighten'], "width: 50px;", $a_selected);
+        echo com_make_tag_option2($a_act, $f_claim_settlement_closingday, "f_claim_settlement_closingday", $GLOBALS['g_DB_m_contract_tighten'], "width: 50px;", $a_selected);
     ?>
 </td>
 </tr>
@@ -97,7 +97,7 @@ require_once('./10100-com.php');
 <td class="td_titlee">決済（支払）</td>
 <td>
     <?php
-        echo com_make_tag_option2($a_act, $f_claim_settlement_closingday, "f_claim_settlement_closingday", $GLOBALS['g_DB_m_contract_bill_pay'], "", $a_selected);
+        echo com_make_tag_option2($a_act, $f_claim_settlement_paymentday, "f_claim_settlement_paymentday", $GLOBALS['g_DB_m_contract_bill_pay'], "", $a_selected);
     ?>
 </td>
 </tr>

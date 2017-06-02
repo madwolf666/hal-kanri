@@ -14,8 +14,8 @@ $f_customer_name = "";
 $f_claim_agreement_start = "";
 $f_claim_agreement_end = "";
 $f_claim_contract_form = "";
-$f_claim_hourly_monthly = "";
 $f_claim_settlement_closingday = "";
+$f_claim_settlement_paymentday = "";
 $f_remarks = "";
 if (isset($_SESSION['f_engineer_number'])){
     $f_engineer_number = $_SESSION['f_engineer_number'];
@@ -38,11 +38,11 @@ if (isset($_SESSION['f_claim_agreement_end'])){
 if (isset($_SESSION['f_claim_contract_form'])){
     $f_claim_contract_form = $_SESSION['f_claim_contract_form'];
 }
-if (isset($_SESSION['f_claim_hourly_monthly'])){
-    $f_claim_hourly_monthly = $_SESSION['f_claim_hourly_monthly'];
-}
 if (isset($_SESSION['f_claim_settlement_closingday'])){
     $f_claim_settlement_closingday = $_SESSION['f_claim_settlement_closingday'];
+}
+if (isset($_SESSION['f_claim_settlement_paymentday'])){
+    $f_claim_settlement_paymentday = $_SESSION['f_claim_settlement_paymentday'];
 }
 if (isset($_SESSION['f_remarks'])){
     $f_remarks = $_SESSION['f_remarks'];
