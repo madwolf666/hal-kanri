@@ -176,6 +176,10 @@ $(function () {
     $('#opt_contarct_projects_confirm').change(function(){check_value_changed_10105(1, 'projects_confirm', $('[name=opt_contarct_projects_confirm] option:selected').text(), '#opt_contarct_projects_confirm');});
     $('#opt_contarct_engineer_list').change(function(){check_value_changed_10105(1, 'engineer_list', $('[name=opt_contarct_engineer_list] option:selected').text(), '#opt_contarct_engineer_list');});
     $('#inp_biko').keyup(function(){check_value_changed_10105(1, 'remarks', $('#inp_biko').val(), '#inp_biko');});
+
+    //条件検索
+    $('#f_claim_agreement_start').datepicker({});
+    $('#f_claim_agreement_end').datepicker({});
 });
 
 function calc_bill_work_time()

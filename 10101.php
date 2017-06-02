@@ -8,7 +8,17 @@
 
 require_once('./header.php');
 
+$a_act = "e";
+
+require_once('./10100-com.php');
+
 ?>
+
+<link rel="stylesheet" href="./jquery/jquery-ui.css">
+<link rel="stylesheet" href="./jquery/jquery.datetimepicker.css">
+<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.ui.datepicker-ja.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.datetimepicker.js"></script>
 
 <link rel="stylesheet" href="css/hal-kanri-common.css">
 
@@ -20,29 +30,85 @@ require_once('./header.php');
     <center>
 <table class="tbl_list">
 <tr>
-<td class="td_titlee">管理No.</td>
-<td><input type="text" name="管理No." size="10" class="ws"></td>
+<td class="td_titlee">エンジニア名</td>
+<td>
+    <?php
+        echo com_make_tag_input($a_act, $f_engineer_name, "f_engineer_name", "width: 260px; text-align: center;");
+    ?>
+</td>
 </tr>
 <tr>
-<td class="td_titlee">発行日</td>
-<td><input type="text" name="発行日" size="10" class="ws"></td>
+<td class="td_titlee">エンジニア番号</td>
+<td>
+    <?php
+        echo com_make_tag_input($a_act, $f_engineer_number, "f_engineer_number", "width: 260px; text-align: center;");
+    ?>
+</td>
 </tr>
 <tr>
-<td class="td_titlee">作成者</td>
-<td><input type="text" name="作成者" size="30" class="ws"></td>
+<td class="td_titlee">契約管理番号</td>
+<td>
+    <?php
+        echo com_make_tag_input($a_act, $f_contract_number, "f_contract_number", "width: 260px; text-align: center;");
+    ?>
+</td>
 </tr>
 <tr>
-<td class="td_titlee">ｴﾝｼﾞﾆｱ番号</td>
-<td><input type="text" name="ｴﾝｼﾞﾆｱ番号" size="10" class="ws"></td>
+<td class="td_titlee">客先名</td>
+<td>
+    <?php
+        echo com_make_tag_input($a_act, $f_customer_name, "f_customer_name", "width: 260px; text-align: center;");
+    ?>
+</td>
 </tr>
 <tr>
-<td class="td_titlee">ｴﾝｼﾞﾆｱ名</td>
-<td><input type="text" name="ｴﾝｼﾞﾆｱ名" size="10" class="ws"></td>
+<td class="td_titlee">開始日</td>
+<td>
+    <?php
+        echo com_make_tag_input($a_act, $f_claim_agreement_start, "f_claim_agreement_start", "width: 260px; text-align: center;");
+    ?>
+</td>
 </tr>
 <tr>
-<!-- th>お問い合わせ詳細※</th>
-<td><textarea name="お問い合わせ詳細" cols="30" rows="10" class="wl"></textarea></td>
-</tr -->
+<td class="td_titlee">終了日</td>
+<td>
+    <?php
+        echo com_make_tag_input($a_act, $f_claim_agreement_end, "f_claim_agreement_end", "width: 260px; text-align: center;");
+    ?>
+</td>
+</tr>
+<tr>
+<td class="td_titlee">契約形態</td>
+<td>
+    <?php
+        echo com_make_tag_option2($a_act, $f_claim_contract_form, "f_claim_contract_form", $GLOBALS['g_DB_m_contract_bill_form'], "width: 260px;", $a_selected);
+    ?>
+</td>
+</tr>
+<tr>
+<td class="td_titlee">決済（締）</td>
+<td>
+    <?php
+        echo com_make_tag_option2($a_act, $f_claim_hourly_monthly, "f_claim_hourly_monthly", $GLOBALS['g_DB_m_contract_tighten'], "width: 50px;", $a_selected);
+    ?>
+</td>
+</tr>
+<tr>
+<td class="td_titlee">決済（支払）</td>
+<td>
+    <?php
+        echo com_make_tag_option2($a_act, $f_claim_settlement_closingday, "f_claim_settlement_closingday", $GLOBALS['g_DB_m_contract_bill_pay'], "", $a_selected);
+    ?>
+</td>
+</tr>
+<tr>
+<td class="td_titlee">備考</td>
+<td>
+    <?php
+        echo com_make_tag_input($a_act, $f_remarks, "f_remarks", "width: 260px; text-align: center;");
+    ?>
+</td>
+</tr>
 </table>
 </center>
 <br>
@@ -59,3 +125,5 @@ require_once('./header.php');
 <?php
 require_once('./footer.php');
 ?>
+
+<script src="./js/hal-kanri-10100.js"></script>

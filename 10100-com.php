@@ -6,6 +6,48 @@
  * and open the template in the editor.
  */
 
+#Session
+$f_engineer_number = "";
+$f_engineer_name = "";
+$f_contract_number = "";
+$f_customer_name = "";
+$f_claim_agreement_start = "";
+$f_claim_agreement_end = "";
+$f_claim_contract_form = "";
+$f_claim_hourly_monthly = "";
+$f_claim_settlement_closingday = "";
+$f_remarks = "";
+if (isset($_SESSION['f_engineer_number'])){
+    $f_engineer_number = $_SESSION['f_engineer_number'];
+}
+if (isset($_SESSION['f_engineer_name'])){
+    $f_engineer_name = $_SESSION['f_engineer_name'];
+}
+if (isset($_SESSION['f_contract_number'])){
+    $f_contract_number = $_SESSION['f_contract_number'];
+}
+if (isset($_SESSION['f_customer_name'])){
+    $f_customer_name = $_SESSION['f_customer_name'];
+}
+if (isset($_SESSION['f_claim_agreement_start'])){
+    $f_claim_agreement_start = $_SESSION['f_claim_agreement_start'];
+}
+if (isset($_SESSION['f_claim_agreement_end'])){
+    $f_claim_agreement_end = $_SESSION['f_claim_agreement_end'];
+}
+if (isset($_SESSION['f_claim_contract_form'])){
+    $f_claim_contract_form = $_SESSION['f_claim_contract_form'];
+}
+if (isset($_SESSION['f_claim_hourly_monthly'])){
+    $f_claim_hourly_monthly = $_SESSION['f_claim_hourly_monthly'];
+}
+if (isset($_SESSION['f_claim_settlement_closingday'])){
+    $f_claim_settlement_closingday = $_SESSION['f_claim_settlement_closingday'];
+}
+if (isset($_SESSION['f_remarks'])){
+    $f_remarks = $_SESSION['f_remarks'];
+}
+
 $cr_id = "";
 $inp_kyakusaki = "";
 $inp_kenmei = "";

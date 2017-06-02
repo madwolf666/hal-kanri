@@ -19,7 +19,26 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." ORDER BY contract_number;";
+    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_report'];
+    
+    $a_where = "";
+    $a_where = com_make_where_session(1, $a_where, 'engineer_name', $_SESSION['f_engineer_name'], "");
+    $a_where = com_make_where_session(1, $a_where, 'engineer_number', $_SESSION['f_engineer_number'], "");
+    $a_where = com_make_where_session(1, $a_where, 'contract_number', $_SESSION['f_contract_number'], "");
+    $a_where = com_make_where_session(1, $a_where, 'customer_name', $_SESSION['f_customer_name'], "");
+    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', $_SESSION['f_claim_agreement_start'], "");
+    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', $_SESSION['f_claim_agreement_end'], "");
+    $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', $_SESSION['f_claim_contract_form'], $GLOBALS['g_DB_m_contract_bill_form']);
+    $a_where = com_make_where_session(3, $a_where, 'claim_hourly_monthly', $_SESSION['f_claim_hourly_monthly'], $GLOBALS['g_DB_m_contract_tighten']);
+    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', $_SESSION['f_claim_settlement_closingday'], $GLOBALS['g_DB_m_contract_bill_pay']);
+    $a_where = com_make_where_session(1, $a_where, 'remarks', $_SESSION['f_remarks'], "");
+    if ($a_where != ""){
+        $a_where = " WHERE ".$a_where;
+    }
+    
+    $a_sql .= $a_where;
+    $a_sql .= " ORDER BY contract_number;";
+    #echo $a_sql;
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();

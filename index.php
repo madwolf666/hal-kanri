@@ -17,6 +17,38 @@ if (!isset($_GET['mnu'])){
         header('Location: ./10000.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10100']:   //契約管理全体
+        #POST
+        if (isset($_POST['f_engineer_number'])){
+            $_SESSION['f_engineer_number'] = $_POST['f_engineer_number'];
+        }
+        if (isset($_POST['f_engineer_name'])){
+            $_SESSION['f_engineer_name'] = $_POST['f_engineer_name'];
+        }
+        if (isset($_POST['f_contract_number'])){
+            $_SESSION['f_contract_number'] = $_POST['f_contract_number'];
+        }
+        if (isset($_POST['f_customer_name'])){
+            $_SESSION['f_customer_name'] = $_POST['f_customer_name'];
+        }
+        if (isset($_POST['f_claim_agreement_start'])){
+            $_SESSION['f_claim_agreement_start'] = $_POST['f_claim_agreement_start'];
+        }
+        if (isset($_POST['f_claim_agreement_end'])){
+            $_SESSION['f_claim_agreement_end'] = $_POST['f_claim_agreement_end'];
+        }
+        if (isset($_POST['f_claim_contract_form'])){
+            $_SESSION['f_claim_contract_form'] = $_POST['f_claim_contract_form'];
+        }
+        if (isset($_POST['f_claim_hourly_monthly'])){
+            $_SESSION['f_claim_hourly_monthly'] = $_POST['f_claim_hourly_monthly'];
+        }
+        if (isset($_POST['f_claim_settlement_closingday'])){
+            $_SESSION['f_claim_settlement_closingday'] = $_POST['f_claim_settlement_closingday'];
+        }
+        if (isset($_POST['f_remarks'])){
+            $_SESSION['f_remarks'] = $_POST['f_remarks'];
+        }
+
         header('Location: ./10100.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10101']:   //契約管理全体：検索

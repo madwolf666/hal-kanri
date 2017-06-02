@@ -234,7 +234,7 @@ function com_make_tag_input(
     $a_sRet = "";
     
     try{
-        $a_sRet = "<input type='text' id='".$h_name."' style='".$h_style."' value='";
+        $a_sRet = "<input type='text' name='".$h_name."' id='".$h_name."' style='".$h_style."' value='";
         //if ($h_act == 'e')
         //{
             $a_sRet .= $h_val;
@@ -259,7 +259,7 @@ function com_make_tag_textarea(
     $a_sRet = "";
     
     try{
-        $a_sRet = "<textarea id='".$h_name."' style='".$h_style."'>";
+        $a_sRet = "<textarea name='".$h_name."' id='".$h_name."' style='".$h_style."'>";
         //if ($h_act == 'e')
         //{
             $a_sRet .= $h_val;
@@ -305,6 +305,65 @@ function com_make_tag_option(
             //if ($h_act == 'e'){
                 //if ($a_result['idx'] == $h_val)
                 if ($a_result['m_name'] == $h_val)
+                {
+                    $a_sRet .= 'selected';
+                    $a_isFound = true;
+                    $h_selected = true;
+                    //echo '$h_selected:'.$h_selected;
+                }
+            //}
+            $a_sRet .= ">".$a_result['m_name']."</option>";
+        }
+        /*
+        if (($h_val != '') && ($a_isFound == false)) {
+            $a_sRet .= "<option value='".$h_val."'";
+            $a_sRet .= " selected>".$h_val."</option>";
+        }
+        */
+        $a_sRet .= "</select>";
+    
+    } catch (PDOException $e){
+        echo 'Error:'.$e->getMessage();
+        die();
+    }
+    
+    //$a_conn = null;
+    
+    return $a_sRet;
+}
+
+//optionタグ生成
+function com_make_tag_option2(
+        $h_act,
+        $h_val,
+        $h_name,
+        $h_table,
+        $h_style,
+        &$h_selected
+        )
+{
+    $a_sRet = "";
+    $h_selected = false;
+    
+    try{
+        //DBから契約情報取得
+        $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+        $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $a_sql = "SELECT * FROM ".$h_table." ORDER BY idx;";
+        //echo $a_sql;
+        $a_stmt = $a_conn->prepare($a_sql);
+        $a_stmt->execute();
+
+        $a_isFound = false;
+        
+        $a_sRet = "<select id='".$h_name."' name='".$h_name."' style='".$h_style."'>";
+
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            $a_sRet .= "<option value='".$a_result['idx']."'";
+            //if ($h_act == 'e'){
+                //if ($a_result['idx'] == $h_val)
+                if ($a_result['idx'] == $h_val)
                 {
                     $a_sRet .= 'selected';
                     $a_isFound = true;
@@ -429,5 +488,31 @@ function com_time_diff($time_from, $time_to, $mode)
     }else{
         return $dif_time;
     }
+}
+
+function com_make_where_session($h_mode, $h_where, $h_column, $h_sess, $h_table){
+    $a_where = "";
+    if (isset($h_sess)){
+        if ($h_sess != ""){
+            if ($h_mode == 1){
+                #text
+                $a_where .= "(".$h_column." LIKE '".$h_sess."%')";
+            }
+            elseif ($h_mode == 2){
+                #date
+                $a_where .= "(".$h_column."='".$h_sess."')";
+            }elseif ($h_mode == 3){
+                #option
+                if ($h_sess != 0){
+                    $a_where .= "(".$h_column."=(SELECT m_name FROM ".$h_table." WHERE (idx=".$h_sess.")))";
+                }
+            }
+
+            if (($h_where != "") && ($a_where != "")){
+                $a_where = " AND ".$a_where;
+            }
+        }
+    }
+    return $h_where.$a_where;
 }
 ?>
