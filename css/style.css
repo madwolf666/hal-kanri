@@ -373,8 +373,8 @@ footer .pr {
 #new dl{
 	padding-left: 15px;
 	margin-bottom: 15px;
-	height: 140px;	/*高さ*/
-	overflow: auto;	/*高さの設定を超えるとスクロールが自動で出る設定。全部表示させていたいならこの行と上の行を削除。*/
+	/*height: 140px;*/	/*高さ*/
+	/*overflow: auto;*/	/*高さの設定を超えるとスクロールが自動で出る設定。全部表示させていたいならこの行と上の行を削除。*/
 }
 /*日付設定*/
 #new dt {
