@@ -66,6 +66,7 @@ try{
     $a_sql .= " ON (t1.cr_id=t3.cr_id)";
 
     $a_where = "";
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10600', "");
     $a_where = com_make_where_session(3, $a_where, 't1.contract_number', 'f_contract_number_10600', "");
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10600', "");
     if ($a_where != ""){

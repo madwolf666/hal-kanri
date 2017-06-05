@@ -51,6 +51,7 @@ try{
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
 
     $a_where = "";
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10200', "");
     $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form']);
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10200', "");
     $a_where = com_make_where_session(2, $a_where, 't2.date_entering', 'f_date_entering_10200', "");
