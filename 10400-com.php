@@ -6,6 +6,16 @@
  * and open the template in the editor.
  */
 
+#Session
+$f_contract_number_10400 = "";
+$f_engineer_name_10400 = "";
+if (isset($_SESSION['f_contract_number_10400'])){
+    $f_contract_number_10400 = $_SESSION['f_contract_number_10400'];
+}
+if (isset($_SESSION['f_engineer_name_10400'])){
+    $f_engineer_name_10400 = $_SESSION['f_engineer_name_10400'];
+}
+
 $cr_id = "";
 $po_no = "";
 $contract_number = "";

@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 
+$(function () {
+    
+    //条件検索
+    $('#f_accounts_bai_previous_day_10300').datepicker({});
+    $('#f_payment_acceptance_date_10300').datepicker({});
+});
 
 function make_acceptance_ledger_list(h_pageNo)
 {

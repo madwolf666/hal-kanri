@@ -6,6 +6,48 @@
  * and open the template in the editor.
  */
 
+#Session
+$f_payment_contract_form_10200 = "";
+$f_engineer_name_10200 = "";
+$f_date_entering_10200 = "";
+$f_date_retire_10200 = "";
+$f_payment_settlement_paymentday_10200 = "";
+$f_date_modify_salary_10200 = "";
+$f_date_first_salary_10200 = "";
+$f_labor_contact_date_10200 = "";
+$f_labor_yayoi_changed_10200 = "";
+$f_labor_remarks_10200 = "";
+if (isset($_SESSION['f_payment_contract_form_10200'])){
+    $f_payment_contract_form_10200 = $_SESSION['f_payment_contract_form_10200'];
+}
+if (isset($_SESSION['f_engineer_name_10200'])){
+    $f_engineer_name_10200 = $_SESSION['f_engineer_name_10200'];
+}
+if (isset($_SESSION['f_date_entering_10200'])){
+    $f_date_entering_10200 = $_SESSION['f_date_entering_10200'];
+}
+if (isset($_SESSION['f_date_retire_10200'])){
+    $f_date_retire_10200 = $_SESSION['f_date_retire_10200'];
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10200'])){
+    $f_payment_settlement_paymentday_10200 = $_SESSION['f_payment_settlement_paymentday_10200'];
+}
+if (isset($_SESSION['f_date_modify_salary_10200'])){
+    $f_date_modify_salary_10200 = $_SESSION['f_date_modify_salary_10200'];
+}
+if (isset($_SESSION['f_date_first_salary_10200'])){
+    $f_date_first_salary_10200 = $_SESSION['f_date_first_salary_10200'];
+}
+if (isset($_SESSION['f_labor_contact_date_10200'])){
+    $f_labor_contact_date_10200 = $_SESSION['f_labor_contact_date_10200'];
+}
+if (isset($_SESSION['f_labor_yayoi_changed_10200'])){
+    $f_labor_yayoi_changed_10200 = $_SESSION['f_labor_yayoi_changed_10200'];
+}
+if (isset($_SESSION['f_labor_remarks_10200'])){
+    $f_labor_remarks_10200 = $_SESSION['f_labor_remarks_10200'];
+}
+
 $cr_id = "";
 
 $payment_contract_form = "";

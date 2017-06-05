@@ -4,6 +4,16 @@
  * and open the template in the editor.
  */
 
+$(function () {
+    
+    //条件検索
+    $('#f_date_entering_10200').datepicker({});
+    $('#f_date_retire_10200').datepicker({});
+    $('#f_payment_settlement_paymentday_10200').datepicker({});
+    $('#f_date_modify_salary_10200').datepicker({});
+    $('#f_date_first_salary_10200').datepicker({});
+    $('#f_labor_contact_date_10200').datepicker({});
+});
 
 function make_payroll_list(h_pageNo)
 {

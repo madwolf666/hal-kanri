@@ -6,6 +6,56 @@
  * and open the template in the editor.
  */
 
+#Session
+$f_contract_number_10300 = "";
+$f_engineer_number_10300 = "";
+$f_engineer_name_10300 = "";
+$f_customer_name_10300 = "";
+$f_claim_contract_form_10300 = "";
+$f_ag_no_10300 = "";
+$f_accounts_bai_previous_day_10300 = "";
+$f_accounts_actual_working_hours_10300 = "";
+$f_accounts_expenses_10300 = "";
+$f_payment_contract_form_10300 = "";
+$f_payment_acceptance_date_10300 = "";
+$f_payment_settlement_paymentday_10300 = "";
+if (isset($_SESSION['f_contract_number_10300'])){
+    $f_contract_number_10300 = $_SESSION['f_contract_number_10300'];
+}
+if (isset($_SESSION['f_engineer_number_10300'])){
+    $f_engineer_number_10300 = $_SESSION['f_engineer_number_10300'];
+}
+if (isset($_SESSION['f_engineer_name_10300'])){
+    $f_engineer_name_10300 = $_SESSION['f_engineer_name_10300'];
+}
+if (isset($_SESSION['f_customer_name_10300'])){
+    $f_customer_name_10300 = $_SESSION['f_customer_name_10300'];
+}
+if (isset($_SESSION['f_claim_contract_form_10300'])){
+    $f_claim_contract_form_10300 = $_SESSION['f_claim_contract_form_10300'];
+}
+if (isset($_SESSION['f_ag_no_10300'])){
+    $f_ag_no_10300 = $_SESSION['f_ag_no_10300'];
+}
+if (isset($_SESSION['f_accounts_bai_previous_day_10300'])){
+    $f_accounts_bai_previous_day_10300 = $_SESSION['f_accounts_bai_previous_day_10300'];
+}
+if (isset($_SESSION['f_accounts_actual_working_hours_10300'])){
+    $f_accounts_actual_working_hours_10300 = $_SESSION['f_accounts_actual_working_hours_10300'];
+}
+if (isset($_SESSION['f_accounts_expenses_10300'])){
+    $f_accounts_expenses_10300 = $_SESSION['f_accounts_expenses_10300'];
+}
+if (isset($_SESSION['f_payment_contract_form_10300'])){
+    $f_payment_contract_form_10300 = $_SESSION['f_payment_contract_form_10300'];
+}
+if (isset($_SESSION['f_payment_acceptance_date_10300'])){
+    $f_payment_acceptance_date_10300 = $_SESSION['f_payment_acceptance_date_10300'];
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10300'])){
+    $f_payment_settlement_paymentday_10300 = $_SESSION['f_payment_settlement_paymentday_10300'];
+}
+
 $cr_id = "";
 
 $contract_number = "";

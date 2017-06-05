@@ -71,12 +71,82 @@ if (!isset($_GET['mnu'])){
         header('Location: ./10107.php?ACT=e&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10200']:   //給与台帳
+        #POST
+        if (isset($_POST['f_payment_contract_form_10200'])){
+            $_SESSION['f_payment_contract_form_10200'] = $_POST['f_payment_contract_form_10200'];
+        }
+        if (isset($_POST['f_engineer_name_10200'])){
+        $_SESSION['f_engineer_name_10200'] = $_POST['f_engineer_name_10200'];
+        }
+        if (isset($_POST['f_date_entering_10200'])){
+            $_SESSION['f_date_entering_10200'] = $_POST['f_date_entering_10200'];
+        }
+        if (isset($_POST['f_date_retire_10200'])){
+            $_SESSION['f_date_retire_10200'] = $_POST['f_date_retire_10200'];
+        }
+        if (isset($_POST['f_payment_settlement_paymentday_10200'])){
+            $_SESSION['f_payment_settlement_paymentday_10200'] = $_POST['f_payment_settlement_paymentday_10200'];
+        }
+        if (isset($_POST['f_date_modify_salary_10200'])){
+            $_SESSION['f_date_modify_salary_10200'] = $_POST['f_date_modify_salary_10200'];
+        }
+        if (isset($_POST['f_date_first_salary_10200'])){
+            $_SESSION['f_date_first_salary_10200'] = $_POST['f_date_first_salary_10200'];
+        }
+        if (isset($_POST['f_labor_contact_date_10200'])){
+            $_SESSION['f_labor_contact_date_10200'] = $_POST['f_labor_contact_date_10200'];
+        }
+        if (isset($_POST['f_labor_yayoi_changed_10200'])){
+            $_SESSION['f_labor_yayoi_changed_10200'] = $_POST['f_labor_yayoi_changed_10200'];
+        }
+        if (isset($_POST['f_labor_remarks_10200'])){
+            $_SESSION['f_labor_remarks_10200'] = $_POST['f_labor_remarks_10200'];
+        }
+
         header('Location: ./10200.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10201']:   //給与台帳：検索
         header('Location: ./10201.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10300']:   //検収台帳
+        #POST
+        if (isset($_POST['f_contract_number_10300'])){
+            $_SESSION['f_contract_number_10300'] = $_POST['f_contract_number_10300'];
+        }
+        if (isset($_POST['f_engineer_number_10300'])){
+            $_SESSION['f_engineer_number_10300'] = $_POST['f_engineer_number_10300'];
+        }
+        if (isset($_POST['f_engineer_name_10300'])){
+            $_SESSION['f_engineer_name_10300'] = $_POST['f_engineer_name_10300'];
+        }
+        if (isset($_POST['f_customer_name_10300'])){
+            $_SESSION['f_customer_name_10300'] = $_POST['f_customer_name_10300'];
+        }
+        if (isset($_POST['f_claim_contract_form_10300'])){
+            $_SESSION['f_claim_contract_form_10300'] = $_POST['f_claim_contract_form_10300'];
+        }
+        if (isset($_POST['f_ag_no_10300'])){
+            $_SESSION['f_ag_no_10300'] = $_POST['f_ag_no_10300'];
+        }
+        if (isset($_POST['f_accounts_bai_previous_day_10300'])){
+            $_SESSION['f_accounts_bai_previous_day_10300'] = $_POST['f_accounts_bai_previous_day_10300'];
+        }
+        if (isset($_POST['f_accounts_actual_working_hours_10300'])){
+            $_SESSION['f_accounts_actual_working_hours_10300'] = $_POST['f_accounts_actual_working_hours_10300'];
+        }
+        if (isset($_POST['f_accounts_expenses_10300'])){
+            $_SESSION['f_accounts_expenses_10300'] = $_POST['f_accounts_expenses_10300'];
+        }
+        if (isset($_POST['f_payment_contract_form_10300'])){
+            $_SESSION['f_payment_contract_form_10300'] = $_POST['f_payment_contract_form_10300'];
+        }
+        if (isset($_POST['f_payment_acceptance_date_10300'])){
+            $_SESSION['f_payment_acceptance_date_10300'] = $_POST['f_payment_acceptance_date_10300'];
+        }
+        if (isset($_POST['f_payment_settlement_paymentday_10300'])){
+            $_SESSION['f_payment_settlement_paymentday_10300'] = $_POST['f_payment_settlement_paymentday_10300'];
+        }
+        
         header('Location: ./10300.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10301']:   //検収台帳：検索
@@ -264,6 +334,14 @@ cr_id
         header('Location: ./10300.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10400']:   //注文書台帳
+        #POST
+        if (isset($_POST['f_contract_number_10400'])){
+            $_SESSION['f_contract_number_10400'] = $_POST['f_contract_number_10400'];
+        }
+        if (isset($_POST['f_engineer_name_10400'])){
+            $_SESSION['f_engineer_name_10400'] = $_POST['f_engineer_name_10400'];
+        }
+
         header('Location: ./10400.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10401']:   //注文書台帳：検索
@@ -276,6 +354,14 @@ cr_id
         header('Location: ./10403.php?ACT='.$_GET['ACT'].'&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10500']:   //契約書台帳
+        #POST
+        if (isset($_POST['f_contract_number_10500'])){
+            $_SESSION['f_contract_number_10500'] = $_POST['f_contract_number_10500'];
+        }
+        if (isset($_POST['f_engineer_name_10500'])){
+            $_SESSION['f_engineer_name_10500'] = $_POST['f_engineer_name_10500'];
+        }
+
         header('Location: ./10500.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10501']:   //契約書台帳：検索
@@ -291,6 +377,14 @@ cr_id
         header('Location: ./10504.php?ACT='.$_GET['ACT'].'&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10600']:   //派遣元台帳
+        #POST
+        if (isset($_POST['f_contract_number_10600'])){
+            $_SESSION['f_contract_number_10600'] = $_POST['f_contract_number_10600'];
+        }
+        if (isset($_POST['f_engineer_name_10600'])){
+            $_SESSION['f_engineer_name_10600'] = $_POST['f_engineer_name_10600'];
+        }
+
         header('Location: ./10600.php');
         break;
     case $GLOBALS['g_MENU_CONTRACT_10601']:   //派遣元台帳：検索
