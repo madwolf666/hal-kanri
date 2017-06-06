@@ -216,6 +216,7 @@ function hide_popup()
 }
 
 var g_input_click = false;
+var g_input_completed = false;
 
 //focus
 function after_focus(h_field, h_id)
@@ -223,15 +224,35 @@ function after_focus(h_field, h_id)
     $("#i_" + h_field + h_id).focus();
 }
 
-//reset input 
-function reset_input(h_field, h_id)
+//set input 
+function set_input(h_field, h_id, h_kind)
 {
-    //alert(h_field + "," + h_id );
-    var a_val = $("#i_" + h_field + h_id).val();
-    $("#" + h_field + h_id).empty().append(a_val);
-
-    g_input_click = false;
+    //alert('set_input(h_kind):' + h_kind);
+    if (h_kind == 2){
+       //alert('chappy');
+        $(function() {
+            alert($('#i_' + h_field + h_id).val());
+            $('#i_' + h_field + h_id).datepicker({});
+            $('#i_' + h_field + h_id).datepicker();
+        });
+    }
 }
+
+//reset input 
+function reset_input(h_field, h_id, h_kind, h_val)
+{
+    //alert(h_field + "," + h_id + "," + h_kind + "," + h_val);
+    //var a_val = $("#i_" + h_field + h_id).val();
+    if (h_kind != 2){
+        if (g_input_completed == false){
+            $("#" + h_field + h_id).empty().append(h_val);
+        }
+        g_input_click = false;
+    }
+
+    g_input_completed = false;
+}
+
 //入力フィールド作成
 function make_input_text(h_cr_id, h_field, h_id, h_kind)
 {
@@ -254,7 +275,10 @@ function make_input_text(h_cr_id, h_field, h_id, h_kind)
     }
     a_str += '" style="width: 96%;"';
     a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ');"';
-    a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\');"';
+    //a_str += ' onfocus="set_input(\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ');"';
+    //if (h_kind != 2){
+        a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ',\'' + a_val + '\');"';
+    //}
     a_str += '>';
     //alert(a_str);
     $("#" + h_field + h_id).empty().append(a_str);
@@ -262,7 +286,24 @@ function make_input_text(h_cr_id, h_field, h_id, h_kind)
     //alert($("#" + h_field + h_id).text());
     
     if (h_kind == 2){
-        $('#i_' + h_field + h_id).datepicker({autoclose: 'true'});
+        //$('#i_' + h_field + h_id).datepicker({});
+        //$('#i_' + h_field + h_id).datepicker("setDate", a_val);
+        //$('#i_' + h_field + h_id).off("blur");
+        /**/
+        $('#i_' + h_field + h_id).datepicker({
+            onSelect:function(dataText){
+                //alert(dataText);
+                //$('#i_' + h_field + h_id).val(dataText);
+                //$('#i_' + h_field + h_id).on("blur", function(){
+                //    alert('');
+                //    reset_input('\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ',\'' + a_val + '\'');
+                //});
+                //g_input_click = false;
+                //g_input_completed = false;
+                $('#i_' + h_field + h_id).focus();
+            }
+        });
+        /**/
     }
     
     g_input_click = true;
@@ -289,7 +330,7 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id, h_kind)
     }
     a_str += '" style="width: 96%;"';
     a_str += ' onKeyPress="check_input_key_enter(window.event.keyCode, \'' + h_cr_id + '\',\'' + h_sub_id + '\',\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ');"';
-    a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id + '\');"';
+    a_str += ' onblur="reset_input(\'' + h_field + '\',\'' + h_id  + '\',' + h_kind + ',\'' + a_val + '\');"';
     a_str += '>';
     //alert(a_str);
     $("#" + h_field + h_id).empty().append(a_str);
@@ -297,7 +338,12 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id, h_kind)
     //alert($("#" + h_field + h_id).text());
      
     if (h_kind == 2){
-        $('#i_' + h_field + h_id).datepicker({autoclose: 'true'});
+        //$('#i_' + h_field + h_id).datepicker({autoclose: 'true'});
+        $('#i_' + h_field + h_id).datepicker({
+            onSelect:function(dataText){
+                $('#i_' + h_field + h_id).focus();
+            }
+        });
     }
 
     g_input_click = true;

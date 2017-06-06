@@ -237,6 +237,7 @@ try{
         $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$a_result['author']."</td>";
         
         $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>";
+        #echo $a_result['cr_id']."<br>";
         $a_sRet_L .= "<a href='#' onclick='choice_contract_report_method(\"".$a_result['cr_id']."\");'>".$a_result['engineer_number']."</a>";
         $a_sRet_L .= "</td>";
         

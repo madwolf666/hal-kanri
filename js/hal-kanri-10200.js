@@ -73,6 +73,7 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
             success: function(data, dataType){
                 //alert(data);
                 if (data == 'OK') {
+                    g_input_completed = true;
                     //$(h_name).css("background-color","#ffffff");
                 } else if ((data == 'NG')) {
                     //$(h_name).css("background-color","#ffccff");
