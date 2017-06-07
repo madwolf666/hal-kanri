@@ -101,16 +101,16 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(31, $a_row, $payment_settlement_closingday);
         $obj_sheet->setCellValueByColumnAndRow(32, $a_row, $payment_settlement_paymentday);
         
-        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $payment_absence_deduction_subject);
-        $obj_sheet->setCellValueByColumnAndRow(34, $a_row, $remarks);
-        $obj_sheet->setCellValueByColumnAndRow(35, $a_row, $claim_contract_form);
+        #$obj_sheet->setCellValueByColumnAndRow(33, $a_row, $payment_absence_deduction_subject);
+        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $remarks);
+        $obj_sheet->setCellValueByColumnAndRow(34, $a_row, $claim_contract_form);
         
-        $obj_sheet->setCellValueByColumnAndRow(36, $a_row, $remarks1);
-        $obj_sheet->setCellValueByColumnAndRow(37, $a_row, $remarks2);
-        $obj_sheet->setCellValueByColumnAndRow(38, $a_row, $remarks3);
-        $obj_sheet->setCellValueByColumnAndRow(39, $a_row, $remarks4);
-        $obj_sheet->setCellValueByColumnAndRow(40, $a_row, $inheriting);
-        $obj_sheet->setCellValueByColumnAndRow(41, $a_row, $sending_back);
+        $obj_sheet->setCellValueByColumnAndRow(35, $a_row, $remarks1);
+        $obj_sheet->setCellValueByColumnAndRow(36, $a_row, $remarks2);
+        $obj_sheet->setCellValueByColumnAndRow(37, $a_row, $remarks3);
+        $obj_sheet->setCellValueByColumnAndRow(38, $a_row, $remarks4);
+        $obj_sheet->setCellValueByColumnAndRow(39, $a_row, $inheriting);
+        $obj_sheet->setCellValueByColumnAndRow(40, $a_row, $sending_back);
         
         $a_row++;
     }

@@ -54,11 +54,16 @@ try{
 ,t2.reserve6
 ,t2.reserve7
 ,t2.guide_ships
+,t3.sex
+,t3.skill_type
     ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
+    $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10500', "");
@@ -125,10 +130,11 @@ try{
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>抵触日(事)</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>組織単位</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>紛争防止措置</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+    #$a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>苦情の処理・申出先(派遣元)</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>苦情の処理・申出先(派遣先)</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>派遣先責任者<br>電話番号</td>";
+    /*
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
@@ -136,6 +142,7 @@ try{
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
+     */
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>派遣の案内発送</td>";
     $a_sRet .= "                    </tr>";
     
@@ -316,7 +323,7 @@ try{
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'contact_date_brn',$a_rec,2).">".$contact_date_brn."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'organization',$a_rec,1).">".$organization."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'conflict_prevention',$a_rec,1).">".$conflict_prevention."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover'>".""."</td>";
+        #$a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover'>".""."</td>";
 
         //入力あり
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_position1',$a_rec,1).">".$chs_position1."</td>";
@@ -327,6 +334,7 @@ try{
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_responsible_tel',$a_rec,1).">".$dd_responsible_tel."</td>";
 
         //入力あり
+        /*
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'reserve1',$a_rec,1).">".$reserve1."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'reserve2',$a_rec,1).">".$reserve2."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'reserve3',$a_rec,1).">".$reserve3."</td>";
@@ -334,7 +342,7 @@ try{
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'reserve5',$a_rec,1).">".$reserve5."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'reserve6',$a_rec,1).">".$reserve6."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'reserve7',$a_rec,1).">".$reserve7."</td>";
-
+        */
         //入力あり
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'guide_ships',$a_rec,1).">".$guide_ships."</td>";
 

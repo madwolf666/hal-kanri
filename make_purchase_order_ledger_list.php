@@ -87,7 +87,7 @@ try{
     $a_sRet .= "                <table class='tbl_list' style='width: 4600px;'>";
     $a_sRet .= "                    <tr>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px; height: 25px;' nowrap>案件情報</td>";
-    $a_sRet .= "                        <td colspan='29' class='td_title2' style='' nowrap>注文内容</td>";
+    $a_sRet .= "                        <td colspan='28' class='td_title2' style='' nowrap>注文内容</td>";
     $a_sRet .= "                        <td colspan='6' class='td_title2' style='' nowrap>注文書備考欄</td>";
     $a_sRet .= "                    </tr>";
 
@@ -102,7 +102,7 @@ try{
     $a_sRet .= "                        <td colspan='6' class='td_title2' style='' nowrap>期中退場</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='' nowrap>時間刻み</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='' nowrap>決済</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>消費税区分</td>";
+    #$a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>消費税区分</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>備考</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>契約形態</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>その他1</td>";
@@ -136,7 +136,7 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>日付</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>月次</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>締日</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>支払日</td>";
     $a_sRet .= "                    </tr>";
     $a_sRet .= "                </table>";
     $a_sRet .= "            </div>";
@@ -219,7 +219,7 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_hourly_monthly."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_settlement_closingday."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_settlement_paymentday."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_absence_deduction_subject."</td>";
+        #$a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_absence_deduction_subject."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$remarks."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_contract_form."</td>";
         

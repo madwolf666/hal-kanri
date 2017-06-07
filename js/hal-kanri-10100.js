@@ -808,8 +808,18 @@ function calc_pay_person()
         $('#opt_tax_withholding').val(0);
     } else if ((a_contract_form == '正') || (a_contract_form == '契')) {
         $('#opt_tax_withholding').val(1);
+        //事業所名・事業所名を入力不可とし、エンジニア名・フリガナを設定
+        $('#txt_jigyosya_name').val($('#txt_engineer_name').val());
+        $('#txt_jigyosya_kana').val($('#txt_engineer_kana').val());
+        $('#txt_jigyosya_name').attr('readonly',true);
+        $('#txt_jigyosya_kana').attr('readonly',true);
     } else {
         $('#opt_tax_withholding').val(2);
+        //事業所名・事業所名を入力可とし、空を設定
+        $('#txt_jigyosya_name').val('');
+        $('#txt_jigyosya_kana').val('');
+        $('#txt_jigyosya_name').attr('readonly',false);
+        $('#txt_jigyosya_kana').attr('readonly',false);
     }
     
     //契約開始日⇒請求サイド契約開始日
@@ -1278,8 +1288,15 @@ function get_engineer_info()
                 var a_val = data.split("\t");
                 $('#txt_engineer_name').val(a_val[0]);
                 $('#txt_engineer_kana').val(a_val[1]);
-                $('#txt_jigyosya_name').val(a_val[0]);
-                $('#txt_jigyosya_kana').val(a_val[1]);
+                
+                if (a_contract_form == '') {
+                } else if ((a_contract_form == '正') || (a_contract_form == '契')) {
+                    //事業所名・事業所名を入力不可とし、エンジニア名・フリガナを設定
+                    $('#txt_jigyosya_name').val(a_val[0]);
+                    $('#txt_jigyosya_kana').val(a_val[1]);
+                } else {
+                    //事業所名・事業所名を入力可とし、空を設定
+                }
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

@@ -54,11 +54,16 @@ if (isset($_GET['NO'])) {
     ,t2.reserve6
     ,t2.reserve7
     ,t2.guide_ships
+    ,t3.sex
+    ,t3.skill_type
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
         $a_sql .= " LEFT JOIN ";
         $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
         $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
+        $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
         $a_sql .= " WHERE (t1.cr_id=:cr_id);";
 
         $a_stmt = $a_conn->prepare($a_sql);
@@ -91,6 +96,7 @@ $obj_sheet->setCellValue("Z1", $ag_no);
 $obj_sheet->setCellValue("E4", $engneer_name_phonetic);
 
 $obj_sheet->setCellValue("E5", $engineer_name);
+$obj_sheet->setCellValue("U5", $sex);
 
 com_setValue_Date($person_birthday,  $obj_sheet, "X5", "yyyy年MM月dd日");
 
@@ -99,6 +105,7 @@ $obj_sheet->setCellValue("E12", $person_address);
 
 com_setValue_Date($claim_agreement_start,  $obj_sheet, "E15", "yyyy年MM月dd日");
 com_setValue_Date($claim_agreement_end,  $obj_sheet, "E17", "yyyy年MM月dd日");
+$obj_sheet->setCellValue("E19", $skill_type);
 
 $obj_sheet->setCellValue("W15", $payment_normal_unit_price_2);
 $obj_sheet->setCellValue("W23", $payment_normal_lower_limit_2);

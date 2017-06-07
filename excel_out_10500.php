@@ -149,15 +149,15 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(57, $a_row, $contact_date_brn);
         $obj_sheet->setCellValueByColumnAndRow(58, $a_row, $organization);
         $obj_sheet->setCellValueByColumnAndRow(59, $a_row, $conflict_prevention);
-        $obj_sheet->setCellValueByColumnAndRow(60, $a_row, $thing1);
+        #$obj_sheet->setCellValueByColumnAndRow(60, $a_row, $thing1);
 
-        $obj_sheet->setCellValueByColumnAndRow(61, $a_row, $chs_position1);
-        $obj_sheet->setCellValueByColumnAndRow(62, $a_row, $chs_name1);
-        $obj_sheet->setCellValueByColumnAndRow(63, $a_row, $chs_position2);
-        $obj_sheet->setCellValueByColumnAndRow(64, $a_row, $chs_name2);
-        $obj_sheet->setCellValueByColumnAndRow(65, $a_row, $chs_tel2);
-        $obj_sheet->setCellValueByColumnAndRow(66, $a_row, $dd_responsible_tel);
-        
+        $obj_sheet->setCellValueByColumnAndRow(60, $a_row, $chs_position1);
+        $obj_sheet->setCellValueByColumnAndRow(61, $a_row, $chs_name1);
+        $obj_sheet->setCellValueByColumnAndRow(62, $a_row, $chs_position2);
+        $obj_sheet->setCellValueByColumnAndRow(63, $a_row, $chs_name2);
+        $obj_sheet->setCellValueByColumnAndRow(64, $a_row, $chs_tel2);
+        $obj_sheet->setCellValueByColumnAndRow(65, $a_row, $dd_responsible_tel);
+        /*
         $obj_sheet->setCellValueByColumnAndRow(67, $a_row, $reserve1);
         $obj_sheet->setCellValueByColumnAndRow(68, $a_row, $reserve2);
         $obj_sheet->setCellValueByColumnAndRow(69, $a_row, $reserve3);
@@ -165,8 +165,8 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(71, $a_row, $reserve5);
         $obj_sheet->setCellValueByColumnAndRow(72, $a_row, $reserve6);
         $obj_sheet->setCellValueByColumnAndRow(73, $a_row, $reserve7);
-
-        $obj_sheet->setCellValueByColumnAndRow(74, $a_row, $guide_ships);
+        */
+        $obj_sheet->setCellValueByColumnAndRow(66, $a_row, $guide_ships);
 
         $a_row++;
     }

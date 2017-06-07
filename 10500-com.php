@@ -111,6 +111,9 @@ $reserve7 = "";
 
 $guide_ships = "";
 
+$sex = "";
+$skill_type = "";
+
 function set_10500_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];
@@ -207,6 +210,10 @@ function set_10500_fromDB($a_result)
     $GLOBALS['reserve7'] = $a_result['reserve7'];
 
     $GLOBALS['guide_ships'] = $a_result['guide_ships'];
+    
+    $GLOBALS['sex'] = $a_result['sex'];
+    $GLOBALS['skill_type'] = $a_result['skill_type'];
+
 }
 
 ?>

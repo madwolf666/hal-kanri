@@ -895,7 +895,7 @@ $a_selected = false;
   <!-- 右2番目のテーブル -->
         <table border="1" rules="all" width=340 height=105>
             <tr>
-		<td colspan="4" class="gray" height=15 nowrap="true">事業者名</td>
+		<td colspan="4" class="yellow" height=15 nowrap="true">事業者名</td>
                 <td colspan="9">
                     <?php
                         if ($a_act == '') {
@@ -919,7 +919,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="2" class="gray"nowrap="true">事業者名ﾌﾘｶﾞﾅ</td>
+                <td colspan="2" class="yellow"nowrap="true">事業者名ﾌﾘｶﾞﾅ</td>
                 <td colspan="6">
                     <?php
                         if ($a_act == '') {

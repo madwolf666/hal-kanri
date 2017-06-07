@@ -112,8 +112,8 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(18, $a_row, $accounts_tax_meter_include);
         $obj_sheet->setCellValueByColumnAndRow(19, $a_row, $accounts_invoicing);
         
-        $obj_sheet->setCellValueByColumnAndRow(20, $a_row, $engineer_name);
-        $obj_sheet->setCellValueByColumnAndRow(21, $a_row, $engneer_name_phonetic);
+        $obj_sheet->setCellValueByColumnAndRow(20, $a_row, $business_name);
+        $obj_sheet->setCellValueByColumnAndRow(21, $a_row, $business_name_phonetic);
         $obj_sheet->setCellValueByColumnAndRow(22, $a_row, $payment_contract_form);
         $obj_sheet->setCellValueByColumnAndRow(23, $a_row, $social_insurance);
         $obj_sheet->setCellValueByColumnAndRow(24, $a_row, $payment_absence_deduction_subject);

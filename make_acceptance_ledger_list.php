@@ -244,8 +244,8 @@ try{
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_tax_meter_include',$a_rec,1).">".$accounts_tax_meter_include."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_invoicing',$a_rec,1).">".$accounts_invoicing."</td>";
 
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engineer_name."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engneer_name_phonetic."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$business_name."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$business_name_phonetic."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_contract_form."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$social_insurance."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_absence_deduction_subject."</td>";

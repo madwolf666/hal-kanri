@@ -68,6 +68,8 @@ $subject = "";
 $claim_agreement_start = "";
 $claim_agreement_end = "";
 
+$business_name = "";
+$business_name_phonetic = "";
 $payment_contract_form = "";
 $social_insurance = "";
 $payment_absence_deduction_subject = "";
@@ -129,6 +131,8 @@ function set_10300_fromDB($a_result)
     $GLOBALS['claim_agreement_start'] = str_replace("-", "/", $a_result['claim_agreement_start']);
     $GLOBALS['claim_agreement_end'] = str_replace("-", "/", $a_result['claim_agreement_end']);
 
+    $GLOBALS['business_name'] = $a_result['business_name'];
+    $GLOBALS['business_name_phonetic'] = $a_result['business_name_phonetic'];
     $GLOBALS['payment_contract_form'] = $a_result['payment_contract_form'];
     $GLOBALS['social_insurance'] = $a_result['social_insurance'];
     $GLOBALS['payment_absence_deduction_subject'] = $a_result['payment_absence_deduction_subject'];

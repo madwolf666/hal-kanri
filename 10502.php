@@ -58,11 +58,16 @@ if (isset($_GET['NO'])) {
     ,t2.reserve6
     ,t2.reserve7
     ,t2.guide_ships
+    ,t3.sex
+    ,t3.skill_type
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
         $a_sql .= " LEFT JOIN ";
         $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
         $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
+        $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
         $a_sql .= " WHERE (t1.cr_id=:cr_id);";
 
         $a_stmt = $a_conn->prepare($a_sql);
@@ -121,7 +126,7 @@ if (isset($_GET['NO'])) {
 	<tr>
             <td height=40>氏名</td>
             <td colspan="8"><?php echo $engineer_name; ?></td>
-            <td colspan="4"><font color="#ff0000">男</font></td>
+            <td colspan="4"><?php echo $sex; ?></td>
             <td colspan="4">
             <?php
                 if ($a_act == '') {
@@ -168,7 +173,7 @@ if (isset($_GET['NO'])) {
 	</tr>
 	<tr>
             <td  rowspan="2">従事する<br>業務の種類</td>
-            <td class="remarks" rowspan="2" colspan="8"><font color="#ff0000">システム開発</font></td>
+            <td class="remarks" rowspan="2" colspan="8"><?php echo $skill_type; ?></td>
             <td colspan="4">控除単価</td>
             <td class="remarksR" colspan="4"><?php echo com_db_number_format($payment_normal_deduction_unit_price_2); ?>円</td>
 	</tr>
