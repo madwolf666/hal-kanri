@@ -235,13 +235,13 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$break_end."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date1',$a_rec,1).">".$chs_date1."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date1',$a_rec,2).">".$chs_date1."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'chs_status1',$a_rec,1).">".$chs_status1."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date2',$a_rec,1).">".$chs_date2."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date2',$a_rec,2).">".$chs_date2."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'chs_status2',$a_rec,1).">".$chs_status2."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date3',$a_rec,1).">".$chs_date3."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date3',$a_rec,2).">".$chs_date3."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'chs_status3',$a_rec,1).">".$chs_status3."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date4',$a_rec,1).">".$chs_date4."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_date4',$a_rec,2).">".$chs_date4."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'chs_status4',$a_rec,1).">".$chs_status4."</td>";
         
         //入力あり
@@ -253,20 +253,20 @@ try{
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_responsible_name',$a_rec,1).">".$dd_responsible_name."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date1',$a_rec,1).">".$employment_date1."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date1',$a_rec,2).">".$employment_date1."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'employment_status1',$a_rec,1).">".$employment_status1."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date2',$a_rec,1).">".$employment_date2."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date2',$a_rec,2).">".$employment_date2."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'employment_status2',$a_rec,1).">".$employment_status2."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date3',$a_rec,1).">".$employment_date3."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date3',$a_rec,2).">".$employment_date3."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'employment_status3',$a_rec,1).">".$employment_status3."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date4',$a_rec,1).">".$employment_date4."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date4',$a_rec,2).">".$employment_date4."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'employment_status4',$a_rec,1).">".$employment_status4."</td>";
 
         //入力あり
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_worker_name',$a_rec,1).">".$dd_worker_name."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_worker_business',$a_rec,1).">".$dd_worker_business."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_worker_holiday_start',$a_rec,1).">".$dd_worker_holiday_start."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_worker_holiday_end',$a_rec,1).">".$dd_worker_holiday_end."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_worker_holiday_start',$a_rec,2).">".$dd_worker_holiday_start."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_worker_holiday_end',$a_rec,2).">".$dd_worker_holiday_end."</td>";
 
         //入力あり
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_insurance',$a_rec,1).">".$employment_insurance."</td>";

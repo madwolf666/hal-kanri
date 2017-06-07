@@ -134,11 +134,11 @@ function set_10200_fromDB($a_result)
     $GLOBALS['employ_num'] = $a_result['employ_num'];
     $GLOBALS['employ_form'] = $a_result['employ_form'];
     $GLOBALS['employ_no'] = $a_result['employ_no'];
-    $GLOBALS['date_entering'] = $a_result['date_entering'];
-    $GLOBALS['date_retire'] = $a_result['date_retire'];
+    $GLOBALS['date_entering'] = com_replace_toDate($a_result['date_entering']);
+    $GLOBALS['date_retire'] = com_replace_toDate($a_result['date_retire']);
     $GLOBALS['yayoi_group'] = $a_result['yayoi_group'];
-    $GLOBALS['date_modify_salary'] = $a_result['date_modify_salary'];
-    $GLOBALS['date_first_salary'] = $a_result['date_first_salary'];
+    $GLOBALS['date_modify_salary'] = com_replace_toDate($a_result['date_modify_salary']);
+    $GLOBALS['date_first_salary'] = com_replace_toDate($a_result['date_first_salary']);
     $GLOBALS['status_employ_insurance'] = $a_result['status_employ_insurance'];
     $GLOBALS['status_compensation_insurance'] = $a_result['status_compensation_insurance'];
     $GLOBALS['status_social_insurance'] = $a_result['status_social_insurance'];
@@ -146,7 +146,7 @@ function set_10200_fromDB($a_result)
     $GLOBALS['tax_dependents'] = $a_result['tax_dependents'];
     $GLOBALS['tax_year_end_adjustment'] = $a_result['tax_year_end_adjustment'];
     $GLOBALS['labor_managerial_position'] = $a_result['labor_managerial_position'];
-    $GLOBALS['labor_contact_date'] = $a_result['labor_contact_date'];
+    $GLOBALS['labor_contact_date'] = com_replace_toDate($a_result['labor_contact_date']);
     $GLOBALS['labor_yayoi_changed'] = $a_result['labor_yayoi_changed'];
     $GLOBALS['labor_remarks'] = $a_result['labor_remarks'];
     $GLOBALS['labor_question'] = $a_result['labor_question'];

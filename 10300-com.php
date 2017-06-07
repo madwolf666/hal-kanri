@@ -141,7 +141,7 @@ function set_10300_fromDB($a_result)
     }
     $GLOBALS['accounts_estimate_no'] = $a_result['accounts_estimate_no'];
     $GLOBALS['accounts_contract_purchase_no'] = $a_result['accounts_contract_purchase_no'];
-    $GLOBALS['accounts_bai_previous_day'] = $a_result['accounts_bai_previous_day'];
+    $GLOBALS['accounts_bai_previous_day'] = com_replace_toDate($a_result['accounts_bai_previous_day']);
     $GLOBALS['accounts_sales_will_amount'] = $a_result['accounts_sales_will_amount'];
     $GLOBALS['accounts_working_hours_manage'] = $a_result['accounts_working_hours_manage'];
     $GLOBALS['accounts_actual_working_hours'] = $a_result['accounts_actual_working_hours'];
@@ -151,7 +151,7 @@ function set_10300_fromDB($a_result)
     $GLOBALS['accounts_tax_meter_include'] = $a_result['accounts_tax_meter_include'];
     $GLOBALS['accounts_invoicing'] = $a_result['accounts_invoicing'];
     $GLOBALS['ordering_purchase_no'] = $a_result['ordering_purchase_no'];
-    $GLOBALS['payment_acceptance_date'] = $a_result['payment_acceptance_date'];
+    $GLOBALS['payment_acceptance_date'] = com_replace_toDate($a_result['payment_acceptance_date']);
     $GLOBALS['payment_schedule_amount'] = $a_result['payment_schedule_amount'];
     $GLOBALS['payment_actual_working_hours'] = $a_result['payment_actual_working_hours'];
     $GLOBALS['payment_actual_amount_money'] = $a_result['payment_actual_amount_money'];

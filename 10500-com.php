@@ -116,7 +116,7 @@ function set_10500_fromDB($a_result)
     $GLOBALS['cr_id'] = $a_result['cr_id'];
     $GLOBALS['ag_no'] = $a_result['ag_no'];
     $GLOBALS['contract_number'] = $a_result['contract_number'];
-    $GLOBALS['publication'] = $a_result['publication'];
+    $GLOBALS['publication'] = com_replace_toDate($a_result['publication']);
     
     $GLOBALS['engineer_number'] = $a_result['engineer_number'];
     $GLOBALS['engineer_name'] = $a_result['engineer_name'];
@@ -181,12 +181,12 @@ function set_10500_fromDB($a_result)
     
     $GLOBALS['person_post_no'] = $a_result['person_post_no'];
     $GLOBALS['person_address'] = $a_result['person_address'];
-    $GLOBALS['person_birthday'] = $a_result['person_birthday'];
+    $GLOBALS['person_birthday'] = com_replace_toDate($a_result['person_birthday']);
 
     //3カラムは何？
     
-    $GLOBALS['contact_date_org'] = $a_result['contact_date_org'];
-    $GLOBALS['contact_date_brn'] = $a_result['contact_date_brn'];
+    $GLOBALS['contact_date_org'] = com_replace_toDate($a_result['contact_date_org']);
+    $GLOBALS['contact_date_brn'] = com_replace_toDate($a_result['contact_date_brn']);
     $GLOBALS['organization'] = $a_result['organization'];
     $GLOBALS['conflict_prevention'] = $a_result['conflict_prevention'];
     $GLOBALS['thing1'] = $a_result['thing1'];

@@ -97,13 +97,13 @@ function set_10600_fromDB($a_result)
     $GLOBALS['break_start'] = substr($a_result['break_start'], 0, 5);
     $GLOBALS['break_end'] = substr($a_result['break_end'], 0, 5);
 
-    $GLOBALS['chs_date1'] = $a_result['chs_date1'];
+    $GLOBALS['chs_date1'] = com_replace_toDate($a_result['chs_date1']);
     $GLOBALS['chs_status1'] = $a_result['chs_status1'];
-    $GLOBALS['chs_date2'] = $a_result['chs_date2'];
+    $GLOBALS['chs_date2'] = com_replace_toDate($a_result['chs_date2']);
     $GLOBALS['chs_status2'] = $a_result['chs_status2'];
-    $GLOBALS['chs_date3'] = $a_result['chs_date3'];
+    $GLOBALS['chs_date3'] = com_replace_toDate($a_result['chs_date3']);
     $GLOBALS['chs_status3'] = $a_result['chs_status3'];
-    $GLOBALS['chs_date4'] = $a_result['chs_date4'];
+    $GLOBALS['chs_date4'] = com_replace_toDate($a_result['chs_date4']);
     $GLOBALS['chs_status4'] = $a_result['chs_status4'];
 
     $GLOBALS['dm_responsible_position'] = $a_result['dm_responsible_position'];
@@ -112,19 +112,19 @@ function set_10600_fromDB($a_result)
     $GLOBALS['dd_responsible_position'] = $a_result['dd_responsible_position'];
     $GLOBALS['dd_responsible_name'] = $a_result['dd_responsible_name'];
 
-    $GLOBALS['employment_date1'] = $a_result['employment_date1'];
+    $GLOBALS['employment_date1'] = com_replace_toDate($a_result['employment_date1']);
     $GLOBALS['employment_status1'] = $a_result['employment_status1'];
-    $GLOBALS['employment_date2'] = $a_result['employment_date2'];
+    $GLOBALS['employment_date2'] = com_replace_toDate($a_result['employment_date2']);
     $GLOBALS['employment_status2'] = $a_result['employment_status2'];
-    $GLOBALS['employment_date3'] = $a_result['employment_date3'];
+    $GLOBALS['employment_date3'] = com_replace_toDate($a_result['employment_date3']);
     $GLOBALS['employment_status3'] = $a_result['employment_status3'];
-    $GLOBALS['employment_date4'] = $a_result['employment_date4'];
+    $GLOBALS['employment_date4'] = com_replace_toDate($a_result['employment_date4']);
     $GLOBALS['employment_status4'] = $a_result['employment_status4'];
 
     $GLOBALS['dd_worker_name'] = $a_result['dd_worker_name'];
     $GLOBALS['dd_worker_business'] = $a_result['dd_worker_business'];
-    $GLOBALS['dd_worker_holiday_start'] = $a_result['dd_worker_holiday_start'];
-    $GLOBALS['dd_worker_holiday_end'] = $a_result['dd_worker_holiday_end'];
+    $GLOBALS['dd_worker_holiday_start'] = com_replace_toDate($a_result['dd_worker_holiday_start']);
+    $GLOBALS['dd_worker_holiday_end'] = com_replace_toDate($a_result['dd_worker_holiday_end']);
 
     $GLOBALS['employment_insurance'] = $a_result['employment_insurance'];
     $GLOBALS['health_insurance'] = $a_result['health_insurance'];

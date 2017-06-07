@@ -233,7 +233,7 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$ag_no."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_bai_previous_day',$a_rec,1).">".$accounts_bai_previous_day."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_bai_previous_day',$a_rec,2).">".$accounts_bai_previous_day."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_sales_will_amount',$a_rec,1).">".$accounts_sales_will_amount."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_working_hours_manage',$a_rec,1).">".$accounts_working_hours_manage."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_actual_working_hours',$a_rec,1).">".$accounts_actual_working_hours."</td>";
@@ -254,7 +254,7 @@ try{
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'ordering_purchase_no',$a_rec,1).">".$ordering_purchase_no."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_acceptance_date',$a_rec,1).">".$payment_acceptance_date."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_acceptance_date',$a_rec,2).">".$payment_acceptance_date."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_schedule_amount',$a_rec,1).">".$payment_schedule_amount."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_working_hours',$a_rec,1).">".$payment_actual_working_hours."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'payment_actual_amount_money',$a_rec,1).">".$payment_actual_amount_money."</td>";

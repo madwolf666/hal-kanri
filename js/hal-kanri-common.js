@@ -217,6 +217,7 @@ function hide_popup()
 
 var g_input_click = false;
 var g_input_completed = false;
+var g_select_completed = true;
 
 //focus
 function after_focus(h_field, h_id)
@@ -243,7 +244,8 @@ function reset_input(h_field, h_id, h_kind, h_val)
 {
     //alert(h_field + "," + h_id + "," + h_kind + "," + h_val);
     //var a_val = $("#i_" + h_field + h_id).val();
-    if (h_kind != 2){
+    //if (h_kind != 2){
+    if (g_select_completed == true){
         if (g_input_completed == false){
             $("#" + h_field + h_id).empty().append(h_val);
         }
@@ -261,6 +263,12 @@ function make_input_text(h_cr_id, h_field, h_id, h_kind)
     if (g_input_click == true) {
         //alert('ccc');
         return;
+    }
+    
+    if (h_kind == 2){
+        g_select_completed = false;
+    }else{
+        g_select_completed = true;
     }
     
     var a_str = '<input type="text"';
@@ -286,20 +294,18 @@ function make_input_text(h_cr_id, h_field, h_id, h_kind)
     //alert($("#" + h_field + h_id).text());
     
     if (h_kind == 2){
-        //$('#i_' + h_field + h_id).datepicker({});
-        //$('#i_' + h_field + h_id).datepicker("setDate", a_val);
-        //$('#i_' + h_field + h_id).off("blur");
         /**/
         $('#i_' + h_field + h_id).datepicker({
+            /*
             onSelect:function(dataText){
                 //alert(dataText);
-                //$('#i_' + h_field + h_id).val(dataText);
-                //$('#i_' + h_field + h_id).on("blur", function(){
-                //    alert('');
-                //    reset_input('\'' + h_field + '\',\'' + h_id + '\',' + h_kind + ',\'' + a_val + '\'');
-                //});
-                //g_input_click = false;
-                //g_input_completed = false;
+                g_select_completed = true;
+                $('#i_' + h_field + h_id).focus();
+            };
+            */
+            onClose:function(dataText){
+                //alert(dataText);
+                g_select_completed = true;
                 $('#i_' + h_field + h_id).focus();
             }
         });
@@ -318,6 +324,12 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id, h_kind)
         return;
     }
     
+    if (h_kind == 2){
+        g_select_completed = false;
+    }else{
+        g_select_completed = true;
+    }
+
     var a_str = '<input type="text"';
     
     a_str += ' id="i_' + h_field + h_id + '"';
@@ -338,9 +350,16 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id, h_kind)
     //alert($("#" + h_field + h_id).text());
      
     if (h_kind == 2){
-        //$('#i_' + h_field + h_id).datepicker({autoclose: 'true'});
+        //alert($('#i_' + h_field + h_id).val());
         $('#i_' + h_field + h_id).datepicker({
+            /*
             onSelect:function(dataText){
+                $('#i_' + h_field + h_id).focus();
+            }
+            */
+            onClose:function(dataText){
+                //alert(dataText);
+                g_select_completed = true;
                 $('#i_' + h_field + h_id).focus();
             }
         });
