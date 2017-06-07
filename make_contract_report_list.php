@@ -110,7 +110,7 @@ try{
     $a_sRet .= "                        <td colspan='6' class='td_title2' style='width: 100px;' nowrap>期中退場</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='width: 100px;' nowrap>時間刻み</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='width: 100px;' nowrap>決済</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>消費税区分</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>欠勤控除対象者</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>見積書</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>注文書</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>注文請書</td>";
