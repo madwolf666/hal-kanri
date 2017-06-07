@@ -51,6 +51,7 @@ try{
 
     switch ($a_kind){
         case 2: //日付
+            com_pdo_bindValue($a_stmt,':'.$a_field, $a_val);
             break;
         case 3: //時間
             break;
