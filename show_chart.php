@@ -41,8 +41,13 @@ try{
         $engineer_name = $a_result['engineer_name'];
         $redemption_ratio = $a_result['redemption_ratio'];
         $accounts_sales_will_amount = $a_result['accounts_sales_will_amount'];
-        $payment_acceptance_date = $a_result['payment_acceptance_date'];
+        $payment_acceptance_date = com_replace_toDate($a_result['payment_acceptance_date']);
         $payment_schedule_amount = $a_result['payment_schedule_amount'];
+        /*echo $engineer_name.'<br>';
+        echo $redemption_ratio.'<br>';
+        echo $accounts_sales_will_amount.'<br>';
+        echo $payment_acceptance_date.'<br>';
+        echo $payment_schedule_amount.'<br>';*/
 
         if ($payment_acceptance_date != ''){
             $a_date = explode("/", $payment_acceptance_date);
