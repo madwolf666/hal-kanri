@@ -86,7 +86,7 @@ $dd_responsible_name = "";
 
 $person_post_no = "";
 $person_address = "";
-$person_birthday = "";
+$birthday = "";
 
 //3カラムは何？
 
@@ -119,7 +119,8 @@ $skill_type = "";
 function set_10500_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];
-    $GLOBALS['ag_no'] = $a_result['ag_no'];
+    $GLOBALS['ag_no'] = $a_result['contract_number'];
+    #$GLOBALS['ag_no'] = $a_result['ag_no'];
     $GLOBALS['contract_number'] = $a_result['contract_number'];
     $GLOBALS['publication'] = com_replace_toDate($a_result['publication']);
     
@@ -188,7 +189,7 @@ function set_10500_fromDB($a_result)
     
     $GLOBALS['person_post_no'] = $a_result['person_post_no'];
     $GLOBALS['person_address'] = $a_result['person_address'];
-    $GLOBALS['person_birthday'] = com_replace_toDate($a_result['person_birthday']);
+    $GLOBALS['birthday'] = com_replace_toDate($a_result['birthday']);
 
     //3カラムは何？
     

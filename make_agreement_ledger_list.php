@@ -25,7 +25,6 @@ try{
 ,t2.publication
 ,t2.person_post_no
 ,t2.person_address
-,t2.person_birthday
 ,t2.contact_date_brn
 ,t2.conflict_prevention
 ,t2.thing1
@@ -40,6 +39,7 @@ try{
 ,t2.reserve7
 ,t2.guide_ships
 ,t3.sex
+,t3.birthday
 ,t3.skill_type
     ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
@@ -78,11 +78,11 @@ try{
     $a_sRet .= "        <td style='width: 400px; padding: 0 0;' width='400px'>";
     $a_sRet .= "            <table class='tbl_list' width='410px;'>";
     $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td rowspan='2' class='td_titleI' style='width: 80px;' nowrap>労働契約書<br>発行No</td>";
+    #$a_sRet .= "                    <td rowspan='2' class='td_titleI' style='width: 80px;' nowrap>労働契約書<br>発行No</td>";
     $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 60px;' nowrap>契約管理<br>No.</td>";
     $a_sRet .= "                    <td rowspan='2' class='td_titleI' style='width: 90px;' nowrap>労働契約書<br>発行日</td>";
     $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 100px; height:25px;' nowrap>ｴﾝｼﾞﾆｱ番号</td>";
-    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 80px;' nowrap>ｴﾝｼﾞﾆｱ名</td>";
+    $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>ｴﾝｼﾞﾆｱ名</td>";
     $a_sRet .= "                </tr>";
     $a_sRet .= "            </table>";
     $a_sRet .= "        </td>";
@@ -181,7 +181,7 @@ try{
     
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>郵便番号</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>現住所</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>生年月日</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>生年月日</td>";
     
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>その他</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>&nbsp;</td>";
@@ -227,7 +227,7 @@ try{
 
         //入力あり
         //$a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover' id='dm_no".$a_rec."' onClick='alert(\"chappy\");'>".$a_result['dm_no']."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 80px;'><div class='myover' ".com_make_input_text($cr_id,'ag_no',$a_rec,1).">".$ag_no."</td>";
+        #$a_sRet_L .= "<td class='td_lineI' style='width: 80px;'><div class='myover' ".com_make_input_text($cr_id,'ag_no',$a_rec,1).">".$ag_no."</td>";
 
         $a_sRet_L .= "<td class='td_line2' style='width: 60px;'><div class='myover'>".$contract_number."</td>";
         $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text($cr_id,'publication',$a_rec,2).">".$publication."</td>";
@@ -236,7 +236,7 @@ try{
         $a_sRet_L .= "<a href='#' onclick='choice_agreement_ledger_method(\"".$a_result['cr_id']."\");'>".$engineer_number."</a>";
         $a_sRet_L .= "</td>";
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$engineer_name."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engineer_name."</td>";
         
         $a_sRet_L .= "</tr>";
 
@@ -296,7 +296,7 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$dd_responsible_name."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'person_post_no',$a_rec,1).">".$person_post_no."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'person_address',$a_rec,1).">".$person_address."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'person_birthday',$a_rec,2).">".$person_birthday."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$birthday."</td>";
         
 
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover'>".""."</td>";

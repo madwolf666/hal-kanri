@@ -181,7 +181,8 @@ function set_10300_fromDB($a_result)
     $GLOBALS['payment_gross_profit'] = $a_result['payment_gross_profit'];
     $GLOBALS['payment_gross_profit_margin'] = $a_result['payment_gross_profit_margin'];
 
-    $GLOBALS['ag_no'] = $a_result['ag_no'];
+    $GLOBALS['ag_no'] = $a_result['contract_number'];
+    #$GLOBALS['ag_no'] = $a_result['ag_no'];
 }
 
 ?>

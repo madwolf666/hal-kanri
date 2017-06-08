@@ -83,7 +83,7 @@ $(function () {
     $('#inp_hakkobi').datepicker({onSelect: function(dataText){}});
     
     //契約形態の変更
-    $('#opt_contract_pay_form').change(function(){calc_pay_person(); calc_pay_settlement();});
+    $('#opt_contract_pay_form').change(function(){calc_pay_person(); calc_pay_settlement(); calc_teisyoku();});
 
     //還元率
     $('#opt_contract_reduction').change(function(){calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement();});
@@ -182,10 +182,10 @@ $(function () {
     $('#f_claim_agreement_end').datepicker({});
     
     //項目追加
-    $('#contact_date_org').datepicker({});
+    //$('#contact_date_org').datepicker({});
     $('#contact_date_org').keyup(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
-    $('#contact_date_org').change(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
-
+    //$('#contact_date_org').change(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
+    
     $('#organization').keyup(function(){check_value_changed_10102(1, 'organization', $('#organization').val(), '#organization');});
     $('#dd_name').keyup(function(){check_value_changed_10102(1, 'dd_name', $('#dd_name').val(), '#dd_name');});
     $('#dd_branch').keyup(function(){check_value_changed_10102(1, 'dd_branch', $('#dd_branch').val(), '#dd_branch');});
@@ -886,9 +886,15 @@ function calc_pay_normal_period()
     if ((a_tankin == '') || (a_kangen == '')) {
         $('#txt_tankin_p11').val('');
         $('#txt_tankin_p21').val('');
+        set_pay_input_mode(true);
     } else {
-        $('#txt_tankin_p11').val(Number(Math.round(a_tankin*(a_kangen/100))).toLocaleString());
-        $('#txt_tankin_p21').val(Number(Math.round(a_tankin*((a_kangen-20)/100))).toLocaleString());
+        if (isFinite(a_kangen) == true){
+            $('#txt_tankin_p11').val(Number(Math.round(a_tankin*(a_kangen/100))).toLocaleString());
+            $('#txt_tankin_p21').val(Number(Math.round(a_tankin*((a_kangen-20)/100))).toLocaleString());
+            set_pay_input_mode(true);
+        }else{
+            set_pay_input_mode(false);
+        }
     }
     a_tankin_p11 = $('#txt_tankin_p11').val().replace(",","");
     a_tankin_p21 = $('#txt_tankin_p21').val().replace(",","");
@@ -1096,9 +1102,15 @@ function calc_pay_middle_admission()
     if ((a_tankin == '') || (a_kangen == '')) {
         $('#txt_tankin_p12').val('');
         $('#txt_tankin_p22').val('');
+        set_pay_input_mode(true);
     } else {
-        $('#txt_tankin_p12').val(Number(Math.round(a_tankin*(a_kangen/100))).toLocaleString());
-        $('#txt_tankin_p22').val(Number(Math.round(a_tankin*((a_kangen-20)/100))).toLocaleString());
+        if (isFinite(a_kangen) == true){
+            $('#txt_tankin_p12').val(Number(Math.round(a_tankin*(a_kangen/100))).toLocaleString());
+            $('#txt_tankin_p22').val(Number(Math.round(a_tankin*((a_kangen-20)/100))).toLocaleString());
+            set_pay_input_mode(true);
+        }else{
+            set_pay_input_mode(false);
+        }
     }
     a_tankin_p12 = $('#txt_tankin_p12').val().replace(",","");
     a_tankin_p22 = $('#txt_tankin_p22').val().replace(",","");
@@ -1205,9 +1217,15 @@ function calc_pay_midway_retirement()
     if ((a_tankin == '') || (a_kangen == '')) {
         $('#txt_tankin_p13').val('');
         $('#txt_tankin_p23').val('');
+        set_pay_input_mode(true);
     } else {
-        $('#txt_tankin_p13').val(Number(Math.round(a_tankin*(a_kangen/100))).toLocaleString());
-        $('#txt_tankin_p23').val(Number(Math.round(a_tankin*((a_kangen-20)/100))).toLocaleString());
+        if (isFinite(a_kangen) == true){
+            $('#txt_tankin_p13').val(Number(Math.round(a_tankin*(a_kangen/100))).toLocaleString());
+            $('#txt_tankin_p23').val(Number(Math.round(a_tankin*((a_kangen-20)/100))).toLocaleString());
+            set_pay_input_mode(true);
+        }else{
+            set_pay_input_mode(false);
+        }
     }
     a_tankin_p13 = $('#txt_tankin_p13').val().replace(",","");
     a_tankin_p23 = $('#txt_tankin_p23').val().replace(",","");
@@ -1287,6 +1305,63 @@ function calc_pay_settlement()
     } else{
         $('#opt_contract_yesno_p3').val('1');
     }
+}
+
+//抵触
+function calc_teisyoku()
+{
+    var a_txt = $('[name=opt_contract_pay_form] option:selected').text();
+    if (a_txt == '正'){
+        $('#contact_date_org').val('無期雇用者に限定する');
+        //$('#contact_date_org').attr('readonly',true);
+    } else{
+        //$('#contact_date_org').attr('readonly',false);
+    }
+}
+
+//支払条件入力切替
+function set_pay_input_mode(h_mode)
+{
+    $('#txt_tankin_p11').attr('readonly', h_mode);
+    $('#txt_tankin_p21').attr('readonly', h_mode);
+    $('#txt_contract_lower_limit_p11').attr('readonly', h_mode);
+    $('#txt_contract_lower_limit_p21').attr('readonly', h_mode);
+    $('#txt_contract_upper_limit_p11').attr('readonly', h_mode);
+    $('#txt_contract_upper_limit_p21').attr('readonly', h_mode);
+    $('#txt_contract_kojyo_unit_p11').attr('readonly', h_mode);
+    $('#txt_contract_kojyo_unit_p21').attr('readonly', h_mode);
+    $('#txt_contract_zangyo_unit_p11').attr('readonly', h_mode);
+    $('#txt_contract_zangyo_unit_p21').attr('readonly', h_mode);
+
+    $('#txt_syugyonisu_p12').attr('readonly', h_mode);
+    $('#txt_syugyonisu_p22').attr('readonly', h_mode);
+    $('#txt_zeneigyonisu_p12').attr('readonly', h_mode);
+    $('#txt_zeneigyonisu_p22').attr('readonly', h_mode);
+    $('#txt_tankin_p12').attr('readonly', h_mode);
+    $('#txt_tankin_p22').attr('readonly', h_mode);
+    $('#txt_contract_lower_limit_p12').attr('readonly', h_mode);
+    $('#txt_contract_lower_limit_p22').attr('readonly', h_mode);
+    $('#txt_contract_upper_limit_p12').attr('readonly', h_mode);
+    $('#txt_contract_upper_limit_p22').attr('readonly', h_mode);
+    $('#txt_contract_kojyo_unit_p12').attr('readonly', h_mode);
+    $('#txt_contract_kojyo_unit_p22').attr('readonly', h_mode);
+    $('#txt_contract_zangyo_unit_p12').attr('readonly', h_mode);
+    $('#txt_contract_zangyo_unit_p22').attr('readonly', h_mode);
+
+    $('#txt_syugyonisu_p13').attr('readonly', h_mode);
+    $('#txt_syugyonisu_p23').attr('readonly', h_mode);
+    $('#txt_zeneigyonisu_p13').attr('readonly', h_mode);
+    $('#txt_zeneigyonisu_p23').attr('readonly', h_mode);
+    $('#txt_tankin_p13').attr('readonly', h_mode);
+    $('#txt_tankin_p23').attr('readonly', h_mode);
+    $('#txt_contract_lower_limit_p13').attr('readonly', h_mode);
+    $('#txt_contract_lower_limit_p23').attr('readonly', h_mode);
+    $('#txt_contract_upper_limit_p13').attr('readonly', h_mode);
+    $('#txt_contract_upper_limit_p23').attr('readonly', h_mode);
+    $('#txt_contract_kojyo_unit_p13').attr('readonly', h_mode);
+    $('#txt_contract_kojyo_unit_p23').attr('readonly', h_mode);
+    $('#txt_contract_zangyo_unit_p13').attr('readonly', h_mode);
+    $('#txt_contract_zangyo_unit_p23').attr('readonly', h_mode);
 }
 
 //ｴﾝｼﾞﾆｱNo.

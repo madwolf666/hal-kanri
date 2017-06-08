@@ -25,7 +25,6 @@ if (isset($_GET['NO'])) {
     ,t2.publication
     ,t2.person_post_no
     ,t2.person_address
-    ,t2.person_birthday
     ,t2.contact_date_brn
     ,t2.conflict_prevention
     ,t2.thing1
@@ -40,6 +39,7 @@ if (isset($_GET['NO'])) {
     ,t2.reserve7
     ,t2.guide_ships
     ,t3.sex
+    ,t3.birthday
     ,t3.skill_type
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";

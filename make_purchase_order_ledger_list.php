@@ -67,16 +67,16 @@ try{
     $a_sRet .= "        <td style='padding: 0 0;'>";
     $a_sRet .= "            <table class='tbl_list' width='450px;'>";
     $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td colspan='3' class='td_title2' style='height:25px;' nowrap>注文書情報</td>";
+    $a_sRet .= "                    <td colspan='2' class='td_title2' style='height:25px;' nowrap>注文書情報</td>";
     $a_sRet .= "                    <td colspan='3' class='td_title2' style='' nowrap>エンジニア情報</td>";
     $a_sRet .= "                </tr>";
     $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 50px; height:50px;' nowrap>注文書<br>台帳<br>No.</td>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 50px;' nowrap>契約<br>管理<br>No.</td>";
+    #$a_sRet .= "                    <td class='td_title2' style='width: 50px; height:50px;' nowrap>注文書<br>台帳<br>No.</td>";
+    $a_sRet .= "                    <td class='td_title2' style='width: 60px;' nowrap>契約<br>管理<br>No.</td>";
     $a_sRet .= "                    <td class='td_titleI' style='width: 90px;' nowrap>注文書<br>発行日</td>";
     $a_sRet .= "                    <td class='td_title2' style='width: 100px; height:50px;' nowrap>HALｴﾝｼﾞﾆｱ<br>番号</td>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 80px;' nowrap>技術者氏名</td>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 80px;' nowrap>ﾌﾘｶﾞﾅ</td>";
+    $a_sRet .= "                    <td class='td_title2' style='width: 100px;' nowrap>技術者氏名</td>";
+    $a_sRet .= "                    <td class='td_title2' style='width: 100px;' nowrap>ﾌﾘｶﾞﾅ</td>";
     $a_sRet .= "                </tr>";
     $a_sRet .= "            </table>";
     $a_sRet .= "        </td>";
@@ -172,9 +172,9 @@ try{
         //入力あり
         //$a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover' id='dm_no".$a_rec."' onClick='alert(\"chappy\");'>".$a_result['dm_no']."</td>";
         #$a_sRet_L .= "<td class='td_lineI' style='width: 50px;'><div class='myover' ".com_make_input_text($cr_id,'po_no',$a_rec,1).">".$po_no."</td>";
-        $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$ag_no."</td>";
+        #$a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$ag_no."</td>";
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover'>".$contract_number."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 60px;'><div class='myover'>".$contract_number."</td>";
 
         //入力あり
         $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text($cr_id,'publication',$a_rec,2).">".$publication."</td>";
@@ -183,8 +183,8 @@ try{
         $a_sRet_L .= "<a href='#' onclick='choice_purchase_order_ledger_method(\"".$a_result['cr_id']."\");'>".$a_result['engineer_number']."</a>";
         $a_sRet_L .= "</td>";
 
-        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$engineer_name."</td>";
-        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$engneer_name_phonetic."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engineer_name."</td>";
+        $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$engneer_name_phonetic."</td>";
         
         $a_sRet_L .= "</tr>";
 

@@ -718,7 +718,8 @@ try{
     $a_stmt->bindParam(':payment_leaving_daily_manual', $_POST['inp_wariai_taijyo_c2'], PDO::PARAM_STR);
 
     //追加項目
-    com_pdo_bindValue($a_stmt, ':contact_date_org', $_POST['contact_date_org']);
+    $a_stmt->bindParam(':contact_date_org', $_POST['contact_date_org'], PDO::PARAM_STR);
+    #com_pdo_bindValue($a_stmt, ':contact_date_org', $_POST['contact_date_org']);
     $a_stmt->bindParam(':organization', $_POST['organization'], PDO::PARAM_STR);
     $a_stmt->bindParam(':dd_name', $_POST['dd_name'], PDO::PARAM_STR);
     $a_stmt->bindParam(':dd_branch', $_POST['dd_branch'], PDO::PARAM_STR);

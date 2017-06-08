@@ -34,7 +34,6 @@ try{
 ,t2.publication
 ,t2.person_post_no
 ,t2.person_address
-,t2.person_birthday
 ,t2.contact_date_brn
 ,t2.conflict_prevention
 ,t2.thing1
@@ -49,6 +48,7 @@ try{
 ,t2.reserve7
 ,t2.guide_ships
 ,t3.sex
+,t3.birthday
 ,t3.skill_type
     ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
@@ -130,7 +130,7 @@ try{
         
         $obj_sheet->setCellValueByColumnAndRow(50, $a_row, $person_post_no);
         $obj_sheet->setCellValueByColumnAndRow(51, $a_row, $person_address);
-        $obj_sheet->setCellValueByColumnAndRow(52, $a_row, $person_birthday);
+        $obj_sheet->setCellValueByColumnAndRow(52, $a_row, $birthday);
         $obj_sheet->setCellValueByColumnAndRow(53, $a_row, "");
         $obj_sheet->setCellValueByColumnAndRow(54, $a_row, "");
         $obj_sheet->setCellValueByColumnAndRow(55, $a_row, "");

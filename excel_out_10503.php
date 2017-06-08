@@ -25,7 +25,6 @@ if (isset($_GET['NO'])) {
     ,t2.publication
     ,t2.person_post_no
     ,t2.person_address
-    ,t2.person_birthday
     ,t2.contact_date_brn
     ,t2.conflict_prevention
     ,t2.thing1
@@ -40,6 +39,7 @@ if (isset($_GET['NO'])) {
     ,t2.reserve7
     ,t2.guide_ships
     ,t3.sex
+    ,t3.birthday
     ,t3.skill_type
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
@@ -81,7 +81,7 @@ $obj_sheet->setCellValue("E4", $engneer_name_phonetic);
 $obj_sheet->setCellValue("E5", $engineer_name);
 $obj_sheet->setCellValue("U5", $sex);
 
-$obj_sheet->setCellValue("X5", $person_birthday);
+com_setValue_Date($birthday,  $obj_sheet, "X5", "yyyy年MM月dd日");
 
 $obj_sheet->setCellValue("G11", $person_post_no);
 $obj_sheet->setCellValue("E12", $person_address);

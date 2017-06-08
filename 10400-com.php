@@ -73,7 +73,8 @@ $ag_no = "";
 function set_10400_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];
-    $GLOBALS['po_no'] = $a_result['po_no'];
+    $GLOBALS['po_no'] = $a_result['contract_number'];
+    #$GLOBALS['po_no'] = $a_result['po_no'];
     $GLOBALS['contract_number'] = $a_result['contract_number'];
     $GLOBALS['publication'] = com_replace_toDate($a_result['publication']);
     $GLOBALS['engineer_number'] = $a_result['engineer_number'];
@@ -124,7 +125,8 @@ function set_10400_fromDB($a_result)
     $GLOBALS['inheriting'] = $a_result['inheriting'];
     $GLOBALS['sending_back'] = $a_result['sending_back'];
     
-    $GLOBALS['ag_no'] = $a_result['ag_no'];
+    $GLOBALS['ag_no'] = $a_result['contract_number'];
+    #$GLOBALS['ag_no'] = $a_result['ag_no'];
 }
 
 ?>

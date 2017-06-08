@@ -1670,8 +1670,8 @@ $a_selected = false;
     <li class="myli">
     <table border="1" rules="all">
 	<tr>
-            <td class="yellow" width="60px;">抵触日</td>
-            <td class="yellow" width="140px;" nowrap="true">組織単位</td>
+            <td class="yellow" style="width:60px;">抵触日</td>
+            <td class="yellow" style="width:140px;" nowrap="true">組織単位</td>
             <td style="width:auto;">
             <?php
                 if ($a_act == '') {

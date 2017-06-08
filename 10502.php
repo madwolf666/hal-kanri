@@ -29,7 +29,6 @@ if (isset($_GET['NO'])) {
     ,t2.publication
     ,t2.person_post_no
     ,t2.person_address
-    ,t2.person_birthday
     ,t2.contact_date_brn
     ,t2.conflict_prevention
     ,t2.thing1
@@ -44,6 +43,7 @@ if (isset($_GET['NO'])) {
     ,t2.reserve7
     ,t2.guide_ships
     ,t3.sex
+    ,t3.birthday
     ,t3.skill_type
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
@@ -87,14 +87,7 @@ if (isset($_GET['NO'])) {
 <center>
     <div class="width">
         <p style="width:150px; margin-left:auto; text-align:left;">
-                No.&nbsp;
-            <?php
-                if ($a_act == '') {
-                    echo $ag_no;
-                } else {
-                    echo com_make_tag_input($a_act, $ag_no, "ag_no", "width: 100px; text-align: center;");
-                }
-            ?>
+                No.&nbsp;<?php echo $ag_no; ?>
                 <br>
         </p>
         <font size="+2"><B><u>労働契約書</u></B></font>
@@ -112,15 +105,7 @@ if (isset($_GET['NO'])) {
             <td height=40>氏名</td>
             <td colspan="8"><?php echo $engineer_name; ?></td>
             <td colspan="4"><?php echo $sex; ?></td>
-            <td colspan="4">
-            <?php
-                if ($a_act == '') {
-                    echo $person_birthday;
-                } else {
-                    echo com_make_tag_input($a_act, $person_birthday, "person_birthday", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td colspan="4"><?php echo $birthday; ?></td>
 	</tr>
 	<tr>
             <td height=40 rowspan="2">現住所</td>
@@ -158,7 +143,7 @@ if (isset($_GET['NO'])) {
 	</tr>
 	<tr>
             <td  rowspan="2">従事する<br>業務の種類</td>
-            <td class="remarks" rowspan="2" colspan="8"><?php echo $skill_type; ?></td>
+            <td class="remarks" rowspan="2" colspan="8">システム開発（第4条第1項1号業務）</td>
             <td colspan="4">控除単価</td>
             <td class="remarksR" colspan="4"><?php echo com_db_number_format($payment_normal_deduction_unit_price_2); ?>円</td>
 	</tr>

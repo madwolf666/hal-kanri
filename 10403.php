@@ -97,20 +97,20 @@ if (isset($_GET['NO'])) {
     <table border="1" rules="all">
 	<tr>
             <th colspan="4">契&nbsp;約&nbsp;形&nbsp;態</th>
-            <td colspan="9" class="remarks">作業請負</td>
+            <td colspan="9" class="remarks"><?php echo $claim_contract_form; ?></td>
 	</tr>
 	<tr>
             <th colspan="2" rowspan="2">契約期間</th>
             <td colspan="2">開&nbsp;始&nbsp;日</td>
-            <td colspan="9" class="remarks">2017/04/01</td>
+            <td colspan="9" class="remarks"><?php echo $claim_agreement_start; ?></td>
 	</tr>
 	<tr>
             <td colspan="2">終&nbsp;了&nbsp;日</td>
-            <td colspan="9" class="remarks">2017/04/30</td>
+            <td colspan="9" class="remarks"><?php echo $claim_agreement_end; ?></td>
 	</tr>
 	<tr>
             <th colspan="4">技&nbsp;術&nbsp;者&nbsp;氏&nbsp;名</th>
-            <td colspan="9" class="remarks">北山　光輝</td>
+            <td colspan="9" class="remarks"><?php echo $engineer_name; ?></td>
 	</tr>
 	<tr>
             <th colspan="4" rowspan="2">作&nbsp;業&nbsp;料&nbsp;金<br>(外税)</th>

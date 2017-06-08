@@ -632,31 +632,6 @@ $a_selected = false;
                 </td>
                 <td colspan="3" width=68></td>
             </tr>
-            <tr>
-                <td colspan="3" height=19 width=68>根本</td>
-                <td colspan="3" width=68>小松</td>
-                <td colspan="3" width=68>坂上</td>
-                <td colspan="3" width=68>仲宗根</td>
-                <td colspan="3" width=68></td>
-            </tr>
-            <tr>
-                <td colspan="3" height=78></td>
-                <td colspan="3"></td>
-                <td colspan="3"></td>
-                <td colspan="3"></td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td colspan="6" rowspan="2" class="hiddencell"></td>
-                <td colspan="3" height=19 width=68>堀口</td>
-                <td colspan="3" height=19 width=68>大窪</td>
-                <td colspan="3" height=19 width=68>坂口</td>
-            </tr>
-            <tr>
-                <td colspan="3" height=78></td>
-                <td colspan="3" height=78></td>
-                <td colspan="3" height=78></td>
-            </tr>
         </table>
     </li>
 </ul>
