@@ -27,27 +27,12 @@ if (isset($_GET['NO'])) {
         $a_sql .= "
      t2.ag_no
     ,t2.publication
-    ,t2.dd_office
-    ,t2.dd_address
-    ,t2.dd_tel
-    ,t2.ip_position
-    ,t2.ip_name
-    ,t2.dm_responsible_position
-    ,t2.dm_responsible_name
-    ,t2.dd_responsible_position
-    ,t2.dd_responsible_name
     ,t2.person_post_no
     ,t2.person_address
     ,t2.person_birthday
-    ,t2.contact_date_org
     ,t2.contact_date_brn
-    ,t2.organization
     ,t2.conflict_prevention
     ,t2.thing1
-    ,t2.chs_position1
-    ,t2.chs_name1
-    ,t2.chs_position2
-    ,t2.chs_name2
     ,t2.chs_tel2
     ,t2.dd_responsible_tel
     ,t2.reserve1
@@ -222,7 +207,32 @@ if (isset($_GET['NO'])) {
                 ・源泉所得税控除<br>
                 ・社会保険（健康保険、厚生年金、雇用保険）適用有り<br>
                 ・基本給のうち、35％相当は定額割増賃金として支給する（残業代換算で70時間相当）。<br>
-                <?php echo $remarks; ?>
+                         <?php
+                            if ($remarks != ''){
+                                echo '<br>'.com_convertEOL($remarks).'<br>';
+                            }
+                            if ($remarks_pay != ''){
+                                echo '<br>'.com_convertEOL($remarks_pay).'<br>';
+                            }
+                            if ($payment_middle_unit_price_2 != ''){
+                                echo '<br>【途中入場】';
+                                echo '<br>&nbsp;&nbsp;単価：'. com_db_number_format_symbol($payment_middle_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;上限時間：'.$payment_middle_upper_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;下限時間：'.$payment_middle_lower_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;控除単価：'. com_db_number_format_symbol($payment_middle_deduction_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;超過単価：'. com_db_number_format_symbol($payment_middle_overtime_unit_price_2);
+                                echo '<br>';
+                            }
+                            if ($payment_leaving_unit_price_2 != ''){
+                                echo '<br>【途中退場】';
+                                echo '<br>&nbsp;&nbsp;単価：'. com_db_number_format_symbol($payment_leaving_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;上限時間：'.$payment_leaving_upper_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;下限時間：'.$payment_leaving_lower_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;控除単価：'. com_db_number_format_symbol($payment_leaving_deduction_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;超過単価：'. com_db_number_format_symbol($payment_leaving_overtime_unit_price_2);
+                                echo '<br>';
+                            }
+                         ?>
             </td>
         </tr>
     </table>

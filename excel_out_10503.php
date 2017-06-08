@@ -23,27 +23,12 @@ if (isset($_GET['NO'])) {
         $a_sql .= "
      t2.ag_no
     ,t2.publication
-    ,t2.dd_office
-    ,t2.dd_address
-    ,t2.dd_tel
-    ,t2.ip_position
-    ,t2.ip_name
-    ,t2.dm_responsible_position
-    ,t2.dm_responsible_name
-    ,t2.dd_responsible_position
-    ,t2.dd_responsible_name
     ,t2.person_post_no
     ,t2.person_address
     ,t2.person_birthday
-    ,t2.contact_date_org
     ,t2.contact_date_brn
-    ,t2.organization
     ,t2.conflict_prevention
     ,t2.thing1
-    ,t2.chs_position1
-    ,t2.chs_name1
-    ,t2.chs_position2
-    ,t2.chs_name2
     ,t2.chs_tel2
     ,t2.dd_responsible_tel
     ,t2.reserve1
@@ -119,7 +104,8 @@ $obj_sheet->setCellValue("W31", $payment_settlement_closingday);
 $obj_sheet->setCellValue("AB31", $payment_settlement_paymentday);
 
 com_setValue_Date($contact_date_org,  $obj_sheet, "H31", "yyyy年MM月dd日");
-$obj_sheet->setCellValue("Q33", $dd_office);
+$obj_sheet->setCellValue("Q33", $dd_name);
+$obj_sheet->setCellValue("X33", $dd_branch);
 $obj_sheet->setCellValue("Q35", $organization);
 $obj_sheet->setCellValue("Q37", $dd_address);
 $obj_sheet->setCellValue("Q39", $dd_tel);
@@ -136,7 +122,33 @@ $obj_sheet->setCellValue("U47", $chs_name2);
 $obj_sheet->setCellValue("Q49", $chs_position1);
 $obj_sheet->setCellValue("U49", $chs_name1);
 
-$obj_sheet->setCellValue("E70", $remarks);
+$a_biko= "";
+if ($remarks != ''){
+    $a_biko .= chr(13).$remarks.chr(13);
+}
+if ($remarks_pay != ''){
+    $a_biko .= chr(13).$remarks_pay.chr(13);
+}
+if ($payment_middle_unit_price_2 != ''){
+    $a_biko .= chr(13).'【途中入場】';
+    $a_biko .= chr(13).'  単価：'. com_db_number_format_symbol($payment_middle_unit_price_2);
+    $a_biko .= chr(13).'  上限時間：'.$payment_middle_upper_limit_2.'h';
+    $a_biko .= chr(13).'  下限時間：'.$payment_middle_lower_limit_2.'h';
+    $a_biko .= chr(13).'  控除単価：'. com_db_number_format_symbol($payment_middle_deduction_unit_price_2);
+    $a_biko .= chr(13).'  超過単価：'. com_db_number_format_symbol($payment_middle_overtime_unit_price_2);
+    $a_biko .= chr(13);
+}
+if ($payment_leaving_unit_price_2 != ''){
+    $a_biko .= chr(13).'【途中退場】';
+    $a_biko .= chr(13).'  単価：'. com_db_number_format_symbol($payment_leaving_unit_price_2);
+    $a_biko .= chr(13).'  上限時間：'.$payment_leaving_upper_limit_2.'h';
+    $a_biko .= chr(13).'  下限時間：'.$payment_leaving_lower_limit_2.'h';
+    $a_biko .= chr(13).'  控除単価：'. com_db_number_format_symbol($payment_leaving_deduction_unit_price_2);
+    $a_biko .= chr(13).'  超過単価：'. com_db_number_format_symbol($payment_leaving_overtime_unit_price_2);
+    $a_biko .= chr(13);
+}
+
+$obj_sheet->setCellValue("E70", $a_biko);
 
 com_setValue_Date($publication,  $obj_sheet, "B84", "yyyy年MM月dd日");
 

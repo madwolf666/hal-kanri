@@ -61,19 +61,16 @@ try{
 ,t2.health_insurance	
 ,t2.welfare_pension		
 ,t2.jurisdiction		
-,t2.specified_worker	
-,t3.dd_office AS dd_place
-,t3.dd_address
-,t3.dd_tel
+,t2.specified_worker
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " LEFT JOIN ";
+    /*$a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
     $a_sql .= " ON (t1.cr_id=t3.cr_id)";
-    $a_sql .= " ORDER BY t2.dm_no;";
+    $a_sql .= " ORDER BY t2.dm_no;";*/
 
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->execute();
@@ -93,7 +90,7 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(5, $a_row, $customer_name);
         
         $obj_sheet->setCellValueByColumnAndRow(6, $a_row, $dd_office);
-        $obj_sheet->setCellValueByColumnAndRow(7, $a_row, $dd_place);
+        $obj_sheet->setCellValueByColumnAndRow(7, $a_row, $dd_name);
         $obj_sheet->setCellValueByColumnAndRow(8, $a_row, $dd_address);
         $obj_sheet->setCellValueByColumnAndRow(9, $a_row, $dd_tel);
         $obj_sheet->setCellValueByColumnAndRow(10, $a_row, $dd_fax);

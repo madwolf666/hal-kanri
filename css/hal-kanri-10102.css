@@ -70,6 +70,20 @@ ul.myul{
 
 }
 
+ul.myul2{
+
+	margin: 0 0 1 0em;
+
+	padding: 0;
+
+	display: table;
+
+	width:760px;
+
+	/*border: 5px dotted #000000;*/
+
+}
+
 /* PC用　*/
 
 @media screen and (min-width: 768px){

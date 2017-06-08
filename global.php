@@ -51,6 +51,7 @@ $g_DB_m_contract_projects_confirm = "m_contract_projects_confirm";
 $g_DB_m_contract_engineer_list = "m_contract_engineer_list";
 
 $g_DB_m_information = "m_information";
+$g_DB_m_contract_status = "m_contract_status";
 
 $g_DB_t_acceptance_ledger = "t_acceptance_ledger";
 $g_DB_t_agreement_ledger = "t_agreement_ledger";
@@ -515,5 +516,9 @@ function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table
         }
     }
     return $h_where.$a_where;
+}
+
+function com_convertEOL($h_string, $h_to="<br>"){
+    return preg_replace("/\r\n|\r|\n/", $h_to, $h_string);
 }
 ?>

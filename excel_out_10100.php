@@ -283,7 +283,7 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(74, $a_row, $opt_contract_yesno_p2);
         $obj_sheet->setCellValueByColumnAndRow(75, $a_row, $opt_contract_yesno_p3);
         $obj_sheet->setCellValueByColumnAndRow(76, $a_row, $opt_contract_yesno_p4);
-        $obj_sheet->setCellValueByColumnAndRow(77, $a_row, $inp_biko);
+        $obj_sheet->setCellValueByColumnAndRow(77, $a_row, $a_result['remarks_pay']);
         $obj_sheet->setCellValueByColumnAndRow(78, $a_row, $opt_contract_pay_form);
 
         $obj_sheet->setCellValueByColumnAndRow(79, $a_row, $check_correct_date);

@@ -23,27 +23,12 @@ if (isset($_GET['NO'])) {
         $a_sql .= "
      t2.ag_no
     ,t2.publication
-    ,t2.dd_office
-    ,t2.dd_address
-    ,t2.dd_tel
-    ,t2.ip_position
-    ,t2.ip_name
-    ,t2.dm_responsible_position
-    ,t2.dm_responsible_name
-    ,t2.dd_responsible_position
-    ,t2.dd_responsible_name
     ,t2.person_post_no
     ,t2.person_address
     ,t2.person_birthday
-    ,t2.contact_date_org
     ,t2.contact_date_brn
-    ,t2.organization
     ,t2.conflict_prevention
     ,t2.thing1
-    ,t2.chs_position1
-    ,t2.chs_name1
-    ,t2.chs_position2
-    ,t2.chs_name2
     ,t2.chs_tel2
     ,t2.dd_responsible_tel
     ,t2.reserve1
@@ -54,11 +39,16 @@ if (isset($_GET['NO'])) {
     ,t2.reserve6
     ,t2.reserve7
     ,t2.guide_ships
+    ,t3.sex
+    ,t3.skill_type
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
         $a_sql .= " LEFT JOIN ";
         $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
         $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
+        $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
         $a_sql .= " WHERE (t1.cr_id=:cr_id);";
 
         $a_stmt = $a_conn->prepare($a_sql);
@@ -86,7 +76,10 @@ $obj_sheet = $obj_book->getSheet(0);
 
 $obj_sheet->setCellValue("E6", $engineer_name);
 
-$obj_sheet->setCellValue("J18", $dd_office);
+$obj_sheet->setCellValue("H13", $skill_type);
+
+$obj_sheet->setCellValue("J18", $dd_name);
+$obj_sheet->setCellValue("J20", $dd_branch);
 $obj_sheet->setCellValue("J22", $dd_address);
 $obj_sheet->setCellValue("J24", $dd_tel);
 
@@ -107,14 +100,40 @@ $obj_sheet->setCellValue("P56", $dd_responsible_name);
 $obj_sheet->setCellValue("I59", $dm_responsible_position);
 $obj_sheet->setCellValue("P59", $dm_responsible_name);
 
-$obj_sheet->setCellValue("L69", $chs_position1);
-$obj_sheet->setCellValue("Q69", $chs_name1);
+$obj_sheet->setCellValue("L69", $chs_position2);
+$obj_sheet->setCellValue("Q69", $chs_name2);
 $obj_sheet->setCellValue("L71", $chs_position1);
 $obj_sheet->setCellValue("Q71", $chs_name1);
 
 $obj_sheet->setCellValue("I113", com_db_number_format($payment_normal_unit_price_2));
 
-$obj_sheet->setCellValue("H118", $remarks);
+$a_biko= "";
+if ($remarks != ''){
+    $a_biko .= chr(13).$remarks.chr(13);
+}
+if ($remarks_pay != ''){
+    $a_biko .= chr(13).$remarks_pay.chr(13);
+}
+if ($payment_middle_unit_price_2 != ''){
+    $a_biko .= chr(13).'【途中入場】';
+    $a_biko .= chr(13).'  単価：'. com_db_number_format_symbol($payment_middle_unit_price_2);
+    $a_biko .= chr(13).'  上限時間：'.$payment_middle_upper_limit_2.'h';
+    $a_biko .= chr(13).'  下限時間：'.$payment_middle_lower_limit_2.'h';
+    $a_biko .= chr(13).'  控除単価：'. com_db_number_format_symbol($payment_middle_deduction_unit_price_2);
+    $a_biko .= chr(13).'  超過単価：'. com_db_number_format_symbol($payment_middle_overtime_unit_price_2);
+    $a_biko .= chr(13);
+}
+if ($payment_leaving_unit_price_2 != ''){
+    $a_biko .= chr(13).'【途中退場】';
+    $a_biko .= chr(13).'  単価：'. com_db_number_format_symbol($payment_leaving_unit_price_2);
+    $a_biko .= chr(13).'  上限時間：'.$payment_leaving_upper_limit_2.'h';
+    $a_biko .= chr(13).'  下限時間：'.$payment_leaving_lower_limit_2.'h';
+    $a_biko .= chr(13).'  控除単価：'. com_db_number_format_symbol($payment_leaving_deduction_unit_price_2);
+    $a_biko .= chr(13).'  超過単価：'. com_db_number_format_symbol($payment_leaving_overtime_unit_price_2);
+    $a_biko .= chr(13);
+}
+
+$obj_sheet->setCellValue("H118", $a_biko);
 
 header("Content-Type: application/vnd.ms-excel");
 header("Content-Disposition: attachment;filename='".$GLOBALS['g_EXCEL_CONTRACT_10504']."'");

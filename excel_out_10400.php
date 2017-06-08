@@ -102,7 +102,7 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(32, $a_row, $payment_settlement_paymentday);
         
         #$obj_sheet->setCellValueByColumnAndRow(33, $a_row, $payment_absence_deduction_subject);
-        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $remarks);
+        $obj_sheet->setCellValueByColumnAndRow(33, $a_row, $remarks_pay);
         $obj_sheet->setCellValueByColumnAndRow(34, $a_row, $claim_contract_form);
         
         $obj_sheet->setCellValueByColumnAndRow(35, $a_row, $remarks1);

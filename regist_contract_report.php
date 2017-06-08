@@ -150,6 +150,24 @@ try{
             ,payment_leaving_daily_manual
             ,reg_id
             ,reg_date
+            ,contact_date_org
+            ,organization
+            ,dd_name
+            ,dd_branch
+            ,dd_address
+            ,dd_tel
+            ,ip_position
+            ,ip_name
+            ,dm_responsible_position
+            ,dm_responsible_name
+            ,dd_responsible_position
+            ,dd_responsible_name
+            ,chs_position1
+            ,chs_name1
+            ,chs_position2
+            ,chs_name2
+            ,remarks_pay
+            ,status_cd
             ";
         $a_sql .= ") VALUES(";
         $a_sql .= "
@@ -278,6 +296,24 @@ try{
             ,:payment_leaving_daily_manual
             ,:reg_id
             ,:reg_date
+            ,:contact_date_org
+            ,:organization
+            ,:dd_name
+            ,:dd_branch
+            ,:dd_address
+            ,:dd_tel
+            ,:ip_position
+            ,:ip_name
+            ,:dm_responsible_position
+            ,:dm_responsible_name
+            ,:dd_responsible_position
+            ,:dd_responsible_name
+            ,:chs_position1
+            ,:chs_name1
+            ,:chs_position2
+            ,:chs_name2
+            ,:remarks_pay
+            ,:status_cd
             ";
         $a_sql .= ");";
     }else{
@@ -408,6 +444,24 @@ try{
             ,payment_leaving_daily_manual=:payment_leaving_daily_manual
             ,upd_id=:upd_id
             ,upd_date=:upd_date
+            ,contact_date_org=:contact_date_org
+            ,organization=:organization
+            ,dd_name=:dd_name
+            ,dd_branch=:dd_branch
+            ,dd_address=:dd_address
+            ,dd_tel=:dd_tel
+            ,ip_position=:ip_position
+            ,ip_name=:ip_name
+            ,dm_responsible_position=:dm_responsible_position
+            ,dm_responsible_name=:dm_responsible_name
+            ,dd_responsible_position=:dd_responsible_position
+            ,dd_responsible_name=:dd_responsible_name
+            ,chs_position1=:chs_position1
+            ,chs_name1=:chs_name1
+            ,chs_position2=:chs_position2
+            ,chs_name2=:chs_name2
+            ,remarks_pay=:remarks_pay
+            ,status_cd=:status_cd
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -663,6 +717,26 @@ try{
     $a_stmt->bindParam(':payment_leaving_daily_auto', $_POST['inp_wariai_taijyo_c1'], PDO::PARAM_STR);
     $a_stmt->bindParam(':payment_leaving_daily_manual', $_POST['inp_wariai_taijyo_c2'], PDO::PARAM_STR);
 
+    //追加項目
+    com_pdo_bindValue($a_stmt, ':contact_date_org', $_POST['contact_date_org']);
+    $a_stmt->bindParam(':organization', $_POST['organization'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dd_name', $_POST['dd_name'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dd_branch', $_POST['dd_branch'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dd_address', $_POST['dd_address'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dd_tel', $_POST['dd_tel'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':ip_position', $_POST['ip_position'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':ip_name', $_POST['ip_name'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dm_responsible_position', $_POST['dm_responsible_position'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dm_responsible_name', $_POST['dm_responsible_name'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dd_responsible_position', $_POST['dd_responsible_position'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':dd_responsible_name', $_POST['dd_responsible_name'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':chs_position1', $_POST['chs_position1'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':chs_name1', $_POST['chs_name1'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':chs_position2', $_POST['chs_position2'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':chs_name2', $_POST['chs_name2'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':remarks_pay', $_POST['remarks_pay'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':status_cd', $_POST['status_cd'], PDO::PARAM_STR);
+        
     if ($a_act == 'e'){
         com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
         com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));

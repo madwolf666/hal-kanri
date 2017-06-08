@@ -56,6 +56,7 @@ $payment_hourly_monthly = "";
 $payment_settlement_closingday = "";
 $payment_settlement_paymentday = "";
 $remarks = "";
+$remarks_pay = "";
 $claim_contract_form = "";
 
 $payment_absence_deduction_subject = "";
@@ -111,6 +112,7 @@ function set_10400_fromDB($a_result)
     $GLOBALS['payment_settlement_closingday'] = $a_result['payment_settlement_closingday'];
     $GLOBALS['payment_settlement_paymentday'] = $a_result['payment_settlement_paymentday'];
     $GLOBALS['remarks'] = $a_result['remarks'];
+    $GLOBALS['remarks_pay'] = $a_result['remarks_pay'];
     $GLOBALS['claim_contract_form'] = $a_result['claim_contract_form'];
     
     $GLOBALS['payment_absence_deduction_subject'] = $a_result['payment_absence_deduction_subject'];

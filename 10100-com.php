@@ -190,6 +190,25 @@ $inp_wariai_nyujyo_c2 = "";
 $inp_wariai_taijyo_c1 = "";
 $inp_wariai_taijyo_c2 = "";
 
+$contact_date_org = "";
+$organization = "";
+$dd_name = "";
+$dd_branch = "";
+$dd_address = "";
+$dd_tel = "";
+$ip_position = "";
+$ip_name = "";
+$dm_responsible_position = "";
+$dm_responsible_name = "";
+$dd_responsible_position = "";
+$dd_responsible_name = "";
+$chs_position1 = "";
+$chs_name1 = "";
+$chs_position2 = "";
+$chs_name2 = "";
+$remarks_pay = "";
+$status_cd = "";
+
 if ($a_act == 'n'){
     if (isset($_GET['ENO'])) {
         $inp_engineer_no = $_GET['ENO'];
@@ -371,6 +390,26 @@ if ($a_act == 'n'){
                 $inp_wariai_nyujyo_c2 = $a_result['payment_middle_daily_manual'];
                 $inp_wariai_taijyo_c1 = $a_result['payment_leaving_daily_auto'];
                 $inp_wariai_taijyo_c2 = $a_result['payment_leaving_daily_manual'];
+                
+                $contact_date_org = com_replace_toDate($a_result['contact_date_org']);
+                $organization = $a_result['organization'];
+                $dd_name = $a_result['dd_name'];
+                $dd_branch = $a_result['dd_branch'];
+                $dd_address = $a_result['dd_address'];
+                $dd_tel = $a_result['dd_tel'];
+                $ip_position = $a_result['ip_position'];
+                $ip_name = $a_result['ip_name'];
+                $dm_responsible_position = $a_result['dm_responsible_position'];
+                $dm_responsible_name = $a_result['dm_responsible_name'];
+                $dd_responsible_position = $a_result['dd_responsible_position'];
+                $dd_responsible_name = $a_result['dd_responsible_name'];
+                $chs_position1 = $a_result['chs_position1'];
+                $chs_name1 = $a_result['chs_name1'];
+                $chs_position2 = $a_result['chs_position2'];
+                $chs_name2 = $a_result['chs_name2'];
+                $remarks_pay = $a_result['remarks_pay'];
+                $status_cd = $a_result['status_cd'];
+
             }
         } catch (PDOException $e){
             echo 'Error:'.$e->getMessage();

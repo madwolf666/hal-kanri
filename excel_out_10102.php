@@ -83,7 +83,7 @@ $obj_sheet->setCellValue("F43",$opt_m_contract_yesno_b1);
 $obj_sheet->setCellValue("N43",$opt_m_contract_yesno_b2);
 $obj_sheet->setCellValue("F44",$opt_m_contract_yesno_b3);
 $obj_sheet->setCellValue("N44",$opt_m_contract_yesno_b4);
-$obj_sheet->setCellValue("C46",$inp_biko);
+$obj_sheet->setCellValue("C60",$inp_biko);
 
 $obj_sheet->setCellValue("Z2",$opt_contract_kind);
 $obj_sheet->setCellValue("Z3",$inp_keiyaku_no);
@@ -166,6 +166,25 @@ $obj_sheet->setCellValue("AR26",$inp_wariai_nyujyo_c2);
 
 $obj_sheet->setCellValue("AR30",$inp_wariai_taijyo_c1);
 $obj_sheet->setCellValue("AR31",$inp_wariai_taijyo_c2);
+
+//追加項目
+$obj_sheet->setCellValue("H46",$contact_date_org);
+$obj_sheet->setCellValue("R47",$dd_name);
+$obj_sheet->setCellValue("AC47",$dd_branch);
+$obj_sheet->setCellValue("R49",$organization);
+$obj_sheet->setCellValue("R51",$dd_address);
+$obj_sheet->setCellValue("R53",$dd_tel);
+$obj_sheet->setCellValue("R54",$ip_position);
+$obj_sheet->setCellValue("AC54",$ip_name);
+$obj_sheet->setCellValue("R55",$dd_responsible_position);
+$obj_sheet->setCellValue("AC55",$dd_responsible_name);
+$obj_sheet->setCellValue("R56",$dm_responsible_position);
+$obj_sheet->setCellValue("AC56",$dm_responsible_name);
+$obj_sheet->setCellValue("R57",$chs_position2);
+$obj_sheet->setCellValue("AC57",$chs_name2);
+$obj_sheet->setCellValue("R58",$chs_position1);
+$obj_sheet->setCellValue("AC58",$chs_name1);
+$obj_sheet->setCellValue("V60",$remarks_pay);
 
 header("Content-Type: application/vnd.ms-excel");
 //header("Content-Type: application/octet-stream");

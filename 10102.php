@@ -777,22 +777,6 @@ $a_selected = false;
                 </td>
             </tr>
         </table>
-        <br>
-<!-- 左5番目のテーブル -->
-        <table border="1" rules="all" width=340 height=200>
-            <tr>
-                <td colspan="2" class="yellow" height=200>備考</td>
-                <td colspan="10" class="remarks">
-                    <?php
-                        if ($a_act == ''){
-                            echo $inp_biko;
-                        }else{
-                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 96%;");
-                        }
-                    ?>
-                </td>
-            </tr>
-        </table>
     </li>
     <br>
 <!-- 右側のテーブル群 -->
@@ -1033,7 +1017,6 @@ $a_selected = false;
                 <td>&nbsp;</td>
             </tr>
         </table>
-        <br>
 <!-- 右3番目のテーブル -->
         <table border="1" rules="all" width=340 height=330>
             <tr>
@@ -1679,36 +1662,262 @@ $a_selected = false;
                 </td>
             </tr>
         </table>
-        <br>
-  <!-- 右5番目のテーブル -->
-          <table border="1" rules="all" width=340 height=200>
+    </li>
+</ul>
+<br>
+<ul class="" style="list-style:none; width:auto;">
+    <!-- bootstrapによる表示 -->
+    <li class="myli">
+    <table border="1" rules="all">
+	<tr>
+            <td class="yellow" width="60px;">抵触日</td>
+            <td class="yellow" width="140px;" nowrap="true">組織単位</td>
+            <td style="width:auto;">
+            <?php
+                if ($a_act == '') {
+                    echo $contact_date_org;
+                } else {
+                    echo com_make_tag_input($a_act, $contact_date_org, "contact_date_org", "width: 90%; text-align: center;");
+                }
+            ?>
+            </td>
+	</tr>
+	<tr>
+            <td rowspan="18" class="yellow" nowrap="true">派遣契約に<br>関する通知</td>
+            <td rowspan="8" class="yellow" nowrap="true">就業場所</td>
+            <td class="yellow">名称・部署</td>
+	</tr>
+	<tr>
+            <td class="">
+                <?php
+                    if ($a_act == '') {
+                        echo $dd_name;
+                    } else {
+                        echo com_make_tag_input($a_act, $dd_name, "dd_name", "width: 45%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $dd_branch;
+                    } else {
+                        echo com_make_tag_input($a_act, $dd_branch, "dd_branch", "width: 45%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td class="yellow" nowrap="true">組織単位</td>
+	</tr>
+	<tr>
+            <td class="">
+                <?php
+                    if ($a_act == '') {
+                        echo $organization;
+                    } else {
+                        echo com_make_tag_input($a_act, $organization, "organization", "width: 90%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td colspan="4" class="yellow" nowrap="true">所在地</td>
+	</tr>
+	<tr>
+            <td class="">
+                <?php
+                    if ($a_act == '') {
+                        echo $dd_address;
+                    } else {
+                        echo com_make_tag_input($a_act, $dd_address, "dd_address", "width: 90%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td colspan="4" class="yellow" nowrap="true">電話番号</td>
+	</tr>
+	<tr>
+            <td class="">
+                <?php
+                    if ($a_act == '') {
+                        echo $dd_tel;
+                    } else {
+                        echo com_make_tag_input($a_act, $dd_tel, "dd_tel", "width: 90%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td rowspan="2" class="yellow" nowrap="true">指揮命令者</td>
+            <td class="yellow" nowrap="true">職名・氏名</td>
+	</tr>
+	<tr>
+            <td class="">
+                <?php
+                    if ($a_act == '') {
+                        echo $ip_position;
+                    } else {
+                        echo com_make_tag_input($a_act, $ip_position, "ip_position", "width: 45%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $ip_name;
+                    } else {
+                        echo com_make_tag_input($a_act, $ip_name, "ip_name", "width: 45%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td rowspan="2" class="yellow" nowrap="true">派遣先責任者</td>
+            <td class="yellow" nowrap="true">職名・氏名</td>
+	</tr>
+	<tr>
+            <td class="">
+                <?php
+                    if ($a_act == '') {
+                        echo $dd_responsible_position;
+                    } else {
+                        echo com_make_tag_input($a_act, $dd_responsible_position, "dd_responsible_position", "width: 45%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $dd_responsible_name;
+                    } else {
+                        echo com_make_tag_input($a_act, $dd_responsible_name, "dd_responsible_name", "width: 45%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td rowspan="2" class="yellow" nowrap="true">派遣元責任者</td>
+            <td class="yellow" nowrap="true">職名・氏名</td>
+	</tr>
+	<tr>
+            <td class="hiddencell_r">
+                <?php
+                    if ($a_act == '') {
+                        echo $dm_responsible_position;
+                    } else {
+                        echo com_make_tag_input($a_act, $dm_responsible_position, "dm_responsible_position", "width: 45%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $dm_responsible_name;
+                    } else {
+                        echo com_make_tag_input($a_act, $dm_responsible_name, "dm_responsible_name", "width: 45%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td rowspan="4" class="yellow" nowrap="true">苦情の処理・申出先(1)</td>
+            <td class="yellow" nowrap="true">派遣先：職名・氏名</td>
+	</tr>
+	<tr>
+            <td class="hiddencell_r">
+                <?php
+                    if ($a_act == '') {
+                        echo $chs_position2;
+                    } else {
+                        echo com_make_tag_input($a_act, $chs_position2, "chs_position2", "width: 45%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $chs_name2;
+                    } else {
+                        echo com_make_tag_input($a_act, $chs_name2, "chs_name2", "width: 45%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+	<tr>
+            <td class="yellow" nowrap="true">派遣元：職名・氏名</td>
+	</tr>
+	<tr>
+            <td class="hiddencell_r">
+                <?php
+                    if ($a_act == '') {
+                        echo $chs_position1;
+                    } else {
+                        echo com_make_tag_input($a_act, $chs_position1, "chs_position1", "width: 45%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $chs_name1;
+                    } else {
+                        echo com_make_tag_input($a_act, $chs_name1, "chs_name1", "width: 45%; text-align: center;");
+                    }
+                ?>
+            </td>
+	</tr>
+    </table>
+    </li>
+</ui>    
+<br>
+<ul class="myul" style="list-style:none;">
+    <li class="myli">
+        <table border="1" rules="all" width=340 height=200>
             <tr>
-                <td colspan="3" height=19 width=80></td>
-                <td colspan="3" width=80></td>
-                <td colspan="3" width=80></td>
-                <td colspan="3" width=80></td>
-                <td colspan="3" width=80></td>
+                <td colspan="2" class="yellow" height=200>備考<br>(営業)</td>
+                <td colspan="10" class="remarks">
+                    <?php
+                        if ($a_act == ''){
+                            echo $inp_biko;
+                        }else{
+                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 96%;");
+                        }
+                    ?>
+                </td>
             </tr>
+        </table>
+    </li>
+    <!-- 右側のテーブル群 -->
+    <li class="myli">
+        <table border="1" rules="all" width=340 height=200>
             <tr>
-                <td colspan="3" height=78></td>
-                <td colspan="3"></td>
-                <td colspan="3"></td>
-                <td colspan="3"></td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td colspan="12" rowspan="2" class="hiddencell"></td>
-                <td colspan="3" height=19 width=80></td>
-            </tr>
-            <tr>
-                <td colspan="3" height=78></td>
+                <td colspan="2" class="yellow" height=200>備考<br>(管理)</td>
+                <td colspan="10" class="remarks">
+                    <?php
+                        if ($a_act == ''){
+                            echo $remarks_pay;
+                        }else{
+                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 96%;");
+                        }
+                    ?>
+                </td>
             </tr>
         </table>
     </li>
 </ul>
-
+<br>
+        <table border="1" rules="all" >
+            <tr>
+                <td class="yellow">契約作成ステータス</td>
+                <td class="">
+                    <?php
+                        if ($a_act == '') {
+                            echo $status_cd;
+                        } else {
+                            echo com_make_tag_option($a_act, $status_cd, "status_cd", $GLOBALS['g_DB_m_contract_status'], "width: 120px;", $a_selected);
+                        }
+                    ?>
+                </td>
+            </tr>
+        </table>
 </center>
-
+<br>
 <input type="hidden" id="cr_id" value="<?php echo $cr_id; ?>">
 
 <p class="c">

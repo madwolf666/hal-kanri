@@ -53,17 +53,14 @@ try{
 ,t2.welfare_pension		
 ,t2.jurisdiction		
 ,t2.specified_worker
-,t3.dd_office AS dd_place
-,t3.dd_address
-,t3.dd_tel
         ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " LEFT JOIN ";
+    /*$a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
-    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";*/
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10600', "");
@@ -222,7 +219,7 @@ try{
 
         //入力あり
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_office',$a_rec,1).">".$dd_office."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_place',$a_rec,1).">".$dd_place."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_name',$a_rec,1).">".$dd_name."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_address',$a_rec,1).">".$dd_address."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_tel',$a_rec,1).">".$dd_tel."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_fax',$a_rec,1).">".$dd_fax."</td>";

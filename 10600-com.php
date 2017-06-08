@@ -26,7 +26,7 @@ $engneer_name_phonetic = "";
 $customer_name = "";
 
 $dd_office = "";
-$dd_place = "";
+$dd_name = "";
 $dd_address = "";
 $dd_tel = "";
 $dd_fax = "";
@@ -85,7 +85,7 @@ function set_10600_fromDB($a_result)
     $GLOBALS['customer_name'] = $a_result['customer_name'];
 
     $GLOBALS['dd_office'] = $a_result['dd_office'];
-    $GLOBALS['dd_place'] = $a_result['dd_place'];
+    $GLOBALS['dd_name'] = $a_result['dd_name'];
     $GLOBALS['dd_address'] = $a_result['dd_address'];
     $GLOBALS['dd_tel'] = $a_result['dd_tel'];
     $GLOBALS['dd_fax'] = $a_result['dd_fax'];

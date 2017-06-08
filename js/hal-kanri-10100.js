@@ -180,6 +180,30 @@ $(function () {
     //条件検索
     $('#f_claim_agreement_start').datepicker({});
     $('#f_claim_agreement_end').datepicker({});
+    
+    //項目追加
+    $('#contact_date_org').datepicker({});
+    $('#contact_date_org').keyup(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
+    $('#contact_date_org').change(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
+
+    $('#organization').keyup(function(){check_value_changed_10102(1, 'organization', $('#organization').val(), '#organization');});
+    $('#dd_name').keyup(function(){check_value_changed_10102(1, 'dd_name', $('#dd_name').val(), '#dd_name');});
+    $('#dd_branch').keyup(function(){check_value_changed_10102(1, 'dd_branch', $('#dd_branch').val(), '#dd_branch');});
+    $('#dd_address').keyup(function(){check_value_changed_10102(1, 'dd_address', $('#dd_address').val(), '#dd_address');});
+    $('#dd_tel').keyup(function(){check_value_changed_10102(1, 'dd_tel', $('#dd_tel').val(), '#dd_tel');});
+    $('#ip_position').keyup(function(){check_value_changed_10102(1, 'ip_position', $('#ip_position').val(), '#ip_position');});
+    $('#ip_name').keyup(function(){check_value_changed_10102(1, 'ip_name', $('#ip_name').val(), '#ip_name');});
+    $('#dm_responsible_position').keyup(function(){check_value_changed_10102(1, 'dm_responsible_position', $('#dm_responsible_position').val(), '#dm_responsible_position');});
+    $('#dm_responsible_name').keyup(function(){check_value_changed_10102(1, 'dm_responsible_name', $('#dm_responsible_name').val(), '#dm_responsible_name');});
+    $('#dd_responsible_position').keyup(function(){check_value_changed_10102(1, 'dd_responsible_position', $('#dd_responsible_position').val(), '#dd_responsible_position');});
+    $('#dd_responsible_name').keyup(function(){check_value_changed_10102(1, 'dd_responsible_name', $('#dd_responsible_name').val(), '#dd_responsible_name');});
+    $('#chs_position1').keyup(function(){check_value_changed_10102(1, 'chs_position1', $('#chs_position1').val(), '#chs_position1');});
+    $('#chs_name1').keyup(function(){check_value_changed_10102(1, 'chs_name1', $('#chs_name1').val(), '#chs_name1');});
+    $('#chs_position2').keyup(function(){check_value_changed_10102(1, 'chs_position2', $('#chs_position2').val(), '#chs_position2');});
+    $('#chs_name2').keyup(function(){check_value_changed_10102(1, 'chs_name2', $('#chs_name2').val(), '#chs_name2');});
+    $('#remarks_pay').keyup(function(){check_value_changed_10102(1, 'remarks_pay', $('#remarks_pay').val(), '#remarks_pay');});
+
+    $('#status_cd').change(function(){check_value_changed_10102(1, 'status_cd', $('[name=status_cd] option:selected').text(), '#status_cd');});
 });
 
 function calc_bill_work_time()
@@ -1311,6 +1335,7 @@ function get_engineer_info()
 //契約レポート登録
 function regist_contract_report(h_act)
 {
+    //alert($('#contact_date_org').val());
     var a_idx = "";
     var a_sKind = "";
     if (h_act == 'n'){
@@ -1475,6 +1500,25 @@ function regist_contract_report(h_act)
             'opt_contract_yesno_p2': $('[name=opt_contract_yesno_p2] option:selected').text(),
             'opt_contract_yesno_p3': $('[name=opt_contract_yesno_p3] option:selected').text(),
             'opt_contract_yesno_p4': $('[name=opt_contract_yesno_p4] option:selected').text(),
+            
+            'contact_date_org': $('#contact_date_org').val(),
+            'organization': $('#organization').val(),
+            'dd_name': $('#dd_name').val(),
+            'dd_branch': $('#dd_branch').val(),
+            'dd_address': $('#dd_address').val(),
+            'dd_tel': $('#dd_tel').val(),
+            'ip_position': $('#ip_position').val(),
+            'ip_name': $('#ip_name').val(),
+            'dm_responsible_position': $('#dm_responsible_position').val(),
+            'dm_responsible_name': $('#dm_responsible_name').val(),
+            'dd_responsible_position': $('#dd_responsible_position').val(),
+            'dd_responsible_name': $('#dd_responsible_name').val(),
+            'chs_position1': $('#chs_position1').val(),
+            'chs_name1': $('#chs_name1').val(),
+            'chs_position2': $('#chs_position2').val(),
+            'chs_name2': $('#chs_name2').val(),
+            'remarks_pay': $('#remarks_pay').val(),
+            'status_cd': $('[name=status_cd] option:selected').text(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

@@ -67,11 +67,13 @@ $payment_hourly_monthly = "";
 $payment_settlement_closingday = "";
 $payment_settlement_paymentday = "";
 $remarks = "";
+$remarks_pay = "";
 
 $payment_settlement_closingday  = "";
 $payment_settlement_paymentday = "";
 
-$dd_office = "";
+$dd_name = "";
+$dd_branch = "";
 $dd_address = "";
 $dd_tel = "";
 
@@ -167,11 +169,13 @@ function set_10500_fromDB($a_result)
     $GLOBALS['payment_settlement_closingday'] = $a_result['payment_settlement_closingday'];
     $GLOBALS['payment_settlement_paymentday'] = $a_result['payment_settlement_paymentday'];
     $GLOBALS['remarks'] = $a_result['remarks'];
+    $GLOBALS['remarks_pay'] = $a_result['remarks_pay'];
     
     $GLOBALS['payment_settlement_closingday'] = $a_result['payment_settlement_closingday'];
     $GLOBALS['payment_settlement_paymentday'] = $a_result['payment_settlement_paymentday'];
 
-    $GLOBALS['dd_office'] = $a_result['dd_office'];
+    $GLOBALS['dd_name'] = $a_result['dd_name'];
+    $GLOBALS['dd_branch'] = $a_result['dd_branch'];
     $GLOBALS['dd_address'] = $a_result['dd_address'];
     $GLOBALS['dd_tel'] = $a_result['dd_tel'];
 

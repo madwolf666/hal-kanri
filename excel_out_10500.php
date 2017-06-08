@@ -32,27 +32,12 @@ try{
     $a_sql .= "
  t2.ag_no
 ,t2.publication
-,t2.dd_office
-,t2.dd_address
-,t2.dd_tel
-,t2.ip_position
-,t2.ip_name
-,t2.dm_responsible_position
-,t2.dm_responsible_name
-,t2.dd_responsible_position
-,t2.dd_responsible_name
 ,t2.person_post_no
 ,t2.person_address
 ,t2.person_birthday
-,t2.contact_date_org
 ,t2.contact_date_brn
-,t2.organization
 ,t2.conflict_prevention
 ,t2.thing1
-,t2.chs_position1
-,t2.chs_name1
-,t2.chs_position2
-,t2.chs_name2
 ,t2.chs_tel2
 ,t2.dd_responsible_tel
 ,t2.reserve1
@@ -63,11 +48,16 @@ try{
 ,t2.reserve6
 ,t2.reserve7
 ,t2.guide_ships
+,t3.sex
+,t3.skill_type
     ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
     $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
+    $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
     $a_sql .= " ORDER BY t2.ag_no;";
 
     $a_stmt = $a_conn->prepare($a_sql);
@@ -126,9 +116,9 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(37, $a_row, $payment_hourly_monthly);
         $obj_sheet->setCellValueByColumnAndRow(38, $a_row, $payment_settlement_closingday);
         $obj_sheet->setCellValueByColumnAndRow(39, $a_row, $payment_settlement_paymentday);
-        $obj_sheet->setCellValueByColumnAndRow(40, $a_row, $remarks);
+        $obj_sheet->setCellValueByColumnAndRow(40, $a_row, $remarks_pay);
 
-        $obj_sheet->setCellValueByColumnAndRow(41, $a_row, $dd_office);
+        $obj_sheet->setCellValueByColumnAndRow(41, $a_row, $dd_name);
         $obj_sheet->setCellValueByColumnAndRow(42, $a_row, $dd_address);
         $obj_sheet->setCellValueByColumnAndRow(43, $a_row, $dd_tel);
         $obj_sheet->setCellValueByColumnAndRow(44, $a_row, $ip_position);
@@ -157,7 +147,7 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(63, $a_row, $chs_name2);
         $obj_sheet->setCellValueByColumnAndRow(64, $a_row, $chs_tel2);
         $obj_sheet->setCellValueByColumnAndRow(65, $a_row, $dd_responsible_tel);
-        /*
+
         $obj_sheet->setCellValueByColumnAndRow(67, $a_row, $reserve1);
         $obj_sheet->setCellValueByColumnAndRow(68, $a_row, $reserve2);
         $obj_sheet->setCellValueByColumnAndRow(69, $a_row, $reserve3);
@@ -165,7 +155,7 @@ try{
         $obj_sheet->setCellValueByColumnAndRow(71, $a_row, $reserve5);
         $obj_sheet->setCellValueByColumnAndRow(72, $a_row, $reserve6);
         $obj_sheet->setCellValueByColumnAndRow(73, $a_row, $reserve7);
-        */
+
         $obj_sheet->setCellValueByColumnAndRow(66, $a_row, $guide_ships);
 
         $a_row++;

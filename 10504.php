@@ -27,27 +27,12 @@ if (isset($_GET['NO'])) {
         $a_sql .= "
      t2.ag_no
     ,t2.publication
-    ,t2.dd_office
-    ,t2.dd_address
-    ,t2.dd_tel
-    ,t2.ip_position
-    ,t2.ip_name
-    ,t2.dm_responsible_position
-    ,t2.dm_responsible_name
-    ,t2.dd_responsible_position
-    ,t2.dd_responsible_name
     ,t2.person_post_no
     ,t2.person_address
     ,t2.person_birthday
-    ,t2.contact_date_org
     ,t2.contact_date_brn
-    ,t2.organization
     ,t2.conflict_prevention
     ,t2.thing1
-    ,t2.chs_position1
-    ,t2.chs_name1
-    ,t2.chs_position2
-    ,t2.chs_name2
     ,t2.chs_tel2
     ,t2.dd_responsible_tel
     ,t2.reserve1
@@ -58,11 +43,16 @@ if (isset($_GET['NO'])) {
     ,t2.reserve6
     ,t2.reserve7
     ,t2.guide_ships
+    ,t3.sex
+    ,t3.skill_type
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
         $a_sql .= " LEFT JOIN ";
         $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
         $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
+        $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
         $a_sql .= " WHERE (t1.cr_id=:cr_id);";
 
         $a_stmt = $a_conn->prepare($a_sql);
@@ -111,101 +101,39 @@ if (isset($_GET['NO'])) {
     <table border="1" rules="all" width=100%>
 	<tr>
             <td width=20%>業務内容</td>
-            <td class="remarks" colspan="5" width=80%>
-                <font color="#ff0000">
-                    情報処理システム開発（１号）業務<br>
-                    ソフトウェア開発補助業務<br>
-                    派遣法施行令第４条第一項第一号<br>
-                    </font>
-            </td>
+            <td class="remarks" colspan="5" width=80%><?php echo $skill_type; ?></td>
 	</tr>
 	<tr>
             <td rowspan="4" width=20%>就業場所</td>
             <td class="remarks hiddencell_r hiddencell_b" width=10%>事業所名</td>
-            <td class="remarks hiddencell_b" colspan="4" width=70%>
-            <?php
-                if ($a_act == '') {
-                    echo $dd_office;
-                } else {
-                    echo com_make_tag_input($a_act, $dd_office, "dd_office", "width: 90%; text-align: center;");
-                }
-            ?>
-                </td>
+            <td class="remarks hiddencell_b" colspan="4" width=70%><?php echo $dd_name; ?></td>
 	</tr>
 	<tr>
             <td class="remarks hiddencell_r hiddencell_b">部署名</td>
-            <td class="remarks hiddencell_b" colspan="4"><font color="#ff0000">クライアント・システム開発事業部　技術部ビジネスソリューショングループ</font></td>
+            <td class="remarks hiddencell_b" colspan="4"><?php echo $dd_branch; ?></td>
 	</tr>
 	<tr>
             <td class="remarks hiddencell_r hiddencell_b">所在地</td>
-            <td class="remarks hiddencell_b" colspan="4">
-            <?php
-                if ($a_act == '') {
-                    echo $dd_address;
-                } else {
-                    echo com_make_tag_input($a_act, $dd_address, "dd_address", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td class="remarks hiddencell_b" colspan="4"><?php echo $dd_address; ?></td>
 	</tr>
 	<tr>
             <td class="remarks hiddencell_r">電話番号</td>
-            <td class="remarks" colspan="4">
-            <?php
-                if ($a_act == '') {
-                    echo $dd_tel;
-                } else {
-                    echo com_make_tag_input($a_act, $dd_tel, "dd_tel", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td class="remarks" colspan="4"><?php echo $dd_tel; ?></td>
 	</tr>
 	<tr>
             <td width=20%>組織単位</td>
-            <td class="remarks" colspan="5" width=80%>
-            <?php
-                if ($a_act == '') {
-                    echo $organization;
-                } else {
-                    echo com_make_tag_input($a_act, $organization, "organization", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td class="remarks" colspan="5" width=80%><?php echo $organization; ?></td>
 	</tr>
 	<tr>
             <td width=20%>指揮命令者</td>
             <td width=5% class="hiddencell_r">職名</td>
-            <td width=15% class="hiddencell_r remarks">
-            <?php
-                if ($a_act == '') {
-                    echo $ip_position;
-                } else {
-                    echo com_make_tag_input($a_act, $ip_position, "ip_position", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td width=15% class="hiddencell_r remarks"><?php echo $ip_position; ?></td>
             <td width=10% class="hiddencell_r">氏名</td>
-            <td width=50% class="remarks" colspan="2">
-            <?php
-                if ($a_act == '') {
-                    echo $ip_name;
-                } else {
-                    echo com_make_tag_input($a_act, $ip_name, "ip_name", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td width=50% class="remarks" colspan="2"><?php echo $ip_name; ?></td>
 	</tr>
 	<tr>
             <td width=20%>抵触日</td>
-            <td class="remarks" colspan="5" width=80%>
-            <?php
-                if ($a_act == '') {
-                    echo $contact_date_org;
-                } else {
-                    echo com_make_tag_input($a_act, $contact_date_org, "contact_date_org", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td class="remarks" colspan="5" width=80%><?php echo $contact_date_org; ?></td>
 	</tr>
 	<tr>
             <td width=20%>就業日</td>
@@ -233,48 +161,18 @@ if (isset($_GET['NO'])) {
 	<tr>
             <td width=20%>派遣先責任者</td>
             <td width=3% class="hiddencell_r">職名</td>
-            <td width=7% class="hiddencell_r">
-            <?php
-                if ($a_act == '') {
-                    echo $dd_responsible_position;
-                } else {
-                    echo com_make_tag_input($a_act, $dd_responsible_position, "dd_responsible_position", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td width=7% class="hiddencell_r"><?php echo $dd_responsible_position; ?></td>
             <td width=3% class="hiddencell_r">氏名</td>
-            <td width=17% class="hiddencell_r">
-            <?php
-                if ($a_act == '') {
-                    echo $dd_responsible_name;
-                } else {
-                    echo com_make_tag_input($a_act, $dd_responsible_name, "dd_responsible_name", "width: 90%; text-align: center;");
-                }
-            ?>
+            <td width=17% class="hiddencell_r"><?php echo $dd_responsible_name; ?>
             </td>
             <td width=50%>（電話：<font color="#ff0000">０６－４８０７－６６２０</font>）</td>
 	</tr>
 	<tr>
             <td width=20%>派遣元責任者</td>
             <td width=3% class="hiddencell_r">職名</td>
-            <td width=7% class="hiddencell_r">
-            <?php
-                if ($a_act == '') {
-                    echo $dm_responsible_position;
-                } else {
-                    echo com_make_tag_input($a_act, $dm_responsible_position, "dm_responsible_position", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td width=7% class="hiddencell_r"><?php echo $dm_responsible_position; ?></td>
             <td width=3% class="hiddencell_r">氏名</td>
-            <td width=17% class="hiddencell_r">
-            <?php
-                if ($a_act == '') {
-                    echo $dm_responsible_name;
-                } else {
-                    echo com_make_tag_input($a_act, $dm_responsible_name, "dm_responsible_name", "width: 90%; text-align: center;");
-                }
-            ?>
+            <td width=17% class="hiddencell_r"><?php echo $dm_responsible_name; ?>
             </td>
             <td width=50%>（電話：<font color="#ff0000">０６－６１３６－５７７２</font>）</td>
 	</tr>
@@ -287,48 +185,18 @@ if (isset($_GET['NO'])) {
             <td colspan="5" width=80%  class="remarks hiddencell_b">申込先</td>
 	</tr>
 	<tr>
-            <td width=15% class="hiddencell_r hiddencell_b">派遣先<font color="#ff0000">元？</font>：職名</td>
-            <td width=5% class="hiddencell_r hiddencell_b">
-            <?php
-                if ($a_act == '') {
-                    echo $chs_position1;
-                } else {
-                    echo com_make_tag_input($a_act, $chs_position1, "chs_position1", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td width=15% class="hiddencell_r hiddencell_b">派遣先：職名</td>
+            <td width=5% class="hiddencell_r hiddencell_b"><?php echo $chs_position2; ?></td>
             <td width=5% class="hiddencell_r hiddencell_b">氏名</td>
-            <td width=10% class="hiddencell_r hiddencell_b">
-            <?php
-                if ($a_act == '') {
-                    echo $chs_name1;
-                } else {
-                    echo com_make_tag_input($a_act, $chs_name1, "chs_name1", "width: 90%; text-align: center;");
-                }
-            ?>
+            <td width=10% class="hiddencell_r hiddencell_b"><?php echo $chs_name2; ?>
             </td>
             <td width=45% class="hiddencell_b">（電話：<font color=#ff0000">０６－４８０７－６６２０</font>）</td>
 	</tr>
 	<tr>
-            <td width=15% class="hiddencell_r">派遣先：職名</td>
-            <td width=5% class="hiddencell_r">
-            <?php
-                if ($a_act == '') {
-                    echo $chs_position2;
-                } else {
-                    echo com_make_tag_input($a_act, $chs_position2, "chs_position2", "width: 90%; text-align: center;");
-                }
-            ?>
-            </td>
+            <td width=15% class="hiddencell_r">派遣元：職名</td>
+            <td width=5% class="hiddencell_r"><?php echo $chs_position1; ?></td>
             <td width=5% class="hiddencell_r">氏名</td>
-            <td width=10% class="hiddencell_r">
-            <?php
-                if ($a_act == '') {
-                    echo $chs_name2;
-                } else {
-                    echo com_make_tag_input($a_act, $chs_name2, "chs_name2", "width: 90%; text-align: center;");
-                }
-            ?>
+            <td width=10% class="hiddencell_r"><?php echo $chs_name1; ?>
             </td>
             <td width=45%>（電話：<font color=#ff0000">０６－６１３６－５７７２</font>）</td>
 	</tr>
@@ -372,7 +240,32 @@ if (isset($_GET['NO'])) {
 	<tr>
             <td width=20% height=300>備考</td>
             <td class="remarks" colspan="5" width=80%>
-                <?php echo $remarks; ?>
+                         <?php
+                            if ($remarks != ''){
+                                echo '<br>'.com_convertEOL($remarks).'<br>';
+                            }
+                            if ($remarks_pay != ''){
+                                echo '<br>'.com_convertEOL($remarks_pay).'<br>';
+                            }
+                            if ($payment_middle_unit_price_2 != ''){
+                                echo '<br>【途中入場】';
+                                echo '<br>&nbsp;&nbsp;単価：'. com_db_number_format_symbol($payment_middle_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;上限時間：'.$payment_middle_upper_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;下限時間：'.$payment_middle_lower_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;控除単価：'. com_db_number_format_symbol($payment_middle_deduction_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;超過単価：'. com_db_number_format_symbol($payment_middle_overtime_unit_price_2);
+                                echo '<br>';
+                            }
+                            if ($payment_leaving_unit_price_2 != ''){
+                                echo '<br>【途中退場】';
+                                echo '<br>&nbsp;&nbsp;単価：'. com_db_number_format_symbol($payment_leaving_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;上限時間：'.$payment_leaving_upper_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;下限時間：'.$payment_leaving_lower_limit_2.'h';
+                                echo '<br>&nbsp;&nbsp;控除単価：'. com_db_number_format_symbol($payment_leaving_deduction_unit_price_2);
+                                echo '<br>&nbsp;&nbsp;超過単価：'. com_db_number_format_symbol($payment_leaving_overtime_unit_price_2);
+                                echo '<br>';
+                            }
+                         ?>
             </td>
 	</tr>
     </table>
