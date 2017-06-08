@@ -1714,6 +1714,7 @@ function excel_out_10107(h_no){
 //契約終了レポート登録
 function regist_contract_end_report(h_act, h_no)
 {
+    //alert($('#remarks_pay').val());
     var a_idx = "";
     var a_sKind = "";
     if (h_act == 'n'){
@@ -1753,6 +1754,7 @@ function regist_contract_end_report(h_act, h_no)
             'opt_contarct_personality': $('[name=opt_contarct_personality] option:selected').text(),
             'opt_contarct_projects_confirm': $('[name=opt_contarct_projects_confirm] option:selected').text(),
             'opt_contarct_engineer_list': $('[name=opt_contarct_engineer_list] option:selected').text(),
+            'remarks_pay': $('#remarks_pay').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

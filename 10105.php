@@ -63,6 +63,7 @@ if (isset($_GET['NO'])) {
             $opt_contarct_personality = $a_result['personality'];
             $opt_contarct_projects_confirm = $a_result['projects_confirm'];
             $opt_contarct_engineer_list = $a_result['engineer_list'];
+            $remarks_pay = $a_result['remarks_pay'];
         }
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
@@ -552,23 +553,6 @@ $a_selected = false;
                     </td>
             </tr>
         </table>
-        <br>
-        <!-- 右下2番目のテーブル -->
-        <table border="1" rules="all" width=340 height=230>
-            <tr>
-                <td colspan="2" width=40 class="yellow" height=230>備考</td>
-                <td colspan="10" width=300 class="remarks">
-                    <?php
-                        if ($a_act == ''){
-                            echo $inp_biko;
-                        }else{
-                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 96%;");
-                        }
-                    ?>
-                </td>
-            </tr>
-        </table>
-        <br>
     </li>
     <!-- 左下のテーブル群 -->
     <li class="myli">
@@ -603,7 +587,6 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4" width=68>&nbsp;</td>
             </tr>
         </table>
         <br>
@@ -630,9 +613,48 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" width=68></td>
             </tr>
         </table>
+    </li>
+</ul>
+<br>
+<ul style="list-style:none;" class="Responsive">
+    <li class="myli">
+        <!-- 右下1番目のテーブル -->
+        <table border="1" rules="all" width=340 height=230>
+            <tr>
+                <td colspan="2" width=60 class="yellow" height=230>備考<br>(営業)</td>
+                <td colspan="10" width=280 class="remarks">
+                    <?php
+                        if ($a_act == ''){
+                            echo $inp_biko;
+                        }else{
+                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 96%;");
+                        }
+                    ?>
+                </td>
+            </tr>
+        </table>
+        <br>
+    </li>
+    <!-- 左下のテーブル群 -->
+    <li class="myli">
+        <!-- 左下1番目のテーブル -->
+        <table border="1" rules="all" width=340 height=230>
+            <tr>
+                <td colspan="2" width=60 class="yellow" height=230>備考<br>(管理)</td>
+                <td colspan="10" width=280 class="remarks">
+                    <?php
+                        if ($a_act == ''){
+                            echo $remarks_pay;
+                        }else{
+                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 96%;");
+                        }
+                    ?>
+                </td>
+            </tr>
+        </table>
+        <br>
     </li>
 </ul>
 </center>  

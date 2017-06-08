@@ -53,6 +53,7 @@ try{
             ,engineer_list
             ,reg_id
             ,reg_date
+            ,remarks_pay
             ";
         $a_sql .= ") VALUES(";
         $a_sql .= "
@@ -76,6 +77,7 @@ try{
             ,:engineer_list
             ,:reg_id
             ,:reg_date
+            ,:remarks_pay
             ";
         $a_sql .= ");";
     }else{
@@ -100,6 +102,7 @@ try{
             ,engineer_list=:engineer_list
             ,upd_id=:upd_id
             ,upd_date=:upd_date
+            ,remarks_pay=:remarks_pay
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -124,6 +127,7 @@ try{
     $a_stmt->bindParam(':personality', $_POST['opt_contarct_personality'], PDO::PARAM_STR);
     $a_stmt->bindParam(':projects_confirm', $_POST['opt_contarct_projects_confirm'], PDO::PARAM_STR);
     $a_stmt->bindParam(':engineer_list', $_POST['opt_contarct_engineer_list'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':remarks_pay', $_POST['remarks_pay'], PDO::PARAM_STR);
 
     if ($a_isExists == false) {
         com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);

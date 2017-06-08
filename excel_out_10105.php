@@ -65,6 +65,7 @@ if (isset($_GET['NO'])) {
             $opt_contarct_personality = $a_result['personality'];
             $opt_contarct_projects_confirm = $a_result['projects_confirm'];
             $opt_contarct_engineer_list = $a_result['engineer_list'];
+            $remarks_pay = $a_result['remarks_pay'];
         }
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
@@ -187,12 +188,13 @@ $obj_sheet->setCellValue("Y37",$opt_contarct_end_reason3);
 $obj_sheet->setCellValue("E38",$inp_end_reason_detail);
 $obj_sheet->setCellValue("E46",$opt_contarct_from_now);
 $obj_sheet->setCellValue("N46",$opt_contarct_skill);
-$obj_sheet->setCellValue("C48",$inp_biko);
+$obj_sheet->setCellValue("C50",$inp_biko);
 $obj_sheet->setCellValue("W46",$opt_contarct_conversation);
 $obj_sheet->setCellValue("AA46",$opt_contarct_work_attitude);
 $obj_sheet->setCellValue("AE46",$opt_contarct_personality);
 $obj_sheet->setCellValue("W48",$opt_contarct_projects_confirm);
 $obj_sheet->setCellValue("AE48",$opt_contarct_engineer_list);
+$obj_sheet->setCellValue("U50",$remarks_pay);
 
 header("Content-Type: application/vnd.ms-excel");
 header("Content-Disposition: attachment;filename='".$GLOBALS['g_EXCEL_CONTRACT_10105']."'");

@@ -1665,10 +1665,11 @@ $a_selected = false;
     </li>
 </ul>
 <br>
+<!--
 <ul class="" style="list-style:none; width:auto;">
-    <!-- bootstrapによる表示 -->
     <li class="myli">
-    <table border="1" rules="all">
+-->
+        <table border="1" rules="all" style="min-width:340px; max-width:760px">
 	<tr>
             <td class="yellow" style="width:60px;">抵触日</td>
             <td class="yellow" style="width:140px;" nowrap="true">組織単位</td>
@@ -1863,8 +1864,10 @@ $a_selected = false;
             </td>
 	</tr>
     </table>
+<!--
     </li>
-</ui>    
+</ui>
+-->
 <br>
 <ul class="myul" style="list-style:none;">
     <li class="myli">
