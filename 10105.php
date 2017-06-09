@@ -33,6 +33,8 @@ $opt_contarct_personality = "";
 $opt_contarct_projects_confirm = "";
 $opt_contarct_engineer_list = "";
 
+$cnf_person = "";
+
 if (isset($_GET['NO'])) {
     $a_no = $_GET['NO'];
     try{
@@ -40,7 +42,14 @@ if (isset($_GET['NO'])) {
         $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
         $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_end_report']." WHERE (cr_id=:cr_id);";
+        //担当営業情報は契約レポートから持ってくる。
+        $a_sql = "SELECT t1.*";
+        $a_sql .= ",(SELECT reg_id FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE (cr_id=t1.cr_id)) AS reg_id";
+        $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=(SELECT reg_id FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE (cr_id=t1.cr_id)))) AS reg_person";
+        $a_sql .= ",(SELECT upd_id FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE (cr_id=t1.cr_id)) AS upd_id";
+        $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=(SELECT upd_id FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE (cr_id=t1.cr_id)))) AS upd_person";
+        $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.cnf_id)) AS cnf_person";
+        $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_end_report']." t1 WHERE (cr_id=:cr_id);";
         $a_stmt = $a_conn->prepare($a_sql);
         $a_stmt->bindParam(':cr_id', $a_no, PDO::PARAM_STR);
         $a_stmt->execute();
@@ -64,7 +73,19 @@ if (isset($_GET['NO'])) {
             $opt_contarct_projects_confirm = $a_result['projects_confirm'];
             $opt_contarct_engineer_list = $a_result['engineer_list'];
             $remarks_pay = $a_result['remarks_pay'];
+
+            $reg_id = $a_result['reg_id'];
+            $reg_person = $a_result['reg_person'];
+            $upd_id = $a_result['upd_id'];
+            $upd_person = $a_result['upd_person'];
+            $cnf_person = $a_result['cnf_person'];
+            
         }
+        if ($upd_person != ''){
+            $reg_id = $upd_id;
+            $reg_person = $upd_person;
+        }
+
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
         die();
@@ -290,7 +311,10 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" rowspan="4">&nbsp;</td>
+                <td colspan="3" rowspan="4">
+                    <?php echo $reg_person; ?>
+                    <input type="hidden" id="reg_id" value="<?php echo $reg_id; ?>">
+                </td>
             </tr>
             <tr>
                 <td colspan="4" class="gray" height=15>契約No</td>
@@ -438,7 +462,7 @@ $a_selected = false;
                 <td colspan="1" width=52><?php echo $opt_m_contract_time_inc_pd; ?></td>
                 <td colspan="3" width=52 class="gray">月次</td>
                 <td colspan="1" width=52><?php echo $opt_m_contract_time_inc_pm; ?></td>
-                <td colspan="3" width=80>寺西COO</td>
+                <td colspan="3" width=80>管理<br>本部</td>
             </tr>
             <tr>
                 <td colspan="5" class="gray" height=15>決済</td>
@@ -446,7 +470,7 @@ $a_selected = false;
                 <td colspan="1"><?php echo $opt_contract_tighten_p; ?></td>
                 <td colspan="3" class="gray">支払日</td>
                 <td colspan="1"><?php echo $opt_contract_pay_pay; ?></td>
-                <td colspan="3" rowspan="3">&nbsp;</td>
+                <td colspan="3" rowspan="3"><?php echo $cnf_person; ?></td>
             </tr>
             <tr>
                 <td colspan="12" class="hiddencell_l" height=15></td>

@@ -249,7 +249,7 @@ if (isset($_GET['NO'])) {
                                 echo '<br>'.com_convertEOL($remarks).'<br>';
                             }
                             if ($remarks_pay != ''){
-                                echo '<br>'.com_convertEOL($remarks_pay).'<br>';
+                                #echo '<br>'.com_convertEOL($remarks_pay).'<br>';
                             }
                             if ($payment_middle_unit_price_2 != ''){
                                 echo '<br>【途中入場】';

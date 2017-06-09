@@ -274,14 +274,17 @@ if (isset($_GET['NO'])) {
         <tr>
 	   <td height=400>備考</td>
 	   <td class="remarks" colspan="16">
-			 ・社会保険（健康保険、厚生年金、雇用保険）適用有り<br>
-			 ・基本給・諸手当うち、35%相当は定額割増賃金として支給する。<br>
+                <!-- ・源泉所得税控除<br --> 
+                ・社会保険（健康保険、厚生年金、雇用保険）適用有り<br>
+                <?php if ($payment_normal_calculation_2 != '時給'){ ?>
+                ・基本給のうち、35％相当は定額割増賃金として支給する（残業代換算で70時間相当）。<br>
+                <?php } ?>
                          <?php
                             if ($remarks != ''){
                                 echo '<br>'.com_convertEOL($remarks).'<br>';
                             }
                             if ($remarks_pay != ''){
-                                echo '<br>'.com_convertEOL($remarks_pay).'<br>';
+                                #echo '<br>'.com_convertEOL($remarks_pay).'<br>';
                             }
                             if ($payment_middle_unit_price_2 != ''){
                                 echo '<br>【途中入場】';

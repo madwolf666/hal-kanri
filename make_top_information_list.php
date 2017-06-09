@@ -21,6 +21,7 @@ try{
     $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.upd_id)) AS upd_person";
     $a_sql .= " FROM ".$GLOBALS['g_DB_m_information']." t1";
     $a_sql .= " ORDER BY publication DESC,idx DESC;";
+    #echo $a_sql;
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();

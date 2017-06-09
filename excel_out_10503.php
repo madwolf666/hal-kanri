@@ -103,7 +103,8 @@ $obj_sheet->setCellValue("AB29", $payment_settlement_paymentday);
 $obj_sheet->setCellValue("W31", $payment_settlement_closingday);
 $obj_sheet->setCellValue("AB31", $payment_settlement_paymentday);
 
-com_setValue_Date($contact_date_org,  $obj_sheet, "H31", "yyyy年MM月dd日");
+$obj_sheet->setCellValue("H31", $contact_date_org);
+
 $obj_sheet->setCellValue("Q33", $dd_name);
 $obj_sheet->setCellValue("X33", $dd_branch);
 $obj_sheet->setCellValue("Q35", $organization);
@@ -122,12 +123,16 @@ $obj_sheet->setCellValue("U47", $chs_name2);
 $obj_sheet->setCellValue("Q49", $chs_position1);
 $obj_sheet->setCellValue("U49", $chs_name1);
 
+if ($payment_normal_calculation_2 == '時給'){
+    $obj_sheet->setCellValue("E70", "");
+}
+
 $a_biko= "";
 if ($remarks != ''){
     $a_biko .= chr(13).$remarks.chr(13);
 }
 if ($remarks_pay != ''){
-    $a_biko .= chr(13).$remarks_pay.chr(13);
+    #$a_biko .= chr(13).$remarks_pay.chr(13);
 }
 if ($payment_middle_unit_price_2 != ''){
     $a_biko .= chr(13).'【途中入場】';
@@ -148,9 +153,9 @@ if ($payment_leaving_unit_price_2 != ''){
     $a_biko .= chr(13);
 }
 
-$obj_sheet->setCellValue("E70", $a_biko);
+$obj_sheet->setCellValue("E71", $a_biko);
 
-com_setValue_Date($publication,  $obj_sheet, "B84", "yyyy年MM月dd日");
+com_setValue_Date($publication,  $obj_sheet, "B85", "yyyy年MM月dd日");
 
 header("Content-Type: application/vnd.ms-excel");
 header("Content-Disposition: attachment;filename='".$GLOBALS['g_EXCEL_CONTRACT_10503']."'");

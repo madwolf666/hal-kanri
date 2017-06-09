@@ -45,8 +45,8 @@ function check_m_user_input(h_idx){
     //--------------------------------------------------------------------------
     //必須チェック
     //--------------------------------------------------------------------------
-    if (!check_IsRequired("#txt_branch", "部署が入力されていません！"))
-        return false;
+    /*if (!check_IsRequired("#txt_branch", "部署が入力されていません！"))
+        return false;*/
     if (!check_IsRequired("#txt_person", "名前が入力されていません！"))
         return false;
     if (!check_IsRequired("#txt_pass", "パスワードが入力されていません！"))
@@ -62,10 +62,10 @@ function check_m_user_input(h_idx){
         async: false,
         data:{
             'idx': a_idx,
-            'txt_branch': $('#txt_branch').val(),
-            'txt_person': $('#txt_person').val(),
-            'txt_pass':  $('#txt_pass').val(),
-            'cmb_auth': a_auth
+            'base_cd': $('[name=base_cd]').val(),
+            'department_cd': $('[name=department_cd]').val(),
+            'person':  $('#person').val(),
+            'pass':  $('#pass').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

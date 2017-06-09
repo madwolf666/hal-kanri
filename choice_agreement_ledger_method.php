@@ -27,14 +27,22 @@ try{
         $a_sRet = $a_result['contract_number']." ".$a_result['engineer_number']." ".$a_result['engineer_name']."<br>";
         $a_sRet .= "<table border='0'>";
         $a_sRet .= "<tr>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10502']."&ACT=e&NO=".$a_result['cr_id']."'>労働契約書へ</a></td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10503']."&ACT=e&NO=".$a_result['cr_id']."'>労働契約書（再発行）へ</a></td>";
-        $a_sRet .= "</tr>";
-        $a_sRet .= "<tr>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10504']."&ACT=e&NO=".$a_result['cr_id']."'>就業条件明示書へ</a></td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>&nbsp;</a></td>";
+
+        if ($a_result['payment_contract_form'] == '契'){
+            if ($a_result['claim_contract_form'] != '派遣'){
+                //契約社員で、かつ派遣以外の場合は、労働契約書
+                $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10502']."&ACT=e&NO=".$a_result['cr_id']."'>労働契約書へ</a></td>";
+            }else{
+                //契約社員で、かる派遣の場合は、労働契約書（再発行）
+                $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10503']."&ACT=e&NO=".$a_result['cr_id']."'>労働契約書へ</a></td>";
+            }
+        }elseif ($a_result['payment_contract_form'] == '正'){
+            //正社員の場合は、就業条件明示書
+            $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10504']."&ACT=e&NO=".$a_result['cr_id']."'>就業条件明示書へ</a></td>";
+        }else{
+            $a_sRet .= "<td><font color='#ff0000'>選択できる機能はありません</font></td>";
+        }
+        
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";

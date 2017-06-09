@@ -15,6 +15,11 @@ if (!isset($_GET['ACT'])){
     $a_act = $_GET['ACT'];
 }
 
+$base_cd = "";
+$department_cd = "";
+$person = "";
+$pass = "";
+
 if ($a_act == 'e'){
     try{
         //DBからユーザ情報取得
@@ -28,11 +33,20 @@ if ($a_act == 'e'){
         $a_stmt->execute();
 
         $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
+        
+        $base_cd = $a_result['base_cd'];
+        $department_cd = $a_result['department_cd'];
+        $person = $a_result['person'];
+        $pass = $a_result['pass'];
+
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
         die();
     }
 }
+
+$a_selected = false;
+
 ?>
 
 <link rel="stylesheet" href="css/hal-kanri-common.css">
@@ -45,29 +59,35 @@ if ($a_act == 'e'){
 <form action="" method="post">
     <table class='tbl_list'>
         <tr>
+            <td class='td_titlee'><font color='#ffffff'>拠点</font></td>
+            <td class='td_line'>
+                <?php
+                echo com_make_tag_option2($a_act, $base_cd, "base_cd", $GLOBALS['g_DB_m_base'], "", $a_selected);
+                ?>
+            </td>
+        </tr>
+        <tr>
             <td class='td_titlee'><font color='#ffffff'>部署</font></td>
-            <td class='td_line'><input type='text' size='36' maxlength='100' id='txt_branch' value='<?php if ($a_act == 'e'){echo $a_result['branch'];} ?>'>
+            <td class='td_line'>
+                <?php
+                echo com_make_tag_option2($a_act, $department_cd, "department_cd", $GLOBALS['g_DB_m_department'], "", $a_selected);
+                ?>
             </td>
         </tr>
         <tr>
             <td class='td_titlee'><font color='#ffffff'>名前</font></td>
-            <td class='td_line'><input type='text' size='36' maxlength='100' id='txt_person' value='<?php if ($a_act == 'e'){echo $a_result['person'];} ?>'>
-            </td>
-        </tr>
-        <tr>
-            <td class='td_titlee'><font color='#ffffff'>権限</font></td>
             <td class='td_line'>
-                <select name='cmb_auth'>
-                    <option value='0' <?php if ($a_act == 'e'){if ($a_result['auth']==0){echo 'selected';}} ?>>特権</option>
-                    <option value='1' <?php if ($a_act == 'e'){if ($a_result['auth']==1){echo 'selected';}} ?>>ユーザ１</option>
-                    <option value='2' <?php if ($a_act == 'e'){if ($a_result['auth']==2){echo 'selected';}} ?>>ユーザ２</option>
-                    <option value='3' <?php if ($a_act == 'e'){if ($a_result['auth']==3){echo 'selected';}} ?>>ユーザ３</option>
-                </select>
+                <?php
+                echo com_make_tag_input($a_act, $person, "person", "width: 260px; text-align: left;");
+                ?>
             </td>
         </tr>
         <tr>
             <td class='td_titlee'><font color='#ffffff'>パスワード</font></td>
-            <td class='td_line'><input type='text' size='36' maxlength='16' id='txt_pass' value='<?php if ($a_act == 'e'){echo $a_result['pass'];} ?>'>
+            <td class='td_line'>
+                <?php
+                echo com_make_tag_input($a_act, $pass, "pass", "width: 260px; text-align: left;");
+                ?>
             </td>
         </tr>
     </table>

@@ -207,9 +207,13 @@ $chs_position2 = "";
 $chs_name2 = "";
 $remarks_pay = "";
 $status_cd = "";
+$status_cd_num = "";
 
+$reg_id = "";
 $reg_person = "";
+$upd_id = "";
 $upd_person = "";
+$cnf_person = "";
 
 if ($a_act == 'n'){
     if (isset($_GET['ENO'])) {
@@ -244,8 +248,10 @@ if ($a_act == 'n'){
             $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $a_sql = "SELECT t1.*";
+            $a_sql .= ",(SELECT idx FROM ".$GLOBALS['g_DB_m_contract_status']." WHERE (m_name=t1.status_cd)) AS status_cd_num";
             $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.reg_id)) AS reg_person";
             $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.upd_id)) AS upd_person";
+            $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.cnf_id)) AS cnf_person";
             $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1 WHERE (cr_id=:cr_id);";
             $a_stmt = $a_conn->prepare($a_sql);
             $a_stmt->bindParam(':cr_id', $a_no, PDO::PARAM_STR);
@@ -414,9 +420,13 @@ if ($a_act == 'n'){
                 $chs_name2 = $a_result['chs_name2'];
                 $remarks_pay = $a_result['remarks_pay'];
                 $status_cd = $a_result['status_cd'];
+                $status_cd_num = $a_result['status_cd_num'];
 
+                $reg_id = $a_result['reg_id'];
                 $reg_person = $a_result['reg_person'];
+                $upd_id = $a_result['upd_id'];
                 $upd_person = $a_result['upd_person'];
+                $cnf_person = $a_result['cnf_person'];
 
             }
         } catch (PDOException $e){

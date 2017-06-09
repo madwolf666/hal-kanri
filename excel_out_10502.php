@@ -102,12 +102,16 @@ $obj_sheet->setCellValue("E22", $work_start."から".$work_end.chr(13)."（う�
 $obj_sheet->setCellValue("W29", $payment_settlement_closingday);
 $obj_sheet->setCellValue("W31", $payment_settlement_paymentday);
 
+if ($payment_normal_calculation_2 == '時給'){
+    $obj_sheet->setCellValue("E40", "");
+}
+
 $a_biko= "";
 if ($remarks != ''){
     $a_biko .= chr(13).$remarks.chr(13);
 }
 if ($remarks_pay != ''){
-    $a_biko .= chr(13).$remarks_pay.chr(13);
+    #$a_biko .= chr(13).$remarks_pay.chr(13);
 }
 if ($payment_middle_unit_price_2 != ''){
     $a_biko .= chr(13).'【途中入場】';

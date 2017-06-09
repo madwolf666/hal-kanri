@@ -21,6 +21,7 @@ try{
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //レコードが存在するかチェック
+    //担当営業情報は契約レポートから持ってくる。
     $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_end_report']." WHERE (cr_id=:cr_id);";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
@@ -54,6 +55,8 @@ try{
             ,reg_id
             ,reg_date
             ,remarks_pay
+            ,cnf_id
+            ,cnf_date
             ";
         $a_sql .= ") VALUES(";
         $a_sql .= "
@@ -78,6 +81,8 @@ try{
             ,:reg_id
             ,:reg_date
             ,:remarks_pay
+            ,:cnf_id
+            ,:cnf_date
             ";
         $a_sql .= ");";
     }else{
@@ -103,6 +108,8 @@ try{
             ,upd_id=:upd_id
             ,upd_date=:upd_date
             ,remarks_pay=:remarks_pay
+            ,cnf_id=:cnf_id
+            ,cnf_date=:cnf_date
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -130,13 +137,23 @@ try{
     $a_stmt->bindParam(':remarks_pay', $_POST['remarks_pay'], PDO::PARAM_STR);
 
     if ($a_isExists == false) {
-        com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':reg_id', $_POST['reg_id']);
+        #com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
         com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
     } else {
-        com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':upd_id', $_POST['reg_id']);
+        #com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
         com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
     }
 
+    if ($_SESSION['hal_department_cd'] == 3){
+        //管理部門でログイン
+        com_pdo_bindValue($a_stmt, ':cnf_id', $_SESSION['hal_idx']);
+        com_pdo_bindValue($a_stmt, ':cnf_date', date("Y/m/d"));
+    }else{
+        com_pdo_bindValue($a_stmt, ':cnf_id', null);
+        com_pdo_bindValue($a_stmt, ':cnf_date', null);
+    }
     $a_stmt->execute();
 
     $a_sRet = 'OK';

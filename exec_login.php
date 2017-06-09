@@ -22,9 +22,12 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_m_user'];
+    $a_sql = "SELECT t1.*";
+    $a_sql .= ",(SELECT m_name FROM m_base WHERE (idx=t1.base_cd)) AS base_name";
+    $a_sql .= ",(SELECT m_name FROM m_department WHERE (idx=t1.department_cd)) AS department_name";
+    $a_sql .= ",(SELECT auth FROM m_department WHERE (idx=t1.department_cd)) AS auth";
+    $a_sql .= " FROM ".$GLOBALS['g_DB_m_user']." t1";
     $a_sql .= " WHERE (pass=:pass);";
-    //$a_sql .= " WHERE (pass='".$a_pass."')";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();
@@ -35,23 +38,32 @@ try{
 
         //認証OKの場合は、セッション変数にパスワードを保存する。
         $_SESSION["hal_idx"] = $a_result['idx'];
-        $_SESSION["hal_branch"] = $a_result['branch'];
+        $_SESSION["hal_base_cd"] = $a_result['base_cd'];
+        $_SESSION["hal_department_cd"] = $a_result['department_cd'];
         $_SESSION["hal_person"] = $a_result['person'];
         $_SESSION["hal_auth"] = $a_result['auth'];
+        $_SESSION["hal_base_name"] = $a_result['base_name'];
+        $_SESSION["hal_department_name"] = $a_result['department_name'];
 
         //cookie
         if ($a_remember == 'true'){
             //cookieに保存
             setcookie('hal_idx', $a_result['idx'], time() + 60 * 60 * 24 * 14);
-            setcookie('hal_branch', $a_result['branch'], time() + 60 * 60 * 24 * 14);
+            setcookie('hal_base_cd', $a_result['base_cd'], time() + 60 * 60 * 24 * 14);
+            setcookie('hal_department_cd', $a_result['department_cd'], time() + 60 * 60 * 24 * 14);
             setcookie('hal_person', $a_result['person'], time() + 60 * 60 * 24 * 14);
             setcookie('hal_auth', $a_result['auth'], time() + 60 * 60 * 24 * 14);
+            setcookie('hal_base_name', $a_result['base_name'], time() + 60 * 60 * 24 * 14);
+            setcookie('hal_department_name', $a_result['department_name'], time() + 60 * 60 * 24 * 14);
         }else{
             //cookieから削除
             setcookie('hal_idx', '', time() - 1800);
-            setcookie('hal_branch', '', time() - 1800);
+            setcookie('hal_base_cd', '', time() - 1800);
+            setcookie('hal_department_cd', '', time() - 1800);
             setcookie('hal_person', '', time() - 1800);
             setcookie('hal_auth', '', time() - 1800);
+            setcookie('hal_base_name', '', time() - 1800);
+            setcookie('hal_department_name', '', time() - 1800);
         }
         
         $a_sRet = 'OK';

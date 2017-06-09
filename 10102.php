@@ -35,6 +35,19 @@ if ($a_act == 'c') {
     $txt_kyakusaki_kaishi = $inp_kyakusaki_kaishi;
     $txt_kyakusaki_syuryo = "";
     $a_act = 'n';
+}else{
+    if ($a_act != 'n'){
+        #管理本部かレポート作成者以外は更新不可
+        if (($reg_id == $_SESSION['hal_idx']) || ($_SESSION['hal_department_cd'] == 3)){
+        }else{
+            $a_act = '';
+        }
+        #echo $status_cd_num;
+        #管理本部以外で、かつステータスが「管理承認」の場合は更新不可
+        if (($_SESSION['hal_department_cd'] != 3) && ($status_cd_num == 2)){
+            $a_act = '';
+        }
+    }
 }
 
 $a_selected = false;
@@ -807,7 +820,15 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" rowspan="4">&nbsp;</td>
+                <td colspan="3" rowspan="4">
+                    <?php
+                        if ($upd_person != ''){
+                            echo $upd_person;
+                        }else{
+                            echo $reg_person;
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>発行日</td>
@@ -1591,7 +1612,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3">寺西COO</td>
+                <td colspan="3">管理<br>本部</td>
             </tr>
             <tr>
                 <td colspan="5" class="yellow" height=15>決済</td>
@@ -1615,7 +1636,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" rowspan="3">&nbsp;</td>
+                <td colspan="3" rowspan="3"><?php echo $cnf_person; ?></td>
             </tr>
             <tr>
                 <td colspan="7" class="yellow" height=15><font size="-2" nowrap="true">欠勤控除対象者</font></td>
@@ -1913,7 +1934,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $status_cd;
                         } else {
-                            echo com_make_tag_option($a_act, $status_cd, "status_cd", $GLOBALS['g_DB_m_contract_status'], "width: 120px;", $a_selected);
+                            echo com_make_tag_option_contract_status($a_act, $status_cd, "status_cd", $GLOBALS['g_DB_m_contract_status'], "width: 120px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -1926,15 +1947,22 @@ $a_selected = false;
 <p class="c">
 <?php if ($a_act == ''){ ?>
 <input type="button" value="Excelへ出力" onclick="return excel_out_10102(<?php echo $cr_id; ?>);">
+<?php     if ($_SESSION["hal_auth"] <= 0) { ?>
 <input type="button" value="契約終了レポート" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10105']; ?>&NO=<?php echo $cr_id; ?>'">
+<?php     } ?>
 <input type="button" value="見積書" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10107']; ?>&NO=<?php echo $cr_id; ?>'">
 <?php } elseif ($a_act == 'n'){ ?>
 <input type="button" value="登録" onclick="return regist_contract_report('n');">
 <?php } else { ?>
 <!-- ↓後でコメントアウトする -->
+<!-- 管理部かレポート作成者以外は更新できない　-->
+<?php if (($reg_id == $_SESSION['hal_idx']) || ($_SESSION['hal_department_cd'] == 3)){ ?>
 <input type="button" value="更新" onclick="return regist_contract_report('e');">
+<?php } ?>
 <input type="button" value="Excelへ出力" onclick="return excel_out_10102(<?php echo $cr_id; ?>);">
+<?php     if ($_SESSION["hal_auth"] <= 0) { ?>
 <input type="button" value="契約終了レポート" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10105']; ?>&NO=<?php echo $cr_id; ?>'">
+<?php } ?>
 <input type="button" value="見積書" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10107']; ?>&NO=<?php echo $cr_id; ?>'">
 <!-- ↑後でコメントアウトする -->
 <?php } ?>

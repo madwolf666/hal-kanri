@@ -46,7 +46,7 @@ require_once('./global.php');
 
 <header>
 <?php
-echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_SESSION["hal_branch"]." ".$_SESSION["hal_person"]." is logined.</p>";
+echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_SESSION["hal_base_name"]." ".$_SESSION["hal_department_name"]." ".$_SESSION["hal_person"]."</p>";
 ?>
 <h1 id="logo"><a href="./index.php"><img src="images/logo.png" alt="HAL社内管理システム"></a></h1>
 <!--大きな端末用（901px以上端末）メニュー-->
@@ -56,14 +56,16 @@ echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_S
 <li class="arrow1"><a href="">台帳関連</a>
     <ul class="ddmenu">
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>">契約管理全体</a></li>
+<?php if ($_SESSION["hal_auth"] <= 0) { ?>
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10200']; ?>">給与台帳</a></li>
 	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>">検収台帳</a></li>
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10400']; ?>">注文書台帳</a></li>
 	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>">契約書台帳</a></li>
 	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10600']; ?>">派遣元台帳</a></li>
+<?php } ?>
     </ul>
 </li>
-<?php if ($_SESSION['hal_auth'] == 0){ ?>
+
 <li class="arrow1"><a href="">マスタ情報</a>
     <ul class="ddmenu">
         <?php if ($_SESSION["hal_auth"] <= 0) { ?>
@@ -73,7 +75,7 @@ echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_S
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90200']; ?>">エンジニア情報</a></li>
     </ul>
 </li>
-<?php } ?>
+
 <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_LOGOUT_00000']; ?>">ログアウト</a></li>
 </ul>
 </nav>

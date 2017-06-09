@@ -112,7 +112,7 @@ if ($remarks != ''){
     $a_biko .= chr(13).$remarks.chr(13);
 }
 if ($remarks_pay != ''){
-    $a_biko .= chr(13).$remarks_pay.chr(13);
+    #$a_biko .= chr(13).$remarks_pay.chr(13);
 }
 if ($payment_middle_unit_price_2 != ''){
     $a_biko .= chr(13).'【途中入場】';

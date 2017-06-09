@@ -1594,6 +1594,7 @@ function regist_contract_report(h_act)
             'chs_name2': $('#chs_name2').val(),
             'remarks_pay': $('#remarks_pay').val(),
             'status_cd': $('[name=status_cd] option:selected').text(),
+            'status_cd_num': $('[name=status_cd] option:selected').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){
@@ -1755,6 +1756,7 @@ function regist_contract_end_report(h_act, h_no)
             'opt_contarct_projects_confirm': $('[name=opt_contarct_projects_confirm] option:selected').text(),
             'opt_contarct_engineer_list': $('[name=opt_contarct_engineer_list] option:selected').text(),
             'remarks_pay': $('#remarks_pay').val(),
+            'reg_id':$('#reg_id').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

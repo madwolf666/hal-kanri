@@ -29,15 +29,21 @@ try{
         $a_sRet .= "<tr>";
         $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=e&NO=".$a_result['cr_id']."'>契約レポート参照・更新へ</a></td>";
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a></td>";
-        $a_sRet .= "</tr>";
-        $a_sRet .= "<tr>";
         $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10107']."&NO=".$a_result['cr_id']."'>見積書へ</a></td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a></td>";
         $a_sRet .= "</tr>";
+
         $a_sRet .= "<tr>";
+        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a></td>";
+        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
+       $a_sRet .= "</tr>";
+ 
+        $a_sRet .= "<tr>";
+        if ($_SESSION["hal_auth"] <= 0) {
+            $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a></td>";
+        } else {
+            $a_sRet .= "<td>&nbsp;&nbsp;</td>";
+        }
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         $a_sRet .= "</tr>";

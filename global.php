@@ -18,40 +18,39 @@ $g_DB_name = "hal_kanri";
 $g_DB_uid = "root";
 $g_DB_pwd = "kanri999";
 
-$g_DB_m_user = "m_user";
-$g_DB_m_engineer = "m_engineer";
-
-$g_DB_m_contract_bill_form = "m_contract_bill_form";
-$g_DB_m_contract_calc = "m_contract_calc";
-$g_DB_m_contract_lower_limit = "m_contract_lower_limit";
-$g_DB_m_contract_upper_limit = "m_contract_upper_limit";
-$g_DB_m_contract_trunc_unit = "m_contract_trunc_unit";
-$g_DB_m_contract_time_inc = "m_contract_time_inc";
-$g_DB_m_contract_tighten = "m_contract_tighten";
-$g_DB_m_contract_bill_pay = "m_contract_bill_pay";
-$g_DB_m_contract_yesno = "m_contract_yesno";
-$g_DB_m_contract_kind = "m_contract_kind";
-$g_DB_m_contract_pay_form = "m_contract_pay_form";
-$g_DB_m_contract_reduction = "m_contract_reduction";
-$g_DB_m_contract_pay_pay = "m_contract_pay_pay";
-$g_DB_m_contract_tax_class = "m_contract_tax_class";
+$g_DB_m_base = "m_base";
 $g_DB_m_contract_absence_deduction = "m_contract_absence_deduction";
-
-$g_DB_m_contract_end_status = "m_contract_end_status";
-$g_DB_m_contract_replace = "m_contract_replace";
-$g_DB_m_contract_insurance_crad = "m_contract_insurance_crad";
+$g_DB_m_contract_bill_form = "m_contract_bill_form";
+$g_DB_m_contract_bill_pay = "m_contract_bill_pay";
+$g_DB_m_contract_calc = "m_contract_calc";
+$g_DB_m_contract_conversation = "m_contract_conversation";
 $g_DB_m_contract_employ_insurance = "m_contract_employ_insurance";
 $g_DB_m_contract_end_reason = "m_contract_end_reason";
+$g_DB_m_contract_end_status = "m_contract_end_status";
+$g_DB_m_contract_engineer_list = "m_contract_engineer_list";
 $g_DB_m_contract_from_now = "m_contract_from_now";
-$g_DB_m_contract_skill = "m_contract_skill";
-$g_DB_m_contract_conversation = "m_contract_conversation";
-$g_DB_m_contract_work_attitude = "m_contract_work_attitude";
+$g_DB_m_contract_insurance_crad = "m_contract_insurance_crad";
+$g_DB_m_contract_kind = "m_contract_kind";
+$g_DB_m_contract_lower_limit = "m_contract_lower_limit";
+$g_DB_m_contract_pay_form = "m_contract_pay_form";
+$g_DB_m_contract_pay_pay = "m_contract_pay_pay";
 $g_DB_m_contract_personality = "m_contract_personality";
 $g_DB_m_contract_projects_confirm = "m_contract_projects_confirm";
-$g_DB_m_contract_engineer_list = "m_contract_engineer_list";
-
-$g_DB_m_information = "m_information";
+$g_DB_m_contract_reduction = "m_contract_reduction";
+$g_DB_m_contract_replace = "m_contract_replace";
+$g_DB_m_contract_skill = "m_contract_skill";
 $g_DB_m_contract_status = "m_contract_status";
+$g_DB_m_contract_tax_class = "m_contract_tax_class";
+$g_DB_m_contract_tighten = "m_contract_tighten";
+$g_DB_m_contract_time_inc = "m_contract_time_inc";
+$g_DB_m_contract_trunc_unit = "m_contract_trunc_unit";
+$g_DB_m_contract_upper_limit = "m_contract_upper_limit";
+$g_DB_m_contract_work_attitude = "m_contract_work_attitude";
+$g_DB_m_contract_yesno = "m_contract_yesno";
+$g_DB_m_department = "m_department";
+$g_DB_m_engineer = "m_engineer";
+$g_DB_m_information = "m_information";
+$g_DB_m_user = "m_user";
 
 $g_DB_t_acceptance_ledger = "t_acceptance_ledger";
 $g_DB_t_agreement_ledger = "t_agreement_ledger";
@@ -164,15 +163,24 @@ $g_NOW_URI = $g_URL_ARRAY[count($g_URL_ARRAY)-1];
 //[2017.05.18]
 if ((isset($_COOKIE['hal_auth'])) &&
     (isset($_COOKIE['hal_person'])) &&
-    (isset($_COOKIE['hal_branch'])) &&
+    (isset($_COOKIE['hal_department_name'])) &&
+    (isset($_COOKIE['hal_base_name'])) &&
+    (isset($_COOKIE['hal_department_cd'])) &&
+    (isset($_COOKIE['hal_base_cd'])) &&
     (isset($_COOKIE['hal_idx']))) {
     
     if (($_COOKIE['hal_auth'] != '') &&
         ($_COOKIE["hal_person"] != '') &&
-        ($_COOKIE["hal_branch"] != '') &&
+        ($_COOKIE["hal_department_name"] != '') &&
+        ($_COOKIE["hal_base_name"] != '') &&
+        ($_COOKIE["hal_department_cd"] != '') &&
+        ($_COOKIE["hal_base_cd"] != '') &&
         ($_COOKIE["hal_idx"] != '')){
         $_SESSION["hal_idx"] = $_COOKIE['hal_idx'];
-        $_SESSION["hal_branch"] = $_COOKIE['hal_branch'];
+        $_SESSION["hal_base_cd"] = $_COOKIE['hal_base_cd'];
+        $_SESSION["hal_department_cd"] = $_COOKIE['hal_department_cd'];
+        $_SESSION["hal_base_name"] = $_COOKIE['hal_base_name'];
+        $_SESSION["hal_department_name"] = $_COOKIE['hal_department_name'];
         $_SESSION["hal_person"] = $_COOKIE['hal_person'];
         $_SESSION["hal_auth"] = $_COOKIE['hal_auth'];
     }
@@ -182,12 +190,18 @@ if ($g_NOW_URI == 'login.php'){
     //ログイン画面
     if ((!isset($_SESSION['hal_auth'])) ||
         (!isset($_SESSION["hal_person"])) ||
-        (!isset($_SESSION["hal_branch"])) ||
+        (!isset($_SESSION["hal_department_name"])) ||
+        (!isset($_SESSION["hal_base_name"])) ||
+        (!isset($_SESSION["hal_department_cd"])) ||
+        (!isset($_SESSION["hal_base_cd"])) ||
         (!isset($_SESSION["hal_idx"]))){
     }else{
         if (($_SESSION['hal_auth'] != '') &&
             ($_SESSION["hal_person"] != '') &&
-            ($_SESSION["hal_branch"] != '') &&
+            ($_SESSION["hal_department_name"] != '') &&
+            ($_SESSION["hal_base_name"] != '') &&
+            ($_SESSION["hal_department_cd"] != '') &&
+            ($_SESSION["hal_base_cd"] != '') &&
             ($_SESSION["hal_idx"] != '')){
             //ログイン画面へ遷移
             header('Location: ./index.php');
@@ -200,7 +214,10 @@ if ($g_NOW_URI == 'login.php'){
     //その他
     if ((!isset($_SESSION['hal_auth'])) ||
         (!isset($_SESSION["hal_person"])) ||
-        (!isset($_SESSION["hal_branch"])) ||
+        (!isset($_SESSION["hal_department_name"])) ||
+        (!isset($_SESSION["hal_base_name"])) ||
+        (!isset($_SESSION["hal_department_cd"])) ||
+        (!isset($_SESSION["hal_base_cd"])) ||
         (!isset($_SESSION["hal_idx"]))){
         //ログイン画面へ遷移
         header('Location: ./login.php');
@@ -208,7 +225,10 @@ if ($g_NOW_URI == 'login.php'){
     }else{
         if (($_SESSION['hal_auth'] == '') ||
             ($_SESSION["hal_person"] == '') ||
-            ($_SESSION["hal_branch"] == '') ||
+            ($_SESSION["hal_department_name"] == '') ||
+            ($_SESSION["hal_base_name"] == '') ||
+            ($_SESSION["hal_department_cd"] == '') ||
+            ($_SESSION["hal_base_cd"] == '') ||
             ($_SESSION["hal_idx"] == '')){
             //ログイン画面へ遷移
             header('Location: ./login.php');
@@ -382,6 +402,97 @@ function com_make_tag_option2(
         */
         $a_sRet .= "</select>";
     
+    } catch (PDOException $e){
+        echo 'Error:'.$e->getMessage();
+        die();
+    }
+    
+    //$a_conn = null;
+    
+    return $a_sRet;
+}
+
+//optionタグ生成（契約作成ステータス専用）
+function com_make_tag_option_contract_status(
+        $h_act,
+        $h_val,
+        $h_name,
+        $h_table,
+        $h_style,
+        &$h_selected
+        )
+{
+    $a_sRet = "";
+    $a_str_sub = "";
+    $h_selected = false;
+    
+    try{
+        //DBから契約情報取得
+        $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+        $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $a_sql = "SELECT * FROM ".$h_table." ORDER BY idx;";
+        //echo $a_sql;
+        $a_stmt = $a_conn->prepare($a_sql);
+        $a_stmt->execute();
+
+        $a_isFound = false;
+        
+        $a_sRet = "<select id='".$h_name."' name='".$h_name."' style='".$h_style."'>";
+
+        $a_isSelect = true;
+        $a_name = "";
+        
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            $a_isOK = true;
+            if ($_SESSION['hal_department_cd'] != 3){
+                #echo $_SESSION['hal_department_cd'].'<br>';
+                //管理本部以外
+                if ($a_result['idx'] >= 2){
+                    #echo $a_result['idx'].'<br>';
+                    //0：営業作成中、1：営業提出以外は選択不可
+                    $a_isOK = false;
+                    #echo $a_isOK.'<br>';
+                }
+            }
+            
+            #echo $a_isOK.'<br>';
+            #echo $a_result['idx'].'<br>';
+            $a_str_sub = "<option value='".$a_result['idx']."'";
+        //if ($h_act == 'e'){
+            //if ($a_result['idx'] == $h_val)
+            if ($a_result['m_name'] == $h_val)
+            {
+                $a_str_sub .= 'selected';
+                $a_isFound = true;
+                $h_selected = true;
+                if ($_SESSION['hal_department_cd'] != 3){
+                    if ($a_result['idx'] >= 2){
+                        #echo '変更不可<br>';
+                        //変更不可
+                        $a_isSelect = false;
+                        $a_name = $a_result['m_name'];
+                    }
+                }
+            }
+        //}
+            $a_str_sub .= ">".$a_result['m_name']."</option>";
+            if ($a_isOK == true){
+                $a_sRet .= $a_str_sub;
+            }
+        }
+        /*
+        if (($h_val != '') && ($a_isFound == false)) {
+            $a_sRet .= "<option value='".$h_val."'";
+            $a_sRet .= " selected>".$h_val."</option>";
+        }
+        */
+        $a_sRet .= "</select>";
+    
+        if ($a_isSelect == false){
+            $a_sRet = $a_name;
+        }
+        
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
         die();
