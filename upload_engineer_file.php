@@ -40,11 +40,6 @@ try {
 
             $a_conn->beginTransaction();  //トランザクション開始
 
-            $a_sql = "DELETE FROM ".$GLOBALS['g_DB_m_engineer'].";";
-            $a_stmt = $a_conn->prepare($a_sql);
-            //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
-            $a_stmt->execute();
-
             //1. リーダーを作成して既存ファイルを読み込む
             $obj_reader = PHPExcel_IOFactory::createReader('Excel2007');
             $obj_book   = $obj_reader->load($target_file);
@@ -83,7 +78,17 @@ try {
                            $a_sql .= "'".$date_val."'";
                             break;
                         default:
-                            $a_sql .= "'".$obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getValue()."'";
+                            $a_tmp = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getValue();
+                            if ($a_col == 0){
+                                //スペースを削除
+                                $a_tmp = str_replace(" ", "", $a_tmp);
+                                //差分アップロードのサポート
+                                $a_sql_D = "DELETE FROM ".$GLOBALS['g_DB_m_engineer']." WHERE (entry_no='".$a_tmp."');";
+                                $a_stmt = $a_conn->prepare($a_sql_D);
+                                #$a_stmt->bindParam(':entry_no', "'".$a_tmp."'", PDO::PARAM_STR);
+                                $a_stmt->execute();
+                            }
+                            $a_sql .= "'".$a_tmp."'";
                             break;
                     }
                 }
