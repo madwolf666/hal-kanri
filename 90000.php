@@ -17,6 +17,7 @@ require_once('./header.php');
 <p><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90300']; ?>">お知らせ情報</a></p>
 <?php } ?>
 <p><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90200']; ?>">エンジニア情報</a></p>
+<p><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90400']; ?>">送付状情報</a></p>
 </section>
 
 <?php

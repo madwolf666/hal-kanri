@@ -530,6 +530,18 @@ if (!isset($_GET['mnu'])){
             header('Location: ./90302.php?ACT='.$_GET['ACT'].'&IDX='.$_GET['IDX']);
         }
         break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90400']:   //送付状一覧
+        header('Location: ./90400.php');
+        break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90401']:   //送付状：検索
+        header('Location: ./90401.php');
+        break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90411']:   //送付状：アップロード
+        header('Location: ./90411.php');
+        break;
+    case $GLOBALS['g_MENU_CONTRACT_SHOW_CHART']:   //エンジニア：アップロード
+        header('Location: ./show_chart.php?BAK='.$_GET['BAK'].'&NO='.$_GET['NO']);
+        break;
     case $GLOBALS['g_MENU_LOGOUT_00000']:       //ログアウト
         $_SESSION["hal_idx"] = -1;
         $_SESSION["hal_base_cd"] = "";

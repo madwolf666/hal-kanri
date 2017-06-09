@@ -47,6 +47,7 @@ $g_DB_m_contract_trunc_unit = "m_contract_trunc_unit";
 $g_DB_m_contract_upper_limit = "m_contract_upper_limit";
 $g_DB_m_contract_work_attitude = "m_contract_work_attitude";
 $g_DB_m_contract_yesno = "m_contract_yesno";
+$g_DB_m_covering_letter = "m_covering_letter";
 $g_DB_m_department = "m_department";
 $g_DB_m_engineer = "m_engineer";
 $g_DB_m_information = "m_information";
@@ -115,6 +116,10 @@ $g_MENU_MAINTENANCE_90300 = 90300;    //お知らせ一覧
 $g_MENU_MAINTENANCE_90302 = 90302;    //お知らせ：新規
 $g_MENU_MAINTENANCE_90303 = 90303;    //お知らせ：修正
 $g_MENU_MAINTENANCE_90304 = 90304;    //お知らせ：削除
+
+$g_MENU_MAINTENANCE_90400 = 90400;    //送付状一覧
+$g_MENU_MAINTENANCE_90401 = 90401;    //送付状検索
+$g_MENU_MAINTENANCE_90411 = 90411;    //送付状Excelアップロード
 
 //グラフ表示
 $g_MENU_CONTRACT_SHOW_CHART = 10001;

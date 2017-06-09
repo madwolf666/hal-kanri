@@ -14,11 +14,11 @@ require_once('./header.php');
 
 <section>
 
-<h2>エンジニア情報</h2>
+<h2>送付状情報</h2>
 
 <p class="c">
-    <!-- input type="button" value="条件検索" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90201']; ?>'" -->
-    <input type="button" value="アップロード" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90211']; ?>'">
+    <!-- input type="button" value="条件検索" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90401']; ?>'" -->
+    <input type="button" value="アップロード" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90411']; ?>'">
 </p>
 
 <center>
@@ -38,11 +38,11 @@ require_once('./header.php');
 require_once('./footer.php');
 ?>
 
-<script src="./js/hal-kanri-90200.js"></script>
+<script src="./js/hal-kanri-90400.js"></script>
 <script type="text/javascript">
-    make_m_engineer_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 400, 184); 
+    make_m_covering_letter_list(1);
+    resize_div2('leftColumn', 'right_title', 'right_record', 200, 184); 
     $(window).resize(function(){
-        resize_div2('leftColumn', 'right_title', 'right_record', 400, 184); 
+        resize_div2('leftColumn', 'right_title', 'right_record', 200, 184); 
     });
 </script>

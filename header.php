@@ -73,6 +73,7 @@ echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_S
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90300']; ?>">お知らせ情報</a></li>
         <?php } ?>
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90200']; ?>">エンジニア情報</a></li>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90400']; ?>">送付状情報</a></li>
     </ul>
 </li>
 

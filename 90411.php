@@ -15,7 +15,7 @@ require_once('./header.php');
 
 <section>
     
-<h2>エンジニア情報</h2>
+<h2>送付状情報</h2>
 
 <form action="" method="post">
 <center>
@@ -33,8 +33,8 @@ require_once('./header.php');
 <br>
 
 <p class="c">
-<input type="button" value="アップロード" onclick="return upload_engineer_file();">
-<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90200']; ?>'">
+<input type="button" value="アップロード" onclick="return upload_covering_letter_file();">
+<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90400']; ?>'">
 </p>
 
 <div id="my-result" style="z-index:100; text-align:center; width:auto; color: #ff0000;"></div>
@@ -47,4 +47,4 @@ require_once('./header.php');
 require_once('./footer.php');
 ?>
 
-<script src="./js/hal-kanri-90200.js"></script>
+<script src="./js/hal-kanri-90400.js"></script>
