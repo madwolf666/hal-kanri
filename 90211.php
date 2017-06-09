@@ -21,7 +21,9 @@ require_once('./header.php');
 <center>
     <font color="#ff0000">※アップロードするExcelファイルを選択して下さい。</font>
     <br>
-    <font color="#ff0000">（パスワードの設定は解除して下さい。）</font>
+    <font color="#ff0000">（パスワードや読み取り専用等の設定は解除して下さい。）</font>
+    <br>
+    <font color="#ff0000">（開いた時、ポップアップが出るなどの状態も解除して下さい。）</font>
     <br>
     <br>
     <input type="file" name="excel_file">
