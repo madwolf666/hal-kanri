@@ -97,11 +97,15 @@ $obj_sheet->setCellValue("H41", $work_start."から".$work_end.chr(13)."（う�
 
 $obj_sheet->setCellValue("I56", $dd_responsible_position);
 $obj_sheet->setCellValue("P56", $dd_responsible_name);
+$obj_sheet->setCellValue("W56", $dd_responsible_tel);
+
 $obj_sheet->setCellValue("I59", $dm_responsible_position);
 $obj_sheet->setCellValue("P59", $dm_responsible_name);
 
 $obj_sheet->setCellValue("L69", $chs_position2);
 $obj_sheet->setCellValue("Q69", $chs_name2);
+$obj_sheet->setCellValue("W69", $chs_tel2);
+
 $obj_sheet->setCellValue("L71", $chs_position1);
 $obj_sheet->setCellValue("Q71", $chs_name1);
 
