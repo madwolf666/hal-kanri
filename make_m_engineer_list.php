@@ -49,7 +49,7 @@ try{
     //可変部分
     $a_sRet .= "        <td style='width: 440px; padding:0 0'>";
     $a_sRet .= "            <div id='right_title' style='overflow:hidden; width: 700px; padding:0 0'>";
-    $a_sRet .= "                <table class='tbl_list' style='width: 16000px;'>";
+    $a_sRet .= "                <table class='tbl_list' style='width: 17000px;'>";
     #$a_sRet .= "                <table class='tbl_list' style='width: 12540px;'>";
     $a_sRet .= "                    <tr>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>面談日</td>";
@@ -73,10 +73,10 @@ try{
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>所属会社名</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='width: 100px;' nowrap>保有資格</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 200px;' nowrap>スキル区分</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>OS</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>言語</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>DB</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>ツール</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 598px;' nowrap>OS</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 598px;' nowrap>言語</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 598px;' nowrap>DB</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 598px;' nowrap>ツール</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>フェイズ</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>業種</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='width: 100px;' nowrap>マネジメント</td>";
@@ -168,14 +168,14 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>スキル</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>市場性</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>総合</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案1行目</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案2行目</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案3行目</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案4行目</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案5行目</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案6行目</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案7行目</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>提案8行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案1行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案2行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案3行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案4行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案5行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案6行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案7行目</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>提案8行目</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>コメント</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
@@ -198,7 +198,7 @@ try{
     
     $a_sRet_R = "       <td valign='top'>";
     $a_sRet_R .= "          <div id='right_record' style='overflow:scroll;width:700px;height:450px;' onscroll='document.all.right_title.scrollLeft=this.scrollLeft;document.all.leftColumn.scrollTop=this.scrollTop;'>";
-    $a_sRet_R .= "              <table class='tbl_list' style='width: 16000px'>";
+    $a_sRet_R .= "              <table class='tbl_list' style='width: 17000px'>";
     #$a_sRet_R .= "              <table class='tbl_list' style='width: 12540px'>";
 
 /**/
@@ -227,6 +227,14 @@ try{
                 switch ($a_idx) {
                     case 24:
                     case 25:
+                    case 82:
+                    case 83:
+                    case 84:
+                    case 85:
+                    case 86:
+                    case 87:
+                    case 88:
+                    case 89:
                         $a_width = "300";
                         break;
                     case 45:
@@ -238,7 +246,7 @@ try{
                     case 49:
                     case 50:
                     case 51:
-                        $a_width = "400";
+                        $a_width = "600";
                         break;
                     case 26:
                     case 27:
