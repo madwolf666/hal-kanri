@@ -117,14 +117,29 @@ try{
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>備考</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>契約</td>";
     
-    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>確認日付</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>確認担当者</td>";
+    #管理本部以外は更新不可
+    if ($_SESSION['hal_department_cd'] == 3){
+        $a_class = "td_titleI";
+    }else{
+        $a_class = "td_title2";
+    }
+    $a_sRet .= "                        <td rowspan='2' class='".$a_class."' style='width: 100px;' nowrap>確認日付</td>";
+    $a_sRet .= "                        <td rowspan='2' class='".$a_class."' style='width: 100px;' nowrap>確認担当者</td>";
+
     #$a_sRet .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_date_end',$a_rec).">".str_replace("-", "/", $a_result['check_date_end'])."</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>現在稼働</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>稼働累計</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>営業支援費</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>管理メモ</td>";
+    
+    #管理本部以外は更新不可
+    if ($_SESSION['hal_department_cd'] == 3){
+        $a_class = "td_titleI";
+    }else{
+        $a_class = "td_title2";
+    }
+    $a_sRet .= "                        <td rowspan='2' class='".$a_class."' style='width: 100px;' nowrap>営業支援費</td>";
+    $a_sRet .= "                        <td rowspan='2' class='".$a_class."' style='width: 100px;' nowrap>管理メモ</td>";
+
     $a_sRet .= "                    </tr>";
 
     $a_sRet .= "                    <tr>";
@@ -322,13 +337,35 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['remarks_pay']."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['payment_contract_form']."</td>";
 
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_correct_date',$a_rec,2).">".str_replace("-", "/", $a_result['check_correct_date'])."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_correct_person',$a_rec,1).">".$a_result['check_correct_person']."</td>";
+        #管理本部以外は更新不可
+        if ($_SESSION['hal_department_cd'] == 3){
+            $a_class = "td_lineI";
+            $a_inp_text1 =" ".com_make_input_text($a_result['cr_id'],'check_correct_date',$a_rec,2).">";
+            $a_inp_text2 =" ".com_make_input_text($a_result['cr_id'],'check_correct_person',$a_rec,1).">";
+        }else{
+            $a_class = "td_line2";
+            $a_inp_text1 = ">";
+            $a_inp_text2 = ">";
+        }
+        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text1.str_replace("-", "/", $a_result['check_correct_date'])."</td>";
+        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text2.$a_result['check_correct_person']."</td>";
+
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".""."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_active_now."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_active_sum."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_remarks1',$a_rec,1).">".$a_result['check_remarks1']."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_remarks2',$a_rec,1).">".$a_result['check_remarks2']."</td>";
+
+        #管理本部以外は更新不可
+        if ($_SESSION['hal_department_cd'] == 3){
+            $a_class = "td_lineI";
+            $a_inp_text1 =" ".com_make_input_text($a_result['cr_id'],'check_remarks1',$a_rec,1).">";
+            $a_inp_text2 =" ".com_make_input_text($a_result['cr_id'],'check_remarks2',$a_rec,1).">";
+        }else{
+            $a_class = "td_line2";
+            $a_inp_text1 = ">";
+            $a_inp_text2 = ">";
+        }
+        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text1.$a_result['check_remarks1']."</td>";
+        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text2.$a_result['check_remarks2']."</td>";
 
         $a_sRet_R .= "</tr>";
     }
