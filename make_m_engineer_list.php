@@ -49,7 +49,8 @@ try{
     //可変部分
     $a_sRet .= "        <td style='width: 440px; padding:0 0'>";
     $a_sRet .= "            <div id='right_title' style='overflow:hidden; width: 700px; padding:0 0'>";
-    $a_sRet .= "                <table class='tbl_list' style='width: 12540px;'>";
+    $a_sRet .= "                <table class='tbl_list' style='width: 16000px;'>";
+    #$a_sRet .= "                <table class='tbl_list' style='width: 12540px;'>";
     $a_sRet .= "                    <tr>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>面談日</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>面談担当者</td>";
@@ -71,11 +72,11 @@ try{
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='width: 100px;' nowrap>家族</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>所属会社名</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='width: 100px;' nowrap>保有資格</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>スキル区分</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>OS</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>言語</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>DB</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>ツール</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 200px;' nowrap>スキル区分</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>OS</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>言語</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>DB</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 398px;' nowrap>ツール</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>フェイズ</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>業種</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='width: 100px;' nowrap>マネジメント</td>";
@@ -121,8 +122,8 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>FAX番号</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>携帯1</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>携帯2</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>e-mail1</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>e-mail2</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>e-mail1</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 300px;' nowrap>e-mail2</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 120px;' nowrap>緊急連絡先氏名</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 120px;' nowrap>緊急連絡先電話</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>学校名1</td>";
@@ -141,8 +142,8 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>分数</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>婚姻区分</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>同居家族</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>ｺﾝﾋﾟｭｰﾀ資格</td>";
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>一般資格</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 200px;' nowrap>ｺﾝﾋﾟｭｰﾀ資格</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 200px;' nowrap>一般資格</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>役割</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>人数</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>希望案件</td>";
@@ -197,7 +198,8 @@ try{
     
     $a_sRet_R = "       <td valign='top'>";
     $a_sRet_R .= "          <div id='right_record' style='overflow:scroll;width:700px;height:450px;' onscroll='document.all.right_title.scrollLeft=this.scrollLeft;document.all.leftColumn.scrollTop=this.scrollTop;'>";
-    $a_sRet_R .= "              <table class='tbl_list' style='width: 12540px'>";
+    $a_sRet_R .= "              <table class='tbl_list' style='width: 16000px'>";
+    #$a_sRet_R .= "              <table class='tbl_list' style='width: 12540px'>";
 
 /**/
     //while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
@@ -223,6 +225,21 @@ try{
         for ($a_idx = 0; $a_idx < 116; $a_idx++) {
             if (($a_idx != 0) && ($a_idx != 1) && ($a_idx != 5) && ($a_idx != 6)) {
                 switch ($a_idx) {
+                    case 24:
+                    case 25:
+                        $a_width = "300";
+                        break;
+                    case 45:
+                    case 46:
+                    case 47:
+                        $a_width = "200";
+                        break;
+                    case 48:
+                    case 49:
+                    case 50:
+                    case 51:
+                        $a_width = "400";
+                        break;
                     case 26:
                     case 27:
                     case 69:
