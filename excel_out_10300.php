@@ -77,6 +77,26 @@ try{
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
     $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    
+    $a_where = "";
+    $a_where = com_make_where_session(1, $a_where, 't1.contract_number', 'f_contract_number_10300', "");
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10300', "");
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10300', "");
+    $a_where = com_make_where_session(1, $a_where, 't1.customer_name', 'f_customer_name_10300', "");
+    $a_where = com_make_where_session(3, $a_where, 't1.claim_contract_form', 'f_claim_contract_form_10300', $GLOBALS['g_DB_m_contract_bill_form']);
+    $a_where = com_make_where_session(1, $a_where, 't3.ag_no', 'f_ag_no_10300', "");
+    $a_where = com_make_where_session(2, $a_where, 't2.accounts_bai_previous_day', 'f_accounts_bai_previous_day_10300', "");
+    $a_where = com_make_where_session(1, $a_where, 't2.accounts_actual_working_hours', 'f_accounts_actual_working_hours_10300', "");
+    $a_where = com_make_where_session(1, $a_where, 't2.accounts_expenses', 'f_accounts_expenses_10300', "");
+    $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10300', $GLOBALS['g_DB_m_contract_pay_form']);
+    $a_where = com_make_where_session(2, $a_where, 't2.payment_acceptance_date', 'f_payment_acceptance_date_10300', "");
+    $a_where = com_make_where_session(3, $a_where, 't1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10300', $GLOBALS['g_DB_m_contract_pay_pay']);
+    if ($a_where != ""){
+        $a_where = " WHERE ".$a_where;
+    }
+    
+    $a_sql .= $a_where;
+
     $a_sql .= " ORDER BY t1.contract_number,t3.ag_no,t2.al_id;";
 
     $a_stmt = $a_conn->prepare($a_sql);

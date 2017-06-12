@@ -19,8 +19,13 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_report'];
-    
+    $a_sql = "SELECT t1.*";
+    $a_sql .= ",(SELECT idx FROM ".$GLOBALS['g_DB_m_contract_status']." WHERE (m_name=t1.status_cd)) AS status_cd_num";
+    $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.reg_id)) AS reg_person";
+    $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.upd_id)) AS upd_person";
+    $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.cnf_id)) AS cnf_person";
+    $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name', "");
     $a_where = com_make_where_session(1, $a_where, 'engineer_number', 'f_engineer_number', "");
@@ -118,11 +123,12 @@ try{
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>契約</td>";
     
     #管理本部以外は更新不可
-    if ($_SESSION['hal_department_cd'] == 3){
+    $a_class = "td_title2";
+    /*if ($_SESSION['hal_department_cd'] == 3){
         $a_class = "td_titleI";
     }else{
         $a_class = "td_title2";
-    }
+    }*/
     $a_sRet .= "                        <td rowspan='2' class='".$a_class."' style='width: 100px;' nowrap>確認日付</td>";
     $a_sRet .= "                        <td rowspan='2' class='".$a_class."' style='width: 100px;' nowrap>確認担当者</td>";
 
@@ -338,7 +344,17 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['payment_contract_form']."</td>";
 
         #管理本部以外は更新不可
-        if ($_SESSION['hal_department_cd'] == 3){
+        $a_class = "td_line2";
+        $a_inp_text1 = ">";
+        $a_inp_text2 = ">";
+        $check_correct_date = "";
+        $check_correct_person = "";
+        if ($a_result['status_cd_num'] == 2){
+            //ステータスが2の場合
+            $check_correct_date = str_replace("-", "/", $a_result['cnf_date']);
+            $check_correct_person = $a_result['cnf_person'];
+        }
+        /*if ($_SESSION['hal_department_cd'] == 3){
             $a_class = "td_lineI";
             $a_inp_text1 =" ".com_make_input_text($a_result['cr_id'],'check_correct_date',$a_rec,2).">";
             $a_inp_text2 =" ".com_make_input_text($a_result['cr_id'],'check_correct_person',$a_rec,1).">";
@@ -346,9 +362,9 @@ try{
             $a_class = "td_line2";
             $a_inp_text1 = ">";
             $a_inp_text2 = ">";
-        }
-        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text1.str_replace("-", "/", $a_result['check_correct_date'])."</td>";
-        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text2.$a_result['check_correct_person']."</td>";
+        }*/
+        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text1.$check_correct_date."</td>";
+        $a_sRet_R .= "<td class='".$a_class."' style='width: 100px;'><div class='myover'".$a_inp_text2.$check_correct_person."</td>";
 
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".""."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_active_now."</td>";

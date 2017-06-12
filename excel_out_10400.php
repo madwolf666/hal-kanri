@@ -47,6 +47,17 @@ try{
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
     $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+
+    $a_where = "";
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10400', "");
+    $a_where = com_make_where_session(3, $a_where, 't1.contract_number', 'f_contract_number_10400', "");
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10400', "");
+    if ($a_where != ""){
+        $a_where = " WHERE ".$a_where;
+    }
+    
+    $a_sql .= $a_where;
+
     $a_sql .= " ORDER BY t3.ag_no;";
 
     $a_stmt = $a_conn->prepare($a_sql);

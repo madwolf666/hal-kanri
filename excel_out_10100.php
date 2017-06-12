@@ -37,7 +37,30 @@ try{
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //一覧出力は何順？
-    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." ORDER BY cr_id;";
+    $a_sql = "SELECT t1.*";
+    $a_sql .= ",(SELECT idx FROM ".$GLOBALS['g_DB_m_contract_status']." WHERE (m_name=t1.status_cd)) AS status_cd_num";
+    $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.reg_id)) AS reg_person";
+    $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.upd_id)) AS upd_person";
+    $a_sql .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.cnf_id)) AS cnf_person";
+    $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+
+    $a_where = "";
+    $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name', "");
+    $a_where = com_make_where_session(1, $a_where, 'engineer_number', 'f_engineer_number', "");
+    $a_where = com_make_where_session(1, $a_where, 'contract_number', 'f_contract_number', "");
+    $a_where = com_make_where_session(1, $a_where, 'customer_name', 'f_customer_name', "");
+    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', 'f_claim_agreement_start', "");
+    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', 'f_claim_agreement_end', "");
+    $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', 'f_claim_contract_form', $GLOBALS['g_DB_m_contract_bill_form']);
+    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', 'f_claim_settlement_closingday', $GLOBALS['g_DB_m_contract_tighten']);
+    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', 'f_claim_settlement_paymentday', $GLOBALS['g_DB_m_contract_bill_pay']);
+    $a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "");
+    if ($a_where != ""){
+        $a_where = " WHERE ".$a_where;
+    }
+    
+    $a_sql .= $a_where;
+    $a_sql .= " ORDER BY contract_number;";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->execute();
 
@@ -195,8 +218,16 @@ try{
         $inp_wariai_taijyo_c1 = $a_result['payment_leaving_daily_auto'];
         $inp_wariai_taijyo_c2 = $a_result['payment_leaving_daily_manual'];
 
-        $check_correct_date = str_replace("-", "/", $a_result['check_correct_date']);
-        $check_correct_person = $a_result['check_correct_person'];
+        $check_correct_date = "";
+        $check_correct_person = "";
+        if ($a_result['status_cd_num'] == 2){
+            //ステータスが2の場合
+            $check_correct_date = str_replace("-", "/", $a_result['cnf_date']);
+            $check_correct_person = $a_result['cnf_person'];
+        }
+        /*$check_correct_date = str_replace("-", "/", $a_result['check_correct_date']);
+        $check_correct_person = $a_result['check_correct_person'];*/
+
         $check_remarks1 = $a_result['check_remarks1'];
         $check_remarks2 = $a_result['check_remarks2'];
         
