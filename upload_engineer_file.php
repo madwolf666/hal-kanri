@@ -88,7 +88,7 @@ try {
                                 #$a_stmt->bindParam(':entry_no', "'".$a_tmp."'", PDO::PARAM_STR);
                                 $a_stmt->execute();
                             }
-                            $a_sql .= "'".$a_tmp."'";
+                            $a_sql .= "'".str_replace("'", "''",$a_tmp)."'";
                             break;
                     }
                 }

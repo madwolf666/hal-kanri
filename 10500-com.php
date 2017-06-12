@@ -187,7 +187,7 @@ function set_10500_fromDB($a_result)
     $GLOBALS['dd_responsible_position'] = $a_result['dd_responsible_position'];
     $GLOBALS['dd_responsible_name'] = $a_result['dd_responsible_name'];
     
-    $GLOBALS['person_post_no'] = $a_result['person_post_no'];
+    $GLOBALS['person_post_no'] = str_replace("〒", "", $a_result['person_post_no']);
     $GLOBALS['person_address'] = $a_result['person_address'];
     $GLOBALS['birthday'] = com_replace_toDate($a_result['birthday']);
 

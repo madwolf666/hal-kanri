@@ -27,8 +27,6 @@ if (isset($_GET['NO'])) {
         $a_sql .= "
      t2.ag_no
     ,t2.publication
-    ,t2.person_post_no
-    ,t2.person_address
     ,t2.contact_date_brn
     ,t2.conflict_prevention
     ,t2.thing1
@@ -45,6 +43,8 @@ if (isset($_GET['NO'])) {
     ,t3.sex
     ,t3.birthday
     ,t3.skill_type
+    ,t4.post_no AS person_post_no
+    ,t4.address AS person_address
         ";
         $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
         $a_sql .= " LEFT JOIN ";
@@ -53,6 +53,9 @@ if (isset($_GET['NO'])) {
         $a_sql .= " LEFT JOIN ";
         $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
         $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
+        $a_sql .= " LEFT JOIN ";
+        $a_sql .= $GLOBALS['g_DB_m_covering_letter']." t4";
+        $a_sql .= " ON (t1.engineer_number=t4.entry_no)";
         $a_sql .= " WHERE (t1.cr_id=:cr_id);";
 
         $a_stmt = $a_conn->prepare($a_sql);

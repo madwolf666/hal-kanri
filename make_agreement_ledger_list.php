@@ -23,8 +23,6 @@ try{
     $a_sql .= "
  t2.ag_no
 ,t2.publication
-,t2.person_post_no
-,t2.person_address
 ,t2.contact_date_brn
 ,t2.conflict_prevention
 ,t2.thing1
@@ -41,6 +39,8 @@ try{
 ,t3.sex
 ,t3.birthday
 ,t3.skill_type
+,t4.post_no AS person_post_no
+,t4.address AS person_address
     ";
     $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql .= " LEFT JOIN ";
@@ -49,6 +49,9 @@ try{
     $a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_m_engineer']." t3";
     $a_sql .= " ON (t1.engineer_number=t3.entry_no)";
+    $a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_m_covering_letter']." t4";
+    $a_sql .= " ON (t1.engineer_number=t4.entry_no)";
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10500', "");
@@ -61,7 +64,7 @@ try{
     $a_sql .= $a_where;
 
     $a_sql .= " ORDER BY t2.ag_no;";
-    
+#echo $a_sql;    
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();
@@ -179,8 +182,8 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>役職</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>氏名</td>";
     
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>郵便番号</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>現住所</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>郵便番号</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>現住所</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>生年月日</td>";
     
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>その他</td>";
@@ -294,8 +297,8 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$dm_responsible_name."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$dd_responsible_position."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$dd_responsible_name."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'person_post_no',$a_rec,1).">".$person_post_no."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'person_address',$a_rec,1).">".$person_address."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$person_post_no."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$person_address."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$birthday."</td>";
         
 

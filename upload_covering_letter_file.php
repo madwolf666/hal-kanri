@@ -49,9 +49,9 @@ try {
             //PHPExcelでは、rowは1始まり、colは0始まりのようである。
             $a_row = 3;
             $a_val = $obj_sheet->getCell("A".$a_row)->getValue();
-            $a_nothin_num = 0;  //10回何もなかったら終了
+            $a_nothin_num = 0;  //100回何もなかったら終了
             #while (($a_val != '') && ($a_nothin_num<=10)) {
-            while ($a_nothin_num<=10) {
+            while ($a_nothin_num<=100) {
                 if (substr($a_val, 0, 3) == 'HAL'){
 
                     $a_nothin_num = 0;
@@ -89,7 +89,8 @@ try {
                                     #$a_stmt->bindParam(':entry_no', "'".$a_tmp."'", PDO::PARAM_STR);
                                     $a_stmt->execute();
                                 }
-                                $a_sql .= "'".$a_tmp."'";
+                                //住所に'がある場合がある。
+                                $a_sql .= "'".str_replace("'", "''",$a_tmp)."'";
                                 break;
                         }
                     }
