@@ -41,6 +41,9 @@ function upload_covering_letter_file()
 
     m_ProgressMsg('アップロード中です......<br><img src="./images/upload.gif" /> ');
 
+    //$('#my-executing').css('display', 'block'); 
+    $('#my-executing').show(); 
+        
     var a_fd = new FormData();
     a_fd.append('file', $('input[name="excel_file"]').prop('files')[0]);
     //a_fd.append("dir", $('#excel_file').val());
@@ -62,6 +65,8 @@ function upload_covering_letter_file()
             //alert(errorThrown.message);
         },
        complete: function (data) {
+            //$('#my-executing').css('display', 'none');
+            $('#my-executing').hide();
             $.unblockUI();
        }
    });

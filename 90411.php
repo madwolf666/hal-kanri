@@ -38,6 +38,7 @@ require_once('./header.php');
 </p>
 
 <div id="my-result" style="z-index:100; text-align:center; width:auto; color: #ff0000;"></div>
+<div id="my-executing" style=" text-align:center; display: none;"><img src="./images/upload.gif" /></div>
 
 </form>
 

@@ -38,6 +38,7 @@ try {
             $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
             $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            $a_trans_num = 0;             //トランザクション実行数
             $a_conn->beginTransaction();  //トランザクション開始
 
             //1. リーダーを作成して既存ファイルを読み込む
@@ -55,6 +56,7 @@ try {
                         $a_sql .= ",";
                     }
                     switch ($a_col) {
+                        /*
                         case 1:
                         case 2:
                         case 4:
@@ -64,7 +66,6 @@ try {
                         case 115:
                             //日付セル
                             $date_val = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getFormattedValue();
-                            /**/
                             if (preg_match( '/^[0-9]{1,}[\-|\/][0-9]{1,}[\-|\/][0-9]{1,}$/', $date_val )) {
                                 //$date_val = "chappy";
                                 $date_val = str_replace("/", "-", $date_val);
@@ -74,11 +75,13 @@ try {
                             } else {
                                 $date_val = "";
                             }
-                            /**/
                            $a_sql .= "'".$date_val."'";
                             break;
+                        */
                         default:
-                            $a_tmp = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getValue();
+                            $a_tmp = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getCalculatedValue();
+                            #$a_tmp = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getValue();
+                            #echo $a_tmp;
                             if ($a_col == 0){
                                 //スペースを削除
                                 $a_tmp = str_replace(" ", "", $a_tmp);
@@ -96,13 +99,22 @@ try {
                 $a_sql .= ");";
                 $a_stmt = $a_conn->prepare($a_sql);
                 $a_stmt->execute();
+                $a_trans_num++;
+                if ($a_trans_num == 10){
+                    $a_conn->commit();    //コミット
+                    $a_trans_num =0;
+                    $a_conn->beginTransaction();  //トランザクション開始     
+                }
                 
                 $a_row++;
                 $a_val = $obj_sheet->getCell("A".$a_row)->getValue();
             }
 
             if ($a_row > 3){
-                $a_conn->commit();    //コミット
+                if ($a_trans_num > 0){
+                    $a_conn->commit();    //コミット
+                    $a_trans_num =0;
+                }
             }else{
                 $a_conn->rollBack();  //ロールバック
                 $a_sRet = "登録データはありません。";
