@@ -26,6 +26,7 @@ function make_dispatching_management_ledger_list(h_pageNo)
         },
        complete: function (data) {
             $.unblockUI();
+            resize_div2('leftColumn', 'right_title', 'right_record', 320, 184); 
        }
    });
 }

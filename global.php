@@ -158,6 +158,10 @@ $g_EXCEL_CONTRACT_10503 = "contrcat_10503.xlsx";
 $g_EXCEL_CONTRACT_10504 = "contrcat_10504.xlsx";
 $g_EXCEL_CONTRACT_10600 = "contrcat_10600.xlsx";
 
+/*******************************************************************************
+* ELSE
+*******************************************************************************/
+$g_MAX_LINE_PAGE = 100;
 
 $g_REQUEST_URI = $_SERVER['REQUEST_URI'];
 $g_URL_ARRAY = explode("/", $g_REQUEST_URI);
@@ -636,5 +640,54 @@ function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table
 
 function com_convertEOL($h_string, $h_to="<br>"){
     return preg_replace("/\r\n|\r|\n/", $h_to, $h_string);
+}
+
+function com_make_pager($h_func, $h_sum, $h_pno, $h_max_line_page)
+{
+    $a_sRet = "[".com_db_number_format($h_sum)."件]";
+    
+    if ($h_sum > 0){
+#echo '$h_sum / $h_max_line_page:'.$h_sum / $h_max_line_page.'<br>';
+        $a_page_sum = floor($h_sum / $h_max_line_page);
+        $a_test = ($h_sum % $h_max_line_page);
+#echo '$h_sum % $h_max_line_page:'.$a_test.'<br>';
+        if (($h_sum % $h_max_line_page) > 0){
+            $a_page_sum++;
+        }
+#echo '$a_page_sum:'.$a_page_sum.'<br>';
+        $a_yoko_num = 10;    //最大10ページ
+        $a_yoko_syo = floor(($h_pno-1) / $a_yoko_num);
+        $a_yoko_amari = $h_pno % $a_yoko_num;
+        $a_start_page = $a_yoko_syo*$a_yoko_num;
+        $a_start_page++;
+
+        if ($a_start_page > 1){
+            //前へを表示
+            $a_sRet .= "&nbsp;&nbsp;<a href='#' onclick='".$h_func."(".($a_start_page-1).");'>前へ</a>";
+        }
+#echo '$a_yoko_num:'.$a_yoko_num.'<br>';
+        for ($a_iCnt=1; $a_iCnt<=$a_yoko_num; $a_iCnt++){
+#echo '$a_iCnt:'.$a_iCnt.'<br>';
+            if ($a_start_page != $h_pno){
+                $a_sRet .= "&nbsp;&nbsp;<a href='#' onclick='".$h_func."(".$a_start_page.");'>".$a_start_page."</a>";
+            }else{
+                $a_sRet .= "&nbsp;&nbsp;".$a_start_page;
+            }
+            $a_start_page++;
+            if ($a_start_page > $a_page_sum){
+                break;
+            }
+        }
+
+        if ($a_start_page <= $a_page_sum){    //[2016.09.21]bug-fixed.
+            //前へを表示
+            $a_sRet .= "&nbsp;&nbsp;<a href='#' onclick='".$h_func."(".$a_start_page.");'>次へ</a>";
+        }
+
+    }else{
+        $a_sRet = "<font color='#ff0000'>現在、登録データはありません。</font>";
+    }    
+    
+    return $a_sRet;
 }
 ?>

@@ -29,6 +29,7 @@ function make_purchase_order_ledger_list(h_pageNo)
         },
        complete: function (data) {
             $.unblockUI();
+            resize_div2('leftColumn', 'right_title', 'right_record', 450, 220); 
        }
    });
 }

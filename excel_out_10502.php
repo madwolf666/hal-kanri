@@ -22,7 +22,7 @@ if (isset($_GET['NO'])) {
         $a_sql = "SELECT t1.*,";
         $a_sql .= "
      t2.ag_no
-    ,t2.publication
+    ,t2.publication AS publication_agreement
     ,t2.contact_date_brn
     ,t2.conflict_prevention
     ,t2.thing1

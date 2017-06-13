@@ -31,7 +31,7 @@ try{
     $a_sql = "SELECT t1.*,";
     $a_sql .= "
  t2.ag_no
-,t2.publication
+,t2.publication AS publication_agreement
 ,t2.person_post_no
 ,t2.person_address
 ,t2.contact_date_brn

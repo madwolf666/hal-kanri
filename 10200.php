@@ -46,7 +46,7 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-10200.js"></script>
 <script type="text/javascript">
     make_payroll_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 440, 184); 
+    //resize_div2('leftColumn', 'right_title', 'right_record', 440, 184); 
     $(window).resize(function(){
         resize_div2('leftColumn', 'right_title', 'right_record', 440, 184); 
     });

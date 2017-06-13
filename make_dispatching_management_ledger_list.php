@@ -19,8 +19,8 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql = "SELECT t1.*,";
-    $a_sql .= "
+    $a_sql_src = "SELECT t1.*,";
+    $a_sql_src .= "
  t2.dm_no				
 ,t2.dd_office			
 ,t2.dd_fax				
@@ -32,10 +32,10 @@ try{
 ,t2.chs_status3			
 ,t2.chs_date4			
 ,t2.chs_status4			
-,t2.dm_responsible_position
-,t2.dm_responsible_name	
-,t2.dd_responsible_position
-,t2.dd_responsible_name	
+,t2.dm_responsible_position AS dm_responsible_position_dispatching_management
+,t2.dm_responsible_name AS dm_responsible_name_dispatching_management
+,t2.dd_responsible_position AS dd_responsible_position_dispatching_management
+,t2.dd_responsible_name AS dd_responsible_name_dispatching_management	
 ,t2.employment_date1	
 ,t2.employment_status1	
 ,t2.employment_date2	
@@ -54,10 +54,10 @@ try{
 ,t2.jurisdiction		
 ,t2.specified_worker
         ";
-    $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
-    $a_sql .= " LEFT JOIN ";
-    $a_sql .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
-    $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
     /*$a_sql .= " LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
     $a_sql .= " ON (t1.cr_id=t3.cr_id)";*/
@@ -70,10 +70,28 @@ try{
         $a_where = " WHERE ".$a_where;
     }
     
-    $a_sql .= $a_where;
+    $a_sql_src .= $a_where;
 
-    $a_sql .= " ORDER BY t2.dm_no;";
+    $a_sql_src .= " ORDER BY t2.dm_no";
     
+    //①件数を取得する。
+    #$a_sql = $a_sql_src.";";
+    $a_sql = "SELECT COUNT(s1.dm_no) AS total_num FROM (".$a_sql_src.") s1;";
+#echo $a_sql;
+    $a_stmt = $a_conn->prepare($a_sql);
+    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
+    $a_stmt->execute();
+    $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
+    $a_total_num = $a_result['total_num'];
+
+    $a_start_idx = (($a_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
+    $a_end_idx = ($a_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
+
+    //②ページ対象のSELECT
+    $a_conn->exec("SET @rownum=0");
+    $a_sql = "SELECT s2.* FROM (";
+    $a_sql .= " SELECT  s1.*, @rownum:=@rownum+1 AS ROW_NUM FROM (".$a_sql_src.") s1";
+    $a_sql .= ") s2 WHERE (s2.ROW_NUM BETWEEN ".$a_start_idx." AND ".$a_end_idx.");";
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();
@@ -147,10 +165,10 @@ try{
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>申出受日4</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 200px;' nowrap>苦情内容、状況4</td>";
 
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>（役職）</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>（氏名）</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>役職</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>氏名</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>（役職）</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>（氏名）</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>役職</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>氏名</td>";
     
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>＜日付1＞</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 200px;' nowrap>＜状況1＞</td>";
@@ -242,12 +260,16 @@ try{
         $a_sRet_R .= "<td class='td_lineI' style='width: 200px;'><div class='myover' ".com_make_input_text($cr_id,'chs_status4',$a_rec,1).">".$chs_status4."</td>";
         
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dm_responsible_position',$a_rec,1).">".$dm_responsible_position."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dm_responsible_name',$a_rec,1).">".$dm_responsible_name."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover'>".$dm_responsible_position."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover'>".$dm_responsible_name."</td>";
+        //$a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dm_responsible_position',$a_rec,1).">".$dm_responsible_position."</td>";
+        //$a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dm_responsible_name',$a_rec,1).">".$dm_responsible_name."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_responsible_position',$a_rec,1).">".$dd_responsible_position."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_responsible_name',$a_rec,1).">".$dd_responsible_name."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover'>".$dd_responsible_position."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover'>".$dd_responsible_name."</td>";
+        //$a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_responsible_position',$a_rec,1).">".$dd_responsible_position."</td>";
+        //$a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_responsible_name',$a_rec,1).">".$dd_responsible_name."</td>";
 
         //入力あり
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'employment_date1',$a_rec,2).">".$employment_date1."</td>";
@@ -287,7 +309,7 @@ try{
         $a_sRet .= $a_sRet_L.$a_sRet_R;
         $a_sRet .= "    </tr>";
         $a_sRet .= "</table>";
-        $a_sRet = "<div id='my-recnum'>".$a_rec."件</div>".$a_sRet;
+        $a_sRet = "<div id='my-recnum'>". com_make_pager("make_dispatching_management_ledger_list", $a_total_num, $a_PageNo, $GLOBALS['g_MAX_LINE_PAGE'])."</div>".$a_sRet;
     }else{
         $a_sRet = "登録データはありません。";
     }

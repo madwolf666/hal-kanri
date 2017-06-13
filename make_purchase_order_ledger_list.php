@@ -19,10 +19,10 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql = "SELECT t1.*,";
-    $a_sql .= "
+    $a_sql_src = "SELECT t1.*,";
+    $a_sql_src .= "
  t2.po_no				
-,t2.publication			
+,t2.publication AS publication_purchase_order
 ,t2.remarks1			
 ,t2.remarks2			
 ,t2.remarks3				
@@ -31,13 +31,13 @@ try{
 ,t2.sending_back
 ,t3.ag_no
         ";
-    $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
-    $a_sql .= " LEFT JOIN ";
-    $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
-    $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " LEFT JOIN ";
-    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
-    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql_src .= " ON (t1.cr_id=t3.cr_id)";
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10400', "");
@@ -47,10 +47,26 @@ try{
         $a_where = " WHERE ".$a_where;
     }
     
-    $a_sql .= $a_where;
+    $a_sql_src .= $a_where;
 
-    $a_sql .= " ORDER BY t3.ag_no;";
+    $a_sql_src .= " ORDER BY t3.ag_no";
     
+    //①件数を取得する。
+    $a_sql = "SELECT COUNT(s1.ag_no) AS total_num FROM (".$a_sql_src.") s1;";
+    $a_stmt = $a_conn->prepare($a_sql);
+    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
+    $a_stmt->execute();
+    $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
+    $a_total_num = $a_result['total_num'];
+    
+    $a_start_idx = (($a_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
+    $a_end_idx = ($a_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
+
+    //②ページ対象のSELECT
+    $a_conn->exec("SET @rownum=0");
+    $a_sql = "SELECT s2.* FROM (";
+    $a_sql .= " SELECT  s1.*, @rownum:=@rownum+1 AS ROW_NUM FROM (".$a_sql_src.") s1";
+    $a_sql .= ") s2 WHERE (s2.ROW_NUM BETWEEN ".$a_start_idx." AND ".$a_end_idx.");";
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();
@@ -246,7 +262,7 @@ try{
         $a_sRet .= $a_sRet_L.$a_sRet_R;
         $a_sRet .= "    </tr>";
         $a_sRet .= "</table>";
-        $a_sRet = "<div id='my-recnum'>".$a_rec."件</div>".$a_sRet;
+        $a_sRet = "<div id='my-recnum'>". com_make_pager("make_purchase_order_ledger_list", $a_total_num, $a_PageNo, $GLOBALS['g_MAX_LINE_PAGE'])."</div>".$a_sRet;
     }else{
         $a_sRet = "登録データはありません。";
     }

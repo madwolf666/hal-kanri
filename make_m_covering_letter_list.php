@@ -17,7 +17,25 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_m_covering_letter']." ORDER BY entry_no;";
+    //①件数を取得する。
+    $a_sql = "SELECT COUNT(entry_no) AS total_num FROM ".$GLOBALS['g_DB_m_covering_letter']." ORDER BY entry_no;";
+    $a_stmt = $a_conn->prepare($a_sql);
+    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
+    $a_stmt->execute();
+    $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
+    $a_total_num = $a_result['total_num'];
+    
+    $a_start_idx = (($a_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
+    $a_end_idx = ($a_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
+
+    //②ページ対象のSELECT
+    $a_conn->exec("SET @rownum=0");
+    $a_sql = "SELECT t2.* FROM (";
+    $a_sql .= " SELECT  t1.*, @rownum:=@rownum+1 AS ROW_NUM FROM";
+    $a_sql .= " (SELECT * FROM ".$GLOBALS['g_DB_m_covering_letter']." ORDER BY entry_no) t1";
+    $a_sql .= ") t2 WHERE (t2.ROW_NUM BETWEEN ".$a_start_idx." AND ".$a_end_idx.");";
+    #$a_sql = "SELECT * FROM ".$GLOBALS['g_DB_m_covering_letter']." ORDER BY entry_no;";
+    #echo $a_sql;
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();
@@ -121,7 +139,7 @@ try{
         $a_sRet .= $a_sRet_L.$a_sRet_R;
         $a_sRet .= "    </tr>";
         $a_sRet .= "</table>";
-        $a_sRet = "<div id='my-recnum'>".$a_rec."件</div>".$a_sRet;
+        $a_sRet = "<div id='my-recnum'>". com_make_pager("make_m_covering_letter_list", $a_total_num, $a_PageNo, $GLOBALS['g_MAX_LINE_PAGE'])."</div>".$a_sRet;
     }else{
         $a_sRet = "登録データはありません。";
     }

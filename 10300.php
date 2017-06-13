@@ -46,7 +46,7 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-10300.js"></script>
 <script type="text/javascript">
     make_acceptance_ledger_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 310, 184); 
+    //resize_div2('leftColumn', 'right_title', 'right_record', 310, 184); 
     $(window).resize(function(){
         resize_div2('leftColumn', 'right_title', 'right_record', 310, 184); 
     });

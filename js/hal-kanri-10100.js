@@ -1637,6 +1637,7 @@ function make_contract_report_list(h_pageNo){
         },
        complete: function (data) {
             $.unblockUI();
+            resize_div2('leftColumn', 'right_title', 'right_record', 400, 194); 
        }
    });
 }

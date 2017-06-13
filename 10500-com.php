@@ -122,7 +122,7 @@ function set_10500_fromDB($a_result)
     $GLOBALS['ag_no'] = $a_result['contract_number'];
     #$GLOBALS['ag_no'] = $a_result['ag_no'];
     $GLOBALS['contract_number'] = $a_result['contract_number'];
-    $GLOBALS['publication'] = com_replace_toDate($a_result['publication']);
+    $GLOBALS['publication'] = com_replace_toDate($a_result['publication_agreement']);
     
     $GLOBALS['engineer_number'] = $a_result['engineer_number'];
     $GLOBALS['engineer_name'] = $a_result['engineer_name'];

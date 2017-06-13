@@ -41,7 +41,7 @@ require_once('./footer.php');
 <script src="./js/hal-kanri-90400.js"></script>
 <script type="text/javascript">
     make_m_covering_letter_list(1);
-    resize_div2('leftColumn', 'right_title', 'right_record', 200, 184); 
+    //resize_div2('leftColumn', 'right_title', 'right_record', 200, 184); 
     $(window).resize(function(){
         resize_div2('leftColumn', 'right_title', 'right_record', 200, 184); 
     });

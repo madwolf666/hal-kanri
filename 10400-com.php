@@ -76,7 +76,7 @@ function set_10400_fromDB($a_result)
     $GLOBALS['po_no'] = $a_result['contract_number'];
     #$GLOBALS['po_no'] = $a_result['po_no'];
     $GLOBALS['contract_number'] = $a_result['contract_number'];
-    $GLOBALS['publication'] = com_replace_toDate($a_result['publication']);
+    $GLOBALS['publication'] = com_replace_toDate($a_result['publication_purchase_order']);
     $GLOBALS['engineer_number'] = $a_result['engineer_number'];
     $GLOBALS['engineer_name'] = $a_result['engineer_name'];
     $GLOBALS['engneer_name_phonetic'] = $a_result['engneer_name_phonetic'];
