@@ -71,13 +71,13 @@ try{
     $a_sql_src .= " ORDER BY t2.employ_no";
 
     //①件数を取得する。
-    $a_sql = "SELECT COUNT(s1.employ_no) AS total_num FROM (".$a_sql_src.") s1;";
+    $a_sql = "SELECT COUNT(s1.cr_id) AS total_num FROM (".$a_sql_src.") s1;";
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();
     $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
     $a_total_num = $a_result['total_num'];
-    
+#echo '$a_total_num:'.$a_total_num.'<br>';    
     $a_start_idx = (($a_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
     $a_end_idx = ($a_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
 

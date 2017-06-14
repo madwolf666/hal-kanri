@@ -76,7 +76,7 @@ try{
     
     //①件数を取得する。
     #$a_sql = $a_sql_src.";";
-    $a_sql = "SELECT COUNT(s1.dm_no) AS total_num FROM (".$a_sql_src.") s1;";
+    $a_sql = "SELECT COUNT(s1.cr_id) AS total_num FROM (".$a_sql_src.") s1;";
 #echo $a_sql;
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);

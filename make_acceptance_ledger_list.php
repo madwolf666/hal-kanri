@@ -91,7 +91,7 @@ try{
     $a_sql_src .= " ORDER BY t1.contract_number,t3.ag_no,t2.al_id";
     
     //①件数を取得する。
-    $a_sql = "SELECT COUNT(s1.contract_number) AS total_num FROM (".$a_sql_src.") s1;";
+    $a_sql = "SELECT COUNT(s1.cr_id) AS total_num FROM (".$a_sql_src.") s1;";
     $a_stmt = $a_conn->prepare($a_sql);
     //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
     $a_stmt->execute();
