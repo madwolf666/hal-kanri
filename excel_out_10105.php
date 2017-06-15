@@ -42,10 +42,32 @@ if (isset($_GET['NO'])) {
         $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
         $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $a_sql = set_10100_selectDB();
+        $a_sql_src = set_10100_selectDB();
 
         //担当営業情報は契約レポートから持ってくる。
-        $a_sql = "SELECT s1.*, s2.* FROM (".$a_sql.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
+        $a_sql = "SELECT s1.*";
+        $a_sql .= "
+            ,s2.replace_person
+            ,s2.end_status
+            ,s2.retire_date
+            ,s2.insurance_crad
+            ,s2.employ_insurance
+            ,s2.end_reason1
+            ,s2.end_reason2
+            ,s2.end_reason3
+            ,s2.end_reason_detail
+            ,s2.from_now
+            ,s2.skill
+            ,s2.remarks AS remarks_end
+            ,s2.conversation
+            ,s2.work_attitude
+            ,s2.personality
+            ,s2.projects_confirm
+            ,s2.engineer_list
+            ,s2.remarks_pay AS remarks_pay_end
+            ,(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=s2.cnf_id)) AS cnf_person_end
+            ";
+        $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
         $a_sql .= " ON (s1.cr_id=s2.cr_id)";
         $a_sql .= " WHERE (s1.cr_id=:cr_id)";
 
@@ -67,13 +89,25 @@ if (isset($_GET['NO'])) {
             $inp_end_reason_detail = $a_result['end_reason_detail'];
             $opt_contarct_from_now = $a_result['from_now'];
             $opt_contarct_skill = $a_result['skill'];
-            $inp_biko = $a_result['remarks'];
+            $inp_biko = $a_result['remarks_end'];
             $opt_contarct_conversation = $a_result['conversation'];
             $opt_contarct_work_attitude = $a_result['work_attitude'];
             $opt_contarct_personality = $a_result['personality'];
             $opt_contarct_projects_confirm = $a_result['projects_confirm'];
             $opt_contarct_engineer_list = $a_result['engineer_list'];
-            $remarks_pay = $a_result['remarks_pay'];
+            $remarks_pay = $a_result['remarks_pay_end'];
+
+            /*$reg_id = $a_result['reg_id'];
+            $reg_person = $a_result['reg_person'];
+            $upd_id = $a_result['upd_id'];
+            $upd_person = $a_result['upd_person'];
+            $cnf_person = $a_result['cnf_person'];*/
+
+            $cnf_person = $a_result['cnf_person_end'];
+        }
+        if ($upd_person != ''){
+            $reg_id = $upd_id;
+            $reg_person = $upd_person;
         }
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
@@ -203,6 +237,9 @@ $obj_sheet->setCellValue("AE46",$opt_contarct_personality);
 $obj_sheet->setCellValue("W48",$opt_contarct_projects_confirm);
 $obj_sheet->setCellValue("AE48",$opt_contarct_engineer_list);
 $obj_sheet->setCellValue("U50",$remarks_pay);
+
+$obj_sheet->setCellValue("AI3",$reg_person);
+$obj_sheet->setCellValue("AI33",$cnf_person);
 
 header("Content-Type: application/vnd.ms-excel");
 header("Content-Disposition: attachment;filename='".$GLOBALS['g_EXCEL_CONTRACT_10105']."'");

@@ -31,7 +31,7 @@ require_once('./global.php');
 
 <div class="signin cf">
   <div class="avatar"></div>
-  <form>
+  <form name="frm_login" action="./index.php" method="post">
     <!--
     <div class="inputrow">
       <input type="text" id="name" placeholder="Username"/>
@@ -39,12 +39,12 @@ require_once('./global.php');
     </div>
     -->
     <div class="inputrow">
-      <input type="password" id="pass" placeholder="パスワード"/>
+        <input type="password" id="pass" placeholder="パスワード" onkeydown="check_keydown();"/>
       <label class="ion-locked" for="pass"></label>
     </div>
     <input type="checkbox" name="remember" id="remember"/>
     <label class="radio" for="remember">ログイン状態を保持する</label>
-    <input type="button" value="ログイン"　 onclick="exec_login();" />
+    <input type="button" value="ログイン"　 onclick="exec_login(false);" />
   </form>
 </div>
 
@@ -53,7 +53,5 @@ require_once('./global.php');
 </body>
 </html>
 
-<script type="text/javascript">
-    //alert('chappy');
-    //alert($.fn.jquery);
-</script>
+<script src="./js/hal-kanri-login.js"></script>
+

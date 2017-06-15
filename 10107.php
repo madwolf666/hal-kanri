@@ -26,9 +26,11 @@ if (isset($_GET['NO'])) {
         $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
         $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $a_sql = set_10100_selectDB();
+        $a_sql_src = set_10100_selectDB();
 
-        $a_sql = "SELECT s1.*, s2.* FROM (".$a_sql.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_estimate']." s2";
+        $a_sql = "SELECT s1.*";
+        $a_sql .= ",s2.estimate_no,s2.estimate_date";
+        $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_estimate']." s2";
         $a_sql .= " ON (s1.cr_id=s2.cr_id)";
         $a_sql .= " WHERE (s1.cr_id=:cr_id)";
         #echo $a_sql;
@@ -70,7 +72,7 @@ if (isset($_GET['NO'])) {
 	<br>
 	<p style="width:300px; margin-left:auto; text-align:left;">
         <u>見積書No.</u>
-            <?php //echo $inp_estimate_no; ?>
+            <?php echo com_make_estimate_no($inp_estimate_date, $inp_estimate_no); ?>
             <?php
                 /*if ($a_act == '') {
                     echo $inp_estimate_no;
@@ -78,16 +80,18 @@ if (isset($_GET['NO'])) {
                     echo com_make_tag_input($a_act, $inp_estimate_no, "inp_estimate_no", "width: 100px; text-align: center;");
                 }*/
             ?>
+            <input type="hidden" id="inp_estimate_no" value="<?php echo $inp_estimate_no; ?>">
         <br>
         <u>&nbsp;&nbsp;発行日&nbsp;&nbsp;&nbsp;</u>
             <?php //echo $inp_estimate_date; ?>
             <?php
-                /*if ($a_act == '') {
+                if ($a_act == '') {
                     echo $inp_estimate_date;
                 } else {
                     echo com_make_tag_input($a_act, $inp_estimate_date, "inp_estimate_date", "width: 100px; text-align: center;");
-                }*/
+                }
             ?>
+            <input type="hidden" id="old_estimate_date" value="<?php echo $inp_estimate_date; ?>">
          &nbsp;<br>
 	</p>
 	<p style="width:330px; margin-right:auto; text-align:left;">
@@ -168,7 +172,7 @@ if (isset($_GET['NO'])) {
 <input type="hidden" id="cr_id" value="<?php echo $cr_id; ?>">
     
 <p class="c">
-<!-- input type="button" value="更新" onclick="return regist_contract_estimate('e',<?php echo $cr_id; ?>);" -->
+<input type="button" value="更新" onclick="return regist_contract_estimate('e',<?php echo $cr_id; ?>);">
 <input type="button" value="Excelへ出力" onclick="return excel_out_10107(<?php echo $cr_id; ?>);">
 <input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>'">
 </p>

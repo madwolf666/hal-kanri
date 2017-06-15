@@ -114,7 +114,7 @@ function resize_div2(h_leftColumn, h_right_title, h_right_record, h_width, h_hei
 }
 
 //ログイン認証
-function exec_login(){
+function exec_login(h_enter){
     //alert('chk_auto');
     //alert($('#pass').val());
     if ($('#pass').val() == null){
@@ -127,6 +127,7 @@ function exec_login(){
     }
     
     //alert($('#remember').prop('checked'));
+    //alert(m_parentURL);
     
     $.ajax({
         url: m_parentURL + "exec_login.php",
@@ -140,7 +141,11 @@ function exec_login(){
         success: function(data, dataType){
             //alert(data);
             if (data == 'OK'){
-                chk_auth();
+                if (h_enter == false){
+                    chk_auth();
+                }else{
+                    chk_auth_enter();
+                }
             }else{
                 $("#my-result").empty().append(data);
             }
@@ -156,25 +161,12 @@ function exec_login(){
 
 //認証チェック
 function chk_auth(){
-    //alert('chk_auth');
-    location.href = './index.php';
-/*    
-    $.ajax({
-        url: m_parentURL + "index.php",
-        type: 'POST',
-        dataType: "html",
-        async: false,
-        data:{
-        },
-        success: function(data, dataType){
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(errorThrown.message);
-        },
-       complete: function (data) {
-       }
-   });
-*/
+    document.location.href = './index.php';
+}
+
+//認証チェック
+function chk_auth_enter(){
+    documtn.frm_login.submit();
 }
 
 //------------------------------------------------------------------------------

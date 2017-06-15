@@ -1123,9 +1123,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_tankin_p11;
                         } else {
-                    ?>
-                    <input type="text" id="txt_tankin_p11" readonly="true" value="<?php echo $txt_tankin_p11; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_tankin_p11, "txt_tankin_p11", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1134,9 +1132,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_tankin_p21;
                         } else {
-                    ?>
-                    <input type="text" id="txt_tankin_p21" readonly="true" value="<?php echo $txt_tankin_p21; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_tankin_p21, "txt_tankin_p21", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1148,9 +1144,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p11;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_lower_limit_p11" readonly="true" value="<?php echo $txt_contract_lower_limit_p11; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_lower_limit_p11, "txt_contract_lower_limit_p11", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1159,9 +1153,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p21;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_lower_limit_p21" readonly="true" value="<?php echo $txt_contract_lower_limit_p21; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_lower_limit_p21, "txt_contract_lower_limit_p21", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1173,9 +1165,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p11;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_upper_limit_p11" readonly="true" value="<?php echo $txt_contract_upper_limit_p11; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_upper_limit_p11, "txt_contract_upper_limit_p11", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1184,9 +1174,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p21;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_upper_limit_p21" readonly="true" value="<?php echo $txt_contract_upper_limit_p21; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_upper_limit_p21, "txt_contract_upper_limit_p21", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1198,9 +1186,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p11;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_kojyo_unit_p11" readonly="true" value="<?php echo $txt_contract_kojyo_unit_p11; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_kojyo_unit_p11, "txt_contract_kojyo_unit_p11", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1209,9 +1195,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p21;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_kojyo_unit_p21" readonly="true" value="<?php echo $txt_contract_kojyo_unit_p21; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_kojyo_unit_p21, "txt_contract_kojyo_unit_p21", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1223,9 +1207,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p11;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_zangyo_unit_p11" readonly="true" value="<?php echo $txt_contract_zangyo_unit_p11; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_zangyo_unit_p11, "txt_contract_zangyo_unit_p11", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1234,9 +1216,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p21;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_zangyo_unit_p21" readonly="true" value="<?php echo $txt_contract_zangyo_unit_p21; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_zangyo_unit_p21, "txt_contract_zangyo_unit_p21", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1249,9 +1229,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p12;
                         } else {
-                    ?>
-                    <input type="text" id="txt_syugyonisu_p12" readonly="true" value="<?php echo $txt_syugyonisu_p12; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_syugyonisu_p12, "txt_syugyonisu_p12", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1260,9 +1238,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p22;
                         } else {
-                    ?>
-                    <input type="text" id="txt_syugyonisu_p22" readonly="true" value="<?php echo $txt_syugyonisu_p22; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_syugyonisu_p22, "txt_syugyonisu_p22", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1274,9 +1250,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p12;
                         } else {
-                    ?>
-                    <input type="text" id="txt_zeneigyonisu_p12" readonly="true" value="<?php echo $txt_zeneigyonisu_p12; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_zeneigyonisu_p12, "txt_zeneigyonisu_p12", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1285,9 +1259,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p22;
                         } else {
-                    ?>
-                    <input type="text" id="txt_zeneigyonisu_p22" readonly="true" value="<?php echo $txt_zeneigyonisu_p22; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_zeneigyonisu_p22, "txt_zeneigyonisu_p22", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1320,9 +1292,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_tankin_p12;
                         } else {
-                    ?>
-                    <input type="text" id="txt_tankin_p12" readonly="true" value="<?php echo $txt_tankin_p12; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_tankin_p12, "txt_tankin_p12", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1331,9 +1301,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_tankin_p22;
                         } else {
-                    ?>
-                    <input type="text" id="txt_tankin_p22" readonly="true" value="<?php echo $txt_tankin_p22; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_tankin_p22, "txt_tankin_p22", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1345,9 +1313,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p12;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_lower_limit_p12" readonly="true" value="<?php echo $txt_contract_lower_limit_p12; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_lower_limit_p12, "txt_contract_lower_limit_p12", "width: 110px; text-align: center;");
                         }
                     ?>
             </td>
@@ -1356,9 +1322,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p22;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_lower_limit_p22" readonly="true" value="<?php echo $txt_contract_lower_limit_p22; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_lower_limit_p22, "txt_contract_lower_limit_p22", "width: 110px; text-align: center;");
                         }
                     ?>
             </td>
@@ -1370,9 +1334,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p12;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_upper_limit_p12" readonly="true" value="<?php echo $txt_contract_upper_limit_p12; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_upper_limit_p12, "txt_contract_upper_limit_p12", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1381,9 +1343,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p22;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_upper_limit_p22" readonly="true" value="<?php echo $txt_contract_upper_limit_p22; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_upper_limit_p22, "txt_contract_upper_limit_p22", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1395,9 +1355,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p12;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_kojyo_unit_p12" readonly="true" value="<?php echo $txt_contract_kojyo_unit_p12; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_kojyo_unit_p12, "txt_contract_kojyo_unit_p12", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1406,9 +1364,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p22;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_kojyo_unit_p22" readonly="true" value="<?php echo $txt_contract_kojyo_unit_p22; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_kojyo_unit_p22, "txt_contract_kojyo_unit_p22", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1420,9 +1376,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p12;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_zangyo_unit_p12" readonly="true" value="<?php echo $txt_contract_zangyo_unit_p12; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_zangyo_unit_p12, "txt_contract_zangyo_unit_p12", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1431,9 +1385,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p22;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_zangyo_unit_p22" readonly="true" value="<?php echo $txt_contract_zangyo_unit_p22; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_zangyo_unit_p22, "txt_contract_zangyo_unit_p22", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1446,9 +1398,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p13;
                         } else {
-                    ?>
-                    <input type="text" id="txt_syugyonisu_p13" readonly="true" value="<?php echo $txt_syugyonisu_p13; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_syugyonisu_p13, "txt_syugyonisu_p13", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1457,9 +1407,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p23;
                         } else {
-                    ?>
-                    <input type="text" id="txt_syugyonisu_p23" readonly="true" value="<?php echo $txt_syugyonisu_p23; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_syugyonisu_p23, "txt_syugyonisu_p23", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1471,9 +1419,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p13;
                         } else {
-                    ?>
-                    <input type="text" id="txt_zeneigyonisu_p13" readonly="true" value="<?php echo $txt_zeneigyonisu_p13; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_zeneigyonisu_p13, "txt_zeneigyonisu_p13", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1482,9 +1428,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p23;
                         } else {
-                    ?>
-                    <input type="text" id="txt_zeneigyonisu_p23" readonly="true" value="<?php echo $txt_zeneigyonisu_p23; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_zeneigyonisu_p23, "txt_zeneigyonisu_p23", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1517,9 +1461,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_tankin_p13;
                         } else {
-                    ?>
-                    <input type="text" id="txt_tankin_p13" readonly="true" value="<?php echo $txt_tankin_p13; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_tankin_p13, "txt_tankin_p13", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1528,9 +1470,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_tankin_p23;
                         } else {
-                    ?>
-                    <input type="text" id="txt_tankin_p23" readonly="true" value="<?php echo $txt_tankin_p23; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_tankin_p23, "txt_tankin_p23", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1542,9 +1482,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p13;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_lower_limit_p13" readonly="true" value="<?php echo $txt_contract_lower_limit_p13; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_lower_limit_p13, "txt_contract_lower_limit_p13", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1553,9 +1491,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p23;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_lower_limit_p23" readonly="true" value="<?php echo $txt_contract_lower_limit_p23; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_lower_limit_p23, "txt_contract_lower_limit_p23", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1567,9 +1503,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p13;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_upper_limit_p13" readonly="true" value="<?php echo $txt_contract_upper_limit_p13; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_upper_limit_p13, "txt_contract_upper_limit_p13", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1578,9 +1512,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p23;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_upper_limit_p23" readonly="true" value="<?php echo $txt_contract_upper_limit_p23; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_upper_limit_p23, "txt_contract_upper_limit_p23", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1592,9 +1524,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p13;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_kojyo_unit_p13" readonly="true" value="<?php echo $txt_contract_kojyo_unit_p13; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_kojyo_unit_p13, "txt_contract_kojyo_unit_p13", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1603,9 +1533,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p23;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_kojyo_unit_p23" readonly="true" value="<?php echo $txt_contract_kojyo_unit_p23; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_kojyo_unit_p23, "txt_contract_kojyo_unit_p23", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1617,9 +1545,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p13;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_zangyo_unit_p13" readonly="true" value="<?php echo $txt_contract_zangyo_unit_p13; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_zangyo_unit_p13, "txt_contract_zangyo_unit_p13", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1628,9 +1554,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p23;
                         } else {
-                    ?>
-                    <input type="text" id="txt_contract_zangyo_unit_p23" readonly="true" value="<?php echo $txt_contract_zangyo_unit_p23; ?>" style="width:110px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_contract_zangyo_unit_p23, "txt_contract_zangyo_unit_p23", "width: 110px; text-align: center;");
                         }
                     ?>
                 </td>

@@ -28,9 +28,11 @@ if (isset($_GET['NO'])) {
         $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
         $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $a_sql = set_10100_selectDB();
+        $a_sql_src = set_10100_selectDB();
 
-        $a_sql = "SELECT s1.*, s2.* FROM (".$a_sql.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_estimate']." s2";
+        $a_sql = "SELECT s1.*";
+        $a_sql .= ",s2.estimate_no,s2.estimate_date";
+        $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_estimate']." s2";
         $a_sql .= " ON (s1.cr_id=s2.cr_id)";
         $a_sql .= " WHERE (s1.cr_id=:cr_id)";
 
@@ -61,7 +63,7 @@ $obj_book   = $obj_reader->load($target_file);
 $obj_sheet = $obj_book->getSheet(0);
 //$obj_sheet->setCellValue("A1", "Hello, PHPExcel!");
 
-#$obj_sheet->setCellValue("M2",$inp_estimate_no);
+$obj_sheet->setCellValue("M2",com_make_estimate_no($inp_estimate_date, $inp_estimate_no));
 com_setValue_Date($inp_estimate_date, $obj_sheet, "M3", '[$-ja-JP]ggge"年"m"月"d"日"');
 
 $obj_sheet->setCellValue("A5",$inp_kyakusaki);

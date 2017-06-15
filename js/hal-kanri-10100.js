@@ -37,15 +37,22 @@ $(function () {
     
     //通常期間：単金・下限時間・上限時間
     $('#opt_contract_calc_b1').change(function(){$('#opt_contract_calc_p11').val($('#opt_contract_calc_b1').val()); $('#opt_contract_calc_p21').val($('#opt_contract_calc_b1').val()); check_value_changed_10102(1, 'claim_normal_calculation', $('[name=opt_contract_calc_b1] option:selected').text(), '#opt_contract_calc_b1');});
-    $('#inp_tankin_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal__unit_price', $('#inp_tankin_b1').val(), '#inp_tankin_b1');});
+    $('#inp_tankin_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); check_value_changed_10102(1, 'claim_normal__unit_price', $('#inp_tankin_b1').val(), '#inp_tankin_b1');});
+    //$('#inp_tankin_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal__unit_price', $('#inp_tankin_b1').val(), '#inp_tankin_b1');});
     
-    $('#opt_contract_lower_limit_b1').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_lower_limit', $('[name=opt_contract_lower_limit_b1] option:selected').text(), '#opt_contract_lower_limit_b1');});
-    $('#opt_contract_upper_limit_b1').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_upper_limit', $('[name=opt_contract_upper_limit_b1] option:selected').text(), '#opt_contract_upper_limit_b1');});
-    $('#txt_contract_lower_limit_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_lower_limit', $('#txt_contract_lower_limit_b1').val(), '#txt_contract_lower_limit_b1');});
-    $('#txt_contract_upper_limit_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_upper_limit', $('#txt_contract_upper_limit_b1').val(), '#txt_contract_upper_limit_b1');});
+    $('#opt_contract_lower_limit_b1').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); check_value_changed_10102(1, 'claim_normal_lower_limit', $('[name=opt_contract_lower_limit_b1] option:selected').text(), '#opt_contract_lower_limit_b1');});
+    $('#opt_contract_upper_limit_b1').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); check_value_changed_10102(1, 'claim_normal_upper_limit', $('[name=opt_contract_upper_limit_b1] option:selected').text(), '#opt_contract_upper_limit_b1');});
+    $('#txt_contract_lower_limit_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); check_value_changed_10102(1, 'claim_normal_lower_limit', $('#txt_contract_lower_limit_b1').val(), '#txt_contract_lower_limit_b1');});
+    $('#txt_contract_upper_limit_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); check_value_changed_10102(1, 'claim_normal_upper_limit', $('#txt_contract_upper_limit_b1').val(), '#txt_contract_upper_limit_b1');});
+    $('#opt_contract_trunc_unit_kojyo').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); check_value_changed_10102(1, 'claim_normal_deduction_unit_price_truncation_unit', $('[name=opt_contract_trunc_unit_kojyo] option:selected').text(), '#opt_contract_trunc_unit_kojyo');});
+    $('#opt_contract_trunc_unit_zangyo').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); check_value_changed_10102(1, 'claim_normal_overtime_unit_price_truncation_unit', $('[name=opt_contract_trunc_unit_zangyo] option:selected').text(), '#opt_contract_trunc_unit_zangyo');});
 
-    $('#opt_contract_trunc_unit_kojyo').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_deduction_unit_price_truncation_unit', $('[name=opt_contract_trunc_unit_kojyo] option:selected').text(), '#opt_contract_trunc_unit_kojyo');});
-    $('#opt_contract_trunc_unit_zangyo').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_overtime_unit_price_truncation_unit', $('[name=opt_contract_trunc_unit_zangyo] option:selected').text(), '#opt_contract_trunc_unit_zangyo');});
+    //$('#opt_contract_lower_limit_b1').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_lower_limit', $('[name=opt_contract_lower_limit_b1] option:selected').text(), '#opt_contract_lower_limit_b1');});
+    //$('#opt_contract_upper_limit_b1').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_upper_limit', $('[name=opt_contract_upper_limit_b1] option:selected').text(), '#opt_contract_upper_limit_b1');});
+    //$('#txt_contract_lower_limit_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_lower_limit', $('#txt_contract_lower_limit_b1').val(), '#txt_contract_lower_limit_b1');});
+    //$('#txt_contract_upper_limit_b1').keyup(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_upper_limit', $('#txt_contract_upper_limit_b1').val(), '#txt_contract_upper_limit_b1');});
+    //$('#opt_contract_trunc_unit_kojyo').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_deduction_unit_price_truncation_unit', $('[name=opt_contract_trunc_unit_kojyo] option:selected').text(), '#opt_contract_trunc_unit_kojyo');});
+    //$('#opt_contract_trunc_unit_zangyo').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_overtime_unit_price_truncation_unit', $('[name=opt_contract_trunc_unit_zangyo] option:selected').text(), '#opt_contract_trunc_unit_zangyo');});
 
     //途中入場：自動計算・手入力・通常単金・通常下限時間・通常上限時間・通常控除単価・通常残業単価・就業日数・全営業日数
     $('#opt_contract_calc_b2').change(function(){$('#opt_contract_calc_p12').val($('#opt_contract_calc_b2').val()); $('#opt_contract_calc_p22').val($('#opt_contract_calc_b2').val()); check_value_changed_10102(1, 'claim_middle_calculation', $('[name=opt_contract_calc_b2] option:selected').text(), '#opt_contract_calc_b2');});
@@ -339,17 +346,23 @@ function calc_bill_normal_period()
                     $('#txt_contract_kojyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
                 }
                 $('#txt_contract_kojyo_unit_b1').attr('readonly',true);
+                /*[2017.06.15]
                 $('#txt_contract_kojyo_unit_p11').attr('readonly',true);
                 $('#txt_contract_kojyo_unit_p21').attr('readonly',true);
+                */
             } else {
                 $('#txt_contract_kojyo_unit_b1').attr('readonly',false);
+                /*[2017.06.15]
                 $('#txt_contract_kojyo_unit_p11').attr('readonly',false);
                 $('#txt_contract_kojyo_unit_p21').attr('readonly',false);
+                */
             }
         } else {
             $('#txt_contract_kojyo_unit_b1').attr('readonly',true);
+            /*[2017.06.15]
             $('#txt_contract_kojyo_unit_p11').attr('readonly',true);
             $('#txt_contract_kojyo_unit_p21').attr('readonly',true);
+            */
         }
         
         //通常期間：残業単価
@@ -379,17 +392,23 @@ function calc_bill_normal_period()
                     $('#txt_contract_zangyo_unit_b1').val(Number(a_tmp*100).toLocaleString());
                 }
                 $('#txt_contract_zangyo_unit_b1').attr('readonly',true);
+                /*[2017.06.15]
                 $('#txt_contract_zangyo_unit_p11').attr('readonly',true);
                 $('#txt_contract_zangyo_unit_p21').attr('readonly',true);
+                */
             } else {
                 $('#txt_contract_zangyo_unit_b1').attr('readonly',false);
+                /*[2017.06.15]
                 $('#txt_contract_zangyo_unit_p11').attr('readonly',false);
                 $('#txt_contract_zangyo_unit_p21').attr('readonly',false);
+                */
             }
         } else {
             $('#txt_contract_zangyo_unit_b1').attr('readonly',true);
+            /*[2017.06.15]
             $('#txt_contract_zangyo_unit_p11').attr('readonly',true);
             $('#txt_contract_zangyo_unit_p21').attr('readonly',true);
+            */
         }
     }
 }
@@ -559,17 +578,23 @@ function calc_bill_middle_admission_lower_limit()
     if (a_lower_txt != '') {
         if (isFinite(a_lower_txt) == true) {
             $('#txt_contract_kojyo_unit_b2').attr('readonly',true);
+            /*[2017.06.15]
             $('#txt_contract_kojyo_unit_p12').attr('readonly',true);
             $('#txt_contract_kojyo_unit_p22').attr('readonly',true);
+            */
         } else {
             $('#txt_contract_kojyo_unit_b2').attr('readonly',false);
+            /*[2017.06.15]
             $('#txt_contract_kojyo_unit_p12').attr('readonly',false);
             $('#txt_contract_kojyo_unit_p22').attr('readonly',false);
+            */
         }
     } else {
         $('#txt_contract_kojyo_unit_b2').attr('readonly',true);
+        /*[2017.06.15]
         $('#txt_contract_kojyo_unit_p12').attr('readonly',true);
         $('#txt_contract_kojyo_unit_p22').attr('readonly',true);
+        */
     }
 }
 
@@ -588,17 +613,23 @@ function calc_bill_middle_admission_upper_limit()
     if (a_upper_txt != '') {
         if (isFinite(a_upper_txt) == true) {
             $('#txt_contract_zangyo_unit_b2').attr('readonly',true);
+            /*[2017.06.15]
             $('#txt_contract_zangyo_unit_p12').attr('readonly',true);
             $('#txt_contract_zangyo_unit_p22').attr('readonly',true);
+            */
         } else {
             $('#txt_contract_zangyo_unit_b2').attr('readonly',false);
+            /*[2017.06.15]
             $('#txt_contract_zangyo_unit_p12').attr('readonly',false);
             $('#txt_contract_zangyo_unit_p22').attr('readonly',false);
+            */
         }
     } else {
         $('#txt_contract_zangyo_unit_b2').attr('readonly',true);
+        /*[2017.06.15]
         $('#txt_contract_zangyo_unit_p12').attr('readonly',true);
         $('#txt_contract_zangyo_unit_p22').attr('readonly',true);
+        */
     }
 }
 
@@ -766,17 +797,23 @@ function calc_bill_midway_retirement_lower_limit()
     if (a_lower_txt != '') {
         if (isFinite(a_lower_txt) == true) {
             $('#txt_contract_kojyo_unit_b3').attr('readonly',true);
+            /*[2017.06.15]
             $('#txt_contract_kojyo_unit_p13').attr('readonly',true);
             $('#txt_contract_kojyo_unit_p23').attr('readonly',true);
+            */
         } else {
             $('#txt_contract_kojyo_unit_b3').attr('readonly',false);
+            /*[2017.06.15]
             $('#txt_contract_kojyo_unit_p13').attr('readonly',false);
             $('#txt_contract_kojyo_unit_p23').attr('readonly',false);
+            */
         }
     } else {
         $('#txt_contract_kojyo_unit_b3').attr('readonly',true);
+        /*[2017.06.15]
         $('#txt_contract_kojyo_unit_p13').attr('readonly',true);
         $('#txt_contract_kojyo_unit_p23').attr('readonly',true);
+        */
     }
 }
 
@@ -795,17 +832,23 @@ function calc_bill_midway_retirement_upper_limit()
     if (a_upper_txt != '') {
         if (isFinite(a_upper_txt) == true) {
             $('#txt_contract_zangyo_unit_b3').attr('readonly',true);
+            /*[2017.06.15]
             $('#txt_contract_zangyo_unit_p13').attr('readonly',true);
             $('#txt_contract_zangyo_unit_p23').attr('readonly',true);
+            */
         } else {
             $('#txt_contract_zangyo_unit_b3').attr('readonly',false);
+            /*[2017.06.15]
             $('#txt_contract_zangyo_unit_p13').attr('readonly',false);
             $('#txt_contract_zangyo_unit_p23').attr('readonly',false);
+            */
         }
     } else {
         $('#txt_contract_zangyo_unit_b3').attr('readonly',true);
+        /*[2017.06.15]
         $('#txt_contract_zangyo_unit_p13').attr('readonly',true);
         $('#txt_contract_zangyo_unit_p23').attr('readonly',true);
+        */
     }
 }
 
@@ -1322,6 +1365,9 @@ function calc_teisyoku()
 //支払条件入力切替
 function set_pay_input_mode(h_mode)
 {
+    //画面入力自体、入力可とする。
+    return;
+    
     $('#txt_tankin_p11').attr('readonly', h_mode);
     $('#txt_tankin_p21').attr('readonly', h_mode);
     $('#txt_contract_lower_limit_p11').attr('readonly', h_mode);
@@ -1790,12 +1836,12 @@ function regist_contract_estimate(h_act, h_no)
         a_sKind = '更新';
     }
 
-    if (check_IsRequired('#inp_estimate_no', '見積書Noが入力されていません！') == false) return;
+    //if (check_IsRequired('#inp_estimate_no', '見積書Noが入力されていません！') == false) return;
     if (check_IsRequired('#inp_estimate_date', '発行日が入力されていません！') == false) return;
 
     if (!confirm("見積書を" + a_sKind + "します。よろしいですか？")) return;
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
-    //alert($('#inp_engineer_no').val());
+    //alert($('#inp_estimate_no').val());
     $.ajax({
         url: m_parentURL + "regist_contract_estimate.php",
         type: 'POST',
@@ -1806,6 +1852,7 @@ function regist_contract_estimate(h_act, h_no)
             'no': h_no,
             'inp_estimate_no': $('#inp_estimate_no').val(),
             'inp_estimate_date': $('#inp_estimate_date').val(),
+            'old_estimate_date': $('#old_estimate_date').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

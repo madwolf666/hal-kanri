@@ -30,6 +30,16 @@ try{
         $a_isExists = true;
     }
 
+    //見積書番号の自動採番
+    $a_next_estimate_no = "";
+    $a_sql = "SELECT (IFNULL(MAX(CAST(estimate_no AS SIGNED)),0)+1) AS next_estimate_no FROM ".$GLOBALS['g_DB_t_contract_estimate']." WHERE (estimate_date='".$_POST['inp_estimate_date']."');";
+    $a_stmt = $a_conn->prepare($a_sql);
+    $a_stmt->execute();
+
+    while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+        $a_next_estimate_no = $a_result['next_estimate_no'];
+    }
+
     if ($a_isExists == false){
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_contract_estimate']." (";
         $a_sql .= "
@@ -62,7 +72,18 @@ try{
     $a_stmt = $a_conn->prepare($a_sql);
 
     $a_stmt->bindParam(':cr_id', $a_cr_id, PDO::PARAM_STR);
-    $a_stmt->bindParam(':estimate_no', $_POST['inp_estimate_no'], PDO::PARAM_STR);
+    
+    $a_estimate_no = $_POST['inp_estimate_no'];
+    if ($_POST['inp_estimate_date'] == ''){
+        $a_estimate_no = "";
+    }else{
+        if ($_POST['inp_estimate_date'] != $_POST['old_estimate_date']){
+            //前回の発行日と異なる場合、見積書番号を採番し直す。
+            $a_estimate_no = $a_next_estimate_no;
+        }
+    }
+    
+    $a_stmt->bindParam(':estimate_no', $a_estimate_no, PDO::PARAM_STR);
     com_pdo_bindValue($a_stmt, ':estimate_date', $_POST['inp_estimate_date']);
 
     if ($a_isExists == false) {

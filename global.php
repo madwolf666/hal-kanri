@@ -714,4 +714,10 @@ function com_select_pager(&$h_conn, &$h_stmt, $h_sql_src, $h_PageNo, &$h_total_n
     $h_stmt->execute();
     
 }
+
+function com_make_estimate_no($h_estimate_date, $h_estimate_no)
+{
+    return "HAL".str_replace("/", "", $h_estimate_date).str_pad($h_estimate_no, 3, "0",STR_PAD_LEFT);
+}
+
 ?>

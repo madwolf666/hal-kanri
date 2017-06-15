@@ -209,6 +209,9 @@ $obj_sheet->setCellValue("R58",$chs_position1);
 $obj_sheet->setCellValue("AC58",$chs_name1);
 $obj_sheet->setCellValue("V60",$remarks_pay);
 
+$obj_sheet->setCellValue("AJ3",$reg_person);
+$obj_sheet->setCellValue("AJ42",$cnf_person);
+
 header("Content-Type: application/vnd.ms-excel");
 //header("Content-Type: application/octet-stream");
 header("Content-Disposition: attachment;filename='".$GLOBALS['g_EXCEL_CONTRACT_10102']."'");
