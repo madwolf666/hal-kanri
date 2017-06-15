@@ -73,6 +73,54 @@ $welfare_pension = "";
 $jurisdiction = "";
 $specified_worker = "";
 
+function set_10600_selectDB()
+{
+    $a_sql_src = "SELECT t1.*,";
+    $a_sql_src .= "
+ t2.dm_no				
+,t2.dd_office			
+,t2.dd_fax				
+,t2.chs_date1			
+,t2.chs_status1			
+,t2.chs_date2			
+,t2.chs_status2			
+,t2.chs_date3			
+,t2.chs_status3			
+,t2.chs_date4			
+,t2.chs_status4			
+,t2.dm_responsible_position AS dm_responsible_position_dispatching_management
+,t2.dm_responsible_name AS dm_responsible_name_dispatching_management
+,t2.dd_responsible_position AS dd_responsible_position_dispatching_management
+,t2.dd_responsible_name AS dd_responsible_name_dispatching_management	
+,t2.employment_date1	
+,t2.employment_status1	
+,t2.employment_date2	
+,t2.employment_status2	
+,t2.employment_date3	
+,t2.employment_status3	
+,t2.employment_date4	
+,t2.employment_status4	
+,t2.dd_worker_name		
+,t2.dd_worker_business	
+,t2.dd_worker_holiday_start
+,t2.dd_worker_holiday_end
+,t2.employment_insurance
+,t2.health_insurance	
+,t2.welfare_pension		
+,t2.jurisdiction		
+,t2.specified_worker
+        ";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
+    /*$a_sql .= " LEFT JOIN ";
+    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql .= " ON (t1.cr_id=t3.cr_id)";*/
+    
+    return $a_sql_src;
+}
+
 function set_10600_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];

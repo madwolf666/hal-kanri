@@ -690,4 +690,28 @@ function com_make_pager($h_func, $h_sum, $h_pno, $h_max_line_page)
     
     return $a_sRet;
 }
+
+function com_select_pager(&$h_conn, &$h_stmt, $h_sql_src, $h_PageNo, &$h_total_num)
+{
+    //①件数を取得する。
+    $a_sql = "SELECT COUNT(s1.cr_id) AS total_num FROM (".$h_sql_src.") s1;";
+    $h_stmt = $h_conn->prepare($a_sql);
+    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
+    $h_stmt->execute();
+    $a_result = $h_stmt->fetch(PDO::FETCH_ASSOC);
+    $h_total_num = $a_result['total_num'];
+#echo '$a_total_num:'.$a_total_num.'<br>';    
+    $a_start_idx = (($h_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
+    $a_end_idx = ($h_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
+
+    //②ページ対象のSELECT
+    $h_conn->exec("SET @rownum=0");
+    $a_sql = "SELECT s2.* FROM (";
+    $a_sql .= " SELECT  s1.*, @rownum:=@rownum+1 AS ROW_NUM FROM (".$h_sql_src.") s1";
+    $a_sql .= ") s2 WHERE (s2.ROW_NUM BETWEEN ".$a_start_idx." AND ".$a_end_idx.");";
+    $h_stmt = $h_conn->prepare($a_sql);
+    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
+    $h_stmt->execute();
+    
+}
 ?>

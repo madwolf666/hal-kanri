@@ -26,12 +26,19 @@ if (isset($_GET['NO'])) {
         $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
         $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_estimate']." WHERE (cr_id=:cr_id);";
+        $a_sql = set_10100_selectDB();
+
+        $a_sql = "SELECT s1.*, s2.* FROM (".$a_sql.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_estimate']." s2";
+        $a_sql .= " ON (s1.cr_id=s2.cr_id)";
+        $a_sql .= " WHERE (s1.cr_id=:cr_id)";
+        #echo $a_sql;
         $a_stmt = $a_conn->prepare($a_sql);
         $a_stmt->bindParam(':cr_id', $a_no, PDO::PARAM_STR);
         $a_stmt->execute();
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            set_10100_fromDB($a_result);
+
             $inp_estimate_no = $a_result['estimate_no'];
             $inp_estimate_date = str_replace("-", "/", $a_result['estimate_date']);
         }

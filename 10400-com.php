@@ -70,6 +70,31 @@ $sending_back = "";
 
 $ag_no = "";
 
+function set_10400_selectDB()
+{
+    $a_sql_src = "SELECT t1.*,";
+    $a_sql_src .= "
+ t2.po_no				
+,t2.publication AS publication_purchase_order
+,t2.remarks1			
+,t2.remarks2			
+,t2.remarks3				
+,t2.remarks4				
+,t2.inheriting			
+,t2.sending_back
+,t3.ag_no
+        ";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql_src .= " ON (t1.cr_id=t3.cr_id)";
+
+    return $a_sql_src;
+}
+
 function set_10400_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];

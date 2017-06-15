@@ -101,6 +101,42 @@ $health_insurance_standard_remuneration = "";
 $thickness_year_standard_remuneration = "";
 //$redemption_ratio = "";
 
+function set_10200_selectDB()
+{
+    $a_sql_src = "SELECT t1.*,";
+    $a_sql_src .= "
+ t2.employ_num
+,t2.employ_form
+,t2.employ_no
+,t2.date_entering
+,t2.date_retire
+,t2.yayoi_group
+,t2.date_modify_salary
+,t2.date_first_salary
+,t2.status_employ_insurance
+,t2.status_compensation_insurance
+,t2.status_social_insurance
+,t2.tax_municipal_tax
+,t2.tax_dependents
+,t2.tax_year_end_adjustment
+,t2.labor_managerial_position
+,t2.labor_contact_date
+,t2.labor_yayoi_changed
+,t2.labor_remarks
+,t2.labor_question
+,t2.labor_answer
+,t2.labor_employ_no
+,t2.health_insurance_standard_remuneration
+,t2.thickness_year_standard_remuneration
+        ";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_payroll']." t2";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
+    
+    return $a_sql_src;
+}
+
 function set_10200_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];

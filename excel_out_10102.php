@@ -18,6 +18,29 @@ if (!isset($_GET['ACT'])){
 
 require_once('./10100-com.php');
 
+if (isset($_GET['NO'])) {
+    $a_no = $_GET['NO'];
+    try{
+        //DBからユーザ情報取得
+        $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+        $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $a_sql = set_10100_selectDB();
+
+        $a_sql .= " WHERE (cr_id=:cr_id);";
+        $a_stmt = $a_conn->prepare($a_sql);
+        $a_stmt->bindParam(':cr_id', $a_no, PDO::PARAM_STR);
+        $a_stmt->execute();
+
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            set_10100_fromDB($a_result);
+        }
+    } catch (PDOException $e){
+        echo 'Error:'.$e->getMessage();
+        die();
+    }
+}
+
 //読み書きするファイルのパスを設定
 $target_file = $GLOBALS['g_EXCEL_TEMPLATE_PATH'].$GLOBALS['g_EXCEL_CONTRACT_10102'];
 

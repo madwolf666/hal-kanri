@@ -117,6 +117,61 @@ $payment_gross_profit_margin = "";
 
 $ag_no = "";
 
+function set_10300_selectDB()
+{
+    $a_sql_src = "SELECT t1.*,";
+    $a_sql_src .= "
+ t2.al_id
+,t2.accounts_estimate_no
+,t2.accounts_contract_purchase_no
+,t2.accounts_bai_previous_day
+,t2.accounts_sales_will_amount
+,t2.accounts_working_hours_manage
+,t2.accounts_actual_working_hours
+,t2.accounts_actual_amount_money
+,t2.accounts_expenses
+,t2.accounts_tax_meter_noinclude
+,t2.accounts_tax_meter_include
+,t2.accounts_invoicing
+,t2.ordering_purchase_no
+,t2.payment_acceptance_date
+,t2.payment_schedule_amount
+,t2.payment_actual_working_hours
+,t2.payment_actual_amount_money
+,t2.payment_commuting_expenses
+,t2.payment_tax_meter_noinclude
+,t2.payment_tax_meter_include
+,t2.payment_bill_acceptance
+,t2.payment_expenses
+,t2.payment_else
+,t2.payment_pre_paid
+,t2.payment_advance
+,t2.payment_commission
+,t2.payment_total
+,t2.payment_plan_month_after_next_1
+,t2.payment_plan_next_month_15
+,t2.payment_plan_month_after_next_15
+,t2.payment_plan_else
+,t2.payment_payroll_schedule
+,t2.payment_transfer_processing_amount1
+,t2.payment_transfer_processing_amount2
+,t2.payment_difference
+,t2.payment_actual_working_hours_difference
+,t2.payment_gross_profit
+,t2.payment_gross_profit_margin
+,t3.ag_no
+        ";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_acceptance_ledger']." t2";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
+    $a_sql_src .= " ON (t1.cr_id=t3.cr_id)";
+
+    return $a_sql_src;
+}
+
 function set_10300_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];

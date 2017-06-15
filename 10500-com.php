@@ -116,6 +116,45 @@ $guide_ships = "";
 $sex = "";
 $skill_type = "";
 
+function set_10500_selectDB()
+{
+    $a_sql_src = "SELECT t1.*,";
+    $a_sql_src .= "
+ t2.ag_no
+,t2.publication AS publication_agreement
+,t2.contact_date_brn
+,t2.conflict_prevention
+,t2.thing1
+,t2.chs_tel2
+,t2.dd_responsible_tel
+,t2.reserve1
+,t2.reserve2
+,t2.reserve3
+,t2.reserve4
+,t2.reserve5
+,t2.reserve6
+,t2.reserve7
+,t2.guide_ships
+,t3.sex
+,t3.birthday
+,t3.skill_type
+,t4.post_no AS person_post_no
+,t4.address AS person_address
+    ";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_agreement_ledger']." t2";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_m_engineer']." t3";
+    $a_sql_src .= " ON (t1.engineer_number=t3.entry_no)";
+    $a_sql_src .= " LEFT JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_m_covering_letter']." t4";
+    $a_sql_src .= " ON (t1.engineer_number=t4.entry_no)";
+    
+    return $a_sql_src;
+}
+
 function set_10500_fromDB($a_result)
 {
     $GLOBALS['cr_id'] = $a_result['cr_id'];

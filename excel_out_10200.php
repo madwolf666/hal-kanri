@@ -27,37 +27,7 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //一覧出力は何順？
-    $a_sql = "SELECT t1.*,";
-    $a_sql .= "
- t2.employ_num
-,t2.employ_form
-,t2.employ_no
-,t2.date_entering
-,t2.date_retire
-,t2.yayoi_group
-,t2.date_modify_salary
-,t2.date_first_salary
-,t2.status_employ_insurance
-,t2.status_compensation_insurance
-,t2.status_social_insurance
-,t2.tax_municipal_tax
-,t2.tax_dependents
-,t2.tax_year_end_adjustment
-,t2.labor_managerial_position
-,t2.labor_contact_date
-,t2.labor_yayoi_changed
-,t2.labor_remarks
-,t2.labor_question
-,t2.labor_answer
-,t2.labor_employ_no
-,t2.health_insurance_standard_remuneration
-,t2.thickness_year_standard_remuneration
-        ";
-    $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
-    $a_sql .= " LEFT JOIN ";
-    $a_sql .= $GLOBALS['g_DB_t_payroll']." t2";
-    $a_sql .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql = set_10200_selectDB();
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10200', "");

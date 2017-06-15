@@ -42,12 +42,20 @@ if (isset($_GET['NO'])) {
         $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
         $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_end_report']." WHERE (cr_id=:cr_id);";
+        $a_sql = set_10100_selectDB();
+
+        //担当営業情報は契約レポートから持ってくる。
+        $a_sql = "SELECT s1.*, s2.* FROM (".$a_sql.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
+        $a_sql .= " ON (s1.cr_id=s2.cr_id)";
+        $a_sql .= " WHERE (s1.cr_id=:cr_id)";
+
         $a_stmt = $a_conn->prepare($a_sql);
         $a_stmt->bindParam(':cr_id', $a_no, PDO::PARAM_STR);
         $a_stmt->execute();
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            set_10100_fromDB($a_result);
+
             $opt_contarct_replace = $a_result['replace_person'];
             $opt_contarct_end_status = $a_result['end_status'];
             $inp_retire_date = str_replace("-", "/", $a_result['retire_date']);

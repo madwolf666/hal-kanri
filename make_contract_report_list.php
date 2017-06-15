@@ -9,6 +9,8 @@
 
 require_once('./global.php');
 
+require_once('./10100-com.php');
+
 //POSTデータを取得
 $a_PageNo = $_POST['PageNo'];
 
@@ -19,12 +21,7 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql_src = "SELECT t1.*";
-    $a_sql_src .= ",(SELECT idx FROM ".$GLOBALS['g_DB_m_contract_status']." WHERE (m_name=t1.status_cd)) AS status_cd_num";
-    $a_sql_src .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.reg_id)) AS reg_person";
-    $a_sql_src .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.upd_id)) AS upd_person";
-    $a_sql_src .= ",(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=t1.cnf_id)) AS cnf_person";
-    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    $a_sql_src = set_10100_selectDB();
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name', "");
@@ -44,26 +41,7 @@ try{
     $a_sql_src .= $a_where;
     $a_sql_src .= " ORDER BY contract_number";
     
-    //①件数を取得する。
-    $a_sql = "SELECT COUNT(s1.contract_number) AS total_num FROM (".$a_sql_src.") s1;";
-    $a_stmt = $a_conn->prepare($a_sql);
-    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
-    $a_stmt->execute();
-    $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
-    $a_total_num = $a_result['total_num'];
-    
-    $a_start_idx = (($a_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
-    $a_end_idx = ($a_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
-
-    //②ページ対象のSELECT
-    $a_conn->exec("SET @rownum=0");
-    $a_sql = "SELECT s2.* FROM (";
-    $a_sql .= " SELECT  s1.*, @rownum:=@rownum+1 AS ROW_NUM FROM (".$a_sql_src.") s1";
-    $a_sql .= ") s2 WHERE (s2.ROW_NUM BETWEEN ".$a_start_idx." AND ".$a_end_idx.");";
-    #echo $a_sql_src;
-    $a_stmt = $a_conn->prepare($a_sql);
-    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
-    $a_stmt->execute();
+    com_select_pager($a_conn, $a_stmt, $a_sql_src, $a_PageNo, $a_total_num);
 
     $a_rec = 0;
 

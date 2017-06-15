@@ -19,48 +19,7 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql_src = "SELECT t1.*,";
-    $a_sql_src .= "
- t2.dm_no				
-,t2.dd_office			
-,t2.dd_fax				
-,t2.chs_date1			
-,t2.chs_status1			
-,t2.chs_date2			
-,t2.chs_status2			
-,t2.chs_date3			
-,t2.chs_status3			
-,t2.chs_date4			
-,t2.chs_status4			
-,t2.dm_responsible_position AS dm_responsible_position_dispatching_management
-,t2.dm_responsible_name AS dm_responsible_name_dispatching_management
-,t2.dd_responsible_position AS dd_responsible_position_dispatching_management
-,t2.dd_responsible_name AS dd_responsible_name_dispatching_management	
-,t2.employment_date1	
-,t2.employment_status1	
-,t2.employment_date2	
-,t2.employment_status2	
-,t2.employment_date3	
-,t2.employment_status3	
-,t2.employment_date4	
-,t2.employment_status4	
-,t2.dd_worker_name		
-,t2.dd_worker_business	
-,t2.dd_worker_holiday_start
-,t2.dd_worker_holiday_end
-,t2.employment_insurance
-,t2.health_insurance	
-,t2.welfare_pension		
-,t2.jurisdiction		
-,t2.specified_worker
-        ";
-    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
-    $a_sql_src .= " LEFT JOIN ";
-    $a_sql_src .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
-    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
-    /*$a_sql .= " LEFT JOIN ";
-    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
-    $a_sql .= " ON (t1.cr_id=t3.cr_id)";*/
+    $a_sql_src = set_10600_selectDB();
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10600', "");
@@ -74,27 +33,7 @@ try{
 
     $a_sql_src .= " ORDER BY t2.dm_no";
     
-    //①件数を取得する。
-    #$a_sql = $a_sql_src.";";
-    $a_sql = "SELECT COUNT(s1.cr_id) AS total_num FROM (".$a_sql_src.") s1;";
-#echo $a_sql;
-    $a_stmt = $a_conn->prepare($a_sql);
-    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
-    $a_stmt->execute();
-    $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
-    $a_total_num = $a_result['total_num'];
-
-    $a_start_idx = (($a_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
-    $a_end_idx = ($a_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
-
-    //②ページ対象のSELECT
-    $a_conn->exec("SET @rownum=0");
-    $a_sql = "SELECT s2.* FROM (";
-    $a_sql .= " SELECT  s1.*, @rownum:=@rownum+1 AS ROW_NUM FROM (".$a_sql_src.") s1";
-    $a_sql .= ") s2 WHERE (s2.ROW_NUM BETWEEN ".$a_start_idx." AND ".$a_end_idx.");";
-    $a_stmt = $a_conn->prepare($a_sql);
-    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
-    $a_stmt->execute();
+    com_select_pager($a_conn, $a_stmt, $a_sql_src, $a_PageNo, $a_total_num);
 
     $a_rec = 0;
 

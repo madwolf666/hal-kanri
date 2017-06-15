@@ -19,37 +19,8 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql_src = "SELECT t1.*,";
-    $a_sql_src .= "
- t2.employ_num
-,t2.employ_form
-,t2.employ_no
-,t2.date_entering
-,t2.date_retire
-,t2.yayoi_group
-,t2.date_modify_salary
-,t2.date_first_salary
-,t2.status_employ_insurance
-,t2.status_compensation_insurance
-,t2.status_social_insurance
-,t2.tax_municipal_tax
-,t2.tax_dependents
-,t2.tax_year_end_adjustment
-,t2.labor_managerial_position
-,t2.labor_contact_date
-,t2.labor_yayoi_changed
-,t2.labor_remarks
-,t2.labor_question
-,t2.labor_answer
-,t2.labor_employ_no
-,t2.health_insurance_standard_remuneration
-,t2.thickness_year_standard_remuneration
-        ";
-    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
-    $a_sql_src .= " LEFT JOIN ";
-    $a_sql_src .= $GLOBALS['g_DB_t_payroll']." t2";
-    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
-
+    $a_sql_src = set_10200_selectDB();
+    
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10200', "");
     $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form']);
@@ -70,25 +41,7 @@ try{
 
     $a_sql_src .= " ORDER BY t2.employ_no";
 
-    //①件数を取得する。
-    $a_sql = "SELECT COUNT(s1.cr_id) AS total_num FROM (".$a_sql_src.") s1;";
-    $a_stmt = $a_conn->prepare($a_sql);
-    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
-    $a_stmt->execute();
-    $a_result = $a_stmt->fetch(PDO::FETCH_ASSOC);
-    $a_total_num = $a_result['total_num'];
-#echo '$a_total_num:'.$a_total_num.'<br>';    
-    $a_start_idx = (($a_PageNo-1)*$GLOBALS['g_MAX_LINE_PAGE']) + 1;
-    $a_end_idx = ($a_PageNo*$GLOBALS['g_MAX_LINE_PAGE']);
-
-    //②ページ対象のSELECT
-    $a_conn->exec("SET @rownum=0");
-    $a_sql = "SELECT s2.* FROM (";
-    $a_sql .= " SELECT  s1.*, @rownum:=@rownum+1 AS ROW_NUM FROM (".$a_sql_src.") s1";
-    $a_sql .= ") s2 WHERE (s2.ROW_NUM BETWEEN ".$a_start_idx." AND ".$a_end_idx.");";
-    $a_stmt = $a_conn->prepare($a_sql);
-    //$a_stmt->bindParam(':pass', $a_pass,PDO::PARAM_STR);
-    $a_stmt->execute();
+    com_select_pager($a_conn, $a_stmt, $a_sql_src, $a_PageNo, $a_total_num);
 
     $a_rec = 0;
 

@@ -27,26 +27,7 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //一覧出力は何順？
-    $a_sql = "SELECT t1.*,";
-    $a_sql .= "
- t2.po_no				
-,t2.publication AS publication_purchase_order
-,t2.remarks1			
-,t2.remarks2			
-,t2.remarks3				
-,t2.remarks4				
-,t2.inheriting			
-,t2.sending_back			
-,t3.ag_no
-        ";
-    $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
-    $a_sql .= " LEFT JOIN ";
-    $a_sql .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
-    $a_sql .= " ON (t1.cr_id=t2.cr_id)";
-    $a_sql .= " LEFT JOIN ";
-    $a_sql .= $GLOBALS['g_DB_t_agreement_ledger']." t3";
-    $a_sql .= " ON (t1.cr_id=t3.cr_id)";
+    $a_sql = set_10400_selectDB();
 
     $a_where = "";
     $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10400', "");
