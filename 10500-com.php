@@ -38,6 +38,9 @@ $break_start = "";
 $break_end = "";
 $break_hours = "";
 
+$claim_normal_calculation = "";
+$claim_normal__unit_price = "";
+
 $social_insurance = "";
 $tax_withholding = "";
 
@@ -81,8 +84,10 @@ $ip_position = "";
 $ip_name = "";
 $dm_responsible_position = "";
 $dm_responsible_name = "";
+$dm_responsible_tel = "";
 $dd_responsible_position = "";
 $dd_responsible_name = "";
+$dd_responsible_tel = "";
 
 $person_post_no = "";
 $person_address = "";
@@ -98,10 +103,10 @@ $thing1 = "";
 
 $chs_position1 = "";
 $chs_name1 = "";
+$chs_tel1 = "";
 $chs_position2 = "";
 $chs_name2 = "";
 $chs_tel2 = "";
-$dd_responsible_tel = "";
 
 $reserve1 = "";
 $reserve2 = "";
@@ -125,8 +130,6 @@ function set_10500_selectDB()
 ,t2.contact_date_brn
 ,t2.conflict_prevention
 ,t2.thing1
-,t2.chs_tel2
-,t2.dd_responsible_tel
 ,t2.reserve1
 ,t2.reserve2
 ,t2.reserve3
@@ -172,6 +175,9 @@ function set_10500_fromDB($a_result)
 
     $GLOBALS['claim_agreement_start'] = str_replace("-", "/", $a_result['claim_agreement_start']);
     $GLOBALS['claim_agreement_end'] = str_replace("-", "/", $a_result['claim_agreement_end']);
+
+    $GLOBALS['claim_normal_calculation'] = $a_result['claim_normal_calculation'];
+    $GLOBALS['claim_normal__unit_price'] = $a_result['claim_normal__unit_price'];
 
     $GLOBALS['work_start'] = substr($a_result['work_start'], 0, 5);
     $GLOBALS['work_end'] = substr($a_result['work_end'], 0, 5);
@@ -223,8 +229,10 @@ function set_10500_fromDB($a_result)
     $GLOBALS['ip_name'] = $a_result['ip_name'];
     $GLOBALS['dm_responsible_position'] = $a_result['dm_responsible_position'];
     $GLOBALS['dm_responsible_name'] = $a_result['dm_responsible_name'];
+    $GLOBALS['dm_responsible_tel'] = $a_result['dm_responsible_tel'];
     $GLOBALS['dd_responsible_position'] = $a_result['dd_responsible_position'];
     $GLOBALS['dd_responsible_name'] = $a_result['dd_responsible_name'];
+    $GLOBALS['dd_responsible_tel'] = $a_result['dd_responsible_tel'];
     
     $GLOBALS['person_post_no'] = str_replace("〒", "", $a_result['person_post_no']);
     $GLOBALS['person_address'] = $a_result['person_address'];
@@ -240,10 +248,10 @@ function set_10500_fromDB($a_result)
 
     $GLOBALS['chs_position1'] = $a_result['chs_position1'];
     $GLOBALS['chs_name1'] = $a_result['chs_name1'];
+    $GLOBALS['chs_tel1'] = $a_result['chs_tel1'];
     $GLOBALS['chs_position2'] = $a_result['chs_position2'];
     $GLOBALS['chs_name2'] = $a_result['chs_name2'];
     $GLOBALS['chs_tel2'] = $a_result['chs_tel2'];
-    $GLOBALS['dd_responsible_tel'] = $a_result['dd_responsible_tel'];
     
     $GLOBALS['reserve1'] = $a_result['reserve1'];
     $GLOBALS['reserve2'] = $a_result['reserve2'];

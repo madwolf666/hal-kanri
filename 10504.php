@@ -150,7 +150,7 @@ if (isset($_GET['NO'])) {
             <td width=3% class="hiddencell_r">氏名</td>
             <td width=17% class="hiddencell_r"><?php echo $dm_responsible_name; ?>
             </td>
-            <td width=50%>（電話：）</td>
+            <td width=50%>（電話：<?php echo $dm_responsible_tel; ?>）</td>
 	</tr>
 	<tr>
             <td width=20%>福利厚生施設<br>の利用等</td>
@@ -174,7 +174,7 @@ if (isset($_GET['NO'])) {
             <td width=5% class="hiddencell_r">氏名</td>
             <td width=10% class="hiddencell_r"><?php echo $chs_name1; ?>
             </td>
-            <td width=45%>（電話：）</td>
+            <td width=45%>（電話：<?php echo $chs_tel1; ?>）</td>
 	</tr>
 	<tr>
             <td width=20%>苦情処理方、<br>連携体制等</td>
@@ -210,7 +210,7 @@ if (isset($_GET['NO'])) {
 	</tr>
 	<tr>
             <td width=20%>派遣料金</td>
-            <td colspan="2" width=40% class="hiddencell_r"><?php echo com_db_number_format($payment_normal_unit_price_2); ?>/月</td>
+            <td colspan="2" width=40% class="hiddencell_r"><?php echo com_db_number_format($claim_normal__unit_price); ?>/<?php if ($claim_normal_calculation == '時給'){echo '時給';}else{echo '月';} ?></td>
             <td colspan="3" width=40% class="remarks">※HALと客先の契約金額</td>
 	</tr>
 	<tr>

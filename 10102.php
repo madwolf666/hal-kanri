@@ -1666,7 +1666,7 @@ $a_selected = false;
         <table border="1" rules="all" style="min-width:340px; max-width:760px">
 	<tr>
             <td class="yellow" style="width:60px;">抵触日</td>
-            <td class="yellow" style="width:140px;" nowrap="true">組織単位</td>
+            <td class="yellow" style="width:60px;" nowrap="true">組織単位</td>
             <td style="width:auto;">
             <?php
                 if ($a_act == '') {
@@ -1688,7 +1688,7 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $dd_name;
                     } else {
-                        echo com_make_tag_input($a_act, $dd_name, "dd_name", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $dd_name, "dd_name", "width: 43%; text-align: center;");
                     }
                 ?>
                 ・
@@ -1696,7 +1696,7 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $dd_branch;
                     } else {
-                        echo com_make_tag_input($a_act, $dd_branch, "dd_branch", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $dd_branch, "dd_branch", "width: 43%; text-align: center;");
                     }
                 ?>
             </td>
@@ -1753,7 +1753,7 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $ip_position;
                     } else {
-                        echo com_make_tag_input($a_act, $ip_position, "ip_position", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $ip_position, "ip_position", "width: 43%; text-align: center;");
                     }
                 ?>
                 ・
@@ -1761,14 +1761,14 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $ip_name;
                     } else {
-                        echo com_make_tag_input($a_act, $ip_name, "ip_name", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $ip_name, "ip_name", "width: 43%; text-align: center;");
                     }
                 ?>
             </td>
 	</tr>
 	<tr>
             <td rowspan="2" class="yellow" nowrap="true">派遣先責任者</td>
-            <td class="yellow" nowrap="true">職名・氏名</td>
+            <td class="yellow" nowrap="true">職名・氏名・電話番号</td>
 	</tr>
 	<tr>
             <td class="">
@@ -1776,7 +1776,7 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $dd_responsible_position;
                     } else {
-                        echo com_make_tag_input($a_act, $dd_responsible_position, "dd_responsible_position", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $dd_responsible_position, "dd_responsible_position", "width: 27%; text-align: center;");
                     }
                 ?>
                 ・
@@ -1784,14 +1784,22 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $dd_responsible_name;
                     } else {
-                        echo com_make_tag_input($a_act, $dd_responsible_name, "dd_responsible_name", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $dd_responsible_name, "dd_responsible_name", "width: 27%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $dd_responsible_tel;
+                    } else {
+                        echo com_make_tag_input($a_act, $dd_responsible_tel, "dd_responsible_tel", "width: 27%; text-align: center;");
                     }
                 ?>
             </td>
 	</tr>
 	<tr>
             <td rowspan="2" class="yellow" nowrap="true">派遣元責任者</td>
-            <td class="yellow" nowrap="true">職名・氏名</td>
+            <td class="yellow" nowrap="true">職名・氏名・電話番号</td>
 	</tr>
 	<tr>
             <td class="hiddencell_r">
@@ -1799,7 +1807,7 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $dm_responsible_position;
                     } else {
-                        echo com_make_tag_input($a_act, $dm_responsible_position, "dm_responsible_position", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $dm_responsible_position, "dm_responsible_position", "width: 27%; text-align: center;");
                     }
                 ?>
                 ・
@@ -1807,14 +1815,22 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $dm_responsible_name;
                     } else {
-                        echo com_make_tag_input($a_act, $dm_responsible_name, "dm_responsible_name", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $dm_responsible_name, "dm_responsible_name", "width: 27%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $dm_responsible_tel;
+                    } else {
+                        echo com_make_tag_input($a_act, $dm_responsible_tel, "dm_responsible_tel", "width: 27%; text-align: center;");
                     }
                 ?>
             </td>
 	</tr>
 	<tr>
-            <td rowspan="4" class="yellow" nowrap="true">苦情の処理・申出先(1)</td>
-            <td class="yellow" nowrap="true">派遣先：職名・氏名</td>
+            <td rowspan="4" class="yellow" nowrap="true">苦情の処理<br>・申出先(1)</td>
+            <td class="yellow" nowrap="true">派遣先：職名・氏名・電話番号</td>
 	</tr>
 	<tr>
             <td class="hiddencell_r">
@@ -1822,7 +1838,7 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $chs_position2;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_position2, "chs_position2", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_position2, "chs_position2", "width: 27%; text-align: center;");
                     }
                 ?>
                 ・
@@ -1830,13 +1846,21 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $chs_name2;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_name2, "chs_name2", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_name2, "chs_name2", "width: 27%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $chs_tel2;
+                    } else {
+                        echo com_make_tag_input($a_act, $chs_tel2, "chs_tel2", "width: 27%; text-align: center;");
                     }
                 ?>
             </td>
 	</tr>
 	<tr>
-            <td class="yellow" nowrap="true">派遣元：職名・氏名</td>
+            <td class="yellow" nowrap="true">派遣元：職名・氏名・電話番号</td>
 	</tr>
 	<tr>
             <td class="hiddencell_r">
@@ -1844,7 +1868,7 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $chs_position1;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_position1, "chs_position1", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_position1, "chs_position1", "width: 27%; text-align: center;");
                     }
                 ?>
                 ・
@@ -1852,7 +1876,15 @@ $a_selected = false;
                     if ($a_act == '') {
                         echo $chs_name1;
                     } else {
-                        echo com_make_tag_input($a_act, $chs_name1, "chs_name1", "width: 45%; text-align: center;");
+                        echo com_make_tag_input($a_act, $chs_name1, "chs_name1", "width: 27%; text-align: center;");
+                    }
+                ?>
+                ・
+                <?php
+                    if ($a_act == '') {
+                        echo $chs_tel1;
+                    } else {
+                        echo com_make_tag_input($a_act, $chs_tel1, "chs_tel1", "width: 27%; text-align: center;");
                     }
                 ?>
             </td>

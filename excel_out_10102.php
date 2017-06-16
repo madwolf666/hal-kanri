@@ -106,7 +106,6 @@ $obj_sheet->setCellValue("F43",$opt_m_contract_yesno_b1);
 $obj_sheet->setCellValue("N43",$opt_m_contract_yesno_b2);
 $obj_sheet->setCellValue("F44",$opt_m_contract_yesno_b3);
 $obj_sheet->setCellValue("N44",$opt_m_contract_yesno_b4);
-$obj_sheet->setCellValue("C60",$inp_biko);
 
 $obj_sheet->setCellValue("Z2",$opt_contract_kind);
 $obj_sheet->setCellValue("Z3",$inp_keiyaku_no);
@@ -197,17 +196,28 @@ $obj_sheet->setCellValue("AC47",$dd_branch);
 $obj_sheet->setCellValue("R49",$organization);
 $obj_sheet->setCellValue("R51",$dd_address);
 $obj_sheet->setCellValue("R53",$dd_tel);
+
 $obj_sheet->setCellValue("R54",$ip_position);
 $obj_sheet->setCellValue("AC54",$ip_name);
+
 $obj_sheet->setCellValue("R55",$dd_responsible_position);
 $obj_sheet->setCellValue("AC55",$dd_responsible_name);
-$obj_sheet->setCellValue("R56",$dm_responsible_position);
-$obj_sheet->setCellValue("AC56",$dm_responsible_name);
-$obj_sheet->setCellValue("R57",$chs_position2);
-$obj_sheet->setCellValue("AC57",$chs_name2);
-$obj_sheet->setCellValue("R58",$chs_position1);
-$obj_sheet->setCellValue("AC58",$chs_name1);
-$obj_sheet->setCellValue("V60",$remarks_pay);
+$obj_sheet->setCellValue("R56",$dd_responsible_tel);
+
+$obj_sheet->setCellValue("R57",$dm_responsible_position);
+$obj_sheet->setCellValue("AC57",$dm_responsible_name);
+$obj_sheet->setCellValue("R58",$dm_responsible_tel);
+
+$obj_sheet->setCellValue("R59",$chs_position2);
+$obj_sheet->setCellValue("AC59",$chs_name2);
+$obj_sheet->setCellValue("R60",$chs_tel2);
+
+$obj_sheet->setCellValue("R61",$chs_position1);
+$obj_sheet->setCellValue("AC61",$chs_name1);
+$obj_sheet->setCellValue("R62",$chs_tel1);
+
+$obj_sheet->setCellValue("C64",$inp_biko);
+$obj_sheet->setCellValue("V64",$remarks_pay);
 
 $obj_sheet->setCellValue("AJ3",$reg_person);
 $obj_sheet->setCellValue("AJ42",$cnf_person);

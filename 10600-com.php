@@ -88,10 +88,6 @@ function set_10600_selectDB()
 ,t2.chs_status3			
 ,t2.chs_date4			
 ,t2.chs_status4			
-,t2.dm_responsible_position AS dm_responsible_position_dispatching_management
-,t2.dm_responsible_name AS dm_responsible_name_dispatching_management
-,t2.dd_responsible_position AS dd_responsible_position_dispatching_management
-,t2.dd_responsible_name AS dd_responsible_name_dispatching_management	
 ,t2.employment_date1	
 ,t2.employment_status1	
 ,t2.employment_date2	

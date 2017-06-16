@@ -87,7 +87,7 @@ try{
     #$a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' nowrap>苦情の処理・申出先(派遣元)</td>";
     $a_sRet .= "                        <td colspan='3' class='td_title2' nowrap>苦情の処理・申出先(派遣先)</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>派遣先責任者<br>電話番号</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width:100px;' nowrap>派遣先責任者<br>電話番号</td>";
     /*
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width:100px;' nowrap>&nbsp;</td>";
@@ -160,7 +160,7 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>氏名</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>役職</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>氏名</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>電話番号</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>電話番号</td>";
 
     $a_sRet .= "                    </tr>";
     $a_sRet .= "                </table>";
@@ -284,9 +284,12 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$chs_name1."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$chs_position2."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$chs_name2."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$chs_tel2."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$dd_responsible_tel."</td>";
+        /*
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'chs_tel2',$a_rec,1).">".$chs_tel2."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'dd_responsible_tel',$a_rec,1).">".$dd_responsible_tel."</td>";
-
+        */
         //入力あり
         /*
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'reserve1',$a_rec,1).">".$reserve1."</td>";

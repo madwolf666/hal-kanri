@@ -74,6 +74,16 @@ com_setValue_Date($inp_kyakusaki_syuryo, $obj_sheet, "K13", 'yyyy年m月d日');
 
 $obj_sheet->setCellValue("F14",$txt_engineer_name);
 $obj_sheet->setCellValue("F15",$inp_jigyosya_tanto);
+
+if ($opt_contract_calc_b1 == '時給'){
+    $obj_sheet->setCellValue("B16","作業料金（時給）");
+    $obj_sheet->getRowDimension(18)->setVisible( false );   
+    $obj_sheet->getRowDimension(19)->setVisible( false );   
+    $obj_sheet->getRowDimension(20)->setVisible( false );   
+}else{
+    $obj_sheet->setCellValue("B16","作業料金");
+}
+
 $obj_sheet->setCellValue("F16",$inp_tankin_b1);
 $obj_sheet->setCellValue("F17",$opt_contract_calc_b1);
 $obj_sheet->setCellValue("F18",$opt_contract_lower_limit_b1);

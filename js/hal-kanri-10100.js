@@ -202,12 +202,16 @@ $(function () {
     $('#ip_name').keyup(function(){check_value_changed_10102(1, 'ip_name', $('#ip_name').val(), '#ip_name');});
     $('#dm_responsible_position').keyup(function(){check_value_changed_10102(1, 'dm_responsible_position', $('#dm_responsible_position').val(), '#dm_responsible_position');});
     $('#dm_responsible_name').keyup(function(){check_value_changed_10102(1, 'dm_responsible_name', $('#dm_responsible_name').val(), '#dm_responsible_name');});
+    $('#dm_responsible_tel').keyup(function(){check_value_changed_10102(1, 'dm_responsible_tel', $('#dm_responsible_tel').val(), '#dm_responsible_tel');});
     $('#dd_responsible_position').keyup(function(){check_value_changed_10102(1, 'dd_responsible_position', $('#dd_responsible_position').val(), '#dd_responsible_position');});
     $('#dd_responsible_name').keyup(function(){check_value_changed_10102(1, 'dd_responsible_name', $('#dd_responsible_name').val(), '#dd_responsible_name');});
+    $('#dd_responsible_tel').keyup(function(){check_value_changed_10102(1, 'dd_responsible_tel', $('#dd_responsible_tel').val(), '#dd_responsible_tel');});
     $('#chs_position1').keyup(function(){check_value_changed_10102(1, 'chs_position1', $('#chs_position1').val(), '#chs_position1');});
     $('#chs_name1').keyup(function(){check_value_changed_10102(1, 'chs_name1', $('#chs_name1').val(), '#chs_name1');});
+    $('#chs_tel1').keyup(function(){check_value_changed_10102(1, 'chs_tel1', $('#chs_tel1').val(), '#chs_tel1');});
     $('#chs_position2').keyup(function(){check_value_changed_10102(1, 'chs_position2', $('#chs_position2').val(), '#chs_position2');});
     $('#chs_name2').keyup(function(){check_value_changed_10102(1, 'chs_name2', $('#chs_name2').val(), '#chs_name2');});
+    $('#chs_tel2').keyup(function(){check_value_changed_10102(1, 'chs_tel2', $('#chs_tel2').val(), '#chs_tel2');});
     $('#remarks_pay').keyup(function(){check_value_changed_10102(1, 'remarks_pay', $('#remarks_pay').val(), '#remarks_pay');});
 
     $('#status_cd').change(function(){check_value_changed_10102(1, 'status_cd', $('[name=status_cd] option:selected').text(), '#status_cd');});
@@ -874,6 +878,7 @@ function calc_pay_person()
     if (a_contract_form == '') {
         $('#opt_tax_withholding').val(0);
     } else if ((a_contract_form == '正') || (a_contract_form == '契')) {
+        $('#opt_social_insurance').val(1);
         $('#opt_tax_withholding').val(1);
         //事業所名・事業所名を入力不可とし、エンジニア名・フリガナを設定
         $('#txt_jigyosya_name').val($('#txt_engineer_name').val());
@@ -881,6 +886,7 @@ function calc_pay_person()
         $('#txt_jigyosya_name').attr('readonly',true);
         $('#txt_jigyosya_kana').attr('readonly',true);
     } else {
+        $('#opt_social_insurance').val(2);
         $('#opt_tax_withholding').val(2);
         //事業所名・事業所名を入力可とし、空を設定
         $('#txt_jigyosya_name').val('');
@@ -1343,10 +1349,18 @@ function calc_pay_settlement()
     //注文書⇒IF(契約形態="","",IF(OR(契約形態="正"),"無","有"))
     if (a_txt == ''){
         $('#opt_contract_yesno_p3').val('0');
-    } else if (a_txt == '正'){
+    } else if ((a_txt == '正') || (a_txt == '契')){
         $('#opt_contract_yesno_p3').val('2');
     } else{
         $('#opt_contract_yesno_p3').val('1');
+    }
+    //注文書請書
+    if (a_txt == ''){
+        $('#opt_contract_yesno_p4').val('0');
+    } else if ((a_txt == '正') || (a_txt == '契')){
+        $('#opt_contract_yesno_p4').val('2');
+    } else{
+        $('#opt_contract_yesno_p4').val('1');
     }
 }
 
@@ -1355,7 +1369,7 @@ function calc_teisyoku()
 {
     var a_txt = $('[name=opt_contract_pay_form] option:selected').text();
     if (a_txt == '正'){
-        $('#contact_date_org').val('無期雇用者に限定する');
+        //$('#contact_date_org').val('無期雇用者に限定する');
         //$('#contact_date_org').attr('readonly',true);
     } else{
         //$('#contact_date_org').attr('readonly',false);
@@ -1632,12 +1646,16 @@ function regist_contract_report(h_act)
             'ip_name': $('#ip_name').val(),
             'dm_responsible_position': $('#dm_responsible_position').val(),
             'dm_responsible_name': $('#dm_responsible_name').val(),
+            'dm_responsible_tel': $('#dm_responsible_tel').val(),
             'dd_responsible_position': $('#dd_responsible_position').val(),
             'dd_responsible_name': $('#dd_responsible_name').val(),
+            'dd_responsible_tel': $('#dd_responsible_tel').val(),
             'chs_position1': $('#chs_position1').val(),
             'chs_name1': $('#chs_name1').val(),
+            'chs_tel1': $('#chs_tel1').val(),
             'chs_position2': $('#chs_position2').val(),
             'chs_name2': $('#chs_name2').val(),
+            'chs_tel2': $('#chs_tel2').val(),
             'remarks_pay': $('#remarks_pay').val(),
             'status_cd': $('[name=status_cd] option:selected').text(),
             'status_cd_num': $('[name=status_cd] option:selected').val(),

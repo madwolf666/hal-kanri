@@ -48,7 +48,7 @@ $obj_sheet = $obj_book->getSheet(0);
 
 $obj_sheet->setCellValue("E6", $engineer_name);
 
-$obj_sheet->setCellValue("H13", $skill_type);
+#$obj_sheet->setCellValue("H13", $skill_type);
 
 $obj_sheet->setCellValue("J18", $dd_name);
 $obj_sheet->setCellValue("J20", $dd_branch);
@@ -73,6 +73,7 @@ $obj_sheet->setCellValue("W56", $dd_responsible_tel);
 
 $obj_sheet->setCellValue("I59", $dm_responsible_position);
 $obj_sheet->setCellValue("P59", $dm_responsible_name);
+$obj_sheet->setCellValue("W59", $dm_responsible_tel);
 
 $obj_sheet->setCellValue("L69", $chs_position2);
 $obj_sheet->setCellValue("Q69", $chs_name2);
@@ -80,8 +81,15 @@ $obj_sheet->setCellValue("W69", $chs_tel2);
 
 $obj_sheet->setCellValue("L71", $chs_position1);
 $obj_sheet->setCellValue("Q71", $chs_name1);
+$obj_sheet->setCellValue("W71", $chs_tel1);
 
-$obj_sheet->setCellValue("I113", com_db_number_format($payment_normal_unit_price_2));
+$a_tmp = com_db_number_format_symbol($payment_normal_unit_price_2)."/";
+if ($claim_normal_calculation == '時給'){
+    $a_tmp .= "時給";
+}else{
+    $a_tmp .= "月";
+}
+$obj_sheet->setCellValue("I113", $a_tmp);
 
 $a_biko= "";
 if ($remarks != ''){

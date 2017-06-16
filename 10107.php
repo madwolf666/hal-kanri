@@ -124,7 +124,7 @@ if (isset($_GET['NO'])) {
             <td class="remarks" colspan="10"><?php echo $inp_jigyosya_tanto; ?></td>
         </tr>
         <tr>
-            <th><B>作業料金（月）</B></th>
+            <th><B>作業料金<?php if ($opt_contract_calc_b1 == '時給'){echo '（時給）';}else{echo '';} ?></B></th>
             <td colspan="10">
                 <div style="float:left;">￥<?php echo number_format($inp_tankin_b1); ?></div>
                 <div style="text-align:right;">（消費税別）&nbsp;</div>
@@ -134,11 +134,12 @@ if (isset($_GET['NO'])) {
             <th><B>計算方法</B></th>
                 <td class="remarks" colspan="10"><?php echo $opt_contract_calc_b1; ?></td>
             </tr>
+<?php if ($opt_contract_calc_b1 != '時給') { ?>
         <tr>
             <th><B>基準時間</B></th>
             <td colspan="10"><?php echo $opt_contract_lower_limit_b1; ?>時間　～　<?php echo $opt_contract_upper_limit_b1; ?>時間</td>
         </tr>
-            <th colspan="1"><B>未達控除金額</B></th>
+            <th colspan="1"><B>未達控除</B></th>
             <td class="remarks hiddencell_r" colspan="1">￥<?php echo $txt_contract_kojyo_unit_b1; ?></td>
             <td class="remarksR" colspan="9">円／時間&nbsp;&nbsp;&nbsp;&nbsp;（<?php echo $opt_contract_trunc_unit_kojyo; ?>）</td>
 	</tr>
@@ -147,6 +148,7 @@ if (isset($_GET['NO'])) {
             <td class="remarks hiddencell_r" colspan="1">￥<?php echo $txt_contract_zangyo_unit_b1; ?></td>
             <td class="remarksR" colspan="9">円／時間&nbsp;&nbsp;&nbsp;&nbsp;（<?php echo $opt_contract_trunc_unit_zangyo; ?>）</td>
 	</tr>
+<?php } ?>
         <tr>
             <th><B>時間切捨て</B></th>
             <td colspan="10">15分未満切捨て</td>
