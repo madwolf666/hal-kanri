@@ -460,7 +460,8 @@ function com_make_tag_option_contract_status(
                 if ($a_result['idx'] >= 2){
                     #echo $a_result['idx'].'<br>';
                     //0：営業作成中、1：営業提出以外は選択不可
-                    $a_isOK = false;
+                    $a_isOK = true; #要望
+                    #$a_isOK = false;
                     #echo $a_isOK.'<br>';
                 }
             }
@@ -476,7 +477,8 @@ function com_make_tag_option_contract_status(
                 $a_isFound = true;
                 $h_selected = true;
                 if ($_SESSION['hal_department_cd'] != 3){
-                    if ($a_result['idx'] >= 2){
+                    if (($a_result['idx'] == 1) || ($a_result['idx'] == 2)){
+                        //営業提出・管理承認
                         #echo '変更不可<br>';
                         //変更不可
                         $a_isSelect = false;
