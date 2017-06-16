@@ -92,8 +92,8 @@ if ($a_act == 'c') {
             $a_act = '';
         }
         #echo $status_cd_num;
-        #管理本部以外で、かつステータスが「管理承認」の場合は更新不可
-        if (($_SESSION['hal_department_cd'] != 3) && ($status_cd_num == 2)){
+        #管理本部以外で、かつステータスが「営業提出」「管理承認」の場合は更新不可
+        if (($_SESSION['hal_department_cd'] != 3) && (($status_cd_num == 1) || ($status_cd_num == 2))){
             $a_act = '';
         }
     }
