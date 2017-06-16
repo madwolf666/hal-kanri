@@ -126,6 +126,7 @@ function exec_login(h_enter){
         return false;
     }
     
+    m_ProgressMsg('認証中です......<br><img src="./images/upload.gif" /> ');
     //alert($('#remember').prop('checked'));
     //alert(m_parentURL);
     
@@ -133,7 +134,7 @@ function exec_login(h_enter){
         url: m_parentURL + "exec_login.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'pass': $('#pass').val(),
             'remember': $('#remember').prop('checked')
@@ -155,6 +156,7 @@ function exec_login(h_enter){
             //alert(errorThrown.message);
         },
        complete: function (data) {
+            $.unblockUI();
        }
    });
 }
