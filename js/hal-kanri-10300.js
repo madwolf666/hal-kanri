@@ -19,7 +19,7 @@ function make_acceptance_ledger_list(h_pageNo)
         url: m_parentURL + "make_acceptance_ledger_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -48,7 +48,7 @@ function choice_acceptance_ledger_method(h_no, h_sub_no)
         url: m_parentURL + "choice_acceptance_ledger_method.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'cr_id': h_no,
             'al_id': h_sub_no
@@ -90,7 +90,7 @@ function check_input_key_enter(h_key, h_cr_id, h_sub_id, h_field, h_id, h_kind)
             url: m_parentURL + "update_value_10302.php",
             type: 'POST',
             dataType: "html",
-            async: false,
+            async: true,
             data:{
                 'cr_id': h_cr_id,
                 'al_id': h_sub_id,

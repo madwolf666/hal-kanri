@@ -12,7 +12,7 @@ function make_m_covering_letter_list(h_pageNo){
         url: m_parentURL + "make_m_covering_letter_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -43,7 +43,7 @@ function upload_covering_letter_file()
     m_ProgressMsg('アップロード中です......<br><img src="./images/upload.gif" /> ');
 
     //$('#my-executing').css('display', 'block'); 
-    $('#my-executing').show(); 
+    //$('#my-executing').show(); 
         
     var a_fd = new FormData();
     a_fd.append('file', $('input[name="excel_file"]').prop('files')[0]);
@@ -54,7 +54,7 @@ function upload_covering_letter_file()
         url: m_parentURL + "upload_covering_letter_file.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data: a_fd,
         processData : false,
         contentType : false,
@@ -67,7 +67,7 @@ function upload_covering_letter_file()
         },
        complete: function (data) {
             //$('#my-executing').css('display', 'none');
-            $('#my-executing').hide();
+            //$('#my-executing').hide();
             $.unblockUI();
        }
    });
@@ -85,7 +85,7 @@ function choice_covering_letter_method(h_no)
         url: m_parentURL + "choice_covering_letter_method.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'entry_no': h_no
         },

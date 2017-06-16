@@ -16,7 +16,7 @@ function make_m_information_list(h_pageNo){
         url: m_parentURL + "make_m_information_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -60,7 +60,7 @@ function check_m_information_input(h_idx){
         url: m_parentURL + "entry_m_information.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'idx': a_idx,
             'publication': $('#publication').val(),
@@ -98,7 +98,7 @@ function delete_m_information(h_idx){
         url: m_parentURL + "delete_m_information.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'idx': a_idx
         },

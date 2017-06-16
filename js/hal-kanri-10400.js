@@ -16,7 +16,7 @@ function make_purchase_order_ledger_list(h_pageNo)
         url: m_parentURL + "make_purchase_order_ledger_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -45,7 +45,7 @@ function choice_purchase_order_ledger_method(h_no)
         url: m_parentURL + "choice_purchase_order_ledger_method.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'cr_id': h_no
         },
@@ -94,7 +94,7 @@ function regist_purchase_order_10402(h_act, h_no)
         url: m_parentURL + "regist_purchase_order_10402.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'no': h_no,
@@ -156,7 +156,7 @@ function regist_purchase_order_10403(h_act, h_no)
         url: m_parentURL + "regist_purchase_order_10403.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'no': h_no,
@@ -222,7 +222,7 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
             url: m_parentURL + "update_value_10402.php",
             type: 'POST',
             dataType: "html",
-            async: false,
+            async: true,
             data:{
                 'cr_id': h_cr_id,
                 'kind': h_kind,

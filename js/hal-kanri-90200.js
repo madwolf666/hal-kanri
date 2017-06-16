@@ -12,7 +12,7 @@ function make_m_engineer_list(h_pageNo){
         url: m_parentURL + "make_m_engineer_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -51,7 +51,7 @@ function upload_engineer_file()
         url: m_parentURL + "upload_engineer_file.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data: a_fd,
         processData : false,
         contentType : false,
@@ -80,7 +80,7 @@ function choice_engineer_method(h_no)
         url: m_parentURL + "choice_engineer_method.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'entry_no': h_no
         },

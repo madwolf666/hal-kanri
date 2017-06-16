@@ -1438,7 +1438,7 @@ function get_engineer_info()
         url: m_parentURL + "get_engineer_info.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'entry_no': $('#inp_engineer_no').val()
         },
@@ -1488,7 +1488,7 @@ function regist_contract_report(h_act)
         url: m_parentURL + "regist_contract_report.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'cr_id': $('#cr_id').val(),
@@ -1688,7 +1688,7 @@ function make_contract_report_list(h_pageNo){
         url: m_parentURL + "make_contract_report_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -1717,7 +1717,7 @@ function choice_contract_report_method(h_no)
         url: m_parentURL + "choice_contract_report_method.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'cr_id': h_no
         },
@@ -1747,7 +1747,7 @@ function excel_out_10100(h_no){
         url: m_parentURL + "excel_out_10100.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
         },
         success: function(data, dataType){
@@ -1799,7 +1799,7 @@ function regist_contract_end_report(h_act, h_no)
         url: m_parentURL + "regist_contract_end_report.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'no': h_no,
@@ -1864,7 +1864,7 @@ function regist_contract_estimate(h_act, h_no)
         url: m_parentURL + "regist_contract_estimate.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'no': h_no,
@@ -1905,7 +1905,7 @@ function unregist_contract_report(h_no)
         url: m_parentURL + "unregist_contract_report.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'no': h_no,
         },
@@ -1940,7 +1940,7 @@ function check_value_changed_10102(h_kind, h_field, h_val, h_name)
         url: m_parentURL + "check_value_changed_10102.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'cr_id': $('#cr_id').val(),
             'kind': h_kind,
@@ -1976,7 +1976,7 @@ function check_value_changed_10105(h_kind, h_field, h_val, h_name)
         url: m_parentURL + "check_value_changed_10105.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'cr_id': $('#cr_id').val(),
             'kind': h_kind,
@@ -2012,7 +2012,7 @@ function check_value_changed_10107(h_kind, h_field, h_val, h_name)
         url: m_parentURL + "check_value_changed_10107.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'cr_id': $('#cr_id').val(),
             'kind': h_kind,
@@ -2054,7 +2054,7 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
             url: m_parentURL + "update_value_10102.php",
             type: 'POST',
             dataType: "html",
-            async: false,
+            async: true,
             data:{
                 'cr_id': h_cr_id,
                 'kind': h_kind,

@@ -13,7 +13,7 @@ function make_dispatching_management_ledger_list(h_pageNo)
         url: m_parentURL + "make_dispatching_management_ledger_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -54,7 +54,7 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
             url: m_parentURL + "update_value_10602.php",
             type: 'POST',
             dataType: "html",
-            async: false,
+            async: true,
             data:{
                 'cr_id': h_cr_id,
                 'kind': h_kind,

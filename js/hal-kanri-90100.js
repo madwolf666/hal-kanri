@@ -12,7 +12,7 @@ function make_m_user_list(h_pageNo){
         url: m_parentURL + "make_m_user_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -59,7 +59,7 @@ function check_m_user_input(h_idx){
         url: m_parentURL + "entry_m_user.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'idx': a_idx,
             'base_cd': $('[name=base_cd]').val(),
@@ -99,7 +99,7 @@ function delete_m_user(h_idx){
         url: m_parentURL + "delete_m_user.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'idx': a_idx
         },

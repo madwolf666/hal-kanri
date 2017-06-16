@@ -18,7 +18,7 @@ function make_agreement_ledger_list(h_pageNo)
         url: m_parentURL + "make_agreement_ledger_list.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'PageNo': h_pageNo
         },
@@ -47,7 +47,7 @@ function choice_agreement_ledger_method(h_no)
         url: m_parentURL + "choice_agreement_ledger_method.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'cr_id': h_no
         },
@@ -86,7 +86,7 @@ function regist_agreement_10502(h_act, h_no)
         url: m_parentURL + "regist_agreement_10502.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'no': h_no,
@@ -158,7 +158,7 @@ function regist_agreement_10503(h_act, h_no)
         url: m_parentURL + "regist_agreement_10503.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'no': h_no,
@@ -233,7 +233,7 @@ function regist_agreement_10504(h_act, h_no)
         url: m_parentURL + "regist_agreement_10504.php",
         type: 'POST',
         dataType: "html",
-        async: false,
+        async: true,
         data:{
             'act': h_act,
             'no': h_no,
@@ -311,7 +311,7 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
             url: m_parentURL + "update_value_10502.php",
             type: 'POST',
             dataType: "html",
-            async: false,
+            async: true,
             data:{
                 'cr_id': h_cr_id,
                 'kind': h_kind,
