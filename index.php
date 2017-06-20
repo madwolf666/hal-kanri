@@ -117,10 +117,10 @@ if (!isset($_GET['mnu'])){
         break;
     case $GLOBALS['g_MENU_CONTRACT_10200']:   //給与台帳
         if ($_SESSION["hal_auth"] <= 0) {
-            if (isset($_GET['ENO'])){
-                $_SESSION['f_engineer_number_10200'] = $_GET['ENO'];
+            if (isset($_GET['ENM'])){
+                #$_SESSION['f_engineer_number_10200'] = $_GET['ENO'];
                 $_SESSION['f_payment_contract_form_10200'] = "";
-                $_SESSION['f_engineer_name_10200'] = "";
+                $_SESSION['f_engineer_name_10200'] = $_GET['ENM'];
                 $_SESSION['f_date_entering_10200'] = "";
                 $_SESSION['f_date_retire_10200'] = "";
                 $_SESSION['f_payment_settlement_paymentday_10200'] = "";
@@ -131,7 +131,7 @@ if (!isset($_GET['mnu'])){
                 $_SESSION['f_labor_remarks_10200'] = "";
             } else {
                 #POST
-                $_SESSION['f_engineer_number_10200'] = "";
+                #$_SESSION['f_engineer_number_10200'] = "";
                 if (isset($_POST['f_payment_contract_form_10200'])){
                     $_SESSION['f_payment_contract_form_10200'] = $_POST['f_payment_contract_form_10200'];
                 }
@@ -203,8 +203,8 @@ if (!isset($_GET['mnu'])){
     case $GLOBALS['g_MENU_CONTRACT_10300']:   //検収台帳
         if ($_SESSION["hal_auth"] <= 0) {
             if (isset($_GET['ENO'])){
-                $_SESSION['f_engineer_number_10300'] = $_GET['ENO'];
                 $_SESSION['f_contract_number_10300'] = "";
+                $_SESSION['f_engineer_number_10300'] = $_GET['ENO'];
                 #$_SESSION['f_engineer_number_10300'] = "";
                 $_SESSION['f_engineer_name_10300'] = "";
                 $_SESSION['f_customer_name_10300'] = "";
@@ -485,12 +485,12 @@ if (!isset($_GET['mnu'])){
         break;
     case $GLOBALS['g_MENU_CONTRACT_10400']:   //注文書台帳
         if ($_SESSION["hal_auth"] <= 0) {
-            if (isset($_GET['ENO'])){
-                $_SESSION['f_engineer_number_10400'] = $_GET['ENO'];
+            if (isset($_GET['ENM'])){
+                #$_SESSION['f_engineer_number_10400'] = $_GET['ENO'];
                 $_SESSION['f_contract_number_10400'] = "";
-                $_SESSION['f_engineer_name_10400'] = "";
+                $_SESSION['f_engineer_name_10400'] = $_GET['ENM'];
             } else {
-                $_SESSION['f_engineer_number_10400'] = "";
+                #$_SESSION['f_engineer_number_10400'] = "";
                 #POST
                 if (isset($_POST['f_contract_number_10400'])){
                     $_SESSION['f_contract_number_10400'] = $_POST['f_contract_number_10400'];
@@ -524,12 +524,12 @@ if (!isset($_GET['mnu'])){
         break;
     case $GLOBALS['g_MENU_CONTRACT_10500']:   //契約書台帳
         if ($_SESSION["hal_auth"] <= 0) {
-            if (isset($_GET['ENO'])){
-                $_SESSION['f_engineer_number_10500'] = $_GET['ENO'];
+            if (isset($_GET['ENM'])){
+                #$_SESSION['f_engineer_number_10500'] = $_GET['ENO'];
                 $_SESSION['f_contract_number_10500'] = "";
-                $_SESSION['f_engineer_name_10500'] = "";
+                $_SESSION['f_engineer_name_10500'] = $_GET['ENM'];
             } else {
-                $_SESSION['f_engineer_number_10500'] = "";
+                #$_SESSION['f_engineer_number_10500'] = "";
                 #POST
                 if (isset($_POST['f_contract_number_10500'])){
                     $_SESSION['f_contract_number_10500'] = $_POST['f_contract_number_10500'];
@@ -568,12 +568,12 @@ if (!isset($_GET['mnu'])){
         break;
     case $GLOBALS['g_MENU_CONTRACT_10600']:   //派遣元台帳
         if ($_SESSION["hal_auth"] <= 0) {
-            if (isset($_GET['ENO'])){
-                $_SESSION['f_engineer_number_10600'] = $_GET['ENO'];
+            if (isset($_GET['ENM'])){
+                #$_SESSION['f_engineer_number_10600'] = $_GET['ENO'];
                 $_SESSION['f_contract_number_10600'] = "";
-                $_SESSION['f_engineer_name_10600'] = "";
+                $_SESSION['f_engineer_name_10600'] = $_GET['ENM'];
             } else {
-                $_SESSION['f_engineer_number_10600'] = "";
+                #$_SESSION['f_engineer_number_10600'] = "";
                 #POST
                 if (isset($_POST['f_contract_number_10600'])){
                     $_SESSION['f_contract_number_10600'] = $_POST['f_contract_number_10600'];
