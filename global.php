@@ -670,7 +670,7 @@ function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table
         if ($a_sess != ""){
             if ($h_mode == 1){
                 #text
-                $a_where .= "(".$h_column." LIKE '".$a_sess."%')";
+                $a_where .= "(".$h_column." LIKE '%".$a_sess."%')";
             }
             elseif ($h_mode == 2){
                 #date
