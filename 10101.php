@@ -119,7 +119,7 @@ $h_selected = false;
         echo com_make_tag_input($a_act, $f_remarks, "f_remarks", "width: 260px; text-align: center;");
     ?>
 </td>
-<td>&nbsp;</td>
+<td><?php echo com_make_tag_option_andor("", "f_remarks_andor", "f_remarks_andor", "", $h_selected); ?></td>
 </tr>
 </table>
 </center>
