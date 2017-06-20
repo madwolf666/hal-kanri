@@ -104,13 +104,31 @@ function resize_div(dname, lwidth){
 
 //divリサイズ
 function resize_div2(h_leftColumn, h_right_title, h_right_record, h_width, h_height){
-    //alert(dname + "," + lwidth);
-    $('#' + h_right_record).width($('#main').width() - h_width);
-    $('#' + h_right_title).width($('#main').width() - h_width - 17);
-    var a_h = window.innerHeight ? window.innerHeight: $(window).height();
-    var a_rn = $('#my-recnum').offset().top;
-    $('#' + h_right_record).height(a_h - a_rn - h_height);
-    $('#' + h_leftColumn).height(a_h - a_rn - h_height - 17);
+    //alert($(window).width());
+    if ($(window).width() <= 480) {
+        //alert($(window).width());
+        $('#' + h_right_title).css('overflow','visible');
+        $('#' + h_right_title).width('auto');
+        $('#' + h_right_record).css('overflow','visible');
+        $('#' + h_right_record).width('auto');
+        $('#my-list').css('overflow-x', 'scroll');
+
+        $('#' + h_right_record).height('auto');
+        $('#' + h_leftColumn).height('auto');
+    }else{
+        $('#' + h_right_title).css('overflow','hidden');
+        //$('#right_title').css('width','auto');
+        $('#' + h_right_record).css('overflow','scroll');
+        $('#my-list').css('overflow-x', 'hidden');
+        
+        //alert(dname + "," + lwidth);
+        $('#' + h_right_record).width($('#main').width() - h_width);
+        $('#' + h_right_title).width($('#main').width() - h_width - 17);
+        var a_h = window.innerHeight ? window.innerHeight: $(window).height();
+        var a_rn = $('#my-recnum').offset().top;
+        $('#' + h_right_record).height(a_h - a_rn - h_height);
+        $('#' + h_leftColumn).height(a_h - a_rn - h_height - 17);
+    }
 }
 
 //ログイン認証
