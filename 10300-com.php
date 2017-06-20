@@ -56,6 +56,52 @@ if (isset($_SESSION['f_payment_settlement_paymentday_10300'])){
     $f_payment_settlement_paymentday_10300 = $_SESSION['f_payment_settlement_paymentday_10300'];
 }
 
+#Session(AND OR)
+$f_engineer_number_10300_andor = "";
+$f_engineer_name_10300_andor = "";
+$f_customer_name_10300_andor = "";
+$f_claim_contract_form_10300_andor = "";
+$f_ag_no_10300_andor = "";
+$f_accounts_bai_previous_day_10300_andor = "";
+$f_accounts_actual_working_hours_10300_andor = "";
+$f_accounts_expenses_10300_andor = "";
+$f_payment_contract_form_10300_andor = "";
+$f_payment_acceptance_date_10300_andor = "";
+$f_payment_settlement_paymentday_10300_andor = "";
+if (isset($_SESSION['f_engineer_number_10300_andor'])){
+    $f_engineer_number_10300_andor = $_SESSION['f_engineer_number_10300_andor'];
+}
+if (isset($_SESSION['f_engineer_name_10300_andor'])){
+    $f_engineer_name_10300_andor = $_SESSION['f_engineer_name_10300_andor'];
+}
+if (isset($_SESSION['f_customer_name_10300_andor'])){
+    $f_customer_name_10300_andor = $_SESSION['f_customer_name_10300_andor'];
+}
+if (isset($_SESSION['f_claim_contract_form_10300_andor'])){
+    $f_claim_contract_form_10300_andor = $_SESSION['f_claim_contract_form_10300_andor'];
+}
+if (isset($_SESSION['f_ag_no_10300_andor'])){
+    $f_ag_no_10300_andor = $_SESSION['f_ag_no_10300_andor'];
+}
+if (isset($_SESSION['f_accounts_bai_previous_day_10300_andor'])){
+    $f_accounts_bai_previous_day_10300_andor = $_SESSION['f_accounts_bai_previous_day_10300_andor'];
+}
+if (isset($_SESSION['f_accounts_actual_working_hours_10300_andor'])){
+    $f_accounts_actual_working_hours_10300_andor = $_SESSION['f_accounts_actual_working_hours_10300_andor'];
+}
+if (isset($_SESSION['f_accounts_expenses_10300_andor'])){
+    $f_accounts_expenses_10300_andor = $_SESSION['f_accounts_expenses_10300_andor'];
+}
+if (isset($_SESSION['f_payment_contract_form_10300_andor'])){
+    $f_payment_contract_form_10300_andor = $_SESSION['f_payment_contract_form_10300_andor'];
+}
+if (isset($_SESSION['f_payment_acceptance_date_10300_andor'])){
+    $f_payment_acceptance_date_10300_andor = $_SESSION['f_payment_acceptance_date_10300_andor'];
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10300_andor'])){
+    $f_payment_settlement_paymentday_10300_andor = $_SESSION['f_payment_settlement_paymentday_10300_andor'];
+}
+
 $cr_id = "";
 
 $contract_number = "";

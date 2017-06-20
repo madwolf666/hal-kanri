@@ -48,6 +48,44 @@ if (isset($_SESSION['f_remarks'])){
     $f_remarks = $_SESSION['f_remarks'];
 }
 
+#Session(AND OR)
+$f_engineer_number_andor = "";
+$f_contract_number_andor = "";
+$f_customer_name_andor = "";
+$f_claim_agreement_start_andor = "";
+$f_claim_agreement_end_andor = "";
+$f_claim_contract_form_andor = "";
+$f_claim_settlement_closingday_andor = "";
+$f_claim_settlement_paymentday_andor = "";
+$f_remarks_andor = "";
+if (isset($_SESSION['f_engineer_number_andor'])){
+    $f_engineer_number_andor = $_SESSION['f_engineer_number_andor'];
+}
+if (isset($_SESSION['f_contract_number_andor'])){
+    $f_contract_number_andor = $_SESSION['f_contract_number_andor'];
+}
+if (isset($_SESSION['f_customer_name_andor'])){
+    $f_customer_name_andor = $_SESSION['f_customer_name_andor'];
+}
+if (isset($_SESSION['f_claim_agreement_start_andor'])){
+    $f_claim_agreement_start_andor = $_SESSION['f_claim_agreement_start_andor'];
+}
+if (isset($_SESSION['f_claim_agreement_end_andor'])){
+    $f_claim_agreement_end_andor = $_SESSION['f_claim_agreement_end_andor'];
+}
+if (isset($_SESSION['f_claim_contract_form_andor'])){
+    $f_claim_contract_form_andor = $_SESSION['f_claim_contract_form_andor'];
+}
+if (isset($_SESSION['f_claim_settlement_closingday_andor'])){
+    $f_claim_settlement_closingday_andor = $_SESSION['f_claim_settlement_closingday_andor'];
+}
+if (isset($_SESSION['f_claim_settlement_paymentday_andor'])){
+    $f_claim_settlement_paymentday_andor = $_SESSION['f_claim_settlement_paymentday_andor'];
+}
+if (isset($_SESSION['f_remarks_andor'])){
+    $f_remarks_andor = $_SESSION['f_remarks_andor'];
+}
+
 $cr_id = "";
 $inp_kyakusaki = "";
 $inp_kenmei = "";

@@ -30,18 +30,19 @@ try{
     $a_sql = set_10300_selectDB();
     
     $a_where = "";
-    $a_where = com_make_where_session(1, $a_where, 't1.contract_number', 'f_contract_number_10300', "");
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10300', "");
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10300', "");
-    $a_where = com_make_where_session(1, $a_where, 't1.customer_name', 'f_customer_name_10300', "");
-    $a_where = com_make_where_session(3, $a_where, 't1.claim_contract_form', 'f_claim_contract_form_10300', $GLOBALS['g_DB_m_contract_bill_form']);
-    $a_where = com_make_where_session(1, $a_where, 't3.ag_no', 'f_ag_no_10300', "");
-    $a_where = com_make_where_session(2, $a_where, 't2.accounts_bai_previous_day', 'f_accounts_bai_previous_day_10300', "");
-    $a_where = com_make_where_session(1, $a_where, 't2.accounts_actual_working_hours', 'f_accounts_actual_working_hours_10300', "");
-    $a_where = com_make_where_session(1, $a_where, 't2.accounts_expenses', 'f_accounts_expenses_10300', "");
-    $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10300', $GLOBALS['g_DB_m_contract_pay_form']);
-    $a_where = com_make_where_session(2, $a_where, 't2.payment_acceptance_date', 'f_payment_acceptance_date_10300', "");
-    $a_where = com_make_where_session(3, $a_where, 't1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10300', $GLOBALS['g_DB_m_contract_pay_pay']);
+    $a_where = com_make_where_session(1, $a_where, 't1.contract_number', 'f_contract_number_10300', "", "");
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10300', "", "f_engineer_number_10300_andor");
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10300', "", "f_engineer_name_10300_andor");
+    $a_where = com_make_where_session(1, $a_where, 't1.customer_name', 'f_customer_name_10300', "", "f_customer_name_10300_andor");
+    $a_where = com_make_where_session(3, $a_where, 't1.claim_contract_form', 'f_claim_contract_form_10300', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_10300_andor");
+    $a_where = com_make_where_session(1, $a_where, 't2.accounts_contract_purchase_no', 'f_ag_no_10300', "", "f_ag_no_10300_andor");
+    #$a_where = com_make_where_session(1, $a_where, 't3.ag_no', 'f_ag_no_10300', "", "f_ag_no_10300_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.accounts_bai_previous_day', 'f_accounts_bai_previous_day_10300', "", "f_accounts_bai_previous_day_10300_andor");
+    $a_where = com_make_where_session(1, $a_where, 't2.accounts_actual_working_hours', 'f_accounts_actual_working_hours_10300', "", "f_accounts_actual_working_hours_10300_andor");
+    $a_where = com_make_where_session(1, $a_where, 't2.accounts_expenses', 'f_accounts_expenses_10300', "", "f_accounts_expenses_10300_andor");
+    $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10300', $GLOBALS['g_DB_m_contract_pay_form'], "f_payment_contract_form_10300_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.payment_acceptance_date', 'f_payment_acceptance_date_10300', "", "f_payment_acceptance_date_10300_andor");
+    $a_where = com_make_where_session(3, $a_where, 't1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10300', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10300_andor");
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }

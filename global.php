@@ -514,6 +514,56 @@ function com_make_tag_option_contract_status(
     return $a_sRet;
 }
 
+//optionタグ生成（検索条件：AND OR）
+function com_make_tag_option_andor(
+        $h_act,
+        $h_val,
+        $h_name,
+        $h_style,
+        &$h_selected
+        )
+{
+    $a_array = ['AND', 'OR'];
+    $a_sRet = "";
+    $h_selected = false;
+    
+    try{
+
+        $a_isFound = false;
+        
+        $a_sRet = "<select id='".$h_name."' name='".$h_name."' style='".$h_style."'>";
+
+        for ($a_i=0; $a_i<2; $a_i++){
+            $a_sRet .= "<option value='".$a_array[$a_i]."'";
+            if (isset($_SESSION[$h_val])){
+                if ($a_array[$a_i] == $_SESSION[$h_val])
+                {
+                    $a_sRet .= 'selected';
+                    $a_isFound = true;
+                    $h_selected = true;
+                    //echo '$h_selected:'.$h_selected;
+                }
+            }else{
+                if ($a_i == 0){
+                    $a_sRet .= 'selected';
+                    $a_isFound = true;
+                    $h_selected = true;
+                }
+            }
+            $a_sRet .= ">".$a_array[$a_i]."</option>";
+        }
+        $a_sRet .= "</select>";
+    
+    } catch (PDOException $e){
+        echo 'Error:'.$e->getMessage();
+        die();
+    }
+    
+    //$a_conn = null;
+    
+    return $a_sRet;
+}
+
 //PDOのbindValue
 function com_pdo_bindValue($h_stmt, $h_name, $h_value)
 {
@@ -613,7 +663,7 @@ function com_time_diff($time_from, $time_to, $mode)
     }
 }
 
-function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table){
+function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table, $h_andor){
     $a_where = "";
     if (isset($_SESSION[$h_sname])){
         $a_sess = $_SESSION[$h_sname];
@@ -633,7 +683,12 @@ function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table
             }
 
             if (($h_where != "") && ($a_where != "")){
-                $a_where = " AND ".$a_where;
+                if (isset($_SESSION[$h_andor])){
+                    $a_where = " ".$_SESSION[$h_andor]." ".$a_where;
+                }else{
+                    $a_where = " AND ".$a_where;
+                }
+                #$a_where = " AND ".$a_where;
             }
         }
     }

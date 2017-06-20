@@ -39,16 +39,16 @@ try{
     $a_sql = set_10100_selectDB();
 
     $a_where = "";
-    $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name', "");
-    $a_where = com_make_where_session(1, $a_where, 'engineer_number', 'f_engineer_number', "");
-    $a_where = com_make_where_session(1, $a_where, 'contract_number', 'f_contract_number', "");
-    $a_where = com_make_where_session(1, $a_where, 'customer_name', 'f_customer_name', "");
-    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', 'f_claim_agreement_start', "");
-    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', 'f_claim_agreement_end', "");
-    $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', 'f_claim_contract_form', $GLOBALS['g_DB_m_contract_bill_form']);
-    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', 'f_claim_settlement_closingday', $GLOBALS['g_DB_m_contract_tighten']);
-    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', 'f_claim_settlement_paymentday', $GLOBALS['g_DB_m_contract_bill_pay']);
-    $a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "");
+    $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name', "", "");
+    $a_where = com_make_where_session(1, $a_where, 'engineer_number', 'f_engineer_number', "", "f_engineer_number_andor");
+    $a_where = com_make_where_session(1, $a_where, 'contract_number', 'f_contract_number', "", "f_contract_number_andor");
+    $a_where = com_make_where_session(1, $a_where, 'customer_name', 'f_customer_name', "", "f_customer_name_andor");
+    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', 'f_claim_agreement_start', "", "f_claim_agreement_start_andor");
+    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', 'f_claim_agreement_end', "", "f_claim_agreement_end_andor");
+    $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', 'f_claim_contract_form', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_andor");
+    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', 'f_claim_settlement_closingday', $GLOBALS['g_DB_m_contract_tighten'], "f_claim_settlement_closingday_andor");
+    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', 'f_claim_settlement_paymentday', $GLOBALS['g_DB_m_contract_bill_pay'], "f_claim_settlement_paymentday_andor");
+    $a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "", "f_remarks_andor");
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }

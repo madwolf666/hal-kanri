@@ -30,17 +30,17 @@ try{
     $a_sql = set_10200_selectDB();
 
     $a_where = "";
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10200', "");
-    $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form']);
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10200', "");
-    $a_where = com_make_where_session(2, $a_where, 't2.date_entering', 'f_date_entering_10200', "");
-    $a_where = com_make_where_session(2, $a_where, 't2.date_retire', 'f_date_retire_10200', "");
-    $a_where = com_make_where_session(3, $a_where, 't1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10200', $GLOBALS['g_DB_m_contract_pay_pay']);
-    $a_where = com_make_where_session(2, $a_where, 't2.date_modify_salary', 'f_date_modify_salary_10200', "");
-    $a_where = com_make_where_session(2, $a_where, 't2.date_first_salary', 'f_date_first_salary_10200', "");
-    $a_where = com_make_where_session(2, $a_where, 't2.labor_contact_date', 'f_labor_contact_date_10200', "");
-    $a_where = com_make_where_session(2, $a_where, 't2.labor_yayoi_changed', 'f_labor_yayoi_changed_10200', "");
-    $a_where = com_make_where_session(1, $a_where, 't2.labor_remarks', 'f_labor_remarks_10200', "");
+    #$a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10200', "", "");
+    $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form'], "");
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10200', "", "f_engineer_name_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.date_entering', 'f_date_entering_10200', "", "f_date_entering_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.date_retire', 'f_date_retire_10200', "", "f_date_retire_10200_andor");
+    $a_where = com_make_where_session(3, $a_where, 't1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10200', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.date_modify_salary', 'f_date_modify_salary_10200', "", "f_date_modify_salary_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.date_first_salary', 'f_date_first_salary_10200', "", "f_date_first_salary_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.labor_contact_date', 'f_labor_contact_date_10200', "", "f_labor_contact_date_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 't2.labor_yayoi_changed', 'f_labor_yayoi_changed_10200', "", "f_labor_yayoi_changed_10200_andor");
+    $a_where = com_make_where_session(1, $a_where, 't2.labor_remarks', 'f_labor_remarks_10200', "", "f_labor_remarks_10200_andor");
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }

@@ -48,6 +48,44 @@ if (isset($_SESSION['f_labor_remarks_10200'])){
     $f_labor_remarks_10200 = $_SESSION['f_labor_remarks_10200'];
 }
 
+#Session(AND OR)
+$f_engineer_name_10200_andor = "";
+$f_date_entering_10200_andor = "";
+$f_date_retire_10200_andor = "";
+$f_payment_settlement_paymentday_10200_andor = "";
+$f_date_modify_salary_10200_andor = "";
+$f_date_first_salary_10200_andor = "";
+$f_labor_contact_date_10200_andor = "";
+$f_labor_yayoi_changed_10200_andor = "";
+$f_labor_remarks_10200_andor = "";
+if (isset($_SESSION['f_engineer_name_10200_andor'])){
+    $f_engineer_name_10200_andor = $_SESSION['f_engineer_name_10200_andor'];
+}
+if (isset($_SESSION['f_date_entering_10200_andor'])){
+    $f_date_entering_10200_andor = $_SESSION['f_date_entering_10200_andor'];
+}
+if (isset($_SESSION['f_date_retire_10200_andor'])){
+    $f_date_retire_10200_andor = $_SESSION['f_date_retire_10200_andor'];
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10200_andor'])){
+    $f_payment_settlement_paymentday_10200_andor = $_SESSION['f_payment_settlement_paymentday_10200_andor'];
+}
+if (isset($_SESSION['f_date_modify_salary_10200_andor'])){
+    $f_date_modify_salary_10200_andor = $_SESSION['f_date_modify_salary_10200_andor'];
+}
+if (isset($_SESSION['f_date_first_salary_10200_andor'])){
+    $f_date_first_salary_10200_andor = $_SESSION['f_date_first_salary_10200_andor'];
+}
+if (isset($_SESSION['f_labor_contact_date_10200_andor'])){
+    $f_labor_contact_date_10200_andor = $_SESSION['f_labor_contact_date_10200_andor'];
+}
+if (isset($_SESSION['f_labor_yayoi_changed_10200_andor'])){
+    $f_labor_yayoi_changed_10200_andor = $_SESSION['f_labor_yayoi_changed_10200_andor'];
+}
+if (isset($_SESSION['f_labor_remarks_10200_andor'])){
+    $f_labor_remarks_10200_andor = $_SESSION['f_labor_remarks_10200_andor'];
+}
+
 $cr_id = "";
 
 $payment_contract_form = "";

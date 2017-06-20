@@ -30,6 +30,7 @@ require_once('./10500-com.php');
         echo com_make_tag_input($a_act, $f_contract_number_10500, "f_contract_number_10500", "width: 260px; text-align: center;");
     ?>
 </td>
+<td>&nbsp;</td>
 </tr>
 <tr>
 <td class="td_titlee">氏名</td>
@@ -38,6 +39,7 @@ require_once('./10500-com.php');
         echo com_make_tag_input($a_act, $f_engineer_name_10500, "f_engineer_name_10500", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_engineer_name_10500_andor", "f_engineer_name_10500_andor", "", $h_selected); ?></td>
 </tr>
 </table>
 </center>

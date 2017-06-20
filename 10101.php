@@ -12,6 +12,8 @@ $a_act = "e";
 
 require_once('./10100-com.php');
 
+$h_selected = false;
+
 ?>
 
 <link rel="stylesheet" href="./jquery/jquery-ui.css">
@@ -36,6 +38,7 @@ require_once('./10100-com.php');
         echo com_make_tag_input($a_act, $f_engineer_name, "f_engineer_name", "width: 260px; text-align: center;");
     ?>
 </td>
+<td>&nbsp;</td>
 </tr>
 <tr>
 <td class="td_titlee">エンジニア番号</td>
@@ -44,6 +47,7 @@ require_once('./10100-com.php');
         echo com_make_tag_input($a_act, $f_engineer_number, "f_engineer_number", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_engineer_number_andor", "f_engineer_number_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">契約管理番号</td>
@@ -52,6 +56,7 @@ require_once('./10100-com.php');
         echo com_make_tag_input($a_act, $f_contract_number, "f_contract_number", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_contract_number_andor", "f_contract_number_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">客先名</td>
@@ -60,6 +65,7 @@ require_once('./10100-com.php');
         echo com_make_tag_input($a_act, $f_customer_name, "f_customer_name", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_customer_name_andor", "f_customer_name_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">開始日</td>
@@ -68,6 +74,7 @@ require_once('./10100-com.php');
         echo com_make_tag_input($a_act, $f_claim_agreement_start, "f_claim_agreement_start", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_claim_agreement_start_andor", "f_claim_agreement_start_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">終了日</td>
@@ -76,6 +83,7 @@ require_once('./10100-com.php');
         echo com_make_tag_input($a_act, $f_claim_agreement_end, "f_claim_agreement_end", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_claim_agreement_end_andor", "f_claim_agreement_end_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">契約形態</td>
@@ -84,6 +92,7 @@ require_once('./10100-com.php');
         echo com_make_tag_option2($a_act, $f_claim_contract_form, "f_claim_contract_form", $GLOBALS['g_DB_m_contract_bill_form'], "width: 260px;", $a_selected);
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_claim_contract_form_andor", "f_claim_contract_form_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">決済（締）</td>
@@ -92,6 +101,7 @@ require_once('./10100-com.php');
         echo com_make_tag_option2($a_act, $f_claim_settlement_closingday, "f_claim_settlement_closingday", $GLOBALS['g_DB_m_contract_tighten'], "width: 50px;", $a_selected);
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_claim_settlement_closingday_andor", "f_claim_settlement_closingday_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">決済（支払）</td>
@@ -100,6 +110,7 @@ require_once('./10100-com.php');
         echo com_make_tag_option2($a_act, $f_claim_settlement_paymentday, "f_claim_settlement_paymentday", $GLOBALS['g_DB_m_contract_bill_pay'], "", $a_selected);
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_claim_settlement_paymentday_andor", "f_claim_settlement_paymentday_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">備考</td>
@@ -108,6 +119,7 @@ require_once('./10100-com.php');
         echo com_make_tag_input($a_act, $f_remarks, "f_remarks", "width: 260px; text-align: center;");
     ?>
 </td>
+<td>&nbsp;</td>
 </tr>
 </table>
 </center>

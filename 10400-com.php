@@ -16,6 +16,12 @@ if (isset($_SESSION['f_engineer_name_10400'])){
     $f_engineer_name_10400 = $_SESSION['f_engineer_name_10400'];
 }
 
+#Session(AND OR)
+$f_engineer_name_10400_andor = "";
+if (isset($_SESSION['f_engineer_name_10400_andor'])){
+    $f_engineer_name_10400_andor = $_SESSION['f_engineer_name_10400_andor'];
+}
+
 $cr_id = "";
 $po_no = "";
 $contract_number = "";

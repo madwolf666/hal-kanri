@@ -36,6 +36,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_contract_number_10300, "f_contract_number_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td>&nbsp;</td>
 </tr>
 <tr>
 <td class="td_titlee">HAL No.</td>
@@ -44,6 +45,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_engineer_number_10300, "f_engineer_number_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_engineer_number_10300_andor", "f_engineer_number_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">エンジニア氏名</td>
@@ -52,6 +54,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_engineer_name_10300, "f_engineer_name_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_engineer_name_10300_andor", "f_engineer_name_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">得意先</td>
@@ -60,6 +63,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_customer_name_10300, "f_customer_name_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_customer_name_10300_andor", "f_customer_name_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">契約形態（受注サイド）</td>
@@ -68,6 +72,7 @@ require_once('./10300-com.php');
         echo com_make_tag_option2($a_act, $f_claim_contract_form_10300, "f_claim_contract_form_10300", $GLOBALS['g_DB_m_contract_bill_form'], "width: 260px;", $a_selected);
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_claim_contract_form_10300_andor", "f_claim_contract_form_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">注文書/契約書No.</td>
@@ -76,6 +81,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_ag_no_10300, "f_ag_no_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_ag_no_10300_andor", "f_ag_no_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">売上日</td>
@@ -84,6 +90,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_accounts_bai_previous_day_10300, "f_accounts_bai_previous_day_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_accounts_bai_previous_day_10300_andor", "f_accounts_bai_previous_day_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">実働時間</td>
@@ -92,6 +99,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_accounts_actual_working_hours_10300, "f_accounts_actual_working_hours_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_accounts_actual_working_hours_10300_andor", "f_accounts_actual_working_hours_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">諸経費</td>
@@ -100,6 +108,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_accounts_expenses_10300, "f_accounts_expenses_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_accounts_expenses_10300_andor", "f_accounts_expenses_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">契約形態（発注サイド）</td>
@@ -108,6 +117,7 @@ require_once('./10300-com.php');
         echo com_make_tag_option2($a_act, $f_payment_contract_form_10300, "f_payment_contract_form_10300", $GLOBALS['g_DB_m_contract_pay_form'], "width: 260px; text-align: center;", $a_selected);
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_payment_contract_form_10300_andor", "f_payment_contract_form_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">検収日</td>
@@ -116,6 +126,7 @@ require_once('./10300-com.php');
         echo com_make_tag_input($a_act, $f_payment_acceptance_date_10300, "f_payment_acceptance_date_10300", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_payment_acceptance_date_10300_andor", "f_payment_acceptance_date_10300_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">支払日</td>
@@ -124,6 +135,7 @@ require_once('./10300-com.php');
         echo com_make_tag_option2($a_act, $f_payment_settlement_paymentday_10300, "f_payment_settlement_paymentday_10300", $GLOBALS['g_DB_m_contract_pay_pay'], "", $a_selected);
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_payment_settlement_paymentday_10300_andor", "f_payment_settlement_paymentday_10300_andor", "", $h_selected); ?></td>
 </tr>
 </table>
 </center>

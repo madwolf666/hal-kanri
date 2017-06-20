@@ -60,6 +60,34 @@ if (!isset($_GET['mnu'])){
             if (isset($_POST['f_remarks'])){
                 $_SESSION['f_remarks'] = $_POST['f_remarks'];
             }
+            #AND OR
+            if (isset($_POST['f_engineer_number_andor'])){
+            $_SESSION['f_engineer_number_andor'] = $_POST['f_engineer_number_andor'];
+            }
+            if (isset($_POST['f_contract_number_andor'])){
+                $_SESSION['f_contract_number_andor'] = $_POST['f_contract_number_andor'];
+            }
+            if (isset($_POST['f_customer_name_andor'])){
+                $_SESSION['f_customer_name_andor'] = $_POST['f_customer_name_andor'];
+            }
+            if (isset($_POST['f_claim_agreement_start_andor'])){
+                $_SESSION['f_claim_agreement_start_andor'] = $_POST['f_claim_agreement_start_andor'];
+            }
+            if (isset($_POST['f_claim_agreement_end_andor'])){
+                $_SESSION['f_claim_agreement_end_andor'] = $_POST['f_claim_agreement_end_andor'];
+            }
+            if (isset($_POST['f_claim_contract_form_andor'])){
+                $_SESSION['f_claim_contract_form_andor'] = $_POST['f_claim_contract_form_andor'];
+            }
+            if (isset($_POST['f_claim_settlement_closingday_andor'])){
+                $_SESSION['f_claim_settlement_closingday_andor'] = $_POST['f_claim_settlement_closingday_andor'];
+            }
+            if (isset($_POST['f_claim_settlement_paymentday_andor'])){
+                $_SESSION['f_claim_settlement_paymentday_andor'] = $_POST['f_claim_settlement_paymentday_andor'];
+            }
+            if (isset($_POST['f_remarks_andor'])){
+                $_SESSION['f_remarks_andor'] = $_POST['f_remarks_andor'];
+            }
         }
         
         header('Location: ./10100.php');
@@ -134,6 +162,34 @@ if (!isset($_GET['mnu'])){
                 if (isset($_POST['f_labor_remarks_10200'])){
                     $_SESSION['f_labor_remarks_10200'] = $_POST['f_labor_remarks_10200'];
                 }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10200_andor'])){
+                    $_SESSION['f_engineer_name_10200_andor'] = $_POST['f_engineer_name_10200_andor'];
+                }
+                if (isset($_POST['f_date_entering_10200_andor'])){
+                    $_SESSION['f_date_entering_10200_andor'] = $_POST['f_date_entering_10200_andor'];
+                }
+                if (isset($_POST['f_date_retire_10200_andor'])){
+                    $_SESSION['f_date_retire_10200_andor'] = $_POST['f_date_retire_10200_andor'];
+                }
+                if (isset($_POST['f_payment_settlement_paymentday_10200_andor'])){
+                    $_SESSION['f_payment_settlement_paymentday_10200_andor'] = $_POST['f_payment_settlement_paymentday_10200_andor'];
+                }
+                if (isset($_POST['f_date_modify_salary_10200_andor'])){
+                    $_SESSION['f_date_modify_salary_10200_andor'] = $_POST['f_date_modify_salary_10200_andor'];
+                }
+                if (isset($_POST['f_date_first_salary_10200_andor'])){
+                    $_SESSION['f_date_first_salary_10200_andor'] = $_POST['f_date_first_salary_10200_andor'];
+                }
+                if (isset($_POST['f_labor_contact_date_10200_andor'])){
+                    $_SESSION['f_labor_contact_date_10200_andor'] = $_POST['f_labor_contact_date_10200_andor'];
+                }
+                if (isset($_POST['f_labor_yayoi_changed_10200_andor'])){
+                    $_SESSION['f_labor_yayoi_changed_10200_andor'] = $_POST['f_labor_yayoi_changed_10200_andor'];
+                }
+                if (isset($_POST['f_labor_remarks_10200_andor'])){
+                    $_SESSION['f_labor_remarks_10200_andor'] = $_POST['f_labor_remarks_10200_andor'];
+                }
             }
 
             header('Location: ./10200.php');
@@ -197,6 +253,40 @@ if (!isset($_GET['mnu'])){
                 }
                 if (isset($_POST['f_payment_settlement_paymentday_10300'])){
                     $_SESSION['f_payment_settlement_paymentday_10300'] = $_POST['f_payment_settlement_paymentday_10300'];
+                }
+                # AND OR
+                if (isset($_POST['f_engineer_number_10300_andor'])){
+                    $_SESSION['f_engineer_number_10300_andor'] = $_POST['f_engineer_number_10300_andor'];
+                }
+                if (isset($_POST['f_engineer_name_10300_andor'])){
+                    $_SESSION['f_engineer_name_10300_andor'] = $_POST['f_engineer_name_10300_andor'];
+                }
+                if (isset($_POST['f_customer_name_10300_andor'])){
+                    $_SESSION['f_customer_name_10300_andor'] = $_POST['f_customer_name_10300_andor'];
+                }
+                if (isset($_POST['f_claim_contract_form_10300_andor'])){
+                    $_SESSION['f_claim_contract_form_10300_andor'] = $_POST['f_claim_contract_form_10300_andor'];
+                }
+                if (isset($_POST['f_ag_no_10300_andor'])){
+                    $_SESSION['f_ag_no_10300_andor'] = $_POST['f_ag_no_10300_andor'];
+                }
+                if (isset($_POST['f_accounts_bai_previous_day_10300_andor'])){
+                    $_SESSION['f_accounts_bai_previous_day_10300_andor'] = $_POST['f_accounts_bai_previous_day_10300_andor'];
+                }
+                if (isset($_POST['f_accounts_actual_working_hours_10300_andor'])){
+                    $_SESSION['f_accounts_actual_working_hours_10300_andor'] = $_POST['f_accounts_actual_working_hours_10300_andor'];
+                }
+                if (isset($_POST['f_accounts_expenses_10300_andor'])){
+                    $_SESSION['f_accounts_expenses_10300_andor'] = $_POST['f_accounts_expenses_10300_andor'];
+                }
+                if (isset($_POST['f_payment_contract_form_10300_andor'])){
+                    $_SESSION['f_payment_contract_form_10300_andor'] = $_POST['f_payment_contract_form_10300_andor'];
+                }
+                if (isset($_POST['f_payment_acceptance_date_10300_andor'])){
+                    $_SESSION['f_payment_acceptance_date_10300_andor'] = $_POST['f_payment_acceptance_date_10300_andor'];
+                }
+                if (isset($_POST['f_payment_settlement_paymentday_10300_andor'])){
+                    $_SESSION['f_payment_settlement_paymentday_10300_andor'] = $_POST['f_payment_settlement_paymentday_10300_andor'];
                 }
             }
 
@@ -408,6 +498,10 @@ if (!isset($_GET['mnu'])){
                 if (isset($_POST['f_engineer_name_10400'])){
                     $_SESSION['f_engineer_name_10400'] = $_POST['f_engineer_name_10400'];
                 }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10400_andor'])){
+                    $_SESSION['f_engineer_name_10400_andor'] = $_POST['f_engineer_name_10400_andor'];
+                }
             }
 
             header('Location: ./10400.php');
@@ -442,6 +536,10 @@ if (!isset($_GET['mnu'])){
                 }
                 if (isset($_POST['f_engineer_name_10500'])){
                     $_SESSION['f_engineer_name_10500'] = $_POST['f_engineer_name_10500'];
+                }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10500_andor'])){
+                    $f_engineer_name_10500_andor = $_POST['f_engineer_name_10500_andor'];
                 }
             }
 
@@ -482,6 +580,10 @@ if (!isset($_GET['mnu'])){
                 }
                 if (isset($_POST['f_engineer_name_10600'])){
                     $_SESSION['f_engineer_name_10600'] = $_POST['f_engineer_name_10600'];
+                }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10600_andor'])){
+                    $f_engineer_name_10600_andor = $_POST['f_engineer_name_10600_andor'];
                 }
             }
 

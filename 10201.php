@@ -36,6 +36,7 @@ require_once('./10200-com.php');
         echo com_make_tag_option2($a_act, $f_payment_contract_form_10200, "f_payment_contract_form_10200", $GLOBALS['g_DB_m_contract_pay_form'], "width: 260px; text-align: center;", $a_selected);
     ?>
 </td>
+<td>&nbsp;</td>
 </tr>
 <tr>
 <td class="td_titlee">氏名</td>
@@ -44,6 +45,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_engineer_name_10200, "f_engineer_name_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_engineer_name_10200_andor", "f_engineer_name_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">入社日</td>
@@ -52,6 +54,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_date_entering_10200, "f_date_entering_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_date_entering_10200_andor", "f_date_entering_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">退職日</td>
@@ -60,6 +63,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_date_retire_10200, "f_date_retire_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_date_retire_10200_andor", "f_date_retire_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">支給日</td>
@@ -68,6 +72,7 @@ require_once('./10200-com.php');
         echo com_make_tag_option2($a_act, $f_payment_settlement_paymentday_10200, "f_payment_settlement_paymentday_10200", $GLOBALS['g_DB_m_contract_pay_pay'], "width: 260px; text-align: center;", $a_selected);
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_payment_settlement_paymentday_10200_andor", "f_payment_settlement_paymentday_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">給与変更日</td>
@@ -76,6 +81,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_date_modify_salary_10200, "f_date_modify_salary_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_date_modify_salary_10200_andor", "f_date_modify_salary_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">給与変更後最初の給与日</td>
@@ -84,6 +90,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_date_first_salary_10200, "f_date_first_salary_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_date_first_salary_10200_andor", "f_date_first_salary_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">連絡日</td>
@@ -92,6 +99,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_labor_contact_date_10200, "f_labor_contact_date_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_labor_contact_date_10200_andor", "f_labor_contact_date_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">弥生給与変更済</td>
@@ -100,6 +108,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_labor_yayoi_changed_10200, "f_labor_yayoi_changed_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_labor_yayoi_changed_10200_andor", "f_labor_yayoi_changed_10200_andor", "", $h_selected); ?></td>
 </tr>
 <tr>
 <td class="td_titlee">備考</td>
@@ -108,6 +117,7 @@ require_once('./10200-com.php');
         echo com_make_tag_input($a_act, $f_labor_remarks_10200, "f_labor_remarks_10200", "width: 260px; text-align: center;");
     ?>
 </td>
+<td><?php echo com_make_tag_option_andor("", "f_labor_remarks_10200_andor", "f_labor_remarks_10200_andor", "", $h_selected); ?></td>
 </tr>
 </table>
 </center>

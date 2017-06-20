@@ -22,9 +22,9 @@ try{
     $a_sql_src = set_10600_selectDB();
 
     $a_where = "";
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10600', "");
-    $a_where = com_make_where_session(3, $a_where, 't1.contract_number', 'f_contract_number_10600', "");
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10600', "");
+    #$a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10600', "", "");
+    $a_where = com_make_where_session(3, $a_where, 't1.contract_number', 'f_contract_number_10600', "", "");
+    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10600', "", "f_engineer_name_10600_andor");
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }
