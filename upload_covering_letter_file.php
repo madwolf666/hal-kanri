@@ -63,21 +63,31 @@ try {
                             $a_sql .= ",";
                         }
                         switch ($a_col) {
-                            case 115:   //現状なし
+                            case 2:   //誕生日
+                            case 9:   //退職日
                                 //日付セル
-                                $date_val = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getFormattedValue();
-                                /**/
-                                if (preg_match( '/^[0-9]{1,}[\-|\/][0-9]{1,}[\-|\/][0-9]{1,}$/', $date_val )) {
-                                    //$date_val = "chappy";
-                                    $date_val = str_replace("/", "-", $date_val);
-                                    $date_val = DateTime::createFromFormat( 'm-d-Y', $date_val )->format( 'Y/m/d' );
-                                    //$date_val = DateTime::createFromFormat('m-d-Y', $date_val);
-                                    //$date_val = DateTime::createFromFormat( 'm/d/y', $date_val )->format( 'Y/m/d' );
-                                } else {
-                                    $date_val = "";
-                                }
-                                /**/
-                               $a_sql .= "'".$date_val."'";
+                                $a_tmp = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getCalculatedValue();
+                                #echo '$a_tmp-->'.$a_tmp.'<br>';
+                                if ($a_tmp != ''){
+                                    $date_val = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getFormattedValue();
+                                    #echo '$date_val-->'.$date_val.'<br>';
+                                    if (preg_match( '/^[0-9]{1,}[\-|\/][0-9]{1,}[\-|\/][0-9]{1,}$/', $date_val )) {
+                                        //$date_val = "chappy";
+                                        $date_val2 = str_replace("/", "-", $date_val);
+                                        #echo '$date_val2-->'.$date_val2.'<br>';
+                                        $split = explode("-", $date_val2);
+                                        if (strlen($split[0]) <= 2){
+                                            try{
+                                                $date_val2 = DateTime::createFromFormat( 'm-d-Y', $date_val2 )->format( 'Y/m/d' );
+                                                $date_val = $date_val2;
+                                            }catch (Exception $e){
+                                            }
+                                        }
+                                    }
+                                    $a_sql .= "'".$date_val."'";
+                                 }else{
+                                    $a_sql .= "''";
+                                 }
                                 break;
                             default:
                                 $a_tmp = $obj_sheet->getCellByColumnAndRow($a_col,$a_row)->getCalculatedValue();
