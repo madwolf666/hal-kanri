@@ -5,6 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+ini_set('session.cookie_httponly', 1);  #JavaScriptからCookie情報への不正アクセス防止
 
 session_start();
 
@@ -252,6 +253,8 @@ header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');
 header('Cache-Control: no-store, no-cache, must-revalidate'); 
 header('Cache-Control: post-check=0, pre-check=0', false); 
 header('Pragma: no-cache'); 
+header('X-Frame-Options: DENY');    #クリックジャキング対策
+header("Content-type: text/html; charset=utf-8");   #Content-Typeヘッダがない
 
 //inputタグ生成
 function com_make_tag_input(

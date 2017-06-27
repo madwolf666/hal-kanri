@@ -39,7 +39,7 @@ require_once('./global.php');
     </div>
     -->
     <div class="inputrow">
-        <input type="password" id="pass" placeholder="パスワード" onkeydown="check_keydown();"/>
+        <input type="password" id="pass" placeholder="パスワード" autocomplete="off" onkeydown="check_keydown();"/>
       <label class="ion-locked" for="pass"></label>
     </div>
     <input type="checkbox" name="remember" id="remember"/>
