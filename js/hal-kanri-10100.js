@@ -12,10 +12,10 @@ $(function () {
     //請求サイド
     //--------------------------------------------------------------------------
     //作業時間
-    $('#inp_kaishi1').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:1});
-    $('#inp_syuryo1').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:1});
-    $('#inp_kaishi2').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:1});
-    $('#inp_syuryo2').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:1});
+    $('#inp_kaishi1').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:5});
+    $('#inp_syuryo1').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:5});
+    $('#inp_kaishi2').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:5});
+    $('#inp_syuryo2').datetimepicker({format:'H:i', datepicker:false, lang:'ja', step:5});
 
     $('#inp_kaishi1').keyup(function(){calc_bill_work_time(); check_value_changed_10102(3, 'work_start', $('#inp_kaishi1').val(), '#inp_kaishi1');});
     $('#inp_syuryo1').keyup(function(){calc_bill_work_time(); check_value_changed_10102(3, 'work_end', $('#inp_syuryo1').val(), '#inp_syuryo1');});

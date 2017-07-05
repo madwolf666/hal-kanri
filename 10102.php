@@ -925,9 +925,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_engineer_name;
                         } else {
-                    ?>
-                    <input type="text" id="txt_engineer_name" readonly="true" value="<?php echo $txt_engineer_name; ?>" style="width:90px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_engineer_name, "txt_engineer_name", "width: 90px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -937,9 +935,7 @@ $a_selected = false;
                         if ($a_act == '') {
                             echo $txt_engineer_kana;
                         } else {
-                    ?>
-                    <input type="text" id="txt_engineer_kana" readonly="true" value="<?php echo $txt_engineer_kana; ?>" style="width:100px; text-align: center;">
-                    <?php
+                            echo com_make_tag_input($a_act, $txt_engineer_kana, "txt_engineer_kana", "width: 100px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -1059,32 +1055,36 @@ $a_selected = false;
                 </td>
             </tr>
         </table>
-         <br>
-<!-- 日割り時の割合 -->
-        <table border="0" width=340>
+        <br>
+        <!-- 日割り時の割合-->
+        <table border="0" rules="" width=340>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td colspan="3" class="">&nbsp;</td>
             </tr>
             <tr>
+                <td class="" style="width: 120px;">&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="width: 40px;">&nbsp;</td>
             </tr>
             <tr>
+                <td class="" style="width: 120px;">&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="width: 40px;">&nbsp;</td>
             </tr>
         </table>
-        <table border="0" width=340 height="98">
+        <table border="0" rules="" width=340 height="95">
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td colspan="3" class="">&nbsp;</td>
             </tr>
             <tr>
+                <td class="" style="width: 120px;">&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="width: 40px;">&nbsp;</td>
             </tr>
             <tr>
+                <td class="" style="width: 120px;">&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="width: 40px;">&nbsp;</td>
             </tr>
         </table>
 <!-- 右3番目のテーブル -->
@@ -1585,7 +1585,6 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3">管理<br>本部</td>
             </tr>
             <tr>
                 <td colspan="5" class="yellow" height=15>決済</td>
@@ -1609,7 +1608,6 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" rowspan="3"><?php echo $cnf_person; ?></td>
             </tr>
             <tr>
                 <td colspan="7" class="yellow" height=15><font size="-2" nowrap="true">欠勤控除対象者</font></td>
@@ -1654,6 +1652,12 @@ $a_selected = false;
                         }
                     ?>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="12">管理本部</td>
+            </tr>
+            <tr>
+                <td colspan="12"><?php echo $cnf_person; ?></td>
             </tr>
         </table>
     </li>

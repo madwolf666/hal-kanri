@@ -293,11 +293,11 @@ $a_selected = false;
         <!-- 左4番目のテーブル -->
         <table border="1" rules="all" width=340 height=60>
             <tr>
-                <td colspan="4" width=120 class="gray" height=15>時間刻み</td>
-                <td colspan="2" width=65 class="gray">日次</td>
-                <td colspan="2" width=65><?php echo $opt_m_contract_time_inc_bd; ?></td>
-                <td colspan="2" width=65 class="gray">月次</td>
-                <td colspan="2" width=65><?php echo $opt_m_contract_time_inc_bm; ?></td>
+                <td colspan="4" width=40 class="gray" height=15>時間刻み</td>
+                <td colspan="2" width=30 class="gray">日次</td>
+                <td colspan="2" width=52><?php echo $opt_m_contract_time_inc_bd; ?></td>
+                <td colspan="2" width=30 class="gray">月次</td>
+                <td colspan="2" width=100><?php echo $opt_m_contract_time_inc_bm; ?></td>
             </tr>
             <tr>
                 <td colspan="4" class="gray" height=15>決済</td>
@@ -498,27 +498,25 @@ $a_selected = false;
         <!-- 右4番目のテーブル -->
         <table border="1" rules="all" width=340 height=60>
             <tr>
-                <td colspan="5" width=60 class="gray" height=15><font size="-1">時間刻み</font></td>
-                <td colspan="2" width=44 class="gray">日次</td>
+                <td colspan="5" width=40 class="gray" height=15>時間刻み</td>
+                <td colspan="2" width=20 class="gray">日次</td>
                 <td colspan="1" width=52><?php echo $opt_m_contract_time_inc_pd; ?></td>
-                <td colspan="3" width=52 class="gray">月次</td>
-                <td colspan="1" width=52><?php echo $opt_m_contract_time_inc_pm; ?></td>
-                <td colspan="3" width=80>管理<br>本部</td>
+                <td colspan="2" width=20 class="gray">月次</td>
+                <td colspan="1" width=100><?php echo $opt_m_contract_time_inc_pm; ?></td>
             </tr>
             <tr>
                 <td colspan="5" class="gray" height=15>決済</td>
                 <td colspan="2" class="gray">締め</td>
                 <td colspan="1"><?php echo $opt_contract_tighten_p; ?></td>
-                <td colspan="3" class="gray">支払日</td>
+                <td colspan="2" class="gray">支払日</td>
                 <td colspan="1"><?php echo $opt_contract_pay_pay; ?></td>
-                <td colspan="3" rowspan="3"><?php echo $cnf_person; ?></td>
             </tr>
-            <tr>
+            <!-- tr>
                 <td colspan="12" class="hiddencell_l" height=15></td>
-            </tr>
+            </tr -->
             <tr>
-                <td colspan="4" class="yellow" height=15>保険証</td>
-                <td colspan="4">
+                <td colspan="5" class="yellow" height=15>保険証</td>
+                <td colspan="3">
                     <?php
                         if ($a_act == '') {
                             echo $opt_contarct_insurance_crad;
@@ -536,6 +534,12 @@ $a_selected = false;
                         }
                     ?>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="12" width=80>管理本部</td>
+            </tr>
+            <tr>
+                <td colspan="12"><?php echo $cnf_person; ?></td>
             </tr>
         </table>
     </li>
