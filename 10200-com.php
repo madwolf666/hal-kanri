@@ -209,8 +209,14 @@ OR (IFNULL(s1.payment_middle_overtime_unit_price_2,0)<>IFNULL(s2.payment_middle_
 OR (IFNULL(s1.payment_leaving_unit_price_2,0)<>IFNULL(s2.payment_leaving_unit_price_2,0))	
 OR (IFNULL(s1.payment_leaving_deduction_unit_price_2,0)<>IFNULL(s2.payment_leaving_deduction_unit_price_2,0))	
 OR (IFNULL(s1.payment_leaving_overtime_unit_price_2,0)<>IFNULL(s2.payment_leaving_overtime_unit_price_2,0))
-)	
 )
+)
+UNION ALL
+SELECT *
+ FROM
+  ".$GLOBALS['g_DB_t_contract_report']."
+ WHERE
+  (new_or_continued='継続契約') AND (cr_id_src IS NULL)
     ";
     $a_sql_src .= ") t1";
     
