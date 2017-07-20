@@ -51,6 +51,7 @@ if (isset($_SESSION['f_payment_contract_form_10300'])){
 }
 if (isset($_SESSION['f_payment_acceptance_date_10300'])){
     $f_payment_acceptance_date_10300 = $_SESSION['f_payment_acceptance_date_10300'];
+    #echo '検収日⇒'.$f_payment_acceptance_date_10300;
 }
 if (isset($_SESSION['f_payment_settlement_paymentday_10300'])){
     $f_payment_settlement_paymentday_10300 = $_SESSION['f_payment_settlement_paymentday_10300'];

@@ -22,6 +22,26 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    #[2017.07.20]課題解決表No.67
+    $a_cn_max = 0;
+    if (($_SESSION['hal_department_cd'] == 3) && ($_POST['status_cd_num'] == 2)){
+        //管理者で、ステータスが2の場合
+        $a_sql2 = "SELECT MAX(t1.contract_number)+1 AS cn_max";
+        $a_sql2 .= " FROM";
+        $a_sql2 .= " (";
+        $a_sql2 .= "  SELECT";
+        $a_sql2 .= "   CASE WHEN contract_number > 0 THEN CAST(contract_number AS SIGNED)";
+        $a_sql2 .= "   ELSE 0";
+        $a_sql2 .= "   END AS contract_number";
+        $a_sql2 .= "  FROM t_contract_report";
+        $a_sql2 .= " ) t1";
+        $a_stmt = $a_conn->prepare($a_sql2);
+        $a_stmt->execute();
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            $a_cn_max = $a_result['cn_max'];
+        }
+    }
+
     if ($a_act == 'n'){
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_contract_report']." (";
         $a_sql .= "
@@ -170,6 +190,7 @@ try{
             ,chs_tel2
             ,remarks_pay
             ,status_cd
+            ,cr_id_src
             ";
         if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
             //管理者以外もしくは、ステータスが2未満の場合
@@ -330,6 +351,7 @@ try{
             ,:chs_tel2
             ,:remarks_pay
             ,:status_cd
+            ,:cr_id_src
             ";
         if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
             //管理者以外もしくは、ステータスが2未満の場合
@@ -624,9 +646,19 @@ try{
     $a_stmt->bindParam(':remarks', $_POST['inp_biko'], PDO::PARAM_STR);
     
     $a_stmt->bindParam(':new_or_continued', $_POST['opt_contract_kind'], PDO::PARAM_STR);
-    //if ($a_act == 'n'){
+    
+    #[2017.07.20]課題解決表No.67
+    if ($_POST['inp_keiyaku_no'] == ''){
+        if (($_SESSION['hal_department_cd'] == 3) && ($_POST['status_cd_num'] == 2)){
+            //管理者で、ステータスが2の場合
+            $a_stmt->bindParam(':contract_number', $a_cn_max, PDO::PARAM_STR);
+        } else{
+            $a_stmt->bindParam(':contract_number', $_POST['inp_keiyaku_no'], PDO::PARAM_STR);
+        }
+    } else {
         $a_stmt->bindParam(':contract_number', $_POST['inp_keiyaku_no'], PDO::PARAM_STR);
-    //}
+    }
+    
     com_pdo_bindValue($a_stmt, ':publication', $_POST['inp_hakkobi']);
     $a_stmt->bindParam(':author', $_POST['inp_sakuseisya'], PDO::PARAM_STR);
     $a_val = "";    //変数として代入しないとNGとなる
@@ -803,6 +835,7 @@ try{
             com_pdo_bindValue($a_stmt, ':cnf_id', $_SESSION['hal_idx']);
             com_pdo_bindValue($a_stmt, ':cnf_date', date("Y/m/d"));
         }
+        com_pdo_bindValue($a_stmt, ':cr_id_src', $_POST['cr_id_src']);  #[2017.07.20]課題解決表No.67
     }
     
     $a_stmt->execute();

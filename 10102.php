@@ -17,6 +17,8 @@ if (!isset($_GET['ACT'])){
 
 require_once('./10100-com.php');
 
+$cr_id_src = '';   #[2017.07.20]課題解決表No.67
+
 if ($a_act == 'n'){
     if (isset($_GET['ENO'])) {
         $inp_engineer_no = $_GET['ENO'];
@@ -70,8 +72,6 @@ if ($a_act == 'c') {
     //契約継続時
     $cr_id = "";
     
-    
-    
     $inp_kyakusaki_kaishi = "";
     if ($inp_kyakusaki_syuryo != '') {
         //1日プラス
@@ -84,6 +84,9 @@ if ($a_act == 'c') {
     $txt_kyakusaki_kaishi = $inp_kyakusaki_kaishi;
     $txt_kyakusaki_syuryo = "";
     $a_act = 'n';
+
+    $status_cd = "営業作成中";  #[2017.07.20]課題解決表No.67
+    $cr_id_src = $_GET['NO'];   #[2017.07.20]課題解決表No.67
 }else{
     if ($a_act != 'n'){
         #管理本部かレポート作成者以外は更新不可
@@ -1952,6 +1955,7 @@ $a_selected = false;
 </center>
 <br>
 <input type="hidden" id="cr_id" value="<?php echo $cr_id; ?>">
+<input type="hidden" id="cr_id_src" value="<?php echo $cr_id_src; ?>">
 
 <p class="c">
 <?php if ($a_act == ''){ ?>

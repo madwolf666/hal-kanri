@@ -1659,6 +1659,7 @@ function regist_contract_report(h_act)
             'remarks_pay': $('#remarks_pay').val(),
             'status_cd': $('[name=status_cd] option:selected').text(),
             'status_cd_num': $('[name=status_cd] option:selected').val(),
+            'cr_id_src': $('#cr_id_src').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

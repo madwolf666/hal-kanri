@@ -80,10 +80,11 @@ $g_MENU_CONTRACT_10107 = 10107;    //見積書作成
 
 $g_MENU_CONTRACT_10200 = 10200;    //給与台帳一覧
 $g_MENU_CONTRACT_10201 = 10201;    //給与台帳一覧：検索
+$g_MENU_CONTRACT_10210 = 10210;    //給与台帳一覧：行追加
+$g_MENU_CONTRACT_10211 = 10211;    //給与台帳一覧：現在行削除
 
 $g_MENU_CONTRACT_10300 = 10300;    //検収台帳一覧
 $g_MENU_CONTRACT_10301 = 10301;    //検収台帳一覧：検索
-
 $g_MENU_CONTRACT_10310 = 10310;    //検収台帳一覧：行追加
 $g_MENU_CONTRACT_10311 = 10311;    //検収台帳一覧：現在行削除
 
@@ -677,7 +678,18 @@ function com_make_where_session($h_mode, $h_where, $h_column, $h_sname, $h_table
             }
             elseif ($h_mode == 2){
                 #date
-                $a_where .= "(".$h_column."='".$a_sess."')";
+                #[2017.07.19]課題解決表No.69
+                $a_tmp = explode("/", $a_sess);
+                if(count($a_tmp) > 2){
+                    $a_where .= "(".$h_column."='".$a_sess."')";
+                }else{
+                    $a_tmp2 = $a_tmp[0]."/".$a_tmp[1]."/01";
+                    $a_where .= "(".$h_column.">='".$a_tmp2."'";
+                    #1ヶ月後
+                    $a_tmp2 = date("Y/m/d", strtotime($a_tmp2." + 1 month"));
+                    $a_where .= " AND ".$h_column." < '".$a_tmp2."')";
+                }
+                #echo $a_where.'<br>';
             }elseif ($h_mode == 3){
                 #option
                 if ($a_sess != 0){

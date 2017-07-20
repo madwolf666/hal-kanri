@@ -15,6 +15,7 @@ $a_cr_id = $_POST['cr_id'];
 $a_kind = $_POST['kind'];
 $a_field = $_POST['field'];
 $a_val = $_POST['val'];
+$a_pr_id = $_POST['pr_id']; #[2017.07.20]課題解決表No.72
 $a_isExists = false;
 
 try{
@@ -23,9 +24,10 @@ try{
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //レコードが存在するかチェック
-    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_payroll']." WHERE (cr_id=:cr_id);";
+    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_payroll']." WHERE (cr_id=:cr_id) AND (pr_id=:pr_id);";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+    com_pdo_bindValue($a_stmt, ':pr_id', $a_pr_id);
     $a_stmt->execute();
 
     while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
@@ -44,7 +46,7 @@ try{
         $a_sql .= $a_field."=:".$a_field;
         $a_sql .= ",upd_id=:upd_id";
         $a_sql .= ",upd_date=:upd_date";
-        $a_sql .= " WHERE (cr_id=:cr_id);";
+        $a_sql .= " WHERE (cr_id=:cr_id) AND (pr_id=:pr_id);";  #[2017.07.20]課題解決表No.72
     }
     
     $a_stmt = $a_conn->prepare($a_sql);
@@ -64,6 +66,7 @@ try{
         com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
         com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
     } else {
+        com_pdo_bindValue($a_stmt, ':pr_id', $a_pr_id); #[2017.07.20]課題解決管理表No.72
         com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
         com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
     }

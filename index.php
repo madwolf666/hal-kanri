@@ -200,6 +200,107 @@ if (!isset($_GET['mnu'])){
             header('Location: ./10201.php');
         }
         break;
+    case $GLOBALS['g_MENU_CONTRACT_10210']:   //給与台帳：行追加[2017.07.20]課題解決表No.72
+        if ($_SESSION["hal_auth"] <= 0) {
+            //POSTデータを取得
+            $a_cr_id = $_GET['NO'];
+            $a_pr_id = $_GET['SN'];
+            $a_isExists = false;
+
+            try{
+                //DBからユーザ情報取得
+                $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+                $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_payroll']." WHERE (cr_id=:cr_id);";
+                $a_stmt = $a_conn->prepare($a_sql);
+                $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+                $a_stmt->execute();
+
+                $a_sql2 = "";
+                while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+                    $a_isExists = true;
+                }
+
+                $a_rec = 1;
+                if ($a_isExists == false){
+                    echo 'false';
+                    $a_rec = 1;
+                } else {
+                    echo 'true';
+                    $a_sql2 = "INSERT INTO ".$GLOBALS['g_DB_t_payroll']." (";
+                    $a_sql2 .= "
+    cr_id
+    ,reg_id
+    ,reg_date
+    ,is_manual
+                ";
+                    $a_sql2 .= ") SELECT";
+                    $a_sql2 .= "
+    :cr_id AS cr_id
+    ,:reg_id AS reg_id
+    ,:reg_date AS reg_date
+    ,1 AS is_manual
+                ";
+                    $a_sql2 .= " FROM ".$GLOBALS['g_DB_t_payroll']." WHERE (cr_id=:cr_id) AND (pr_id=:pr_id);";
+                }
+
+                if ($a_isExists == false){
+                    for ($a_i = 1; $a_i <= $a_rec; $a_i++) {
+                        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_payroll']." (";
+                        $a_sql .= "cr_id,reg_id,reg_date,is_manual";
+                        $a_sql .= ") VALUES(";
+                        $a_sql .= ":cr_id,:reg_id,:reg_date,1";
+                        $a_sql .= ");";
+
+                        $a_stmt = $a_conn->prepare($a_sql);
+
+                        com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+                        com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
+                        com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+                        $a_stmt->execute();
+                    }
+                } else {
+                        $a_stmt = $a_conn->prepare($a_sql2);
+
+                        com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+                        com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
+                        com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+                        com_pdo_bindValue($a_stmt, ':pr_id', $a_pr_id);
+                        $a_stmt->execute();
+                }
+            } catch (PDOException $e){
+                $a_sRet = 'Error:'.$e->getMessage();
+            }
+            $a_conn = null;
+
+            header('Location: ./10200.php');
+        }
+        break;    case $GLOBALS['g_MENU_CONTRACT_10211']:   //給与台帳：現在行削除[2017.07.20]課題解決表No.72
+        if ($_SESSION["hal_auth"] <= 0) {
+            //POSTデータを取得
+            $a_cr_id = $_GET['NO'];
+            $a_pr_id = $_GET['SN'];
+            $a_isExists = false;
+
+            try{
+                //DBからユーザ情報取得
+                $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+                $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_payroll']." WHERE (cr_id=:cr_id) AND (pr_id=:pr_id);";
+                $a_stmt = $a_conn->prepare($a_sql);
+                com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+                com_pdo_bindValue($a_stmt, ':pr_id', $a_pr_id);
+                $a_stmt->execute();
+            } catch (PDOException $e){
+                $a_sRet = 'Error:'.$e->getMessage();
+            }
+            $a_conn = null;
+
+            header('Location: ./10200.php');
+        }
+        break;
     case $GLOBALS['g_MENU_CONTRACT_10300']:   //検収台帳
         if ($_SESSION["hal_auth"] <= 0) {
             if (isset($_GET['ENO'])){

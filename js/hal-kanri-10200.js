@@ -36,7 +36,7 @@ function make_payroll_list(h_pageNo)
         },
        complete: function (data) {
             $.unblockUI();
-            resize_div2('leftColumn', 'right_title', 'right_record', 440, 184); 
+            resize_div2('leftColumn', 'right_title', 'right_record', 460, 184); 
        }
    });
 }
@@ -48,7 +48,7 @@ function excel_out_10200(){
 }
 
 //Enterキー押下時の処理
-function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
+function check_input_key_enter(h_key, h_cr_id, h_sub_id, h_field, h_id, h_kind)
 {
     //alert(h_cr_id + "," + h_field + "," + h_id);
 
@@ -67,6 +67,7 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
             async: true,
             data:{
                 'cr_id': h_cr_id,
+                'pr_id': h_sub_id,
                 'kind': h_kind,
                 'field': h_field,
                 'val': a_val,
@@ -97,4 +98,34 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
     }else{
         //alert("ENTER以外が押されました");
     }    
+}
+
+//給与台帳機能選択⇒[2017.07.20]課題解決表No.72
+function choice_payroll_method(h_no, h_sub_no)
+{
+    //alert(h_no);
+    /**/
+    m_ProgressMsg('データ取得中です......<br><img src="./images/upload.gif" /> ');
+    
+    $.ajax({
+        url: m_parentURL + "choice_payroll_method.php",
+        type: 'POST',
+        dataType: "html",
+        async: true,
+        data:{
+            'cr_id': h_no,
+            'pr_id': h_sub_no
+        },
+        success: function(data, dataType){
+            $("#my-method").empty().append(data);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown.message);
+        },
+       complete: function (data) {
+            $.unblockUI();
+       }
+    });
+    /**/
+    show_popup();
 }

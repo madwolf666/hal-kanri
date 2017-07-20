@@ -22,24 +22,28 @@ try{
     $a_sql_src = set_10200_selectDB();
     
     $a_where = "";
-    #$a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10200', "", "");
-    $a_where = com_make_where_session(3, $a_where, 't1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form'], "");
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10200', "", "f_engineer_name_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 't2.date_entering', 'f_date_entering_10200', "", "f_date_entering_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 't2.date_retire', 'f_date_retire_10200', "", "f_date_retire_10200_andor");
-    $a_where = com_make_where_session(3, $a_where, 't1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10200', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 't2.date_modify_salary', 'f_date_modify_salary_10200', "", "f_date_modify_salary_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 't2.date_first_salary', 'f_date_first_salary_10200', "", "f_date_first_salary_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 't2.labor_contact_date', 'f_labor_contact_date_10200', "", "f_labor_contact_date_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 't2.labor_yayoi_changed', 'f_labor_yayoi_changed_10200', "", "f_labor_yayoi_changed_10200_andor");
-    $a_where = com_make_where_session(1, $a_where, 't2.labor_remarks', 'f_labor_remarks_10200', "", "f_labor_remarks_10200_andor");
+    #[2017.07.20]課題解決表No.72
+    #$a_where = com_make_where_session(1, $a_where, 'u1.engineer_number', 'f_engineer_number_10200', "", "");
+    $a_where = com_make_where_session(3, $a_where, 'u1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form'], "");
+    $a_where = com_make_where_session(1, $a_where, 'u1.engineer_name', 'f_engineer_name_10200', "", "f_engineer_name_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 'u1.date_entering', 'f_date_entering_10200', "", "f_date_entering_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 'u1.date_retire', 'f_date_retire_10200', "", "f_date_retire_10200_andor");
+    $a_where = com_make_where_session(3, $a_where, 'u1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10200', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 'u1.date_modify_salary', 'f_date_modify_salary_10200', "", "f_date_modify_salary_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 'u1.date_first_salary', 'f_date_first_salary_10200', "", "f_date_first_salary_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 'u1.labor_contact_date', 'f_labor_contact_date_10200', "", "f_labor_contact_date_10200_andor");
+    $a_where = com_make_where_session(2, $a_where, 'u1.labor_yayoi_changed', 'f_labor_yayoi_changed_10200', "", "f_labor_yayoi_changed_10200_andor");
+    $a_where = com_make_where_session(1, $a_where, 'u1.labor_remarks', 'f_labor_remarks_10200', "", "f_labor_remarks_10200_andor");
+
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }
     
     $a_sql_src .= $a_where;
 
-    $a_sql_src .= " ORDER BY t2.employ_no";
+    #[2017.07.20]課題解決表No.72
+    $a_sql_src .= " ORDER BY u1.engineer_number,u1.cr_id,u1.pr_id";
+    #$a_sql_src .= " ORDER BY t2.employ_no";
 
     com_select_pager($a_conn, $a_stmt, $a_sql_src, $a_PageNo, $a_total_num);
 
@@ -53,14 +57,14 @@ try{
     
     //固定列部分
     $a_sRet .= "        <td style='padding: 0 0;'>";
-    $a_sRet .= "            <table class='tbl_list' width='440px;'>";
+    $a_sRet .= "            <table class='tbl_list' width='460px;'>";
     $a_sRet .= "                <tr class='tr_title2'>";
     $a_sRet .= "                    <td rowspan='2' class='td_titleI' style='width: 60px;' nowrap>現従業員<br>人数</td>";
     $a_sRet .= "                    <td rowspan='2' class='td_title2' style='width: 40px;' nowrap>雇用<br>形態</td>";
     $a_sRet .= "                    <td colspan='4' class='td_title2' style='height:25px;' nowrap>労働者</td>";
     $a_sRet .= "                </tr>";
     $a_sRet .= "                <tr class='tr_title2'>";
-    $a_sRet .= "                    <td class='td_title2' style='width: 80px; height:25px;' nowrap>氏名</td>";
+    $a_sRet .= "                    <td class='td_title2' style='width: 100px; height:25px;' nowrap>氏名</td>";
     $a_sRet .= "                    <td class='td_titleI' style='width: 80px;' nowrap>社員番号</td>";
     $a_sRet .= "                    <td class='td_titleI' style='width: 90px;' nowrap>入社日</td>";
     $a_sRet .= "                    <td class='td_titleI' style='width: 90px;' nowrap>退職日</td>";
@@ -146,7 +150,7 @@ try{
 
     $a_sRet_L = "       <td valign='top'>";
     $a_sRet_L .= "           <div id='leftColumn' style='overflow:hidden;height:433px;'>";
-    $a_sRet_L .= "               <table class='tbl_list' style='width: 440px;'>";
+    $a_sRet_L .= "               <table class='tbl_list' style='width: 460px;'>";
     
     $a_sRet_R = "       <td valign='top' style='padding: 0 0;'>";
     $a_sRet_R .= "          <div id='right_record' style='padding: 0 0; overflow:scroll;width:500px;height:450px;' onscroll='document.all.right_title.scrollLeft=this.scrollLeft;document.all.leftColumn.scrollTop=this.scrollTop;'>";
@@ -171,21 +175,28 @@ try{
 
         //入力あり
         //$a_sRet_L .= "<td class='td_line2' style='width: 50px;'><div class='myover' id='dm_no".$a_rec."' onClick='alert(\"chappy\");'>".$a_result['dm_no']."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 60px;'><div class='myover' ".com_make_input_text($cr_id,'employ_num',$a_rec,1).">".$employ_num."</td>";
+        $a_sRet_L .= "<td class='td_lineI' style='width: 60px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'employ_num',$a_rec,1).">".$employ_num."</td>";
         $a_sRet_L .= "<td class='td_line2' style='width: 40px;'><div class='myover'>".$payment_contract_form."</td>";
-        $a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$engineer_name."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 80px;'><div class='myover' ".com_make_input_text($cr_id,'employ_no',$a_rec,1).">".$employ_no."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text($cr_id,'date_entering',$a_rec,2).">".$date_entering."</td>";
-        $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text($cr_id,'date_retire',$a_rec,2).">".$date_retire."</td>";
+
+        #[2017.07.20]課題解決表No.72
+        $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>";
+        #echo $a_result['pr_id'];
+        $a_sRet_L .= "<a href='#' onclick='choice_payroll_method(\"".$a_result['cr_id']."\",\"".$a_result['pr_id']."\");'>".$engineer_name."</a>";
+        $a_sRet_L .= "</td>";
+        #$a_sRet_L .= "<td class='td_line2' style='width: 80px;'><div class='myover'>".$engineer_name."</td>";
+
+        $a_sRet_L .= "<td class='td_lineI' style='width: 80px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'employ_no',$a_rec,1).">".$employ_no."</td>";
+        $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'date_entering',$a_rec,2).">".$date_entering."</td>";
+        $a_sRet_L .= "<td class='td_lineI' style='width: 90px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'date_retire',$a_rec,2).">".$date_retire."</td>";
         
         $a_sRet_L .= "</tr>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'yayoi_group',$a_rec,1).">".$yayoi_group."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'yayoi_group',$a_rec,1).">".$yayoi_group."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_settlement_closingday."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_settlement_paymentday."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'date_modify_salary',$a_rec,2).">".$date_modify_salary."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'date_first_salary',$a_rec,2).">".$date_first_salary."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'date_modify_salary',$a_rec,2).">".$date_modify_salary."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'date_first_salary',$a_rec,2).">".$date_first_salary."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_normal_calculation_2."</td>";
 
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".""."</td>";
@@ -214,25 +225,25 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_leaving_upper_limit_2."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$payment_leaving_lower_limit_2."</td>";
 
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'status_employ_insurance',$a_rec,1).">".$status_employ_insurance."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'status_compensation_insurance',$a_rec,1).">".$status_compensation_insurance."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'status_social_insurance',$a_rec,1).">".$status_social_insurance."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'status_employ_insurance',$a_rec,1).">".$status_employ_insurance."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'status_compensation_insurance',$a_rec,1).">".$status_compensation_insurance."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'status_social_insurance',$a_rec,1).">".$status_social_insurance."</td>";
         
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'tax_municipal_tax',$a_rec,1).">".$tax_municipal_tax."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'tax_dependents',$a_rec,1).">".$tax_dependents."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'tax_year_end_adjustment',$a_rec,1).">".$tax_year_end_adjustment."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'tax_municipal_tax',$a_rec,1).">".$tax_municipal_tax."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'tax_dependents',$a_rec,1).">".$tax_dependents."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'tax_year_end_adjustment',$a_rec,1).">".$tax_year_end_adjustment."</td>";
 
         //入力あり
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'labor_managerial_position',$a_rec,1).">".$labor_managerial_position."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'labor_contact_date',$a_rec,2).">".$labor_contact_date."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'labor_yayoi_changed',$a_rec,1).">".$labor_yayoi_changed."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'labor_remarks',$a_rec,1).">".$labor_remarks."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'labor_question',$a_rec,1).">".$labor_question."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'labor_answer',$a_rec,1).">".$labor_answer."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'labor_employ_no',$a_rec,1).">".$labor_employ_no."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'labor_managerial_position',$a_rec,1).">".$labor_managerial_position."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'labor_contact_date',$a_rec,2).">".$labor_contact_date."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'labor_yayoi_changed',$a_rec,1).">".$labor_yayoi_changed."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'labor_remarks',$a_rec,1).">".$labor_remarks."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'labor_question',$a_rec,1).">".$labor_question."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'labor_answer',$a_rec,1).">".$labor_answer."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'labor_employ_no',$a_rec,1).">".$labor_employ_no."</td>";
         
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'health_insurance_standard_remuneration',$a_rec,1).">".$health_insurance_standard_remuneration."</td>";
-        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($cr_id,'thickness_year_standard_remuneration',$a_rec,1).">".$thickness_year_standard_remuneration."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'health_insurance_standard_remuneration',$a_rec,1).">".$health_insurance_standard_remuneration."</td>";
+        $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$pr_id,'thickness_year_standard_remuneration',$a_rec,1).">".$thickness_year_standard_remuneration."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".$redemption_ratio."</td>";
 
         $a_sRet_R .= "</tr>";

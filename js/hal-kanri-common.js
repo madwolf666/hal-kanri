@@ -13,6 +13,12 @@ var m_parentURL = "//" + m_parentURL + "/hal-kanri/";
 //linux
 //var m_parentURL = "//" + m_parentURL + "/";
 
+//消費税⇒課題解決表No.70
+var m_consumption_tax = [
+    ['1997/04/01', 0.05],
+    ['2014/04/01', 0.08],
+];
+
 //処理中表示
 var m_ProgressMsg = function (text) {
     $.blockUI({

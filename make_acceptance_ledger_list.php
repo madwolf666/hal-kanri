@@ -41,7 +41,9 @@ try{
     
     $a_sql_src .= $a_where;
 
-    $a_sql_src .= " ORDER BY t1.contract_number,t3.ag_no,t2.al_id";
+    #課題解決表No.71
+    $a_sql_src .= " ORDER BY t1.contract_number,t1.engineer_number,t2.al_id";
+    #$a_sql_src .= " ORDER BY t1.contract_number,t3.ag_no,t2.al_id";
     
     com_select_pager($a_conn, $a_stmt, $a_sql_src, $a_PageNo, $a_total_num);
 
@@ -87,7 +89,7 @@ try{
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>売上予定金額</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>作業時間管理表</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>実働時間</td>";
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>実績時間</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>実績金額</td>";  #[2017.07.19]課題解決表No.70
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>諸経費</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>計(税抜)+諸経費</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>計(税込)</td>";
@@ -106,7 +108,7 @@ try{
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>支払い予定金額</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>実働時間</td>";
 
-    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>実績時間</td>";
+    $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>実績金額</td>";  #[2017.07.19]課題解決表No.70
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>交通費等</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>計(税抜)+諸経費</td>";
     $a_sRet .= "                        <td class='td_titleI' style='width: 100px;' nowrap>計(税込)</td>";

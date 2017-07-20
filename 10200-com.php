@@ -139,6 +139,8 @@ $health_insurance_standard_remuneration = "";
 $thickness_year_standard_remuneration = "";
 //$redemption_ratio = "";
 
+$pr_id = "";    #[2017.07.20]課題解決表No.72
+
 function set_10200_selectDB()
 {
     $a_sql_src = "SELECT t1.*,";
@@ -166,11 +168,93 @@ function set_10200_selectDB()
 ,t2.labor_employ_no
 ,t2.health_insurance_standard_remuneration
 ,t2.thickness_year_standard_remuneration
+,t2.pr_id
         ";
-    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    #[2017.07.20]課題解決表No.72
+    $a_sql_src .= " FROM (";
+    $a_sql_src .= "
+SELECT *
+ FROM
+  ".$GLOBALS['g_DB_t_contract_report']."
+ WHERE
+  new_or_continued<>'継続契約'
+UNION ALL (
+SELECT s1.*
+FROM
+(
+ SELECT *
+ FROM
+  ".$GLOBALS['g_DB_t_contract_report']."
+ WHERE
+  new_or_continued='継続契約'
+) s1
+JOIN
+(
+ SELECT *
+ FROM
+  ".$GLOBALS['g_DB_t_contract_report']."
+ WHERE
+  new_or_continued<>'継続契約'
+) s2
+ON
+(s1.cr_id_src=s2.cr_id)
+AND 
+((IFNULL(s1.workplace,'')<>IFNULL(s2.workplace,''))
+OR (IFNULL(s1.payment_normal_unit_price_2,0)<>IFNULL(s2.payment_normal_unit_price_2,0))
+OR (IFNULL(s1.payment_normal_deduction_unit_price_2,0)<>IFNULL(s2.payment_normal_deduction_unit_price_2,0))	
+OR (IFNULL(s1.payment_normal_overtime_unit_price_2,0)<>IFNULL(s2.payment_normal_overtime_unit_price_2,0))	
+OR (IFNULL(s1.payment_middle_unit_price_2,0)<>IFNULL(s2.payment_middle_unit_price_2,0))	
+OR (IFNULL(s1.payment_middle_deduction_unit_price_2,0)<>IFNULL(s2.payment_middle_deduction_unit_price_2,0))	
+OR (IFNULL(s1.payment_middle_overtime_unit_price_2,0)<>IFNULL(s2.payment_middle_overtime_unit_price_2,0))	
+OR (IFNULL(s1.payment_leaving_unit_price_2,0)<>IFNULL(s2.payment_leaving_unit_price_2,0))	
+OR (IFNULL(s1.payment_leaving_deduction_unit_price_2,0)<>IFNULL(s2.payment_leaving_deduction_unit_price_2,0))	
+OR (IFNULL(s1.payment_leaving_overtime_unit_price_2,0)<>IFNULL(s2.payment_leaving_overtime_unit_price_2,0))
+)	
+)
+    ";
+    $a_sql_src .= ") t1";
+    
     $a_sql_src .= " LEFT JOIN ";
     $a_sql_src .= $GLOBALS['g_DB_t_payroll']." t2";
-    $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
+    $a_sql_src .= " ON (t1.cr_id=t2.cr_id) AND (t2.is_manual IS NULL)";
+
+    #[2017.07.20]課題解決表No.
+    $a_sql_src .= " UNION ALL (";
+    $a_sql_src .= "SELECT t3.*,";
+    $a_sql_src .= "
+ t4.employ_num
+,t4.employ_form
+,t4.employ_no
+,t4.date_entering
+,t4.date_retire
+,t4.yayoi_group
+,t4.date_modify_salary
+,t4.date_first_salary
+,t4.status_employ_insurance
+,t4.status_compensation_insurance
+,t4.status_social_insurance
+,t4.tax_municipal_tax
+,t4.tax_dependents
+,t4.tax_year_end_adjustment
+,t4.labor_managerial_position
+,t4.labor_contact_date
+,t4.labor_yayoi_changed
+,t4.labor_remarks
+,t4.labor_question
+,t4.labor_answer
+,t4.labor_employ_no
+,t4.health_insurance_standard_remuneration
+,t4.thickness_year_standard_remuneration
+,t4.pr_id
+        ";
+    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t3";
+    $a_sql_src .= " JOIN ";
+    $a_sql_src .= $GLOBALS['g_DB_t_payroll']." t4";
+    $a_sql_src .= " ON (t3.cr_id=t4.cr_id) AND (t4.is_manual=1)";    
+    $a_sql_src .= ")";    
+    #echo $a_sql_src.'<br>';
+    
+    $a_sql_src = " SELECT u1.* FROM (".$a_sql_src.") u1";    
     
     return $a_sql_src;
 }
@@ -229,6 +313,12 @@ function set_10200_fromDB($a_result)
     $GLOBALS['health_insurance_standard_remuneration'] = $a_result['health_insurance_standard_remuneration'];
     $GLOBALS['thickness_year_standard_remuneration'] = $a_result['thickness_year_standard_remuneration'];
     //$GLOBALS['redemption_ratio'] = $a_result['redemption_ratio'];
+
+    #[2017.07.20]課題解決表No.72
+    $GLOBALS['pr_id'] = $a_result['pr_id'];
+    if ($GLOBALS['pr_id'] == ''){
+        $GLOBALS['pr_id'] = -1;
+    }
 
 }
 

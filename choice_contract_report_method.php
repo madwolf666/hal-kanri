@@ -18,7 +18,10 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE (cr_id=:cr_id);";
+    #[2017.07.19]課題解決表No.68
+    $a_sql = "SELECT *";
+    $a_sql .= ",(SELECT idx FROM ".$GLOBALS['g_DB_m_contract_status']." WHERE (m_name=".$GLOBALS['g_DB_t_contract_report'].".status_cd)) AS status_cd_num";
+    $a_sql .= " FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE (cr_id=:cr_id);";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
     $a_stmt->execute();
@@ -35,8 +38,17 @@ try{
         $a_sRet .= "<tr>";
         $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a></td>";
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
-       $a_sRet .= "</tr>";
+        
+        #[2017.07.19]課題解決表No.68
+        #管理本部以外で、かつステータスが「営業提出」「管理承認」の場合は更新不可
+        $status_cd_num = $a_result['status_cd_num'];
+        if (($_SESSION['hal_department_cd'] != 3) && (($status_cd_num == 1) || ($status_cd_num == 2))){
+            $a_sRet .= "<td>&nbsp;&nbsp;</td>";
+        }else{
+            $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
+        }
+
+        $a_sRet .= "</tr>";
  
         $a_sRet .= "<tr>";
         if ($_SESSION["hal_auth"] <= 0) {
