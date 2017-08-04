@@ -36,12 +36,20 @@ try{
         $a_sRet .= "</tr>";
 
         $a_sRet .= "<tr>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a></td>";
+        #[2017.08.04]「管理承認」のみ契約継続
+        $status_cd_num = $a_result['status_cd_num'];
+        $a_sRet .= "<td>";
+        if ($status_cd_num == 2){
+            $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a>";
+        }else{
+            $a_sRet .= "&nbsp;&nbsp;";
+        }
+        $a_sRet .= "</td>";
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         
         #[2017.07.19]課題解決表No.68
         #管理本部以外で、かつステータスが「営業提出」「管理承認」の場合は更新不可
-        $status_cd_num = $a_result['status_cd_num'];
+        #$status_cd_num = $a_result['status_cd_num'];[2017.08.04]
         if (($_SESSION['hal_department_cd'] != 3) && (($status_cd_num == 1) || ($status_cd_num == 2))){
             $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         }else{
@@ -52,7 +60,14 @@ try{
  
         $a_sRet .= "<tr>";
         if ($_SESSION["hal_auth"] <= 0) {
-            $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a></td>";
+            #[2017.08.04]「管理承認」のみ契約継続
+            $a_sRet .= "<td>";
+            if ($status_cd_num == 2){
+                $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a>";
+            }else{
+                $a_sRet .= "&nbsp;&nbsp;";
+            }
+            $a_sRet .= "</td>";
         } else {
             $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         }

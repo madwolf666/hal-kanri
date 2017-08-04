@@ -97,7 +97,13 @@ if (isset($_GET['NO'])) {
 	</tr>
 	<tr>
             <th colspan="4" rowspan="2">作&nbsp;業&nbsp;料&nbsp;金<br>(外税)</th>
-            <td colspan="3" rowspan="2"><font size="-1">※小数点以下が発生する場合は<br>切捨てとする。</font><br><?php echo $payment_normal_unit_price_1; ?>&nbsp;／月</td>
+            <td colspan="3" rowspan="2"><font size="-1">※小数点以下が発生する場合は<br>切捨てとする。</font><br><?php echo $payment_normal_unit_price_1; ?>&nbsp;／
+                <?php if ($payment_normal_calculation_1 != '時給'){ ?>
+                月
+                <?php }else{ ?>
+                時間
+                <?php } ?>
+            </td>
             <td colspan="3">&nbsp;</td>
             <td colspan="3">&nbsp;</td>
 	</tr>
@@ -127,18 +133,32 @@ if (isset($_GET['NO'])) {
 	<tr>
             <th colspan="2" rowspan="2">清算単価</th>
             <td colspan="2">控除単価</td>
-            <td colspan="3"><?php echo $payment_normal_deduction_unit_price_1; ?>&nbsp;／&nbsp;H</td>
+            <td colspan="3"><?php echo $payment_normal_deduction_unit_price_1; ?>
+                <?php if ($payment_normal_calculation_1 != '時給'){ ?>
+                &nbsp;／&nbsp;H
+                <?php } ?>
+            </td>
             <td colspan="3">&nbsp;</td>
             <td colspan="3">&nbsp;</td>
 	</tr>
 	<tr>
             <td colspan="2">残業単価</td>
-            <td colspan="3"><?php echo $payment_normal_overtime_unit_price_1; ?>&nbsp;／&nbsp;H</td>
+            <td colspan="3"><?php echo $payment_normal_overtime_unit_price_1; ?>
+                <?php if ($payment_normal_calculation_1 != '時給'){ ?>
+                &nbsp;／&nbsp;H
+                <?php } ?>
+            </td>
             <td colspan="3">&nbsp;</td>
             <td colspan="3">&nbsp;</td>
 	</tr>
 	<tr>
-            <th colspan="4">時間単価</th>
+            <th colspan="4">
+                <?php if ($payment_normal_calculation_1 != '時給'){ ?>
+                時間単価
+                <?php }else{ ?>
+                時間単位
+                <?php } ?>
+            </th>
             <td colspan="9">月次：&nbsp;30&nbsp;分</td>
 	</tr>
 	<tr>

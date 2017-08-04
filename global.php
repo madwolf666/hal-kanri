@@ -603,7 +603,12 @@ function com_db_number_format_symbol($h_value)
 //PHPExcel
 function com_setValue_Date($h_date, $h_sheet, $h_cell, $h_format)
 {
-    $a_date = PHPExcel_Shared_Date::PHPToExcel(new DateTime(str_replace("-", "/", $h_date)));
+    #[2017.08.04]
+    try{
+        $a_date = PHPExcel_Shared_Date::PHPToExcel(new DateTime(str_replace("-", "/", $h_date)));
+    } catch (Exception $e){
+        $a_date = $h_date;
+    }
     $h_sheet->setCellValue($h_cell,$a_date);
     $h_sheet->getStyle($h_cell)->getNumberFormat()->setFormatCode($h_format);
 }
