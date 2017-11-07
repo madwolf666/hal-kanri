@@ -128,7 +128,7 @@ $a_selected = false;
 <!-- 左側のテーブル群 -->
     <li class="myli">
 <!-- 左1番目のテーブル -->
-        <table border="1" rules="all" width=340 height=105>
+        <table border="1" rules="all" width=340 height=280>
             <tr>
                 <td colspan="12" class="gray" height=15>請求ｻｲﾄﾞ（売上）</td>
             </tr>
@@ -157,7 +157,7 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="yellow" height=15>契約形態</td>
+                <td colspan="2" class="yellow" height=15 nowrap>契約形態</td>
                 <td colspan="10">
                     <?php
                         if ($a_act == '') {
@@ -169,7 +169,7 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="yellow" height=15>作業場所</td>
+                <td colspan="2" class="yellow" height=15 nowrap>作業場所</td>
                 <td colspan="10">
                     <?php
                         if ($a_act == '') {
@@ -181,7 +181,7 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="yellow" height=15>開始</td>
+                <td colspan="2" class="yellow" height=15 nowrap>開始</td>
                 <td colspan="2">
                     <?php
                         if ($a_act == '') {
@@ -191,7 +191,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="2" class="yellow">終了</td>
+                <td colspan="2" class="yellow" nowrap>終了</td>
                 <td colspan="2">
                     <?php
                         if ($a_act == '') {
@@ -201,7 +201,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="2" class="gray">作業時間</td>
+                <td colspan="2" class="gray" nowrap>作業時間</td>
                 <td colspan="2" width="50">
                     <!-- 自動計算：終了－開始－休憩時間 -->
                     <?php
@@ -216,7 +216,7 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="yellow" height=15>開始</td>
+                <td colspan="2" class="yellow" height=15 nowrap>開始</td>
                 <td colspan="2">
                     <?php
                         if ($a_act == '') {
@@ -226,7 +226,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="2" class="yellow">終了</td>
+                <td colspan="2" class="yellow" nowrap>終了</td>
                 <td colspan="2">
                     <?php
                         if ($a_act == ''){
@@ -236,7 +236,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="2" class="gray">休憩時間</td>
+                <td colspan="2" class="gray" nowrap>休憩時間</td>
                 <td colspan="2" width="50">
                 <!-- 終了－開始 -->
                     <?php
@@ -253,7 +253,7 @@ $a_selected = false;
         </table>
           <br>
 <!-- 左2番目のテーブル -->
-        <table border="1" rules="all" width=340 height=105>
+        <table border="1" rules="all" width=340 height=280>
             <tr>
                 <td colspan="2" class="yellow" height=15>客先担当部署</td>
                 <td colspan="10">
@@ -522,7 +522,7 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td rowspan="8" class="Length yellow" height=120>途中入場</td>
+                <td rowspan="8" class="Length yellow" height=120 width="6">途中入場</td>
                 <td colspan="2" class="yellow">就業日数</td>
                 <td colspan="9">
                     <?php
@@ -635,7 +635,7 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td rowspan="8" class="Length yellow" height=120>途中退場</td>
+                <td rowspan="8" class="Length yellow" height=120 width="6">途中退場</td>
                 <td colspan="2" class="yellow">就業日数</td>
                 <td colspan="9">
                     <?php
@@ -847,7 +847,7 @@ $a_selected = false;
 <!-- 右側のテーブル群 -->
     <li class="myli">
 <!-- 右1番目のテーブル -->
-        <table border="1" rules="all" width=340 height=105>
+        <table border="1" rules="all" width=340 height=280>
             <tr>
 		<td colspan="4" class="yellow" height=15 nowrap="true">新規or継続</td>
                 <td colspan="4">
@@ -946,7 +946,7 @@ $a_selected = false;
         </table>
         <br>
   <!-- 右2番目のテーブル -->
-        <table border="1" rules="all" width=340 height=105>
+        <table border="1" rules="all" width=340 height=280>
             <tr>
 		<td colspan="4" class="yellow" height=15 nowrap="true">事業者名</td>
                 <td colspan="9">
@@ -1667,14 +1667,17 @@ $a_selected = false;
 </ul>
 <br>
 <!--
-<ul class="" style="list-style:none; width:auto;">
+<ul class="" style="list-style:none;">
     <li class="myli">
 -->
-        <table border="1" rules="all" style="min-width:340px; max-width:760px">
+        <!-- table border="1" rules="all" style="width:740px;" -->
+        <table border="1" rules="all" class="notice">
+        <!-- table border="1" rules="all" style="min-width:340px; max-width:760px" -->
 	<tr>
             <td class="yellow" style="width:60px;">抵触日</td>
             <td class="yellow" style="width:60px;" nowrap="true">組織単位</td>
-            <td style="width:auto;">
+            <td class="">
+            <!-- td style="width:auto;" -->
             <?php
                 if ($a_act == '') {
                     echo $contact_date_org;
@@ -1809,7 +1812,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">職名・氏名・電話番号</td>
 	</tr>
 	<tr>
-            <td class="hiddencell_r">
+            <td class="">
                 <?php
                     if ($a_act == '') {
                         echo $dm_responsible_position;
@@ -1840,7 +1843,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">派遣先：職名・氏名・電話番号</td>
 	</tr>
 	<tr>
-            <td class="hiddencell_r">
+            <td class="">
                 <?php
                     if ($a_act == '') {
                         echo $chs_position2;
@@ -1870,7 +1873,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">派遣元：職名・氏名・電話番号</td>
 	</tr>
 	<tr>
-            <td class="hiddencell_r">
+            <td class="">
                 <?php
                     if ($a_act == '') {
                         echo $chs_position1;
@@ -1906,11 +1909,11 @@ $a_selected = false;
     <li class="myli">
         <table border="1" rules="all" width=340 height=200>
             <tr>
-                <td colspan="2" class="yellow" height=200>備考<br>(営業)</td>
+                <td colspan="2" class="yellow" height=200 nowrap>備考<br>(営業)</td>
                 <td colspan="10" class="remarks">
                     <?php
                         if ($a_act == ''){
-                            echo $inp_biko;
+                            echo com_db_string_format($inp_biko);   #[2017.11.07]
                         }else{
                             echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 96%;");
                         }
@@ -1923,11 +1926,11 @@ $a_selected = false;
     <li class="myli">
         <table border="1" rules="all" width=340 height=200>
             <tr>
-                <td colspan="2" class="yellow" height=200>備考<br>(管理)</td>
+                <td colspan="2" class="yellow" height=200 nowrap>備考<br>(管理)</td>
                 <td colspan="10" class="remarks">
                     <?php
                         if ($a_act == ''){
-                            echo $remarks_pay;
+                            echo com_db_string_format($remarks_pay);    #[2017.11.07]
                         }else{
                             echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 96%;");
                         }

@@ -80,6 +80,18 @@ function check_IsNumeric(h_obj, h_msg) {
     return true;
 }
 
+//半角カナチェック[2017.11.07]課題No.73
+function check_IsHanKana(h_obj, h_msg) {
+    if ($(h_obj).val() != '') {
+        var a_reg = new RegExp(/^[ｦ-ﾟ ]*$/);
+        if (a_reg.test($(h_obj).val()) == false) {
+            show_Alert(h_obj, h_msg);
+            return false;
+        }
+    }
+    return true;
+}
+
 //テーブルリサイズ
 function resize_tbl_list(){
    //out.print("alert($('#tbl_edit_warn_list').width());");

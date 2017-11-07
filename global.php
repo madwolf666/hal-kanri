@@ -600,6 +600,13 @@ function com_db_number_format_symbol($h_value)
     }
 }
 
+//[2017.11.07]
+function com_db_string_format($h_value)
+{
+    $h_value = str_replace(chr(10), "<br>", $h_value);
+    return $h_value;
+}
+
 //PHPExcel
 function com_setValue_Date($h_date, $h_sheet, $h_cell, $h_format)
 {

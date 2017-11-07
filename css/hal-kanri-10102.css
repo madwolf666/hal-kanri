@@ -9,167 +9,120 @@ and open the template in the editor.
 */
 
 td{
-
 	text-align: center;
-
 	margin: 1 1 1 1em;
-
 }
 
 td.remarks{
-
 	text-align: left;			/* 備考欄だけ左詰め　*/
-
 }
 
 /* テーブル内の縦書きベンダープレフィックス　*/
 
 .Length{
-
 -ms-writing-mode: vertical-rl;		/* IE用　*/
-
 -webkit-writing-mode: tb-rl;			/* chrome用　*/
-
 -webkit-text-orientation: upright;
-
 text-orientation: upright;
-
 }
 
 .hiddencell{
-
 	border-left-style: hidden;
-
 	border-bottom:hidden;
-
 }
 
 .yellow{
-
 	background-color: #FBFB86;		/* 背景色を黄色にします　*/
-
 }
 
 .gray{
-
 	background-color: #C0C0C0;		/* 背景色をグレーにします　*/
-
 }
 
 ul.myul{
-
 	margin: 0 0 1 0em;
-
 	padding: 0;
-
 	display: table;
-
 	width:400px;
-
 	/*border: 5px dotted #000000;*/
-
 }
 
 ul.myul2{
-
 	margin: 0 0 1 0em;
-
 	padding: 0;
-
 	display: table;
-
 	width:760px;
-
 	/*border: 5px dotted #000000;*/
-
-}
-
-/* PC用　*/
-
-@media screen and (min-width: 768px){
-
-	li.myli {
-
-		font-size : 15px;
-
-		margin: 0 0 1 0em;
-
-		padding: 0;
-
-		padding-left: 20px;
-
-		padding-right: 20px;
-
-		display: table-cell;
-
-		/*vertical-align: middle;*/
-		vertical-align: top;
-
-		text-align: center;
-
-		/*border: 5px dotted #000000;*/
-
-		}
-
-}
-
-/*481～768px　タブレット等を想定*/
-
-@media screen and (min-width: 481px){
-
-	li.myli {
-
-		margin: 0 0 1 0em;
-
-		padding: 0;
-
-		padding-left:20px;
-
-		padding-right: 20px;
-
-		font-size : 14px;
-
-		/*vertical-align: middle;*/
-		vertical-align: top;
-
-		text-align: center;
-
-		width:auto;
-
-		/*border: 5px dotted #000000;*/
-
-
-
-		}
-
 }
 
 /* スマートフォン用　*/
-
-@media screen and (max-width: 480px){
-
+@media screen and (min-width: 480px){
 	li.myli {
-
 		margin: 0 0 1 0em;
-
 		padding: 0;
-
 		padding-left:0.5%;
-
 		padding-right: 1%;
-
 		font-size : 14px;
-
 		vertical-align: middle;
-
 		text-align: center;
-
 		width:auto;
-
 		/*border: 5px dotted #000000;*/
+        }
+        .notice{
+            width: 340px;
+        }
+        .notice td{
+            /*width: 220px;*/
+            table-layout: fixed;
+        }
+}
 
+/*481～768px　タブレット等を想定*/
+/*@media screen and (min-width: 481px){*/
+@media screen and (min-width: 768px){
+	li.myli {
+		margin: 0 0 1 0em;
+		padding: 0;
+		padding-left:20px;
+		padding-right: 20px;
+		font-size : 14px;
+		/*vertical-align: middle;*/
+		vertical-align: top;
+		text-align: center;
+		width:auto;
+		/*border: 5px dotted #000000;*/
+            }
+        .notice{
+            width: 340px;
+        }
+        .notice td{
+            /*width: 220px;*/
+            table-layout: fixed;
+        }
+}
 
-
-		}
-
+/* PC用　*/
+/*@media screen and (min-width: 768px){*/
+@media screen and (min-width: 980px){
+	li.myli {
+		font-size : 15px;
+		margin: 0 0 1 0em;
+		padding: 0;
+		padding-left: 20px;
+		padding-right: 20px;
+		display: table-cell;
+		/*vertical-align: middle;*/
+		vertical-align: top;
+		text-align: center;
+		/*border: 5px dotted #000000;*/
+        }
+        .notice{
+            width: 720px;
+        }
+        .notice td{
+            /*width: 755px;*/
+            table-layout: fixed;
+            /*height: 1000px;*/
+            /*background-color: #ff0000;*/
+        }
 }

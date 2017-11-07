@@ -15,55 +15,35 @@ th {border:1px solid #999;padding:5px 10px; width:25%;}
 td {border:1px solid #999;padding:5px 10px;}
 
 td{
-
 	text-align: center;
-
 }
 
 td.remarks{
-
 	text-align: left;			/* 左詰め　*/
-
 }
 
 td.remarksR{
-
 	text-align: right;			/* 右詰め　*/
-
 }
 
 .hiddencell_l{
-
 	border-left-style: hidden;
-
 }
 
 .hiddencell_r{
-
 	border-right-style: hidden;
-
 }
 
 @media screen and (max-width: 768px) {
-
 	.table-sp,
-
 	.table-sp tbody,
-
 	.table-sp thead,
-
 	.table-sp tr,
-
 	.table-sp td,
-
 	.table-sp th {display:block;}
-
 	.table-sp th {width:auto;}
-
 }
 
 .width{
-
 	width:80%;
-
 }

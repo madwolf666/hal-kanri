@@ -29,11 +29,11 @@ try{
     $a_sRet = "<table class='tbl_list'>";
     //ヘッダ部
     $a_sRet .= "<tr class='tr_title'>";
-    $a_sRet .= "<td class='td_title'><font color='#ffffff'>No</font></td>";
-    $a_sRet .= "<td class='td_title'><font color='#ffffff'>日付</font></td>";
+    $a_sRet .= "<td class='td_title' nowrap><font color='#ffffff'>No</font></td>";
+    $a_sRet .= "<td class='td_title' nowrap><font color='#ffffff'>日付</font></td>";
     $a_sRet .= "<td class='td_title'><font color='#ffffff'>お知らせ</font></td>";
-    $a_sRet .= "<td class='td_title'><font color='#ffffff'>登録ユーザ</font></td>";
-    $a_sRet .= "<td class='td_title'><font color='#ffffff'>更新ユーザ</font></td>";
+    $a_sRet .= "<td class='td_title' nowrap><font color='#ffffff'>登録ユーザ</font></td>";
+    $a_sRet .= "<td class='td_title' nowrap><font color='#ffffff'>更新ユーザ</font></td>";
     $a_sRet .= "</tr>";
 
     while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
@@ -44,10 +44,11 @@ try{
         }else{
             $a_sRet .= "<tr class='lineo'>";
         }
-        $a_sRet .= "<td class='td_line'>".$a_result['idx']."</td>";
+        $a_sRet .= "<td class='td_line'>".strval($a_rec)."</td>";
+        //$a_sRet .= "<td class='td_line'>".$a_result['idx']."</td>";
         $a_sRet .= "<td class='td_line'><a href='./index.php?mnu=".$GLOBALS['g_MENU_MAINTENANCE_90303']."&ACT=e&IDX=".$a_result['idx']."'>".com_replace_toDate($a_result['publication'])."</a></td>";
         $a_sRet .= "<td class='td_line'>";
-        $a_sRet .= $a_result['information'];
+        $a_sRet .= com_db_string_format($a_result['information']);  //[2017.11.07]
         $a_sRet .= "</td>";
         $a_sRet .= "<td class='td_line'>";
         $a_sRet .= $a_result['reg_person'];
