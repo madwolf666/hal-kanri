@@ -38,7 +38,7 @@ try{
         
         $a_sRet .= "<dt>".com_replace_toDate($a_result['publication'])."</dt>";
         $a_sRet .= "<dd>";
-        $a_sRet .= $a_result['information'];
+        $a_sRet .= com_db_string_format($a_result['information']);  //[2017.11.07]
         if ($a_diff <= 7){
             $a_sRet .= "<span class='newicon'>NEW</span>";
         }
