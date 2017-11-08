@@ -1472,6 +1472,10 @@ function get_engineer_info()
 function regist_contract_report(h_act)
 {
     //alert($('#contact_date_org').val());
+    /*if ($('#file1') != null){
+        alert($('#file1'));
+    }*/
+    var a_wk = null;    //[2017.11.08]課題No.81
     var a_idx = "";
     var a_sKind = "";
     if (h_act == 'n'){
@@ -1665,14 +1669,26 @@ function regist_contract_report(h_act)
             'cr_id_src': $('#cr_id_src').val(),
         },
         success: function(data, dataType){
-            if (data == 'OK'){
-                alert(a_sKind + "しました。");
-                //$.unblockUI();
-                //document.location.href = "./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90100']; ?>";
-                location.href = "./index.php?mnu=10100";
+            //[2017.11.08]↓課題No.81
+            a_wk = data.split('#');
+            if (a_wk != null){
+                if (a_wk[0] == 'OK'){
+                    //[2017.11.08]↓課題No.81
+                    if (a_wk != null){
+                        a_bRet = file_upload(a_wk[1]);
+                    }
+                    //[2017.11.08]↑課題No.81
+
+                    alert(a_sKind + "しました。");
+                    //$.unblockUI();
+                    location.href = "./index.php?mnu=10100";  //[2017.11.08]課題No.81
+                }else{
+                    $("#my-result").empty().append(a_wk[0]);
+                }
             }else{
-                $("#my-result").empty().append(data);
+                    $("#my-result").empty().append("不明なエラー");
             }
+            //[2017.11.08]↑課題No.81
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(errorThrown.message);
@@ -1681,7 +1697,6 @@ function regist_contract_report(h_act)
             $.unblockUI();
        }
    });
-
 }
 
 //契約レポート一覧
@@ -2093,3 +2108,100 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
     }    
 }
 
+//[2017.11.08]課題No.81
+function file_upload(h_cr_id){
+    var a_fd = new FormData();
+    var a_iCnt = 1;
+    
+    var files = $("#input-file2")[0].files;
+    for (var i = 0; i < files.length; i++){
+        //alert(files[i].name);
+        a_fd.append("file", files[i]);
+        a_fd.append("cr_id", h_cr_id);
+        $.ajax({
+            url: m_parentURL + "regist_evidence.php",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            dataType: "text",
+            data: a_fd,
+            async: true,
+            success: function(data, dataType){
+                //alert(data);
+                if (data == 'OK') {
+                } else if ((data == 'NG')) {
+                }else{
+                    alert(data);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown.message);
+            },
+           complete: function (data) {
+           }
+        });
+    }
+    $("#input-file2").val('');
+    //alert('ファイルのアップロードが完了しました！');
+}
+
+//[2017.11.08]課題No.81
+function edit_file_upload(h_cr_id){
+    if (!confirm("ファイルをアップロードします。よろしいですか？")) return;
+    file_upload(h_cr_id);
+    make_evidence_list('e', h_cr_id);
+}
+
+//[2017.11.08]課題No.81
+function make_evidence_list(h_act, h_cr_id){
+    $.ajax({
+        url: m_parentURL + "make_evidence_list.php",
+        type: 'POST',
+        dataType: "html",
+        async: true,
+        data:{
+            'act': h_act,
+            'cr_id': h_cr_id,
+        },
+        success: function(data, dataType){
+            //alert(data);
+            if (data != '') {
+                $("#my-evidence").empty().append(data);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown.message);
+        },
+       complete: function (data) {
+       }
+    });
+}
+
+//[2017.11.08]課題No.81
+function delete_evidence(h_cr_id, h_ed_id){
+    if (!confirm("エビデンスを削除します。よろしいですか？")) return;
+    $.ajax({
+        url: m_parentURL + "delete_evidence.php",
+        type: 'POST',
+        dataType: "html",
+        async: true,
+        data:{
+            'cr_id': h_cr_id,
+            'ed_id': h_ed_id,
+        },
+        success: function(data, dataType){
+            //alert(data);
+            if (data == 'OK') {
+                make_evidence_list('e', h_cr_id);
+            }else{
+                alert(data);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown.message);
+        },
+       complete: function (data) {
+       }
+    });
+    
+}

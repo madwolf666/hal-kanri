@@ -60,6 +60,7 @@ $g_DB_t_contract_estimate = "t_contract_estimate";
 $g_DB_t_contract_end_report = "t_contract_end_report";
 $g_DB_t_contract_report = "t_contract_report";
 $g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
+$g_DB_t_evidence = "t_evidence";    //[2017.11.08]課題No.81
 $g_DB_t_payroll = "t_payroll";
 $g_DB_t_purchase_order_ledger = "t_purchase_order_ledger";
 
@@ -127,6 +128,16 @@ $g_MENU_MAINTENANCE_90411 = 90411;    //送付状Excelアップロード
 $g_MENU_CONTRACT_SHOW_CHART = 10001;
 $g_MENU_LOGOUT_00000 = 0;           //ログアウト
         
+/*******************************************************************************
+* エビデンス
+*******************************************************************************/
+//windows
+$g_EVIDENCE_PATH = "C:/Users/hal/Documents/NetBeansProjects/hal-kanri/evidence/";
+$g_EVIDENCE_URL = "/hal-kanri/evidence/";
+//linux
+//$g_EVIDENCE_PATH = "/var/www/html/evidence/";
+//$g_EVIDENCE_URL = "/evidence/";
+
 /*******************************************************************************
 * Excel出力
 *******************************************************************************/

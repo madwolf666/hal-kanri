@@ -111,6 +111,7 @@ $a_selected = false;
 <script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./jquery/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="./jquery/jquery.datetimepicker.js"></script>
+<!-- script type="text/javascript" src="./jquery/jquery.MultiFile.js"></script -->
 
 <link rel="stylesheet" href="css/hal-kanri-10102.css">
 
@@ -344,7 +345,7 @@ $a_selected = false;
         </table>
         <br>
         <!-- 日割り時の割合-->
-        <table border="1" rules="all" width=340>
+        <table border="1" rules="all" width=340 height="110">
             <tr>
                 <td colspan="3" class="yellow">日割り時の割合(入場時)</td>
             </tr>
@@ -377,7 +378,7 @@ $a_selected = false;
                 <td style="width: 40px;">人月</td>
             </tr>
         </table>
-        <table border="1" rules="all" width=340>
+        <table border="1" rules="all" width=340 height="110">
             <tr>
                 <td colspan="3" class="yellow">日割り時の割合(退場時)</td>
             </tr>
@@ -411,6 +412,7 @@ $a_selected = false;
             </tr>
         </table>
         <br>
+        <br style="line-height: 34px;">
 <!-- 左3番目のテーブル -->
         <table border="1" rules="all" width=340 height=330>
             <tr>
@@ -1060,36 +1062,55 @@ $a_selected = false;
         </table>
         <br>
         <!-- 日割り時の割合-->
-        <table border="0" rules="" width=340>
+        <table border="1" rules="all" width=340 height="220">
             <tr>
-                <td colspan="3" class="">&nbsp;</td>
+                <td class="yellow" height="22">
+                    エビデンス
+                </td>
+            </tr>
+            <?php
+                if ($a_act == '') {
+            ?>
+            <tr>
+                <td colspan="3" class="">
+                    <div id="my-evidence" name="my-evidence" style="line-height: 24px; text-align: left;"></div>
+                </td>
+            </tr>
+            <?php
+                } else {
+            ?>
+            <tr>
+                <td colspan="3" class="">
+                    <div id="my-evidence" name="my-evidence" style="line-height: 24px; text-align: left;"></div>
+                </td>
             </tr>
             <tr>
-                <td class="" style="width: 120px;">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td style="width: 40px;">&nbsp;</td>
+                <td class="" style="width: auto; height:100px; text-align: left;">
+                    <!-- div style="height: 100px; line-height: 24px;" -->
+                        <input type="file" name="input-file2" id="input-file2" multiple>
+                        <!-- input type="file" name="input-file" id="input-file" class="multi max-3" -->
+                    <!-- /div -->
+             <?php
+                        if ($a_act == 'e') {
+            ?>
+                        <input type="button" value="ｱｯﾌﾟﾛｰﾄﾞ" onClick="edit_file_upload(<?php echo $cr_id; ?>);" style="padding: 0px 4px 0px 4px;">
+            <?php
+                        }
+            ?>
+                   <!--
+                    <div id="image_upload_section">
+                        <div id="drop" style="width:autopx; height:80px; padding:0px; border:3px solid #ff0000" ondragover="onDragOver(event)" ondrop="onDrop(event)">
+                            ファイルをドラッグアンドドロップして下さい。
+                        </div>
+                    </div>
+                    -->
+                </td>
             </tr>
-            <tr>
-                <td class="" style="width: 120px;">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td style="width: 40px;">&nbsp;</td>
-            </tr>
+            <?php
+                }
+            ?>
         </table>
-        <table border="0" rules="" width=340 height="95">
-            <tr>
-                <td colspan="3" class="">&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="" style="width: 120px;">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td style="width: 40px;">&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="" style="width: 120px;">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td style="width: 40px;">&nbsp;</td>
-            </tr>
-        </table>
+        <br>
 <!-- 右3番目のテーブル -->
         <table border="1" rules="all" width=340 height=330>
             <tr>
@@ -1998,3 +2019,6 @@ require_once('./footer.php');
 ?>
 
 <script src="./js/hal-kanri-10100.js"></script>
+<script type="text/javascript">
+    make_evidence_list('<?php echo $a_act; ?>', <?php echo $cr_id; ?>);
+</script>

@@ -12,6 +12,7 @@ $a_sRet = '';
 
 //POST情報取得
 $a_act = $_POST['act'];
+//$a_cr_id_result = 0;    //[2017.11.08]課題No.81
 /*
 $a_sRet = "OK";
 echo $a_sRet;
@@ -825,7 +826,9 @@ try{
             com_pdo_bindValue($a_stmt, ':cnf_id', $_SESSION['hal_idx']);
             com_pdo_bindValue($a_stmt, ':cnf_date', date("Y/m/d"));
         }
-        com_pdo_bindValue($a_stmt, ':cr_id', $_POST['cr_id']);
+        //[2017.11.08]課題No.81
+        $a_cr_id = $_POST['cr_id'];
+        com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
     } else {
         if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
             //管理者以外もしくは、ステータスが2未満の場合
@@ -866,6 +869,7 @@ try{
         
     #$a_sRet = 'OK'.'-->.'.$_SESSION['hal_department_cd'].'-->'.$_POST['status_cd'];
     $a_sRet = 'OK';
+    $a_sRet .= "#".$a_cr_id;    //[2017.11.08]課題No.81
     //$a_sRet .= "--->".$inp_tankin_b1;
     
 } catch (PDOException $e){
