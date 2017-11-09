@@ -10,7 +10,10 @@ require_once('./global.php');
 
 //POSTデータを取得
 $a_act = $_POST['act'];
-$a_cr_id = $_POST['cr_id'];
+$a_cr_id = 0;
+if (isset($_POST['cr_id']) == true){
+    $a_cr_id = $_POST['cr_id'];
+}
 
 try{
     //DBからユーザ情報取得
@@ -38,7 +41,9 @@ try{
             $a_sRet .= "<input type='button' value='×' onclick='delete_evidence(".$a_cr_id.",".$a_result['ed_id'].");' style='padding: 0px 4px 0px 4px; height:20px; background-color: #0000ff;'>";
             //$a_sRet .= "<td class='td_line'><input type='button' value='×' style='padding: 0px 4px 0px 4px; height:20px;'></td>";
         }
-        $a_sRet .= "<a href='".$GLOBALS['g_EVIDENCE_URL'].$a_cr_id."/".$a_result['file_name_sys']."' target='_blank'>".$a_result['file_name_src']."</a><br>";
+        $a_sRet .= "<a href='#' onclick='open_file(\"".$GLOBALS['g_EVIDENCE_URL'].$a_cr_id."/".$a_result['file_name_sys']."\");'>".$a_result['file_name_src']."</a><br>";
+        //$a_sRet .= "<a href='".$GLOBALS['g_EVIDENCE_URL'].$a_cr_id."/".$a_result['file_name_sys']."' target='_blank'>".$a_result['file_name_src']."</a><br>";
+
         //$a_sRet .= "<td class='td_line'>".$a_result['file_name_src']."</td>";
         //$a_sRet .= "</tr>";
 

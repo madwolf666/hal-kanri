@@ -589,6 +589,7 @@ try{
     //$a_stmt->bindParam(':claim_middle_unit_price', $a_val, PDO::PARAM_INT);
     com_pdo_bindValue($a_stmt, ':claim_middle_unit_price', $a_val);
     
+    /*[2017.11.09]課題No.81
     if ($_POST['txt_contract_lower_limit_b2'] == ''){
         $a_stmt->bindParam(':claim_middle_lower_limit', $_POST['opt_contract_lower_limit_b2'], PDO::PARAM_STR);
     }else{
@@ -599,6 +600,9 @@ try{
     }else{
         $a_stmt->bindParam(':claim_middle_upper_limit', $_POST['txt_contract_upper_limit_b2'], PDO::PARAM_STR);
     }
+    */
+    $a_stmt->bindParam(':claim_middle_lower_limit', $_POST['txt_contract_lower_limit_b2'], PDO::PARAM_STR); //[2017.11.09]課題No.81
+    $a_stmt->bindParam(':claim_middle_upper_limit', $_POST['txt_contract_upper_limit_b2'], PDO::PARAM_STR); //[2017.11.09]課題No.81
     
     $a_val = str_replace("￥", "", str_replace(",","",$_POST['txt_contract_kojyo_unit_b2']));
     //$a_stmt->bindParam(':claim_middle_deduction_unit_price', $a_val, PDO::PARAM_INT);
@@ -618,6 +622,7 @@ try{
     //$a_stmt->bindParam(':claim_leaving_unit_price', $a_val, PDO::PARAM_INT);
     com_pdo_bindValue($a_stmt, ':claim_leaving_unit_price', $a_val);
     
+    /*[2017.11.09]課題No.81
     if ($_POST['txt_contract_lower_limit_b3'] == ''){
         $a_stmt->bindParam(':claim_leaving_lower_limit', $_POST['opt_contract_lower_limit_b3'], PDO::PARAM_STR);
     }else{
@@ -628,6 +633,9 @@ try{
     }else{
         $a_stmt->bindParam(':claim_leaving_upper_limit', $_POST['txt_contract_upper_limit_b3'], PDO::PARAM_STR);
     }
+    */
+    $a_stmt->bindParam(':claim_leaving_lower_limit', $_POST['txt_contract_lower_limit_b3'], PDO::PARAM_STR);    //[2017.11.09]課題No.81
+    $a_stmt->bindParam(':claim_leaving_upper_limit', $_POST['txt_contract_upper_limit_b3'], PDO::PARAM_STR);    //[2017.11.09]課題No.81
     
     $a_val = str_replace("￥", "", str_replace(",","",$_POST['txt_contract_kojyo_unit_b3']));
     //$a_stmt->bindParam(':claim_leaving_deduction_unit_price', $a_val, PDO::PARAM_INT);

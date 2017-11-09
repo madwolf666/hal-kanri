@@ -18,6 +18,8 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    $a_conn->beginTransaction();  //トランザクション開始
+
     if ($_FILES["file"]["tmp_name"]){
         //$a_cr_id = $_FILES['cr_id'];
         $a_name_src = $_FILES['file']['name'];
@@ -59,7 +61,11 @@ try{
     
         $a_stmt->execute();
     }
+    
+    $a_conn->commit();
+
 } catch (PDOException $e){
+    $a_conn->rollBack();
     $a_sRet = 'Error:'.$e->getMessage();
 }
 $a_conn = null;

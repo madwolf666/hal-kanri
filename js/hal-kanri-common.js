@@ -397,3 +397,27 @@ function make_input_text2(h_cr_id, h_sub_id, h_field, h_id, h_kind)
 
     g_input_click = true;
 }
+
+//[2017.11.09]課題No.81
+function open_file(h_file){
+    //alert(h_file);
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    //alert(w + "," + h);
+    if (w <= 0){
+        w = document.documentElement.clientWidth;
+    }
+    if (h <= 0){
+        h = document.documentElement.clientHeight;
+    }
+    //alert(w + "," + h);
+    
+    var a_left = 0;
+    var a_top = 0;
+    var a_w = parseInt(w*0.8);
+    var a_h = parseInt(h*0.8);
+    window.open(
+        h_file,
+        "myWindow",
+        "left=" + a_left + ",top=" + a_top + ",width=" + a_w + ",height=" + a_h + ",scrollbars=no,resizable=no");
+}

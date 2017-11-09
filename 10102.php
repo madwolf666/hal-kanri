@@ -449,7 +449,6 @@ $a_selected = false;
                         }else{
                             echo com_make_tag_option($a_act, $contract_lower_limit_b1, "opt_contract_lower_limit_b1", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 110px;", $a_selected);
                             echo '&nbsp;&nbsp;';
-                            //echo '$a_selected:'.$a_selected;
                             if ($a_selected == true){
                                 $contract_lower_limit_b1 = "";
                             }
@@ -581,12 +580,14 @@ $a_selected = false;
                         if ($a_act == ''){
                             echo $contract_lower_limit_b2;
                         }else{
+                            /*[2017.11.09]課題No.81
                             echo com_make_tag_option($a_act, $contract_lower_limit_b2, "opt_contract_lower_limit_b2", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 110px;", $a_selected);
                             echo '&nbsp;&nbsp;';
                             if ($a_selected == true){
                                 $contract_lower_limit_b2 = "";
                             }
-                            echo com_make_tag_input($a_act, $contract_lower_limit_b2, "txt_contract_lower_limit_b2", "width: 110px; text-align: center;");
+                            */
+                            echo com_make_tag_input($a_act, $contract_lower_limit_b2, "txt_contract_lower_limit_b2", "width: 230px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -598,12 +599,14 @@ $a_selected = false;
                         if ($a_act == ''){
                             echo $contract_upper_limit_b2;
                         }else{
+                            /*[2017.11.09]課題No.81
                             echo com_make_tag_option($a_act, $contract_upper_limit_b2, "opt_contract_upper_limit_b2", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 110px;", $a_selected);
                             echo '&nbsp;&nbsp;';
                             if ($a_selected == true){
                                 $contract_upper_limit_b2 = "";
                             }
-                            echo com_make_tag_input($a_act, $contract_upper_limit_b2, "txt_contract_upper_limit_b2", "width: 110px; text-align: center;");
+                            */
+                            echo com_make_tag_input($a_act, $contract_upper_limit_b2, "txt_contract_upper_limit_b2", "width: 230px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -694,12 +697,14 @@ $a_selected = false;
                         if ($a_act == ''){
                             echo $contract_lower_limit_b3;
                         }else{
+                            /*[2017.11.09]課題No.81
                             echo com_make_tag_option($a_act, $contract_lower_limit_b3, "opt_contract_lower_limit_b3", $GLOBALS['g_DB_m_contract_lower_limit'], "width: 110px;", $a_selected);
                             echo '&nbsp;&nbsp;';
                             if ($a_selected == true){
                                 $contract_lower_limit_b3 = "";
                             }
-                            echo com_make_tag_input($a_act, $contract_lower_limit_b3, "txt_contract_lower_limit_b3", "width: 110px; text-align: center;");
+                            */
+                            echo com_make_tag_input($a_act, $contract_lower_limit_b3, "txt_contract_lower_limit_b3", "width: 230px; text-align: center;");
                         }
                     ?>
                 </td>
@@ -711,12 +716,14 @@ $a_selected = false;
                         if ($a_act == ''){
                             echo $contract_upper_limit_b3;
                         }else{
+                            /*[2017.11.09]課題No.81
                             echo com_make_tag_option($a_act, $contract_upper_limit_b3, "opt_contract_upper_limit_b3", $GLOBALS['g_DB_m_contract_upper_limit'], "width: 110px;", $a_selected);
                             echo '&nbsp;&nbsp;';
                             if ($a_selected == true){
                                 $contract_upper_limit_b3 = "";
                             }
-                            echo com_make_tag_input($a_act, $contract_upper_limit_b3, "txt_contract_upper_limit_b3", "width: 110px; text-align: center;");
+                            */
+                            echo com_make_tag_input($a_act, $contract_upper_limit_b3, "txt_contract_upper_limit_b3", "width: 230px; text-align: center;");
                         }
                     ?>
                 </td>

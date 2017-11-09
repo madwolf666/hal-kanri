@@ -19,6 +19,8 @@ try{
     $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    $a_conn->beginTransaction();  //トランザクション開始
+
     $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_evidence']." WHERE (cr_id=:cr_id) AND (ed_id=:ed_id);";
     $a_stmt = $a_conn->prepare($a_sql);
     com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
@@ -40,10 +42,13 @@ try{
 
     //ファイルを削除
     unlink($GLOBALS['g_EVIDENCE_PATH'].$a_cr_id."/".$a_name_sys);
+
+    $a_conn->commit();
     
     $a_sRet = 'OK';
     
 } catch (PDOException $e){
+    $a_conn->rollBack();
     $a_sRet = 'Error:'.$e->getMessage();
     //print('Error:'.$e->getMessage());
     //die();

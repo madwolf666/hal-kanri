@@ -22,6 +22,27 @@ try{
 
     $a_conn->beginTransaction();  //トランザクション開始
 
+    //[2017.11.09]↓課題No.81
+    $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_evidence']." WHERE (cr_id=:cr_id);";
+    $a_stmt = $a_conn->prepare($a_sql);
+    com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+    $a_stmt->execute();
+
+    while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+        $a_name_sys = $a_result['file_name_sys'];
+        //ファイルを削除
+        unlink($GLOBALS['g_EVIDENCE_PATH'].$a_cr_id."/".$a_name_sys);
+    }
+    //ディレクトリを削除
+    rmdir($GLOBALS['g_EVIDENCE_PATH'].$a_cr_id);
+
+    $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_evidence']." WHERE (cr_id=:cr_id);";
+
+    $a_stmt = $a_conn->prepare($a_sql);
+    com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+    $a_stmt->execute();
+    //[2017.11.09]↑課題No.81
+    
     $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_contract_estimate']." WHERE (cr_id=:cr_id);";
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);

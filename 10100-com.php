@@ -295,7 +295,7 @@ function set_10100_fromDB($a_result)
 
     //通常期間など
     $GLOBALS['opt_contract_calc_b1'] = $a_result['claim_normal_calculation'];
-    $GLOBALS['inp_tankin_b1'] = $a_result['claim_normal__unit_price'];
+    $GLOBALS['inp_tankin_b1'] = com_db_number_format($a_result['claim_normal__unit_price']);    //[2017.11.09]課題No,82
     $GLOBALS['contract_lower_limit_b1'] = $a_result['claim_normal_lower_limit'];
     $GLOBALS['contract_upper_limit_b1'] = $a_result['claim_normal_upper_limit'];
     $GLOBALS['opt_contract_lower_limit_b1'] = $a_result['claim_normal_lower_limit'];
