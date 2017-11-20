@@ -516,7 +516,9 @@ try{
             ,remarks_pay=:remarks_pay
             ,status_cd=:status_cd
             ";
-        if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        #[2017.11.20]bug-fixed.
+        #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             $a_sql .= "
                 ,upd_id=:upd_id
@@ -826,7 +828,9 @@ try{
     $a_stmt->bindParam(':status_cd', $_POST['status_cd'], PDO::PARAM_STR);
         
     if ($a_act == 'e'){
-        if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        #[2017.11.20]bug-fixed.
+        #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
             com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));

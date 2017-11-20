@@ -30,6 +30,16 @@ try{
             mkdir($a_file, 0755);
         }
         if (move_uploaded_file($_FILES['file']['tmp_name'], $a_file."/".$a_name_sys)) {
+            #[2017.11.20]要望↓
+            if (mb_strtolower($a_file_type) == 'msge'){
+                $a_oldfile = $a_file."/".$a_name_sys;
+                $a_read = file_get_contents($a_oldfile);
+                $a_write = mb_convert_encoding($a_read, "UTF-8", "auto");
+                $a_name_sys .= "e";
+                file_put_contents($a_file."/".$a_name_sys, $a_write);
+                unlink($a_oldfile);
+            }
+            #[2017.11.20]要望↑
             chmod($a_file."/".$a_name_sys, 0644);
             //var_dump($a_file."/".$a_name_sys);
         }
