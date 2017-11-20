@@ -25,17 +25,19 @@ try{
         $a_name_src = $_FILES['file']['name'];
         list($a_file_name, $a_file_type) = explode(".", $_FILES['file']['name']);
         $a_name_sys = date("YmdHis").".".$a_file_type;
+        $a_name_sys_html = date("YmdHis").".html";
         $a_file = $GLOBALS['g_EVIDENCE_PATH'].$a_cr_id;
         if (!file_exists($a_file)){
             mkdir($a_file, 0755);
         }
         if (move_uploaded_file($_FILES['file']['tmp_name'], $a_file."/".$a_name_sys)) {
             #[2017.11.20]要望↓
-            if (mb_strtolower($a_file_type) == 'msge'){
+            if (mb_strtolower($a_file_type) == 'msg'){
                 $a_oldfile = $a_file."/".$a_name_sys;
+                $a_name_sys = $a_name_sys_html;
                 $a_read = file_get_contents($a_oldfile);
                 $a_write = mb_convert_encoding($a_read, "UTF-8", "auto");
-                $a_name_sys .= "e";
+                $a_write = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body><pre>'.$a_write.'</pre></body></html>';
                 file_put_contents($a_file."/".$a_name_sys, $a_write);
                 unlink($a_oldfile);
             }

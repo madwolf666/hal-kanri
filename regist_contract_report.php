@@ -193,7 +193,9 @@ try{
             ,status_cd
             ,cr_id_src
             ";
-        if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        #[2017.11.21]bug-fixed.
+        #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             $a_sql .= "
                 ,reg_id
@@ -354,7 +356,9 @@ try{
             ,:status_cd
             ,:cr_id_src
             ";
-        if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        #[2017.11.21]bug-fixed.
+        #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             $a_sql .= "
                 ,:reg_id
@@ -842,7 +846,9 @@ try{
         $a_cr_id = $_POST['cr_id'];
         com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
     } else {
-        if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        #[2017.11.21]bug-fixed.
+        #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
+        if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
             com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
