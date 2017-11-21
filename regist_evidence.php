@@ -31,8 +31,8 @@ try{
             mkdir($a_file, 0755);
         }
         if (move_uploaded_file($_FILES['file']['tmp_name'], $a_file."/".$a_name_sys)) {
-            #[2017.11.20]要望↓
-            if (mb_strtolower($a_file_type) == 'msg'){
+            #[2017.11.21]要望↓
+            if ((mb_strtolower($a_file_type) == 'txt') || (mb_strtolower($a_file_type) == 'msg')){
                 $a_oldfile = $a_file."/".$a_name_sys;
                 $a_name_sys = $a_name_sys_html;
                 $a_read = file_get_contents($a_oldfile);
