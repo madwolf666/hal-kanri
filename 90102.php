@@ -19,6 +19,7 @@ $base_cd = "";
 $department_cd = "";
 $person = "";
 $pass = "";
+$email_addr = "";   #[2017.11.21]要望
 
 if ($a_act == 'e'){
     try{
@@ -38,6 +39,7 @@ if ($a_act == 'e'){
         $department_cd = $a_result['department_cd'];
         $person = $a_result['person'];
         $pass = $a_result['pass'];
+        $email_addr = $a_result['email_addr'];   #[2017.11.21]要望
 
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
@@ -87,6 +89,14 @@ $a_selected = false;
             <td class='td_line'>
                 <?php
                 echo com_make_tag_input($a_act, $pass, "pass", "width: 260px; text-align: left;");
+                ?>
+            </td>
+        </tr>
+        <tr>
+            <td class='td_titlee'><font color='#ffffff'>メールアドレス</font></td>
+            <td class='td_line'>
+                <?php
+                echo com_make_tag_input($a_act, $email_addr, "email_addr", "width: 260px; text-align: left;");
                 ?>
             </td>
         </tr>

@@ -18,13 +18,15 @@ try{
     $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if ($_POST['idx'] == -1){
-        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_m_user']." (base_cd, department_cd, person, pass) VALUES(:base_cd, :department_cd, :person, :pass);";
+        #[2017.11.21]要望
+        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_m_user']." (base_cd, department_cd, person, pass, email_addr) VALUES(:base_cd, :department_cd, :person, :pass, :email_addr);";
     }else{
         $a_sql = "UPDATE ".$GLOBALS['g_DB_m_user']." SET";
         $a_sql .= " base_cd=:base_cd";
         $a_sql .= ",department_cd=:department_cd";
         $a_sql .= ",person=:person";
         $a_sql .= ",pass=:pass";
+        $a_sql .= ",email_addr=:email_addr";    #[2017.11.21]要望
         $a_sql .= " WHERE (idx=:idx);";
     }
     $a_stmt = $a_conn->prepare($a_sql);
@@ -32,6 +34,8 @@ try{
     $a_stmt->bindParam(':department_cd', $_POST['department_cd'], PDO::PARAM_INT);
     $a_stmt->bindParam(':person', $_POST['person'], PDO::PARAM_STR);
     $a_stmt->bindParam(':pass', $_POST['pass'], PDO::PARAM_STR);
+    #[2017.11.21]要望
+    $a_stmt->bindParam(':email_addr', $_POST['email_addr'], PDO::PARAM_STR);
     if ($_POST['idx'] != -1){
         $a_stmt->bindParam(':idx', $_POST['idx'], PDO::PARAM_INT);
     }

@@ -66,6 +66,7 @@ function check_m_user_input(h_idx){
             'department_cd': $('[name=department_cd]').val(),
             'person':  $('#person').val(),
             'pass':  $('#pass').val(),
+            'email_addr':  $('#email_addr').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

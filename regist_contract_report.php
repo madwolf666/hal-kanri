@@ -195,18 +195,18 @@ try{
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
-        if ($_SESSION['hal_department_cd'] != 3){
+        #if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             $a_sql .= "
                 ,reg_id
                 ,reg_date
                 ";
-        }else{
-            $a_sql .= "
-                ,cnf_id
-                ,cnf_date
-                ";
-        }
+        #}else{
+        #    $a_sql .= "
+        #        ,cnf_id
+        #        ,cnf_date
+        #        ";
+        #}
         $a_sql .= ") VALUES(";
         $a_sql .= "
             :customer_name
@@ -358,18 +358,18 @@ try{
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
-        if ($_SESSION['hal_department_cd'] != 3){
+        #if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             $a_sql .= "
                 ,:reg_id
                 ,:reg_date
                 ";
-        }else{
-            $a_sql .= "
-                ,:cnf_id
-                ,:cnf_date
-                ";
-        }
+        #}else{
+        #    $a_sql .= "
+        #        ,:cnf_id
+        #        ,:cnf_date
+        #        ";
+        #}
         $a_sql .= ");";
     }else{
         $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_report']." SET ";
@@ -848,14 +848,14 @@ try{
     } else {
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
-        if ($_SESSION['hal_department_cd'] != 3){
+        #if ($_SESSION['hal_department_cd'] != 3){
             //管理者以外もしくは、ステータスが2未満の場合
             com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
             com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
-        }else{
-            com_pdo_bindValue($a_stmt, ':cnf_id', $_SESSION['hal_idx']);
-            com_pdo_bindValue($a_stmt, ':cnf_date', date("Y/m/d"));
-        }
+        #}else{
+        #    com_pdo_bindValue($a_stmt, ':cnf_id', $_SESSION['hal_idx']);
+        #    com_pdo_bindValue($a_stmt, ':cnf_date', date("Y/m/d"));
+        #}
         com_pdo_bindValue($a_stmt, ':cr_id_src', $_POST['cr_id_src']);  #[2017.07.20]課題解決表No.67
     }
     
