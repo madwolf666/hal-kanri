@@ -33,6 +33,8 @@ try{
     $a_sRet .= "<td class='td_title'><font color='#ffffff'>拠点</font></td>";
     $a_sRet .= "<td class='td_title'><font color='#ffffff'>部署</font></td>";
     $a_sRet .= "<td class='td_title'><font color='#ffffff'>名前</font></td>";
+    #[2017.11.21]要望
+    $a_sRet .= "<td class='td_title'><font color='#ffffff'>メールアドレス</font></td>";
     $a_sRet .= "</tr>";
 
     while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
@@ -47,6 +49,8 @@ try{
         $a_sRet .= "<td class='td_line'>".$a_result['base_name']."</td>";
         $a_sRet .= "<td class='td_line'>".$a_result['department_name']."</td>";
         $a_sRet .= "<td class='td_line'><a href='./index.php?mnu=".$GLOBALS['g_MENU_MAINTENANCE_90103']."&ACT=e&IDX=".$a_result['idx']."'>".$a_result['person']."</a></td>";
+        #[2017.11.21]要望
+        $a_sRet .= "<td class='td_line'>".$a_result['email_addr']."</td>";
         
         $a_sRet .= "</tr>";
 
