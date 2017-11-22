@@ -184,6 +184,12 @@ $(function () {
     $('#opt_contract_yesno_p3').change(function(){check_value_changed_10102(1, 'payment_purchase_order', $('[name=opt_contract_yesno_p3] option:selected').text(), '#opt_contract_yesno_p3');});
     $('#opt_contract_yesno_p4').change(function(){check_value_changed_10102(1, 'payment_confirmation_order', $('[name=opt_contract_yesno_p4] option:selected').text(), '#opt_contract_yesno_p4');});
 
+    //[2017.11.22]bug-fixed.
+    $('#txt_engineer_name').keyup(function(){set_jigyousya_info('txt_engineer_name','txt_jigyosya_name');});
+    $('#txt_engineer_name').change(function(){set_jigyousya_info('txt_engineer_name','txt_jigyosya_name');});
+    $('#txt_engineer_kana').keyup(function(){set_jigyousya_info('txt_engineer_kana','txt_jigyosya_kana');});
+    $('#txt_engineer_kana').change(function(){set_jigyousya_info('txt_engineer_kana','txt_jigyosya_kana');});
+
     //--------------------------------------------------------------------------
     //見積書
     //--------------------------------------------------------------------------
@@ -1519,6 +1525,8 @@ function get_engineer_info()
                 $('#txt_engineer_name').val(a_val[0]);
                 $('#txt_engineer_kana').val(a_val[1]);
                 
+                //[2017.11.22]bug-fixed.
+                var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
                 if (a_contract_form == '') {
                 } else if ((a_contract_form == '正') || (a_contract_form == '契')) {
                     //事業所名・事業所名を入力不可とし、エンジニア名・フリガナを設定
@@ -2304,4 +2312,17 @@ function delete_evidence(h_cr_id, h_ed_id){
        }
     });
     
+}
+
+//事業者名[2017.11.22]bug-fixed.
+function set_jigyousya_info(h_src, h_dst)
+{
+    var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
+    if (a_contract_form == '') {
+         //$('#' + h_dst).val('');
+    } else if ((a_contract_form == '正') || (a_contract_form == '契')) {
+         $('#' + h_dst).val($('#' + h_src).val());
+    } else {
+        //事業所名・事業所名を入力可とし、空を設定
+    }
 }
