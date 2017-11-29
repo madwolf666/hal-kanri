@@ -13,6 +13,7 @@ require_once($GLOBALS['g_EXCEL_LIB_PATH']."PHPExcel/IOFactory.php");
 require_once('./10100-com.php');
 
 $a_sRet = "<font color='#0000ff'>アップロードが行われました！</font>";
+$a_sTrace = "";
 //$a_sRet = $_FILES["file"]["tmp_name"];
 
 //$dir = $_POST["dir"];
@@ -20,7 +21,7 @@ $a_sRet = "<font color='#0000ff'>アップロードが行われました！</fon
 $cr_id_array = [];
 
 try {
-    /*
+    /**/
     if ($_FILES["file"]["tmp_name"]) {
         list($file_name,$file_type) = explode(".",$_FILES['file']['name']);
         //ファイル名を日付と時刻にしている。
@@ -38,9 +39,9 @@ try {
             chmod($target_file, 0644);
             //var_dump($dir."/".$name);
         }
-    */
-        $target_file = $GLOBALS['g_EXCEL_TMP_PATH']."time-table.xlsx";
-        echo $target_file.'<br>';
+    /**/
+        //$target_file = $GLOBALS['g_EXCEL_TMP_PATH']."time-table.xlsx";
+        $a_sTrace = $target_file.'<br>';
         try{
             //DBからユーザ情報取得
             $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
@@ -50,29 +51,29 @@ try {
             $obj_reader = PHPExcel_IOFactory::createReader('Excel2007');
             $obj_book   = $obj_reader->load($target_file);
             if ($obj_book == NULL){
-                echo 'book is null<br>';
+                $a_sTrace = 'book is null<br>';
             }
             $obj_sheet = $obj_book->getSheetByName("勤務表");
             if ($obj_sheet == NULL){
-                echo 'sheet is null<br>';
+                $a_sTrace = 'sheet is null<br>';
             }
             //PHPExcelでは、rowは1始まり、colは0始まりのようである。
             //エンジニアNo.を取得
             $a_engineer_no = $obj_sheet->getCellByColumnAndRow(9, 2)->getCalculatedValue();
-            echo 'エンジニアNo.：'.$a_engineer_no.'<br>';
+            $a_sTrace = 'エンジニアNo.：'.$a_engineer_no.'<br>';
             //報告日範囲を取得
             $a_time_table_year = $obj_sheet->getCellByColumnAndRow(0, 6)->getCalculatedValue();
             $a_time_table_month = $obj_sheet->getCellByColumnAndRow(2, 6)->getCalculatedValue();
-            echo '年：'.$a_time_table_year.'<br>';
-            echo '月：'.$a_time_table_month.'<br>';
+            $a_sTrace = '年：'.$a_time_table_year.'<br>';
+            $a_sTrace = '月：'.$a_time_table_month.'<br>';
             $a_row = 9;
             
             //報告日が空になるまで繰り返す。
             $a_time_table_day_last = '';
             $a_time_table_day = strval($obj_sheet->getCellByColumnAndRow(0, $a_row)->getCalculatedValue());
             while ($a_time_table_day != ''){
-                echo '----------------------------------------<br>';
-                echo '日付：'.$a_time_table_day.'<br>';
+                $a_sTrace = '----------------------------------------<br>';
+                $a_sTrace = '日付：'.$a_time_table_day.'<br>';
                 $a_time_table_day_last = $a_time_table_day;
                 //合致する契約レポートから情報を抽出する
                 $a_bRet =
@@ -264,8 +265,8 @@ try {
                 $a_time_table_day = $obj_sheet->getCellByColumnAndRow(0, $a_row)->getCalculatedValue();
             }
             
-            print_r($GLOBALS['cr_id_array']);
-            echo '<br>';
+            //print_r($GLOBALS['cr_id_array']);
+            $a_sTrace = '<br>';
 
             //給与の計算
             foreach ($GLOBALS['cr_id_array'] as $a_cr_id){
@@ -287,10 +288,10 @@ try {
             //$a_sRet .= $a_sql;
         }
         $a_conn = null;
-    /*    
+    /**/    
         unlink($target_file);   //ファイル削除
     }
-     */
+    /**/
 } catch (Exception $e) {
     if ($a_conn) {
         $a_conn->rollBack();  //ロールバック
@@ -311,9 +312,10 @@ function _getContractReport(
     $a_bRet = false;
     try{
         $a_day = $h_time_table_year."/".$h_time_table_month."/".$h_time_table_day;
-
+        //$GLOBALS['a_sTrace'] = '日付：'.$a_day.'<br>';
         $a_sql = set_10100_selectDB();
         $a_sql .= " WHERE (claim_agreement_start<=:claim_agreement_start) AND (claim_agreement_end>=:claim_agreement_end) AND (engineer_number=:engineer_number);";
+        //$GLOBALS['a_sTrace'] = $a_sql.'<br>';
         $a_stmt = $h_conn->prepare($a_sql);
         com_pdo_bindValue($a_stmt, ':claim_agreement_start', $a_day);
         com_pdo_bindValue($a_stmt, ':claim_agreement_end', $a_day);
@@ -321,7 +323,7 @@ function _getContractReport(
         $a_stmt->execute();
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
-            echo '契約レポート検出！<br>';
+            $GLOBALS['a_sTrace'] = '契約レポート検出！<br>';
             $a_bRet = true;
             set_10100_fromDB($a_result);
         }
@@ -374,139 +376,142 @@ function _adjustmentWorkTime(
         &$h_deduction_time_actualy_pay2,
         &$h_over_time_actualy_pay2
         ){
-    //--------------------------------------------------------------------------
-    //時間刻み「日次」の値で作業開始・作業終了を調整する。
-    //--------------------------------------------------------------------------
-    $h_time_start_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(4, $h_row)->getCalculatedValue());
-    $h_time_start_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(5, $h_row)->getCalculatedValue());
-    $h_time_end_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(6, $h_row)->getCalculatedValue());
-    $h_time_end_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(7, $h_row)->getCalculatedValue());
-    
-    //請求サイド
-    echo '### 請求サイド ###<br>';
-    _adjustmentWorkTimeSub1(
-            $h_obj_sheet,
-            $h_row,
-            $GLOBALS['opt_m_contract_time_inc_bd'],
-            $h_time_start_hour_src,
-            $h_time_start_minute_src,
-            $h_time_end_hour_src,
-            $h_time_end_minute_src,
-            $h_time_start_minute_dst_bill,
-            $h_time_end_minute_dst_bill
-            );
-    //支払いサイド①
-    echo '### 支払いサイド① ###<br>';
-    _adjustmentWorkTimeSub1(
-            $h_obj_sheet,
-            $h_row,
-            $GLOBALS['opt_m_contract_time_inc_pd'],
-            $h_time_start_hour_src,
-            $h_time_start_minute_src,
-            $h_time_end_hour_src,
-            $h_time_end_minute_src,
-            $h_time_start_minute_dst_pay1,
-            $h_time_end_minute_dst_pay1
-            );
-    //支払いサイド②
-    echo '### 支払いサイド② ###<br>';
-    _adjustmentWorkTimeSub1(
-            $h_obj_sheet,
-            $h_row,
-            $GLOBALS['opt_m_contract_time_inc_pd'],
-            $h_time_start_hour_src,
-            $h_time_start_minute_src,
-            $h_time_end_hour_src,
-            $h_time_end_minute_src,
-            $h_time_start_minute_dst_pay2,
-            $h_time_end_minute_dst_pay2
-            );
+    try{
+        //--------------------------------------------------------------------------
+        //時間刻み「日次」の値で作業開始・作業終了を調整する。
+        //--------------------------------------------------------------------------
+        $h_time_start_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(4, $h_row)->getCalculatedValue());
+        $h_time_start_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(5, $h_row)->getCalculatedValue());
+        $h_time_end_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(6, $h_row)->getCalculatedValue());
+        $h_time_end_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(7, $h_row)->getCalculatedValue());
 
-    //----------------------------------------------------------
-    //契約の作業時間「開始」「終了」と休憩時間「開始」「終了」と①をコンペアし、再計算する。
-    //（残業時間・控除時間も算出する）
-    //----------------------------------------------------------
-    //契約の勤務時間を算出
-    $h_work_time_contract =
-        com_time_diff(
-            strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_kaishi1'].":00"),
-            strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_syuryo1'].":00"),
-            "m"
-            );
-    echo '契約の勤務時間：'.strval($h_work_time_contract).'<br>';
+        //請求サイド
+        $GLOBALS['a_sTrace'] = '### 請求サイド ###<br>';
+        _adjustmentWorkTimeSub1(
+                $h_obj_sheet,
+                $h_row,
+                $GLOBALS['opt_m_contract_time_inc_bd'],
+                $h_time_start_hour_src,
+                $h_time_start_minute_src,
+                $h_time_end_hour_src,
+                $h_time_end_minute_src,
+                $h_time_start_minute_dst_bill,
+                $h_time_end_minute_dst_bill
+                );
+        //支払いサイド①
+        $GLOBALS['a_sTrace'] = '### 支払いサイド① ###<br>';
+        _adjustmentWorkTimeSub1(
+                $h_obj_sheet,
+                $h_row,
+                $GLOBALS['opt_m_contract_time_inc_pd'],
+                $h_time_start_hour_src,
+                $h_time_start_minute_src,
+                $h_time_end_hour_src,
+                $h_time_end_minute_src,
+                $h_time_start_minute_dst_pay1,
+                $h_time_end_minute_dst_pay1
+                );
+        //支払いサイド②
+        $GLOBALS['a_sTrace'] = '### 支払いサイド② ###<br>';
+        _adjustmentWorkTimeSub1(
+                $h_obj_sheet,
+                $h_row,
+                $GLOBALS['opt_m_contract_time_inc_pd'],
+                $h_time_start_hour_src,
+                $h_time_start_minute_src,
+                $h_time_end_hour_src,
+                $h_time_end_minute_src,
+                $h_time_start_minute_dst_pay2,
+                $h_time_end_minute_dst_pay2
+                );
 
-    //契約の休憩時間を算出
-    $h_break_time_contract =
-        com_time_diff(
-            strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_kaishi2'].":00"),
-            strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_syuryo2'].":00"),
-            "m"
-            );
-    echo '契約の休憩時間：'.strval($h_break_time_contract).'<br>';
-    $h_work_time_contract -= $h_break_time_contract;
-    echo '契約の作業時間：'.strval($h_work_time_contract).'<br>';
+        //----------------------------------------------------------
+        //契約の作業時間「開始」「終了」と休憩時間「開始」「終了」と①をコンペアし、再計算する。
+        //（残業時間・控除時間も算出する）
+        //----------------------------------------------------------
+        //契約の勤務時間を算出
+        $h_work_time_contract =
+            com_time_diff(
+                strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_kaishi1'].":00"),
+                strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_syuryo1'].":00"),
+                "m"
+                );
+        $GLOBALS['a_sTrace'] = '契約の勤務時間：'.strval($h_work_time_contract).'<br>';
 
-    //請求サイド
-    echo '### 請求サイド ###<br>';
-    _adjustmentWorkTimeSub2(
-            $h_obj_sheet,
-            $h_row,
-            $h_time_table_year,
-            $h_time_table_month,
-            $h_time_table_day,
-            $h_work_time_contract,
-            $h_time_start_hour_src,
-            $h_time_start_minute_src,
-            $h_time_end_hour_src,
-            $h_time_end_minute_src,
-            $h_time_start_minute_dst_bill,
-            $h_time_end_minute_dst_bill,
-            $h_work_time_actualy_bill,
-            $h_break_time_actualy_bill,
-            $h_deduction_time_actualy_bill,
-            $h_over_time_actualy_bill
-            );
-    //支払いサイド①
-    echo '### 支払いサイド① ###<br>';
-    _adjustmentWorkTimeSub2(
-            $h_obj_sheet,
-            $h_row,
-            $h_time_table_year,
-            $h_time_table_month,
-            $h_time_table_day,
-            $h_work_time_contract,
-            $h_time_start_hour_src,
-            $h_time_start_minute_src,
-            $h_time_end_hour_src,
-            $h_time_end_minute_src,
-            $h_time_start_minute_dst_pay1,
-            $h_time_end_minute_dst_pay1,
-            $h_work_time_actualy_pay1,
-            $h_break_time_actualy_pay1,
-            $h_deduction_time_actualy_pay1,
-            $h_over_time_actualy_pay1
-            );
-    //支払いサイド②
-    echo '### 支払いサイド② ###<br>';
-    _adjustmentWorkTimeSub2(
-            $h_obj_sheet,
-            $h_row,
-            $h_time_table_year,
-            $h_time_table_month,
-            $h_time_table_day,
-            $h_work_time_contract,
-            $h_time_start_hour_src,
-            $h_time_start_minute_src,
-            $h_time_end_hour_src,
-            $h_time_end_minute_src,
-            $h_time_start_minute_dst_pay2,
-            $h_time_end_minute_dst_pay2,
-            $h_work_time_actualy_pay2,
-            $h_break_time_actualy_pay2,
-            $h_deduction_time_actualy_pay2,
-            $h_over_time_actualy_pay2
-            );
-    
+        //契約の休憩時間を算出
+        $h_break_time_contract =
+            com_time_diff(
+                strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_kaishi2'].":00"),
+                strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".$GLOBALS['inp_syuryo2'].":00"),
+                "m"
+                );
+        $GLOBALS['a_sTrace'] = '契約の休憩時間：'.strval($h_break_time_contract).'<br>';
+        $h_work_time_contract -= $h_break_time_contract;
+        $GLOBALS['a_sTrace'] = '契約の作業時間：'.strval($h_work_time_contract).'<br>';
+
+        //請求サイド
+        $GLOBALS['a_sTrace'] = '### 請求サイド ###<br>';
+        _adjustmentWorkTimeSub2(
+                $h_obj_sheet,
+                $h_row,
+                $h_time_table_year,
+                $h_time_table_month,
+                $h_time_table_day,
+                $h_work_time_contract,
+                $h_time_start_hour_src,
+                $h_time_start_minute_src,
+                $h_time_end_hour_src,
+                $h_time_end_minute_src,
+                $h_time_start_minute_dst_bill,
+                $h_time_end_minute_dst_bill,
+                $h_work_time_actualy_bill,
+                $h_break_time_actualy_bill,
+                $h_deduction_time_actualy_bill,
+                $h_over_time_actualy_bill
+                );
+        //支払いサイド①
+        $GLOBALS['a_sTrace'] = '### 支払いサイド① ###<br>';
+        _adjustmentWorkTimeSub2(
+                $h_obj_sheet,
+                $h_row,
+                $h_time_table_year,
+                $h_time_table_month,
+                $h_time_table_day,
+                $h_work_time_contract,
+                $h_time_start_hour_src,
+                $h_time_start_minute_src,
+                $h_time_end_hour_src,
+                $h_time_end_minute_src,
+                $h_time_start_minute_dst_pay1,
+                $h_time_end_minute_dst_pay1,
+                $h_work_time_actualy_pay1,
+                $h_break_time_actualy_pay1,
+                $h_deduction_time_actualy_pay1,
+                $h_over_time_actualy_pay1
+                );
+        //支払いサイド②
+        $GLOBALS['a_sTrace'] = '### 支払いサイド② ###<br>';
+        _adjustmentWorkTimeSub2(
+                $h_obj_sheet,
+                $h_row,
+                $h_time_table_year,
+                $h_time_table_month,
+                $h_time_table_day,
+                $h_work_time_contract,
+                $h_time_start_hour_src,
+                $h_time_start_minute_src,
+                $h_time_end_hour_src,
+                $h_time_end_minute_src,
+                $h_time_start_minute_dst_pay2,
+                $h_time_end_minute_dst_pay2,
+                $h_work_time_actualy_pay2,
+                $h_break_time_actualy_pay2,
+                $h_deduction_time_actualy_pay2,
+                $h_over_time_actualy_pay2
+                );
+    } catch (Exception $ex) {
+        echo 'Error:'.$e->getMessage();
+    }
 }
 
 function _adjustmentWorkTimeSub1(
@@ -522,7 +527,7 @@ function _adjustmentWorkTimeSub1(
         ){
     try{
         if (ctype_digit($h_divid) == TRUE){
-            echo '時間刻み（日次）：'.$h_divid.'<br>';        //作業開始時間の調整
+            $GLOBALS['a_sTrace'] = '時間刻み（日次）：'.$h_divid.'<br>';        //作業開始時間の調整
             $a_inc_bd = intval($h_divid);
             if (ctype_digit($h_time_start_minute_src) == TRUE){
                 $a_minute = intval($h_time_start_minute_src);
@@ -534,9 +539,9 @@ function _adjustmentWorkTimeSub1(
                 }
                 $a_time_start_minute_dst_dig += $a_inc_bd * $a_syo;
                 $h_time_start_minute_dst = str_pad(strval($a_time_start_minute_dst_dig), "2", "0", STR_PAD_LEFT);
-                echo '作業開始時間：'.$h_time_start_hour_src.":".$h_time_start_minute_dst.'<br>';
+                $GLOBALS['a_sTrace'] = '作業開始時間：'.$h_time_start_hour_src.":".$h_time_start_minute_dst.'<br>';
             }else{
-                //echo $a_time_start_minute_src.'なんで？<br>';
+                //$GLOBALS['a_sTrace'] = $a_time_start_minute_src.'なんで？<br>';
             }
 
             //作業終了時間の調整
@@ -547,13 +552,13 @@ function _adjustmentWorkTimeSub1(
                 $a_time_end_minute_dst_dig = 0;
                 $a_time_end_minute_dst_dig += $a_inc_bd * $a_syo;
                 $h_time_end_minute_dst = str_pad(strval($a_time_end_minute_dst_dig), "2", "0", STR_PAD_LEFT);
-                echo '作業終了時間：'.$h_time_end_hour_src.":".$h_time_end_minute_dst.'<br>';
+                $GLOBALS['a_sTrace'] = '作業終了時間：'.$h_time_end_hour_src.":".$h_time_end_minute_dst.'<br>';
             }else{
-                //echo $a_time_start_minute_src.'なんで？<br>';
+                //$GLOBALS['a_sTrace'] = $a_time_start_minute_src.'なんで？<br>';
             }
 
         }else{
-            echo '時間刻み（日次）：なし<br>';
+            $GLOBALS['a_sTrace'] = '時間刻み（日次）：なし<br>';
         }        
     } catch (Exception $ex) {
         echo 'Error:'.$e->getMessage();
@@ -579,7 +584,7 @@ function _adjustmentWorkTimeSub2(
         &$h_over_time_actualy
         ){
     try{
-        //echo $h_time_start_hour_src.'#'.$h_time_start_minute_dst.'#'.$h_time_end_hour_src.'#'.$h_time_end_minute_dst.'<br>';
+        //$GLOBALS['a_sTrace'] = $h_time_start_hour_src.'#'.$h_time_start_minute_dst.'#'.$h_time_end_hour_src.'#'.$h_time_end_minute_dst.'<br>';
         if (($h_time_start_hour_src != '') && ($h_time_start_minute_dst != '') && ($h_time_end_hour_src != '') && ($h_time_end_minute_dst != '')){
             //実際の勤務時間を算出
             $h_work_time_actualy =
@@ -588,7 +593,7 @@ function _adjustmentWorkTimeSub2(
                     strtotime($h_time_table_year."-".$h_time_table_month."-".$h_time_table_day." ".str_pad($h_time_end_hour_src, 2, "0", STR_PAD_LEFT).":".str_pad($h_time_end_minute_dst, 2, "0", STR_PAD_LEFT).":00"),
                     "m"
                     );
-            echo '実際の勤務時間：'.strval($h_work_time_actualy).'<br>';
+            $GLOBALS['a_sTrace'] = '実際の勤務時間：'.strval($h_work_time_actualy).'<br>';
 
             //実際の休憩時間を算出
             $h_break_time_actualy = 0;
@@ -600,9 +605,9 @@ function _adjustmentWorkTimeSub2(
             if (ctype_digit($a_break_time_actualy_str) == TRUE){
                 $h_break_time_actualy += intval($a_break_time_actualy_str);
             }
-            echo '実際の休憩時間：'.strval($h_break_time_actualy).'<br>';
+            $GLOBALS['a_sTrace'] = '実際の休憩時間：'.strval($h_break_time_actualy).'<br>';
             $h_work_time_actualy -= $h_break_time_actualy;
-            echo '実際の作業時間：'.strval($h_work_time_actualy).'<br>';
+            $GLOBALS['a_sTrace'] = '実際の作業時間：'.strval($h_work_time_actualy).'<br>';
 
             //控除時間の算出
             $h_deduction_time_actualy =  $h_work_time_contract - $h_work_time_actualy;
@@ -610,7 +615,7 @@ function _adjustmentWorkTimeSub2(
                 //0以下の場合は0とする。（控除なし）
                 $h_deduction_time_actualy = 0;
             }
-            echo '控除時間：'.strval($h_deduction_time_actualy).'<br>';
+            $GLOBALS['a_sTrace'] = '控除時間：'.strval($h_deduction_time_actualy).'<br>';
 
             //残業時間の算出
             $h_over_time_actualy = 0;
@@ -627,7 +632,7 @@ function _adjustmentWorkTimeSub2(
                     $h_over_time_actualy = 0; 
                 }
             }
-            echo '残業時間：'.strval($h_over_time_actualy).'<br>';
+            $GLOBALS['a_sTrace'] = '残業時間：'.strval($h_over_time_actualy).'<br>';
         }
     } catch (Exception $ex) {
         echo 'Error:'.$e->getMessage();
@@ -654,7 +659,7 @@ function _calcAllowance(
         $a_stmt->execute();
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
-            echo '契約レポート検出！<br>';
+            $GLOBALS['a_sTrace'] = '契約レポート検出！<br>';
             $a_bRet = true;
             set_10100_fromDB($a_result);
         }
@@ -662,7 +667,7 @@ function _calcAllowance(
         //----------------------------------------------------------------------
         //請求サイドの計算
         //----------------------------------------------------------------------
-        echo '--請求サイドの計算--------------------------------------<br>';
+        $GLOBALS['a_sTrace'] = '--請求サイドの計算--------------------------------------<br>';
         $a_calc_day_start_bill = 0;
         $a_calc_day_end_bill = 0;
         $a_work_time_actualy_bill_src = 0;
@@ -691,7 +696,7 @@ function _calcAllowance(
                 $a_charge_bill
                 );
 
-        echo '--支払いサイド①の計算--------------------------------------<br>';
+        $GLOBALS['a_sTrace'] = '--支払いサイド①の計算--------------------------------------<br>';
         $a_calc_day_start_pay1 = 0;
         $a_calc_day_end_pay1 = 0;
         $a_work_time_actualy_pay1_src = 0;
@@ -701,13 +706,14 @@ function _calcAllowance(
         $a_charge_deduction_pay1 = 0;
         $a_charge_over_pay1 = 0;
         $a_charge_pay1 = 0;
+        //支払い計算も請求サイドの締日で行う。
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
                 $h_time_table_year,
                 $h_time_table_month,
                 $GLOBALS['opt_m_contract_time_inc_pm'],
-                $GLOBALS['opt_contract_tighten_p'],
+                $GLOBALS['opt_contract_tighten_b'], #$GLOBALS['opt_contract_tighten_p'],
                 1,
                 $a_calc_day_start_pay1,
                 $a_calc_day_end_pay1,
@@ -719,7 +725,7 @@ function _calcAllowance(
                 $a_charge_over_pay1,
                 $a_charge_pay1
                 );
-        echo '--支払いサイド②の計算--------------------------------------<br>';
+        $GLOBALS['a_sTrace'] = '--支払いサイド②の計算--------------------------------------<br>';
         $a_calc_day_start_pay2 = 0;
         $a_calc_day_end_pay2 = 0;
         $a_work_time_actualy_pay2_src = 0;
@@ -729,13 +735,14 @@ function _calcAllowance(
         $a_charge_deduction_pay2 = 0;
         $a_charge_over_pay2 = 0;
         $a_charge_pay2 = 0;
+        //支払い計算も請求サイドの締日で行う。
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
                 $h_time_table_year,
                 $h_time_table_month,
                 $GLOBALS['opt_m_contract_time_inc_pm'],
-                $GLOBALS['opt_contract_tighten_p'],
+                $GLOBALS['opt_contract_tighten_b'], #$GLOBALS['opt_contract_tighten_p'],
                 2,
                 $a_calc_day_start_pay2,
                 $a_calc_day_end_pay2,
@@ -755,11 +762,13 @@ function _calcAllowance(
 
         $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_charge_calc'];
         $a_sql .= " WHERE (engineer_no=:engineer_no)";
-        $a_sql .= " AND (cr_id=:cr_id);";
-        //echo $a_sql.'<br>';
+        $a_sql .= " AND (cr_id=:cr_id)";
+        $a_sql .= " AND (calc_day_start_bill=:calc_day_start_bill);";
+        //$GLOBALS['a_sTrace'] = $a_sql.'<br>';
         $a_stmt = $h_conn->prepare($a_sql);
         $a_stmt->bindParam(':engineer_no', $h_engineer_no, PDO::PARAM_STR);
         com_pdo_bindValue($a_stmt,':cr_id', $h_cr_id);
+        com_pdo_bindValue($a_stmt, ':calc_day_start_bill', $a_calc_day_start_bill);
         $a_stmt->execute();
 
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_charge_calc'].
@@ -907,8 +916,8 @@ function _calcAllowanceSub(
         }
         $a_clac_day_start_src = $a_clac_day_start;
         $a_clac_day_end_src = $a_clac_day_end;
-        echo '対象の締開始日：'.$a_clac_day_start.'<br>';
-        echo '対象の締終了日：'.$a_clac_day_end.'<br>';
+        $GLOBALS['a_sTrace'] = '対象の締開始日：'.$a_clac_day_start.'<br>';
+        $GLOBALS['a_sTrace'] = '対象の締終了日：'.$a_clac_day_end.'<br>';
 
         $a_diff =
                 com_time_diff(
@@ -928,8 +937,8 @@ function _calcAllowanceSub(
         if ($a_diff > 0){
             $a_clac_day_end = $GLOBALS['inp_kyakusaki_syuryo'];
         }
-        echo '実の締開始日：'.$a_clac_day_start.'<br>';
-        echo '実の締終了日：'.$a_clac_day_end.'<br>';
+        $GLOBALS['a_sTrace'] = '実の締開始日：'.$a_clac_day_start.'<br>';
+        $GLOBALS['a_sTrace'] = '実の締終了日：'.$a_clac_day_end.'<br>';
         $h_calc_day_start = $a_clac_day_start;
         $h_calc_day_end = $a_clac_day_end;
                 
@@ -949,7 +958,7 @@ function _calcAllowanceSub(
                     );
         if ($a_diff > 0){
             //途中入場
-            echo '途中入場<br>';
+            $GLOBALS['a_sTrace'] = '途中入場<br>';
                 switch ($h_kind){
                     case 0: //請求サイド
                         $a_calc_kind = $GLOBALS['opt_contract_calc_b2'];  //計算方法
@@ -985,7 +994,7 @@ function _calcAllowanceSub(
                         );
             if ($a_diff < 0){
                 //途中退場
-                echo '途中退場<br>';
+                $GLOBALS['a_sTrace'] = '途中退場<br>';
                 switch ($h_kind){
                     case 0: //請求サイド
                         $a_calc_kind = $GLOBALS['opt_contract_calc_b3'];  //計算方法
@@ -1014,7 +1023,7 @@ function _calcAllowanceSub(
                 }
             }else{
                 //通常期間
-                echo '通常期間<br>';
+                $GLOBALS['a_sTrace'] = '通常期間<br>';
                 switch ($h_kind){
                     case 0: //請求サイド
                         $a_calc_kind = $GLOBALS['opt_contract_calc_b1'];  //計算方法
@@ -1048,12 +1057,12 @@ function _calcAllowanceSub(
         $a_deduction = com_replace_toNumber($a_deduction);   //控除単価
         $a_overtime = com_replace_toNumber($a_overtime);    //残業単価
 
-        echo '計算方法：'.$a_calc_kind.'<br>';  //計算方法
-        echo '下限：'.$a_lower.'<br>';      //下限
-        echo '上限：'.$a_upper.'<br>';      //上限
-        echo '単価：'.$a_unit.'<br>';        //単価
-        echo '控除単価：'.$a_deduction.'<br>';   //控除単価
-        echo '残業単価：'.$a_overtime.'<br>';    //残業単価
+        $GLOBALS['a_sTrace'] = '計算方法：'.$a_calc_kind.'<br>';  //計算方法
+        $GLOBALS['a_sTrace'] = '下限：'.$a_lower.'<br>';      //下限
+        $GLOBALS['a_sTrace'] = '上限：'.$a_upper.'<br>';      //上限
+        $GLOBALS['a_sTrace'] = '単価：'.$a_unit.'<br>';        //単価
+        $GLOBALS['a_sTrace'] = '控除単価：'.$a_deduction.'<br>';   //控除単価
+        $GLOBALS['a_sTrace'] = '残業単価：'.$a_overtime.'<br>';    //残業単価
 
         //タイムテーブルから対象範囲のデータを抽出する。
         $a_time_total = '';
@@ -1071,7 +1080,7 @@ function _calcAllowanceSub(
         }
         $a_sql .= ") AS t_total FROM ".$GLOBALS['g_DB_t_time_table'];
         $a_sql .= " WHERE (work_day>=:work_day_start) AND (work_day<=:work_day_end) AND (engineer_no=:engineer_no);";
-        //echo $a_sql.'<br>';
+        //$GLOBALS['a_sTrace'] = $a_sql.'<br>';
         $a_stmt = $h_conn->prepare($a_sql);
         com_pdo_bindValue($a_stmt, ':work_day_start', $a_clac_day_start);
         com_pdo_bindValue($a_stmt, ':work_day_end', $a_clac_day_end);
@@ -1080,13 +1089,13 @@ function _calcAllowanceSub(
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
             $a_time_total = $a_result['t_total'];
-            echo '作業時間合計：'.$a_time_total.'<br>';
+            $GLOBALS['a_sTrace'] = '作業時間合計：'.$a_time_total.'<br>';
         }
         
         //作業時間の合計を調整する。
         $a_time_total_dig = 0;
         if (ctype_digit($h_divid) == TRUE){
-            echo '時間刻み（月次）：'.$h_divid.'<br>';
+            $GLOBALS['a_sTrace'] = '時間刻み（月次）：'.$h_divid.'<br>';
             $a_inc_bd = intval($h_divid);
             if (ctype_digit($a_time_total) == TRUE){
                 $a_time_total_dig = intval($a_time_total);
@@ -1095,13 +1104,13 @@ function _calcAllowanceSub(
                 $a_amari = $a_time_total_dig % $a_inc_bd;
                 $a_time_total_dig = $a_inc_bd * $a_syo;
                 $h_work_time_actualy_dst = $a_time_total_dig;
-                echo '実作業時間合計：'.strval($a_time_total_dig).'<br>';
+                $GLOBALS['a_sTrace'] = '実作業時間合計：'.strval($a_time_total_dig).'<br>';
             }else{
-                //echo $a_time_start_minute_src.'なんで？<br>';
+                //$GLOBALS['a_sTrace'] = $a_time_start_minute_src.'なんで？<br>';
             }
 
         }else{
-            echo '時間刻み（月次）：なし<br>';
+            $GLOBALS['a_sTrace'] = '時間刻み（月次）：なし<br>';
         }
         
         $a_charge_total = 0;
@@ -1109,11 +1118,11 @@ function _calcAllowanceSub(
         if (($a_calc_kind != '') && ($a_unit != '')){
             //計算方法／単価あり
             if ($a_calc_kind == '固定'){
-                echo '固定<br>';
+                $GLOBALS['a_sTrace'] = '固定<br>';
                 $a_charge_total = intval($a_unit);
                 $a_message = '';
             }elseif($a_calc_kind == '時給'){
-                echo '時給<br>';
+                $GLOBALS['a_sTrace'] = '時給<br>';
                 if ($a_time_total != ''){
                     //$a_time_total_dig = intval($a_time_total);
                     $a_time_total_dig_h = $a_time_total_dig / 60;
@@ -1121,14 +1130,14 @@ function _calcAllowanceSub(
                     $a_message = '';
                 }
             }else{
-                echo '稼働率<br>';
+                $GLOBALS['a_sTrace'] = '稼働率<br>';
                 if (($a_lower != '') && ($a_upper != '') && ($a_deduction != '') && ($a_overtime != '') && ($a_time_total != '')){
                     //下限・上限とのチェックを行う。
                     //$a_time_total_dig = intval($a_time_total);
                     $a_time_lower_dig = intval($a_lower) * 60;
                     $a_diff = $a_time_lower_dig - $a_time_total_dig;
                     if ($a_diff > 0){
-                        echo '控除あり<br>';
+                        $GLOBALS['a_sTrace'] = '控除あり<br>';
                         //控除あり
                         if ($h_divid != ''){
                             if (ctype_digit($h_divid) == TRUE){
@@ -1142,7 +1151,7 @@ function _calcAllowanceSub(
                         $a_time_upper_dig = intval($a_upper) * 60;
                         $a_diff = $a_time_total_dig - $a_time_upper_dig;
                         if ($a_diff > 0){
-                            echo '残業あり<br>';
+                            $GLOBALS['a_sTrace'] = '残業あり<br>';
                             //残業あり
                             if ($h_divid != ''){
                                 if (ctype_digit($h_divid) == TRUE){
@@ -1153,7 +1162,7 @@ function _calcAllowanceSub(
                                 }
                             }
                         }else{
-                            echo '普通<br>';
+                            $GLOBALS['a_sTrace'] = '普通<br>';
                             $a_charge_total = intval($a_unit);
                             $a_message = '';
                         }
@@ -1163,7 +1172,7 @@ function _calcAllowanceSub(
             
         }
         
-        echo '作業金額合計：'.$a_charge_total.'<br>';
+        $GLOBALS['a_sTrace'] = '作業金額合計：'.$a_charge_total.'<br>';
         $h_charge = $a_charge_total;
         
     } catch (Exception $e) {

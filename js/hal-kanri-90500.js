@@ -59,7 +59,10 @@ function upload_time_table_file()
         processData : false,
         contentType : false,
         success: function(data, dataType){
-            $("#my-result").empty().append(data);
+            //alert(data);
+            //if (data.match(/Error:/)){
+                $("#my-result").empty().append(data);
+            //}
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             //$("#my-result").empty().append(errorThrown.message);
