@@ -63,6 +63,7 @@ $g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
 $g_DB_t_evidence = "t_evidence";    //[2017.11.08]課題No.81
 $g_DB_t_payroll = "t_payroll";
 $g_DB_t_purchase_order_ledger = "t_purchase_order_ledger";
+$g_DB_t_time_table = "t_time_table";    //[2017.11.28]要望
 
 /*******************************************************************************
 * メニュー
@@ -675,16 +676,24 @@ function com_time_diff($time_from, $time_to, $mode)
 {
     // 日時差を秒数で取得
     $dif = $time_to - $time_from;
-    #echo '$dif：'.$dif.'<br>';
-    // 時間単位の差
-    $dif_time = date("H:i:s", $dif);
+    //echo '$dif：'.$dif.'<br>';
+    //echo '$dif：'.strval($dif/3600).'<br>';
+    //
+    // 時間単位の差[2017.11.28]
+    $dif_time = $dif / 3600;
+    //$dif_time = date("H:i:s", $dif);
     #echo '$dif_time：'.$dif_time.'<br>';
+    #
     // 日付単位の差
     $dif_days = (strtotime(date("Y-m-d", $dif)) - strtotime("1970-01-01")) / 86400;
     #echo '$dif_days：'.$dif_days.'<br>';
     
     if ($mode == 'd'){
         return $dif_days;
+    }elseif ($mode == 'h') {
+        return $dif / 3600;
+    }elseif ($mode == 'm') {
+        return $dif / 60;
     }else{
         return $dif_time;
     }
