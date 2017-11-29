@@ -142,9 +142,9 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 150px;'><div class='myover'>".com_db_number_format($a_result['work_time_actualy_bill_dst'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['deduction_time_actualy_bill'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['over_time_actualy_bill'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_bill'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_bill'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_bill'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_deduction_bill'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_over_bill'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_bill'])."</td>";
         
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_replace_toDate($a_result['calc_day_start_pay1'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_replace_toDate($a_result['calc_day_end_pay1'])."</td>";
@@ -152,9 +152,9 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 150px;'><div class='myover'>".com_db_number_format($a_result['work_time_actualy_pay1_dst'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['deduction_time_actualy_pay1'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['over_time_actualy_pay1'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_pay1'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_pay1'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_pay1'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_deduction_pay1'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_over_pay1'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_pay1'])."</td>";
 
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_replace_toDate($a_result['calc_day_start_pay2'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_replace_toDate($a_result['calc_day_end_pay2'])."</td>";
@@ -162,9 +162,9 @@ try{
         $a_sRet_R .= "<td class='td_line2' style='width: 150px;'><div class='myover'>".com_db_number_format($a_result['work_time_actualy_pay2_dst'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['deduction_time_actualy_pay2'])."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['over_time_actualy_pay2'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_pay2'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_pay2'])."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_actualy_pay2'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_deduction_pay2'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_over_pay2'])."</td>";
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".com_db_number_format($a_result['charge_pay2'])."</td>";
 
         $a_sRet_R .= "</tr>";
     }

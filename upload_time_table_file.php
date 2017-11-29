@@ -669,7 +669,9 @@ function _calcAllowance(
         $a_work_time_actualy_bill_dst = 0;
         $a_deduction_time_actualy_bill = 0;
         $a_over_time_actualy_bill = 0;
-        $a_charge_actualy_bill = 0;
+        $a_charge_deduction_bill = 0;
+        $a_charge_over_bill = 0;
+        $a_charge_bill = 0;
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
@@ -684,7 +686,9 @@ function _calcAllowance(
                 $a_work_time_actualy_bill_dst,
                 $a_deduction_time_actualy_bill,
                 $a_over_time_actualy_bill,
-                $a_charge_actualy_bill
+                $a_charge_deduction_bill,
+                $a_charge_over_bill,
+                $a_charge_bill
                 );
 
         echo '--支払いサイド①の計算--------------------------------------<br>';
@@ -694,7 +698,9 @@ function _calcAllowance(
         $a_work_time_actualy_pay1_dst = 0;
         $a_deduction_time_actualy_pay1 = 0;
         $a_over_time_actualy_pay1 = 0;
-        $a_charge_actualy_pay1 = 0;
+        $a_charge_deduction_pay1 = 0;
+        $a_charge_over_pay1 = 0;
+        $a_charge_pay1 = 0;
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
@@ -709,7 +715,9 @@ function _calcAllowance(
                 $a_work_time_actualy_pay1_dst,
                 $a_deduction_time_actualy_pay1,
                 $a_over_time_actualy_pay1,
-                $a_charge_actualy_pay1
+                $a_charge_deduction_pay1,
+                $a_charge_over_pay1,
+                $a_charge_pay1
                 );
         echo '--支払いサイド②の計算--------------------------------------<br>';
         $a_calc_day_start_pay2 = 0;
@@ -718,7 +726,9 @@ function _calcAllowance(
         $a_work_time_actualy_pay2_dst = 0;
         $a_deduction_time_actualy_pay2 = 0;
         $a_over_time_actualy_pay2 = 0;
-        $a_charge_actualy_pay2 = 0;
+        $a_charge_deduction_pay2 = 0;
+        $a_charge_over_pay2 = 0;
+        $a_charge_pay2 = 0;
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
@@ -733,7 +743,9 @@ function _calcAllowance(
                 $a_work_time_actualy_pay2_dst,
                 $a_deduction_time_actualy_pay2,
                 $a_over_time_actualy_pay2,
-                $a_charge_actualy_pay2
+                $a_charge_deduction_pay2,
+                $a_charge_over_pay2,
+                $a_charge_pay2
                 );
         
         //----------------------------------------------------------------------
@@ -744,11 +756,12 @@ function _calcAllowance(
         $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_charge_calc'];
         $a_sql .= " WHERE (engineer_no=:engineer_no)";
         $a_sql .= " AND (cr_id=:cr_id);";
+        //echo $a_sql.'<br>';
         $a_stmt = $h_conn->prepare($a_sql);
-        $a_stmt->bindParam(':engineer_no', $a_engineer_no, PDO::PARAM_STR);
+        $a_stmt->bindParam(':engineer_no', $h_engineer_no, PDO::PARAM_STR);
         com_pdo_bindValue($a_stmt,':cr_id', $h_cr_id);
         $a_stmt->execute();
-        
+
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_charge_calc'].
                 "(engineer_no,
                   cr_id,
@@ -758,21 +771,27 @@ function _calcAllowance(
                   work_time_actualy_bill_dst,
                   deduction_time_actualy_bill,
                   over_time_actualy_bill,
-                  charge_actualy_bill,
+                  charge_deduction_bill,
+                  charge_over_bill,
+                  charge_bill,
                   calc_day_start_pay1,
                   calc_day_end_pay1,
                   work_time_actualy_pay1_src,
                   work_time_actualy_pay1_dst,
                   deduction_time_actualy_pay1,
                   over_time_actualy_pay1,
-                  charge_actualy_pay1,
+                  charge_deduction_pay1,
+                  charge_over_pay1,
+                  charge_pay1,
                   calc_day_start_pay2,
                   calc_day_end_pay2,
                   work_time_actualy_pay2_src,
                   work_time_actualy_pay2_dst,
                   deduction_time_actualy_pay2,
                   over_time_actualy_pay2,
-                  charge_actualy_pay2
+                  charge_deduction_pay2,
+                  charge_over_pay2,
+                  charge_pay2
                 )VALUES(";
         $a_sql .= ":engineer_no,
                   :cr_id,
@@ -782,21 +801,27 @@ function _calcAllowance(
                   :work_time_actualy_bill_dst,
                   :deduction_time_actualy_bill,
                   :over_time_actualy_bill,
-                  :charge_actualy_bill,
+                  :charge_deduction_bill,
+                  :charge_over_bill,
+                  :charge_bill,
                   :calc_day_start_pay1,
                   :calc_day_end_pay1,
                   :work_time_actualy_pay1_src,
                   :work_time_actualy_pay1_dst,
                   :deduction_time_actualy_pay1,
                   :over_time_actualy_pay1,
-                  :charge_actualy_pay1,
+                  :charge_deduction_pay1,
+                  :charge_over_pay1,
+                  :charge_pay1,
                   :calc_day_start_pay2,
                   :calc_day_end_pay2,
                   :work_time_actualy_pay2_src,
                   :work_time_actualy_pay2_dst,
                   :deduction_time_actualy_pay2,
                   :over_time_actualy_pay2,
-                  :charge_actualy_pay2
+                  :charge_deduction_pay2,
+                  :charge_over_pay2,
+                  :charge_pay2
                 );";
         $a_stmt = $h_conn->prepare($a_sql);
         $a_stmt->bindParam(':engineer_no', $h_engineer_no, PDO::PARAM_STR);
@@ -808,7 +833,9 @@ function _calcAllowance(
         com_pdo_bindValue($a_stmt, ':work_time_actualy_bill_dst', $a_work_time_actualy_bill_dst);
         com_pdo_bindValue($a_stmt, ':deduction_time_actualy_bill', $a_deduction_time_actualy_bill);
         com_pdo_bindValue($a_stmt, ':over_time_actualy_bill', $a_over_time_actualy_bill);
-        com_pdo_bindValue($a_stmt, ':charge_actualy_bill', $a_charge_actualy_bill);
+        com_pdo_bindValue($a_stmt, ':charge_deduction_bill', $a_charge_deduction_bill);
+        com_pdo_bindValue($a_stmt, ':charge_over_bill', $a_charge_over_bill);
+        com_pdo_bindValue($a_stmt, ':charge_bill', $a_charge_bill);
 
         com_pdo_bindValue($a_stmt, ':calc_day_start_pay1', $a_calc_day_start_pay1);
         com_pdo_bindValue($a_stmt, ':calc_day_end_pay1', $a_calc_day_end_pay1);
@@ -816,7 +843,9 @@ function _calcAllowance(
         com_pdo_bindValue($a_stmt, ':work_time_actualy_pay1_dst', $a_work_time_actualy_pay1_dst);
         com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay1', $a_deduction_time_actualy_pay1);
         com_pdo_bindValue($a_stmt, ':over_time_actualy_pay1', $a_over_time_actualy_pay1);
-        com_pdo_bindValue($a_stmt, ':charge_actualy_pay1', $a_charge_actualy_pay1);
+        com_pdo_bindValue($a_stmt, ':charge_deduction_pay1', $a_charge_deduction_pay1);
+        com_pdo_bindValue($a_stmt, ':charge_over_pay1', $a_charge_over_pay1);
+        com_pdo_bindValue($a_stmt, ':charge_pay1', $a_charge_pay1);
 
         com_pdo_bindValue($a_stmt, ':calc_day_start_pay2', $a_calc_day_start_pay2);
         com_pdo_bindValue($a_stmt, ':calc_day_end_pay2', $a_calc_day_end_pay2);
@@ -824,10 +853,12 @@ function _calcAllowance(
         com_pdo_bindValue($a_stmt, ':work_time_actualy_pay2_dst', $a_work_time_actualy_pay2_dst);
         com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay2', $a_deduction_time_actualy_pay2);
         com_pdo_bindValue($a_stmt, ':over_time_actualy_pay2', $a_over_time_actualy_pay2);
-        com_pdo_bindValue($a_stmt, ':charge_actualy_pay2', $a_charge_actualy_pay2);
+        com_pdo_bindValue($a_stmt, ':charge_deduction_pay2', $a_charge_deduction_pay2);
+        com_pdo_bindValue($a_stmt, ':charge_over_pay2', $a_charge_over_pay2);
+        com_pdo_bindValue($a_stmt, ':charge_pay2', $a_charge_pay2);
 
         $a_stmt->execute();
-        
+
         $h_conn->commit();    //コミット
 
     } catch (Exception $e) {
@@ -852,7 +883,9 @@ function _calcAllowanceSub(
         &$h_work_time_actualy_dst,
         &$h_deduction_time_actualy,
         &$h_over_time_actualy,
-        &$h_charge_actualy
+        &$h_charge_deduction,
+        &$h_charge_over,
+        &$h_charge
         ){
     try{
         //締日
@@ -1100,7 +1133,8 @@ function _calcAllowanceSub(
                         if ($h_divid != ''){
                             if (ctype_digit($h_divid) == TRUE){
                                 $h_deduction_time_actualy = $a_diff;    //分
-                                $a_charge_total = intval($a_unit) - (floor($a_diff / intval($h_divid)) * intval($a_deduction));
+                                $h_charge_deduction = (floor($a_diff / intval($h_divid)) * intval($a_deduction));
+                                $a_charge_total = intval($a_unit) - $h_charge_deduction;
                                 $a_message = '';
                             }
                         }
@@ -1113,7 +1147,8 @@ function _calcAllowanceSub(
                             if ($h_divid != ''){
                                 if (ctype_digit($h_divid) == TRUE){
                                     $h_over_time_actualy = $a_diff;
-                                    $a_charge_total = intval($a_unit) + (floor($a_diff / intval($h_divid)) * intval($a_overtime));
+                                    $h_charge_over = (floor($a_diff / intval($h_divid)) * intval($a_overtime));
+                                    $a_charge_total = intval($a_unit) + $h_charge_over;
                                     $a_message = '';
                                 }
                             }
@@ -1129,7 +1164,7 @@ function _calcAllowanceSub(
         }
         
         echo '作業金額合計：'.$a_charge_total.'<br>';
-        $h_charge_actualy = $a_charge_total;
+        $h_charge = $a_charge_total;
         
     } catch (Exception $e) {
         echo 'Error:'.$e->getMessage();
