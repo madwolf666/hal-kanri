@@ -663,6 +663,13 @@ function _calcAllowance(
         //請求サイドの計算
         //----------------------------------------------------------------------
         echo '--請求サイドの計算--------------------------------------<br>';
+        $a_calc_day_start_bill = 0;
+        $a_calc_day_end_bill = 0;
+        $a_work_time_actualy_bill_src = 0;
+        $a_work_time_actualy_bill_dst = 0;
+        $a_deduction_time_actualy_bill = 0;
+        $a_over_time_actualy_bill = 0;
+        $a_charge_actualy_bill = 0;
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
@@ -670,10 +677,24 @@ function _calcAllowance(
                 $h_time_table_month,
                 $GLOBALS['opt_m_contract_time_inc_bm'],
                 $GLOBALS['opt_contract_tighten_b'],
-                0
+                0,
+                $a_calc_day_start_bill,
+                $a_calc_day_end_bill,
+                $a_work_time_actualy_bill_src,
+                $a_work_time_actualy_bill_dst,
+                $a_deduction_time_actualy_bill,
+                $a_over_time_actualy_bill,
+                $a_charge_actualy_bill
                 );
 
         echo '--支払いサイド①の計算--------------------------------------<br>';
+        $a_calc_day_start_pay1 = 0;
+        $a_calc_day_end_pay1 = 0;
+        $a_work_time_actualy_pay1_src = 0;
+        $a_work_time_actualy_pay1_dst = 0;
+        $a_deduction_time_actualy_pay1 = 0;
+        $a_over_time_actualy_pay1 = 0;
+        $a_charge_actualy_pay1 = 0;
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
@@ -681,9 +702,23 @@ function _calcAllowance(
                 $h_time_table_month,
                 $GLOBALS['opt_m_contract_time_inc_pm'],
                 $GLOBALS['opt_contract_tighten_p'],
-                1
+                1,
+                $a_calc_day_start_pay1,
+                $a_calc_day_end_pay1,
+                $a_work_time_actualy_pay1_src,
+                $a_work_time_actualy_pay1_dst,
+                $a_deduction_time_actualy_pay1,
+                $a_over_time_actualy_pay1,
+                $a_charge_actualy_pay1
                 );
         echo '--支払いサイド②の計算--------------------------------------<br>';
+        $a_calc_day_start_pay2 = 0;
+        $a_calc_day_end_pay2 = 0;
+        $a_work_time_actualy_pay2_src = 0;
+        $a_work_time_actualy_pay2_dst = 0;
+        $a_deduction_time_actualy_pay2 = 0;
+        $a_over_time_actualy_pay2 = 0;
+        $a_charge_actualy_pay2 = 0;
         _calcAllowanceSub(
                 $h_conn,
                 $h_engineer_no,
@@ -691,10 +726,114 @@ function _calcAllowance(
                 $h_time_table_month,
                 $GLOBALS['opt_m_contract_time_inc_pm'],
                 $GLOBALS['opt_contract_tighten_p'],
-                2
+                2,
+                $a_calc_day_start_pay2,
+                $a_calc_day_end_pay2,
+                $a_work_time_actualy_pay2_src,
+                $a_work_time_actualy_pay2_dst,
+                $a_deduction_time_actualy_pay2,
+                $a_over_time_actualy_pay2,
+                $a_charge_actualy_pay2
                 );
         
+        //----------------------------------------------------------------------
+        //DBに登録
+        //----------------------------------------------------------------------
+        $h_conn->beginTransaction();  //トランザクション開始
+
+        $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_charge_calc'];
+        $a_sql .= " WHERE (engineer_no=:engineer_no)";
+        $a_sql .= " AND (cr_id=:cr_id);";
+        $a_stmt = $h_conn->prepare($a_sql);
+        $a_stmt->bindParam(':engineer_no', $a_engineer_no, PDO::PARAM_STR);
+        com_pdo_bindValue($a_stmt,':cr_id', $h_cr_id);
+        $a_stmt->execute();
+        
+        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_charge_calc'].
+                "(engineer_no,
+                  cr_id,
+                  calc_day_start_bill,
+                  calc_day_end_bill,
+                  work_time_actualy_bill_src,
+                  work_time_actualy_bill_dst,
+                  deduction_time_actualy_bill,
+                  over_time_actualy_bill,
+                  charge_actualy_bill,
+                  calc_day_start_pay1,
+                  calc_day_end_pay1,
+                  work_time_actualy_pay1_src,
+                  work_time_actualy_pay1_dst,
+                  deduction_time_actualy_pay1,
+                  over_time_actualy_pay1,
+                  charge_actualy_pay1,
+                  calc_day_start_pay2,
+                  calc_day_end_pay2,
+                  work_time_actualy_pay2_src,
+                  work_time_actualy_pay2_dst,
+                  deduction_time_actualy_pay2,
+                  over_time_actualy_pay2,
+                  charge_actualy_pay2
+                )VALUES(";
+        $a_sql .= ":engineer_no,
+                  :cr_id,
+                  :calc_day_start_bill,
+                  :calc_day_end_bill,
+                  :work_time_actualy_bill_src,
+                  :work_time_actualy_bill_dst,
+                  :deduction_time_actualy_bill,
+                  :over_time_actualy_bill,
+                  :charge_actualy_bill,
+                  :calc_day_start_pay1,
+                  :calc_day_end_pay1,
+                  :work_time_actualy_pay1_src,
+                  :work_time_actualy_pay1_dst,
+                  :deduction_time_actualy_pay1,
+                  :over_time_actualy_pay1,
+                  :charge_actualy_pay1,
+                  :calc_day_start_pay2,
+                  :calc_day_end_pay2,
+                  :work_time_actualy_pay2_src,
+                  :work_time_actualy_pay2_dst,
+                  :deduction_time_actualy_pay2,
+                  :over_time_actualy_pay2,
+                  :charge_actualy_pay2
+                );";
+        $a_stmt = $h_conn->prepare($a_sql);
+        $a_stmt->bindParam(':engineer_no', $h_engineer_no, PDO::PARAM_STR);
+        com_pdo_bindValue($a_stmt, ':cr_id', $GLOBALS['cr_id']);
+        
+        com_pdo_bindValue($a_stmt, ':calc_day_start_bill', $a_calc_day_start_bill);
+        com_pdo_bindValue($a_stmt, ':calc_day_end_bill', $a_calc_day_end_bill);
+        com_pdo_bindValue($a_stmt, ':work_time_actualy_bill_src', $a_work_time_actualy_bill_src);
+        com_pdo_bindValue($a_stmt, ':work_time_actualy_bill_dst', $a_work_time_actualy_bill_dst);
+        com_pdo_bindValue($a_stmt, ':deduction_time_actualy_bill', $a_deduction_time_actualy_bill);
+        com_pdo_bindValue($a_stmt, ':over_time_actualy_bill', $a_over_time_actualy_bill);
+        com_pdo_bindValue($a_stmt, ':charge_actualy_bill', $a_charge_actualy_bill);
+
+        com_pdo_bindValue($a_stmt, ':calc_day_start_pay1', $a_calc_day_start_pay1);
+        com_pdo_bindValue($a_stmt, ':calc_day_end_pay1', $a_calc_day_end_pay1);
+        com_pdo_bindValue($a_stmt, ':work_time_actualy_pay1_src', $a_work_time_actualy_pay1_src);
+        com_pdo_bindValue($a_stmt, ':work_time_actualy_pay1_dst', $a_work_time_actualy_pay1_dst);
+        com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay1', $a_deduction_time_actualy_pay1);
+        com_pdo_bindValue($a_stmt, ':over_time_actualy_pay1', $a_over_time_actualy_pay1);
+        com_pdo_bindValue($a_stmt, ':charge_actualy_pay1', $a_charge_actualy_pay1);
+
+        com_pdo_bindValue($a_stmt, ':calc_day_start_pay2', $a_calc_day_start_pay2);
+        com_pdo_bindValue($a_stmt, ':calc_day_end_pay2', $a_calc_day_end_pay2);
+        com_pdo_bindValue($a_stmt, ':work_time_actualy_pay2_src', $a_work_time_actualy_pay2_src);
+        com_pdo_bindValue($a_stmt, ':work_time_actualy_pay2_dst', $a_work_time_actualy_pay2_dst);
+        com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay2', $a_deduction_time_actualy_pay2);
+        com_pdo_bindValue($a_stmt, ':over_time_actualy_pay2', $a_over_time_actualy_pay2);
+        com_pdo_bindValue($a_stmt, ':charge_actualy_pay2', $a_charge_actualy_pay2);
+
+        $a_stmt->execute();
+        
+        $h_conn->commit();    //コミット
+
     } catch (Exception $e) {
+        if ($h_conn) {
+            $h_conn->rollBack();  //ロールバック
+        }
         echo 'Error:'.$e->getMessage();
     }    
 }
@@ -706,7 +845,14 @@ function _calcAllowanceSub(
         $h_time_table_month,
         $h_divid,
         $h_closing_day,
-        $h_kind
+        $h_kind,
+        &$h_calc_day_start,
+        &$h_calc_day_end,
+        &$h_work_time_actualy_src,
+        &$h_work_time_actualy_dst,
+        &$h_deduction_time_actualy,
+        &$h_over_time_actualy,
+        &$h_charge_actualy
         ){
     try{
         //締日
@@ -751,7 +897,9 @@ function _calcAllowanceSub(
         }
         echo '実の締開始日：'.$a_clac_day_start.'<br>';
         echo '実の締終了日：'.$a_clac_day_end.'<br>';
-        
+        $h_calc_day_start = $a_clac_day_start;
+        $h_calc_day_end = $a_clac_day_end;
+                
         $a_calc_kind = '';  //計算方法
         $a_lower = '';      //下限
         $a_upper = '';      //上限
@@ -909,9 +1057,11 @@ function _calcAllowanceSub(
             $a_inc_bd = intval($h_divid);
             if (ctype_digit($a_time_total) == TRUE){
                 $a_time_total_dig = intval($a_time_total);
+                $h_work_time_actualy_src = $a_time_total_dig;
                 $a_syo = floor($a_time_total_dig / $a_inc_bd);
                 $a_amari = $a_time_total_dig % $a_inc_bd;
                 $a_time_total_dig = $a_inc_bd * $a_syo;
+                $h_work_time_actualy_dst = $a_time_total_dig;
                 echo '実作業時間合計：'.strval($a_time_total_dig).'<br>';
             }else{
                 //echo $a_time_start_minute_src.'なんで？<br>';
@@ -949,6 +1099,7 @@ function _calcAllowanceSub(
                         //控除あり
                         if ($h_divid != ''){
                             if (ctype_digit($h_divid) == TRUE){
+                                $h_deduction_time_actualy = $a_diff;    //分
                                 $a_charge_total = intval($a_unit) - (floor($a_diff / intval($h_divid)) * intval($a_deduction));
                                 $a_message = '';
                             }
@@ -961,6 +1112,7 @@ function _calcAllowanceSub(
                             //残業あり
                             if ($h_divid != ''){
                                 if (ctype_digit($h_divid) == TRUE){
+                                    $h_over_time_actualy = $a_diff;
                                     $a_charge_total = intval($a_unit) + (floor($a_diff / intval($h_divid)) * intval($a_overtime));
                                     $a_message = '';
                                 }
@@ -977,6 +1129,7 @@ function _calcAllowanceSub(
         }
         
         echo '作業金額合計：'.$a_charge_total.'<br>';
+        $h_charge_actualy = $a_charge_total;
         
     } catch (Exception $e) {
         echo 'Error:'.$e->getMessage();

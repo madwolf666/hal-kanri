@@ -56,6 +56,7 @@ $g_DB_m_user = "m_user";
 
 $g_DB_t_acceptance_ledger = "t_acceptance_ledger";
 $g_DB_t_agreement_ledger = "t_agreement_ledger";
+$g_DB_t_charge_calc = "t_charge_calc";    //[2017.11.29]要望
 $g_DB_t_contract_estimate = "t_contract_estimate";
 $g_DB_t_contract_end_report = "t_contract_end_report";
 $g_DB_t_contract_report = "t_contract_report";
@@ -124,6 +125,10 @@ $g_MENU_MAINTENANCE_90304 = 90304;    //お知らせ：削除
 $g_MENU_MAINTENANCE_90400 = 90400;    //送付状一覧
 $g_MENU_MAINTENANCE_90401 = 90401;    //送付状検索
 $g_MENU_MAINTENANCE_90411 = 90411;    //送付状Excelアップロード
+
+$g_MENU_MAINTENANCE_90500 = 90500;    //請求・支払計算結果一覧[2017.11.29]要望
+$g_MENU_MAINTENANCE_90501 = 90501;    //請求・支払計算結果検索[2017.11.29]要望
+$g_MENU_MAINTENANCE_90511 = 90511;    //勤怠表Excelアップロード[2017.11.29]要望
 
 //グラフ表示
 $g_MENU_CONTRACT_SHOW_CHART = 10001;

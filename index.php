@@ -742,6 +742,15 @@ if (!isset($_GET['mnu'])){
     case $GLOBALS['g_MENU_MAINTENANCE_90411']:   //送付状：アップロード
         header('Location: ./90411.php');
         break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90500']:   //請求・支払計算結果一覧[2017.11.29]要望
+        header('Location: ./90500.php');
+        break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90501']:   //請求・支払計算結果：検索[2017.11.29]要望
+        header('Location: ./90501.php');
+        break;
+    case $GLOBALS['g_MENU_MAINTENANCE_90511']:   //請求・支払計算結果：アップロード[2017.11.29]要望
+        header('Location: ./90511.php');
+        break;
     case $GLOBALS['g_MENU_CONTRACT_SHOW_CHART']:   //エンジニア：アップロード
         header('Location: ./show_chart.php?BAK='.$_GET['BAK'].'&NO='.$_GET['NO']);
         break;
