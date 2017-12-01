@@ -47,6 +47,7 @@ function upload_time_table_file()
         
     var a_fd = new FormData();
     a_fd.append('file', $('input[name="excel_file"]').prop('files')[0]);
+    a_fd.append('consumption_tax', m_consumption_tax);   //[2017.12.01]消費税率
     //a_fd.append("dir", $('#excel_file').val());
     //return true;
     

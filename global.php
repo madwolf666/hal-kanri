@@ -168,6 +168,7 @@ $g_EXCEL_CONTRACT_10105 = "contrcat_10105.xlsx";
 $g_EXCEL_CONTRACT_10107 = "contrcat_10107.xlsx";
 $g_EXCEL_CONTRACT_10200 = "contrcat_10200.xlsx";
 $g_EXCEL_CONTRACT_10300 = "contrcat_10300.xlsx";
+$g_EXCEL_CONTRACT_10301 = "contrcat_10301.xlsx";    #[2017.12.01]請求書
 $g_EXCEL_CONTRACT_10400 = "contrcat_10400.xlsx";
 $g_EXCEL_CONTRACT_10402 = "contrcat_10402.xlsx";
 $g_EXCEL_CONTRACT_10403 = "contrcat_10403.xlsx";

@@ -74,7 +74,7 @@ try{
     $a_sRet .= "                    <tr>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>得意先</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>契約形態</td>";
-    $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>件名</td>";
+    $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>件名</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>開始日</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_title2' style='width: 100px;' nowrap>終了日</td>";
     $a_sRet .= "                        <td rowspan='2' class='td_titleI' style='width: 100px;' nowrap>見積No.</td>";
@@ -178,7 +178,8 @@ try{
 
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$customer_name."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_contract_form."</td>";
-        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$subject."</td>";
+        #[2017.12.01]要望
+        $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'subject',$a_rec,1).">".$subject."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_start."</td>";
         $a_sRet_R .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$claim_agreement_end."</td>";
         $a_sRet_R .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text2($cr_id,$al_id,'accounts_estimate_no',$a_rec,1).">".$accounts_estimate_no."</td>";

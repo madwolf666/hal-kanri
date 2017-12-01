@@ -179,7 +179,8 @@ function calc_input_data(h_key, h_cr_id, h_sub_id, h_field, h_id, h_kind)
             a_keihi = 0;
         }
         a_zeinuki = parseInt(a_jisseki) + parseInt(a_keihi);
-        a_zeikomi = parseInt(a_jisseki)*a_consumption_tax + parseInt(a_keihi);
+        //端数切り捨て
+        a_zeikomi = Math.floor(parseInt(a_jisseki)*a_consumption_tax + parseInt(a_keihi));
         //alert(a_zeinuki);
         //alert(a_zeikomi);
         //alert(document.getElementById("accounts_tax_meter_noinclude" + h_id));
@@ -210,7 +211,8 @@ function calc_input_data(h_key, h_cr_id, h_sub_id, h_field, h_id, h_kind)
             a_keihi = 0;
         }
         a_zeinuki = parseInt(a_jisseki) + parseInt(a_keihi);
-        a_zeikomi = parseInt(a_jisseki)*a_consumption_tax + parseInt(a_keihi);
+        //端数切り捨て
+        a_zeikomi = Math.floor(parseInt(a_jisseki)*a_consumption_tax + parseInt(a_keihi));
         $("#payment_tax_meter_noinclude" + h_id).empty().append(a_zeinuki);
         $("#payment_tax_meter_include" + h_id).empty().append(a_zeikomi);
         entry_calc_data(h_key, h_cr_id, h_sub_id, 'payment_tax_meter_noinclude', h_id, h_kind, a_zeinuki);
@@ -253,5 +255,12 @@ function entry_calc_data(h_key, h_cr_id, h_sub_id, h_field, h_id, h_kind, h_val)
        complete: function (data) {
        }
     });
+}
+
+//Excelへ請求書帳出力
+function excel_out_10301(h_cname, h_date){
+    //alert(h_cname + "," + h_date);
+    location.href = m_parentURL + "excel_out_10301.php?CN=" + h_cname + "&DT=" + h_date;
+    return false;
 }
 

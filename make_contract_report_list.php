@@ -69,7 +69,9 @@ try{
     $a_sRet .= "            <div id='right_title' style='overflow:hidden; width: 500px; padding:0 0;'>";
     $a_sRet .= "                <table class='tbl_list' style='width: 8400px;'>";
     $a_sRet .= "                    <tr>";
+    #$a_sRet .= "                        <td colspan='20' class='td_title2' style='height: 25px;' nowrap>請求サイド</td>";
     $a_sRet .= "                        <td colspan='41' class='td_title2' style='height: 25px;' nowrap>請求サイド</td>";
+    #$a_sRet .= "                        <td colspan='16' class='td_title2' style='' nowrap>支払サイド</td>";
     $a_sRet .= "                        <td colspan='33' class='td_title2' style='' nowrap>支払サイド</td>";
     $a_sRet .= "                        <td colspan='2' class='td_title2' style='' nowrap>&nbsp;</td>";
     #$a_sRet .= "<td class='td_lineI' style='width: 100px;'><div class='myover' ".com_make_input_text($a_result['cr_id'],'check_date_start',$a_rec).">".str_replace("-", "/", $a_result['check_date_start'])."</td>";
@@ -150,6 +152,7 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>開始時間</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>終了時間</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>休憩時間</td>";
+    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>計算方法</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>基準単金</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>下限時間</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>上限時間</td>";
@@ -203,7 +206,7 @@ try{
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>発送</td>";
     $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>受理</td>";
     
-    $a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
+    #$a_sRet .= "                        <td class='td_title2' style='width: 100px;' nowrap>&nbsp;</td>";
 
     $a_sRet .= "                    </tr>";
     $a_sRet .= "                </table>";

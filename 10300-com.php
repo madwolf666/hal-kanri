@@ -119,7 +119,7 @@ $business_name = "";
 $business_name_phonetic = "";
 $payment_contract_form = "";
 $social_insurance = "";
-$payment_absence_deduction_subject = "";
+$payment_absence_deduction_subject = "";    #[2017.12.01]要望
 
 $payment_settlement_paymentday = "";
 
@@ -167,8 +167,10 @@ $ag_no = "";
 function set_10300_selectDB()
 {
     $a_sql_src = "SELECT t1.*,";
+    #[2017.12.01]要望
     $a_sql_src .= "
  t2.al_id
+,t2.subject AS acceptance_subject
 ,t2.accounts_estimate_no
 ,t2.accounts_contract_purchase_no
 ,t2.accounts_bai_previous_day
@@ -238,6 +240,10 @@ function set_10300_fromDB($a_result)
     $GLOBALS['payment_contract_form'] = $a_result['payment_contract_form'];
     $GLOBALS['social_insurance'] = $a_result['social_insurance'];
     $GLOBALS['payment_absence_deduction_subject'] = $a_result['payment_absence_deduction_subject'];
+    #[2017.12.01]要望
+    if ($a_result['acceptance_subject'] != ''){
+        $GLOBALS['subject'] = $a_result['acceptance_subject'];
+    }
     
     $GLOBALS['payment_settlement_paymentday'] = $a_result['payment_settlement_paymentday'];
 

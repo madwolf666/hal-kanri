@@ -17,6 +17,8 @@ $a_sTrace = "";
 //$a_sRet = $_FILES["file"]["tmp_name"];
 
 //$dir = $_POST["dir"];
+$a_consumption_tax = $_POST['consumption_tax'];   //[2017.12.01]消費税率
+#echo '消費税率：'.$a_consumption_tax.'<br>';
 
 $cr_id_array = [];
 
@@ -59,11 +61,14 @@ try {
             }
             //PHPExcelでは、rowは1始まり、colは0始まりのようである。
             //エンジニアNo.を取得
-            $a_engineer_no = $obj_sheet->getCellByColumnAndRow(9, 2)->getCalculatedValue();
+            $a_engineer_no = $obj_sheet->getCellByColumnAndRow(10, 3)->getCalculatedValue();
+            #$a_engineer_no = $obj_sheet->getCellByColumnAndRow(9, 2)->getCalculatedValue();
             $a_sTrace = 'エンジニアNo.：'.$a_engineer_no.'<br>';
             //報告日範囲を取得
             $a_time_table_year = $obj_sheet->getCellByColumnAndRow(0, 6)->getCalculatedValue();
-            $a_time_table_month = $obj_sheet->getCellByColumnAndRow(2, 6)->getCalculatedValue();
+            $a_time_table_month = $obj_sheet->getCellByColumnAndRow(3, 6)->getCalculatedValue();
+            #$a_time_table_year = $obj_sheet->getCellByColumnAndRow(0, 6)->getCalculatedValue();
+            #$a_time_table_month = $obj_sheet->getCellByColumnAndRow(2, 6)->getCalculatedValue();
             $a_sTrace = '年：'.$a_time_table_year.'<br>';
             $a_sTrace = '月：'.$a_time_table_month.'<br>';
             $a_row = 9;
@@ -380,10 +385,14 @@ function _adjustmentWorkTime(
         //--------------------------------------------------------------------------
         //時間刻み「日次」の値で作業開始・作業終了を調整する。
         //--------------------------------------------------------------------------
-        $h_time_start_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(4, $h_row)->getCalculatedValue());
+        $h_time_start_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(5, $h_row)->getCalculatedValue());
+        $h_time_start_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(6, $h_row)->getCalculatedValue());
+        $h_time_end_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(7, $h_row)->getCalculatedValue());
+        $h_time_end_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(8, $h_row)->getCalculatedValue());
+        /*$h_time_start_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(4, $h_row)->getCalculatedValue());
         $h_time_start_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(5, $h_row)->getCalculatedValue());
         $h_time_end_hour_src = strval($h_obj_sheet->getCellByColumnAndRow(6, $h_row)->getCalculatedValue());
-        $h_time_end_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(7, $h_row)->getCalculatedValue());
+        $h_time_end_minute_src = strval($h_obj_sheet->getCellByColumnAndRow(7, $h_row)->getCalculatedValue());*/
 
         //請求サイド
         $GLOBALS['a_sTrace'] = '### 請求サイド ###<br>';
@@ -597,11 +606,13 @@ function _adjustmentWorkTimeSub2(
 
             //実際の休憩時間を算出
             $h_break_time_actualy = 0;
-            $a_break_time_actualy_str = strval($h_obj_sheet->getCellByColumnAndRow(8, $h_row)->getCalculatedValue());
+            $a_break_time_actualy_str = strval($h_obj_sheet->getCellByColumnAndRow(9, $h_row)->getCalculatedValue());
+            #$a_break_time_actualy_str = strval($h_obj_sheet->getCellByColumnAndRow(8, $h_row)->getCalculatedValue());
             if (ctype_digit($a_break_time_actualy_str) == TRUE){
                 $h_break_time_actualy += intval($a_break_time_actualy_str) * 60;
             }
-            $a_break_time_actualy_str = strval($h_obj_sheet->getCellByColumnAndRow(9, $h_row)->getCalculatedValue());
+            $a_break_time_actualy_str = strval($h_obj_sheet->getCellByColumnAndRow(10, $h_row)->getCalculatedValue());
+            #$a_break_time_actualy_str = strval($h_obj_sheet->getCellByColumnAndRow(9, $h_row)->getCalculatedValue());
             if (ctype_digit($a_break_time_actualy_str) == TRUE){
                 $h_break_time_actualy += intval($a_break_time_actualy_str);
             }
@@ -670,6 +681,7 @@ function _calcAllowance(
         $GLOBALS['a_sTrace'] = '--請求サイドの計算--------------------------------------<br>';
         $a_calc_day_start_bill = 0;
         $a_calc_day_end_bill = 0;
+        $a_unit_bill = 0;
         $a_work_time_actualy_bill_src = 0;
         $a_work_time_actualy_bill_dst = 0;
         $a_deduction_time_actualy_bill = 0;
@@ -687,6 +699,7 @@ function _calcAllowance(
                 0,
                 $a_calc_day_start_bill,
                 $a_calc_day_end_bill,
+                $a_unit_bill,
                 $a_work_time_actualy_bill_src,
                 $a_work_time_actualy_bill_dst,
                 $a_deduction_time_actualy_bill,
@@ -699,6 +712,7 @@ function _calcAllowance(
         $GLOBALS['a_sTrace'] = '--支払いサイド①の計算--------------------------------------<br>';
         $a_calc_day_start_pay1 = 0;
         $a_calc_day_end_pay1 = 0;
+        $a_unit_pay1 = 0;
         $a_work_time_actualy_pay1_src = 0;
         $a_work_time_actualy_pay1_dst = 0;
         $a_deduction_time_actualy_pay1 = 0;
@@ -717,6 +731,7 @@ function _calcAllowance(
                 1,
                 $a_calc_day_start_pay1,
                 $a_calc_day_end_pay1,
+                $a_unit_pay1,
                 $a_work_time_actualy_pay1_src,
                 $a_work_time_actualy_pay1_dst,
                 $a_deduction_time_actualy_pay1,
@@ -728,6 +743,7 @@ function _calcAllowance(
         $GLOBALS['a_sTrace'] = '--支払いサイド②の計算--------------------------------------<br>';
         $a_calc_day_start_pay2 = 0;
         $a_calc_day_end_pay2 = 0;
+        $a_unit_pay2 = 0;
         $a_work_time_actualy_pay2_src = 0;
         $a_work_time_actualy_pay2_dst = 0;
         $a_deduction_time_actualy_pay2 = 0;
@@ -746,6 +762,7 @@ function _calcAllowance(
                 2,
                 $a_calc_day_start_pay2,
                 $a_calc_day_end_pay2,
+                $a_unit_pay2,
                 $a_work_time_actualy_pay2_src,
                 $a_work_time_actualy_pay2_dst,
                 $a_deduction_time_actualy_pay2,
@@ -776,6 +793,7 @@ function _calcAllowance(
                   cr_id,
                   calc_day_start_bill,
                   calc_day_end_bill,
+                  unit_bill,
                   work_time_actualy_bill_src,
                   work_time_actualy_bill_dst,
                   deduction_time_actualy_bill,
@@ -785,6 +803,7 @@ function _calcAllowance(
                   charge_bill,
                   calc_day_start_pay1,
                   calc_day_end_pay1,
+                  unit_pay1,
                   work_time_actualy_pay1_src,
                   work_time_actualy_pay1_dst,
                   deduction_time_actualy_pay1,
@@ -794,6 +813,7 @@ function _calcAllowance(
                   charge_pay1,
                   calc_day_start_pay2,
                   calc_day_end_pay2,
+                  unit_pay2,
                   work_time_actualy_pay2_src,
                   work_time_actualy_pay2_dst,
                   deduction_time_actualy_pay2,
@@ -806,6 +826,7 @@ function _calcAllowance(
                   :cr_id,
                   :calc_day_start_bill,
                   :calc_day_end_bill,
+                  :unit_bill,
                   :work_time_actualy_bill_src,
                   :work_time_actualy_bill_dst,
                   :deduction_time_actualy_bill,
@@ -815,6 +836,7 @@ function _calcAllowance(
                   :charge_bill,
                   :calc_day_start_pay1,
                   :calc_day_end_pay1,
+                  :unit_pay1,
                   :work_time_actualy_pay1_src,
                   :work_time_actualy_pay1_dst,
                   :deduction_time_actualy_pay1,
@@ -824,6 +846,7 @@ function _calcAllowance(
                   :charge_pay1,
                   :calc_day_start_pay2,
                   :calc_day_end_pay2,
+                  :unit_pay2,
                   :work_time_actualy_pay2_src,
                   :work_time_actualy_pay2_dst,
                   :deduction_time_actualy_pay2,
@@ -838,6 +861,7 @@ function _calcAllowance(
         
         com_pdo_bindValue($a_stmt, ':calc_day_start_bill', $a_calc_day_start_bill);
         com_pdo_bindValue($a_stmt, ':calc_day_end_bill', $a_calc_day_end_bill);
+        com_pdo_bindValue($a_stmt, ':unit_bill', $a_unit_bill);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_bill_src', $a_work_time_actualy_bill_src);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_bill_dst', $a_work_time_actualy_bill_dst);
         com_pdo_bindValue($a_stmt, ':deduction_time_actualy_bill', $a_deduction_time_actualy_bill);
@@ -848,6 +872,7 @@ function _calcAllowance(
 
         com_pdo_bindValue($a_stmt, ':calc_day_start_pay1', $a_calc_day_start_pay1);
         com_pdo_bindValue($a_stmt, ':calc_day_end_pay1', $a_calc_day_end_pay1);
+        com_pdo_bindValue($a_stmt, ':unit_pay1', $a_unit_pay1);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_pay1_src', $a_work_time_actualy_pay1_src);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_pay1_dst', $a_work_time_actualy_pay1_dst);
         com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay1', $a_deduction_time_actualy_pay1);
@@ -858,6 +883,7 @@ function _calcAllowance(
 
         com_pdo_bindValue($a_stmt, ':calc_day_start_pay2', $a_calc_day_start_pay2);
         com_pdo_bindValue($a_stmt, ':calc_day_end_pay2', $a_calc_day_end_pay2);
+        com_pdo_bindValue($a_stmt, ':unit_pay2', $a_unit_pay2);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_pay2_src', $a_work_time_actualy_pay2_src);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_pay2_dst', $a_work_time_actualy_pay2_dst);
         com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay2', $a_deduction_time_actualy_pay2);
@@ -865,6 +891,167 @@ function _calcAllowance(
         com_pdo_bindValue($a_stmt, ':charge_deduction_pay2', $a_charge_deduction_pay2);
         com_pdo_bindValue($a_stmt, ':charge_over_pay2', $a_charge_over_pay2);
         com_pdo_bindValue($a_stmt, ':charge_pay2', $a_charge_pay2);
+
+        $a_stmt->execute();
+        
+        //----------------------------------------------------------------------
+        //検収台帳へ反映
+        //----------------------------------------------------------------------
+        #消費税算出
+        $a_consumption_tax = 1;
+        //echo $GLOBALS['a_consumption_tax'].'<br>';
+        //echo gettype($GLOBALS['a_consumption_tax']).'<br>';
+        $a_split = explode(",", $GLOBALS['a_consumption_tax']);
+        //echo $a_split[0].'<br>';
+        //echo count($a_split).'<br>';
+        for ($a_cnt = count($a_split) - 1; $a_cnt >= 0; $a_cnt--){
+            #echo $a_split[$a_cnt - 1].'<br>';
+            $a_diff =
+                com_time_diff(
+                    strtotime($a_split[$a_cnt - 1]." 00:00:00"),
+                    strtotime($a_calc_day_end_bill." 00:00:00"),
+                    "d"
+                    );
+
+            if ($a_diff >= 0){
+                $a_consumption_tax = $a_split[$a_cnt];
+                $a_consumption_tax += 1.00;
+                break;
+            }
+            $a_cnt--;   //2つずらす必要あり
+        }
+        $GLOBALS['a_sTrace'] = '消費税：'.strval($a_consumption_tax).'<br>';
+        
+        $a_accounts_expenses = 0;  #売掛（諸経費）
+        $a_accounts_tax_meter_noinclude = 0;  #売掛（計（税抜）+諸経費）
+        $a_accounts_tax_meter_include = 0;  #売掛（計（税込））
+        $a_payment_commuting_expenses = 0;    #支払（交通費等）
+        $a_payment_tax_meter_noinclude = 0;  #売掛（計（税抜）+諸経費）
+        $a_payment_tax_meter_include = 0;  #売掛（計（税込））
+
+        #実働時間を分から時間に変更
+        $a_work_time_actualy_bill_dst = $a_work_time_actualy_bill_dst / 60;
+        $a_work_time_actualy_pay2_dst = $a_work_time_actualy_pay2_dst / 60;
+        
+        $a_isFound = false;
+        $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_acceptance_ledger']." WHERE (cr_id=:cr_id)";
+        #売上日が同じものを検出
+        $a_sql .= " AND (accounts_bai_previous_day=:accounts_bai_previous_day);";
+        $a_stmt = $h_conn->prepare($a_sql);
+        com_pdo_bindValue($a_stmt, ':cr_id', $GLOBALS['cr_id']);
+        com_pdo_bindValue($a_stmt, ':accounts_bai_previous_day', $a_calc_day_end_bill);
+        $a_stmt->execute();
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            if ($a_result['accounts_expenses'] != ''){
+                $a_accounts_expenses = intval($a_result['accounts_expenses']);  #売掛（諸経費）
+            }
+            if ($a_result['payment_commuting_expenses'] != ''){
+                $a_payment_commuting_expenses = intval($a_result['payment_commuting_expenses']);    #支払（交通費等）
+            }
+
+            $a_isFound = true;
+        }
+        
+        #諸経費・計の計算
+        $a_accounts_tax_meter_noinclude = $a_charge_bill + $a_accounts_expenses;  #売掛（計（税抜）+諸経費）
+        $a_accounts_tax_meter_include = floor(($a_charge_bill * $a_consumption_tax) + $a_accounts_expenses);  #売掛（計（税込））
+        $a_payment_tax_meter_noinclude = $a_charge_pay2 + $a_payment_commuting_expenses;  #売掛（計（税抜）+諸経費）
+        $a_payment_tax_meter_include = floor(($a_charge_pay2 * $a_consumption_tax) + $a_payment_commuting_expenses);  #売掛（計（税込））
+        
+        if ($a_isFound == false){
+            #新規追加
+            $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_acceptance_ledger'].
+                    "(cr_id,
+                      accounts_bai_previous_day,
+                      accounts_sales_will_amount,
+                      accounts_actual_working_hours,
+                      accounts_actual_amount_money,
+                      payment_acceptance_date,
+                      payment_schedule_amount,
+                      payment_actual_working_hours,
+                      payment_actual_amount_money,
+                      accounts_expenses,
+                      accounts_tax_meter_noinclude,
+                      accounts_tax_meter_include,
+                      payment_commuting_expenses,
+                      payment_tax_meter_noinclude,
+                      payment_tax_meter_include,
+                      reg_id,
+                      reg_date
+                    )VALUES(";
+            $a_sql .= ":cr_id,
+                      :accounts_bai_previous_day,
+                      :accounts_sales_will_amount,
+                      :accounts_actual_working_hours,
+                      :accounts_actual_amount_money,
+                      :payment_acceptance_date,
+                      :payment_schedule_amount,
+                      :payment_actual_working_hours,
+                      :payment_actual_amount_money,
+                      :accounts_expenses,
+                      :accounts_tax_meter_noinclude,
+                      :accounts_tax_meter_include,
+                      :payment_commuting_expenses,
+                      :payment_tax_meter_noinclude,
+                      :payment_tax_meter_include,
+                      :reg_id,
+                      :reg_date
+                    );";
+        }else{
+            #更新
+            $a_sql = "UPDATE ".$GLOBALS['g_DB_t_acceptance_ledger'].
+                    " SET 
+                      accounts_sales_will_amount=:accounts_sales_will_amount,
+                      accounts_actual_working_hours=:accounts_actual_working_hours,
+                      accounts_actual_amount_money=:accounts_actual_amount_money,
+                      payment_acceptance_date=:payment_acceptance_date,
+                      payment_schedule_amount=:payment_schedule_amount,
+                      payment_actual_working_hours=:payment_actual_working_hours,
+                      payment_actual_amount_money=:payment_actual_amount_money,
+                      accounts_expenses=:accounts_expenses,
+                      accounts_tax_meter_noinclude=:accounts_tax_meter_noinclude,
+                      accounts_tax_meter_include=:accounts_tax_meter_include,
+                      payment_commuting_expenses=:payment_commuting_expenses,
+                      payment_tax_meter_noinclude=:payment_tax_meter_noinclude,
+                      payment_tax_meter_include=:payment_tax_meter_include,
+                      upd_id=:upd_id,
+                      upd_date=:upd_date
+                    ";
+        }
+        
+        if ($a_isFound == false){
+            #新規追加
+        }else{
+            #更新
+            $a_sql .= " WHERE (cr_id=:cr_id) AND (accounts_bai_previous_day=:accounts_bai_previous_day)";
+        }
+        $a_stmt = $h_conn->prepare($a_sql);
+        com_pdo_bindValue($a_stmt, ':cr_id', $GLOBALS['cr_id']);
+        com_pdo_bindValue($a_stmt, ':accounts_bai_previous_day', $a_calc_day_end_bill);
+        com_pdo_bindValue($a_stmt, ':accounts_sales_will_amount', $a_unit_bill);
+        com_pdo_bindValue($a_stmt, ':accounts_actual_working_hours', $a_work_time_actualy_bill_dst);
+        com_pdo_bindValue($a_stmt, ':accounts_actual_amount_money', $a_charge_bill);
+        com_pdo_bindValue($a_stmt, ':payment_acceptance_date', $a_calc_day_end_bill);
+        com_pdo_bindValue($a_stmt, ':payment_schedule_amount', $a_unit_pay2);
+        com_pdo_bindValue($a_stmt, ':payment_actual_working_hours', $a_work_time_actualy_pay2_dst);
+        com_pdo_bindValue($a_stmt, ':payment_actual_amount_money', $a_charge_pay2);
+
+        com_pdo_bindValue($a_stmt, ':accounts_expenses', $a_accounts_expenses);
+        com_pdo_bindValue($a_stmt, ':accounts_tax_meter_noinclude', $a_accounts_tax_meter_noinclude);
+        com_pdo_bindValue($a_stmt, ':accounts_tax_meter_include', $a_accounts_tax_meter_include);
+        com_pdo_bindValue($a_stmt, ':payment_commuting_expenses', $a_payment_commuting_expenses);
+        com_pdo_bindValue($a_stmt, ':payment_tax_meter_noinclude', $a_payment_tax_meter_noinclude);
+        com_pdo_bindValue($a_stmt, ':payment_tax_meter_include', $a_payment_tax_meter_include);
+
+        if ($a_isFound == false){
+            #新規追加
+            com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
+            com_pdo_bindValue($a_stmt, ':reg_date', date("Y/m/d"));
+        } else {
+            #更新
+            com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
+            com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
+        }
 
         $a_stmt->execute();
 
@@ -888,6 +1075,7 @@ function _calcAllowanceSub(
         $h_kind,
         &$h_calc_day_start,
         &$h_calc_day_end,
+        &$h_unit,
         &$h_work_time_actualy_src,
         &$h_work_time_actualy_dst,
         &$h_deduction_time_actualy,
@@ -1064,6 +1252,8 @@ function _calcAllowanceSub(
         $GLOBALS['a_sTrace'] = '控除単価：'.$a_deduction.'<br>';   //控除単価
         $GLOBALS['a_sTrace'] = '残業単価：'.$a_overtime.'<br>';    //残業単価
 
+        $h_unit = $a_unit;
+        
         //タイムテーブルから対象範囲のデータを抽出する。
         $a_time_total = '';
         $a_sql = "SELECT SUM(";
