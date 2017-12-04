@@ -35,12 +35,20 @@ try{
     $a_sql .= " ON (s1.cr_id=s2.cr_id) AND (s1.cc_id=s2.cc_id)";
     #$a_sql .= " ON (s1.cr_id=s2.cr_id) AND (s1.accounts_bai_previous_day=s2.calc_day_end_bill)";
     #売上日が同じで客先が同じもの
-    $a_sql .= " WHERE (s1.customer_name=:customer_name) AND (s1.accounts_bai_previous_day=:accounts_bai_previous_day)";
-    $a_sql .= " ORDER BY s1.engineer_number;";
+    $a_sql .= " WHERE (s1.customer_name=:customer_name) AND (s1.accounts_bai_previous_day";
+    #$a_sql .= " WHERE (s1.customer_name=:customer_name) AND (s1.accounts_bai_previous_day=:accounts_bai_previous_day)";
+    #[2017.12.05]IS NULL対応
+    if ($get_date != ''){
+        $a_sql .= "='".$get_date."'";
+    }else{
+        $a_sql .= " IS NULL";
+    }
+    $a_sql .= ") ORDER BY s1.engineer_number;";
 
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':customer_name', $get_customer_name, PDO::PARAM_STR);
-    com_pdo_bindValue($a_stmt, ':accounts_bai_previous_day', $get_date);
+    #[2017.12.05]IS NULL対応
+    #com_pdo_bindValue($a_stmt, ':accounts_bai_previous_day', $get_date);
     $a_stmt->execute();
 
 } catch (PDOException $e){
@@ -70,7 +78,7 @@ while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
     
     $calc_day_start_bill = str_replace("-", "/", $a_result['calc_day_start_bill']);
     $calc_day_end_bill = str_replace("-", "/", $a_result['calc_day_end_bill']);
-
+    //echo $calc_day_start_bill."-".$calc_day_end_bill.'<br>';
     if ($a_recNum<5){
         
     }else{
