@@ -32,9 +32,11 @@ try{
     $a_sql .= ",s2.calc_day_start_bill,s2.calc_day_end_bill";
     $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ";
     $a_sql .= $GLOBALS['g_DB_t_charge_calc']." s2";
-    $a_sql .= " ON (s1.cr_id=s2.cr_id) AND (s1.accounts_bai_previous_day=s2.calc_day_end_bill)";
+    $a_sql .= " ON (s1.cr_id=s2.cr_id) AND (s1.cc_id=s2.cc_id)";
+    #$a_sql .= " ON (s1.cr_id=s2.cr_id) AND (s1.accounts_bai_previous_day=s2.calc_day_end_bill)";
     #売上日が同じで客先が同じもの
-    $a_sql .= " WHERE (s1.customer_name=:customer_name) AND (s1.accounts_bai_previous_day=:accounts_bai_previous_day);";
+    $a_sql .= " WHERE (s1.customer_name=:customer_name) AND (s1.accounts_bai_previous_day=:accounts_bai_previous_day)";
+    $a_sql .= " ORDER BY s1.engineer_number;";
 
     $a_stmt = $a_conn->prepare($a_sql);
     $a_stmt->bindParam(':customer_name', $get_customer_name, PDO::PARAM_STR);

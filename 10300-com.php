@@ -164,6 +164,8 @@ $payment_gross_profit_margin = "";
 
 $ag_no = "";
 
+$a_cc_id = "";
+
 function set_10300_selectDB()
 {
     $a_sql_src = "SELECT t1.*,";
@@ -209,6 +211,7 @@ function set_10300_selectDB()
 ,t2.payment_gross_profit
 ,t2.payment_gross_profit_margin
 ,t3.ag_no
+,t2.cc_id
         ";
     $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
     $a_sql_src .= " LEFT JOIN ";
@@ -291,6 +294,9 @@ function set_10300_fromDB($a_result)
 
     $GLOBALS['ag_no'] = $a_result['contract_number'];
     #$GLOBALS['ag_no'] = $a_result['ag_no'];
+
+    $GLOBALS['cc_id'] = $a_result['cc_id'];
+
 }
 
 ?>
