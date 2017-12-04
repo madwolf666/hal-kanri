@@ -775,8 +775,25 @@ function _calcAllowance(
         //----------------------------------------------------------------------
         //DBに登録
         //----------------------------------------------------------------------
+        $a_isFound = false;
+
         $h_conn->beginTransaction();  //トランザクション開始
 
+        $a_cc_id = 0;
+        $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_charge_calc'];
+        $a_sql .= " WHERE (engineer_no=:engineer_no)";
+        $a_sql .= " AND (cr_id=:cr_id)";
+        $a_sql .= " AND (calc_day_end_bill=:calc_day_end_bill);";
+        $a_stmt = $h_conn->prepare($a_sql);
+        $a_stmt->bindParam(':engineer_no', $h_engineer_no, PDO::PARAM_STR);
+        com_pdo_bindValue($a_stmt,':cr_id', $h_cr_id);
+        com_pdo_bindValue($a_stmt, ':calc_day_end_bill', $a_calc_day_end_bill);
+        $a_stmt->execute();
+        while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
+            $a_cc_id = $a_result['cc_id'];
+            $a_isFound = true;
+        }
+        /*
         $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_charge_calc'];
         $a_sql .= " WHERE (engineer_no=:engineer_no)";
         $a_sql .= " AND (cr_id=:cr_id)";
@@ -787,80 +804,130 @@ function _calcAllowance(
         com_pdo_bindValue($a_stmt,':cr_id', $h_cr_id);
         com_pdo_bindValue($a_stmt, ':calc_day_start_bill', $a_calc_day_start_bill);
         $a_stmt->execute();
+         */
 
-        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_charge_calc'].
-                "(engineer_no,
-                  cr_id,
-                  calc_day_start_bill,
-                  calc_day_end_bill,
-                  unit_bill,
-                  work_time_actualy_bill_src,
-                  work_time_actualy_bill_dst,
-                  deduction_time_actualy_bill,
-                  over_time_actualy_bill,
-                  charge_deduction_bill,
-                  charge_over_bill,
-                  charge_bill,
-                  calc_day_start_pay1,
-                  calc_day_end_pay1,
-                  unit_pay1,
-                  work_time_actualy_pay1_src,
-                  work_time_actualy_pay1_dst,
-                  deduction_time_actualy_pay1,
-                  over_time_actualy_pay1,
-                  charge_deduction_pay1,
-                  charge_over_pay1,
-                  charge_pay1,
-                  calc_day_start_pay2,
-                  calc_day_end_pay2,
-                  unit_pay2,
-                  work_time_actualy_pay2_src,
-                  work_time_actualy_pay2_dst,
-                  deduction_time_actualy_pay2,
-                  over_time_actualy_pay2,
-                  charge_deduction_pay2,
-                  charge_over_pay2,
-                  charge_pay2
-                )VALUES(";
-        $a_sql .= ":engineer_no,
-                  :cr_id,
-                  :calc_day_start_bill,
-                  :calc_day_end_bill,
-                  :unit_bill,
-                  :work_time_actualy_bill_src,
-                  :work_time_actualy_bill_dst,
-                  :deduction_time_actualy_bill,
-                  :over_time_actualy_bill,
-                  :charge_deduction_bill,
-                  :charge_over_bill,
-                  :charge_bill,
-                  :calc_day_start_pay1,
-                  :calc_day_end_pay1,
-                  :unit_pay1,
-                  :work_time_actualy_pay1_src,
-                  :work_time_actualy_pay1_dst,
-                  :deduction_time_actualy_pay1,
-                  :over_time_actualy_pay1,
-                  :charge_deduction_pay1,
-                  :charge_over_pay1,
-                  :charge_pay1,
-                  :calc_day_start_pay2,
-                  :calc_day_end_pay2,
-                  :unit_pay2,
-                  :work_time_actualy_pay2_src,
-                  :work_time_actualy_pay2_dst,
-                  :deduction_time_actualy_pay2,
-                  :over_time_actualy_pay2,
-                  :charge_deduction_pay2,
-                  :charge_over_pay2,
-                  :charge_pay2
-                );";
+        if ($a_isFound == false){
+            #新規
+            $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_charge_calc'].
+                    "(engineer_no,
+                      cr_id,
+                      calc_day_start_bill,
+                      calc_day_end_bill,
+                      unit_bill,
+                      work_time_actualy_bill_src,
+                      work_time_actualy_bill_dst,
+                      deduction_time_actualy_bill,
+                      over_time_actualy_bill,
+                      charge_deduction_bill,
+                      charge_over_bill,
+                      charge_bill,
+                      calc_day_start_pay1,
+                      calc_day_end_pay1,
+                      unit_pay1,
+                      work_time_actualy_pay1_src,
+                      work_time_actualy_pay1_dst,
+                      deduction_time_actualy_pay1,
+                      over_time_actualy_pay1,
+                      charge_deduction_pay1,
+                      charge_over_pay1,
+                      charge_pay1,
+                      calc_day_start_pay2,
+                      calc_day_end_pay2,
+                      unit_pay2,
+                      work_time_actualy_pay2_src,
+                      work_time_actualy_pay2_dst,
+                      deduction_time_actualy_pay2,
+                      over_time_actualy_pay2,
+                      charge_deduction_pay2,
+                      charge_over_pay2,
+                      charge_pay2
+                    )VALUES(";
+            $a_sql .= ":engineer_no,
+                      :cr_id,
+                      :calc_day_start_bill,
+                      :calc_day_end_bill,
+                      :unit_bill,
+                      :work_time_actualy_bill_src,
+                      :work_time_actualy_bill_dst,
+                      :deduction_time_actualy_bill,
+                      :over_time_actualy_bill,
+                      :charge_deduction_bill,
+                      :charge_over_bill,
+                      :charge_bill,
+                      :calc_day_start_pay1,
+                      :calc_day_end_pay1,
+                      :unit_pay1,
+                      :work_time_actualy_pay1_src,
+                      :work_time_actualy_pay1_dst,
+                      :deduction_time_actualy_pay1,
+                      :over_time_actualy_pay1,
+                      :charge_deduction_pay1,
+                      :charge_over_pay1,
+                      :charge_pay1,
+                      :calc_day_start_pay2,
+                      :calc_day_end_pay2,
+                      :unit_pay2,
+                      :work_time_actualy_pay2_src,
+                      :work_time_actualy_pay2_dst,
+                      :deduction_time_actualy_pay2,
+                      :over_time_actualy_pay2,
+                      :charge_deduction_pay2,
+                      :charge_over_pay2,
+                      :charge_pay2
+                    );";
+        }else{
+            #更新
+            $a_sql = "UPDATE ".$GLOBALS['g_DB_t_charge_calc'];
+            $a_sql .= " SET 
+                      calc_day_start_bill=:calc_day_start_bill,
+                      unit_bill=:unit_bill,
+                      work_time_actualy_bill_src=:work_time_actualy_bill_src,
+                      work_time_actualy_bill_dst=:work_time_actualy_bill_dst,
+                      deduction_time_actualy_bill=:deduction_time_actualy_bill,
+                      over_time_actualy_bill=:over_time_actualy_bill,
+                      charge_deduction_bill=:charge_deduction_bill,
+                      charge_over_bill=:charge_over_bill,
+                      charge_bill=:charge_bill,
+                      calc_day_start_pay1=:calc_day_start_pay1,
+                      calc_day_end_pay1=:calc_day_end_pay1,
+                      unit_pay1=:unit_pay1,
+                      work_time_actualy_pay1_src=:work_time_actualy_pay1_src,
+                      work_time_actualy_pay1_dst=:work_time_actualy_pay1_dst,
+                      deduction_time_actualy_pay1=:deduction_time_actualy_pay1,
+                      over_time_actualy_pay1=:over_time_actualy_pay1,
+                      charge_deduction_pay1=:charge_deduction_pay1,
+                      charge_over_pay1=:charge_over_pay1,
+                      charge_pay1=:charge_pay1,
+                      calc_day_start_pay2=:calc_day_start_pay2,
+                      calc_day_end_pay2=:calc_day_end_pay2,
+                      unit_pay2=:unit_pay2,
+                      work_time_actualy_pay2_src=:work_time_actualy_pay2_src,
+                      work_time_actualy_pay2_dst=:work_time_actualy_pay2_dst,
+                      deduction_time_actualy_pay2=:deduction_time_actualy_pay2,
+                      over_time_actualy_pay2=:over_time_actualy_pay2,
+                      charge_deduction_pay2=:charge_deduction_pay2,
+                      charge_over_pay2=:charge_over_pay2,
+                      charge_pay2=:charge_pay2
+                      ";
+        }
+        if ($a_isFound == false){
+            #新規
+        }else{
+            #更新
+            $a_sql .= " WHERE (cc_id=:cc_id);";
+        }
         $a_stmt = $h_conn->prepare($a_sql);
-        $a_stmt->bindParam(':engineer_no', $h_engineer_no, PDO::PARAM_STR);
-        com_pdo_bindValue($a_stmt, ':cr_id', $GLOBALS['cr_id']);
+        if ($a_isFound == false){
+            #新規
+            $a_stmt->bindParam(':engineer_no', $h_engineer_no, PDO::PARAM_STR);
+            com_pdo_bindValue($a_stmt, ':cr_id', $GLOBALS['cr_id']);
+            com_pdo_bindValue($a_stmt, ':calc_day_end_bill', $a_calc_day_end_bill);
+        }else{
+            #更新
+            com_pdo_bindValue($a_stmt, ':cc_id', $a_cc_id);
+        }
         
         com_pdo_bindValue($a_stmt, ':calc_day_start_bill', $a_calc_day_start_bill);
-        com_pdo_bindValue($a_stmt, ':calc_day_end_bill', $a_calc_day_end_bill);
         com_pdo_bindValue($a_stmt, ':unit_bill', $a_unit_bill);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_bill_src', $a_work_time_actualy_bill_src);
         com_pdo_bindValue($a_stmt, ':work_time_actualy_bill_dst', $a_work_time_actualy_bill_dst);
@@ -894,6 +961,13 @@ function _calcAllowance(
 
         $a_stmt->execute();
         
+        if ($a_isFound == false){
+            #新規
+            $a_cc_id = $h_conn->lastInsertId();
+        }else{
+            #更新
+        }
+
         //----------------------------------------------------------------------
         //検収台帳へ反映
         //----------------------------------------------------------------------
@@ -977,7 +1051,8 @@ function _calcAllowance(
                       payment_tax_meter_noinclude,
                       payment_tax_meter_include,
                       reg_id,
-                      reg_date
+                      reg_date,
+                      cc_id
                     )VALUES(";
             $a_sql .= ":cr_id,
                       :accounts_bai_previous_day,
@@ -995,7 +1070,8 @@ function _calcAllowance(
                       :payment_tax_meter_noinclude,
                       :payment_tax_meter_include,
                       :reg_id,
-                      :reg_date
+                      :reg_date,
+                      :cc_id
                     );";
         }else{
             #更新
@@ -1015,7 +1091,8 @@ function _calcAllowance(
                       payment_tax_meter_noinclude=:payment_tax_meter_noinclude,
                       payment_tax_meter_include=:payment_tax_meter_include,
                       upd_id=:upd_id,
-                      upd_date=:upd_date
+                      upd_date=:upd_date,
+                      cc_id=:cc_id
                     ";
         }
         
@@ -1052,6 +1129,8 @@ function _calcAllowance(
             com_pdo_bindValue($a_stmt, ':upd_id', $_SESSION['hal_idx']);
             com_pdo_bindValue($a_stmt, ':upd_date', date("Y/m/d"));
         }
+
+        com_pdo_bindValue($a_stmt, ':cc_id', $a_cc_id);
 
         $a_stmt->execute();
 
