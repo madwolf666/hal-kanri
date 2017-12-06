@@ -19,7 +19,9 @@ require_once('./header.php');
 
 <form action="" method="post">
 <center>
-    <font color="#ff0000">※アップロードするExcelファイルもしくはzipファイルを選択して下さい。</font>
+    <font color="#ff0000">※アップロードするExcelファイル、もしくはzipファイルを選択して下さい。</font>
+    <br>
+    <font color="#ff0000">（zipの場合、含めるExcelファイル名とzipファイル名に日本語を含めないでください）</font>
     <br>
     <font color="#ff0000">（Excel2007以降の形式で指定して下さい。）</font>
     <br>
