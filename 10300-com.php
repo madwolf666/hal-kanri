@@ -114,7 +114,8 @@ $claim_contract_form = "";
 $subject = "";
 $claim_agreement_start = "";
 $claim_agreement_end = "";
-
+$claim_settlement_paymentday = "";  #[2017.12.06]
+        
 $business_name = "";
 $business_name_phonetic = "";
 $payment_contract_form = "";
@@ -237,6 +238,7 @@ function set_10300_fromDB($a_result)
     $GLOBALS['subject'] = $a_result['subject'];
     $GLOBALS['claim_agreement_start'] = str_replace("-", "/", $a_result['claim_agreement_start']);
     $GLOBALS['claim_agreement_end'] = str_replace("-", "/", $a_result['claim_agreement_end']);
+    $GLOBALS['claim_settlement_paymentday'] = $a_result['claim_settlement_paymentday']; #[2017.12.06]
 
     $GLOBALS['business_name'] = $a_result['business_name'];
     $GLOBALS['business_name_phonetic'] = $a_result['business_name_phonetic'];

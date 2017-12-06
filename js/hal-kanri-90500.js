@@ -79,22 +79,21 @@ function upload_time_table_file()
 }
 
 //送付状機能選択
-function choice_covering_letter_method(h_no)
+function choice_charge_calc_method(h_no)
 {
-    //alert(h_no);
     /**/
     m_ProgressMsg('データ取得中です......<br><img src="./images/upload.gif" /> ');
     
     $.ajax({
-        url: m_parentURL + "choice_covering_letter_method.php",
+        url: m_parentURL + "choice_charge_calc_method.php",
         type: 'POST',
         dataType: "html",
         async: true,
         data:{
-            'entry_no': h_no
+            'cc_id': h_no
         },
         success: function(data, dataType){
-            $("#my-covering_letter").empty().append(data);
+            $("#my-charge-calc").empty().append(data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(errorThrown.message);
@@ -105,4 +104,44 @@ function choice_covering_letter_method(h_no)
     });
     /**/
     show_popup();
+}
+
+function unregist_charge_calc(h_no, h_eno, h_sd, h_ed)
+{
+    //alert(h_no + "," + h_eno + "," + h_sd + "," + h_ed);
+    var a_idx = "";
+    a_sKind = '削除';
+
+    if (!confirm("現在行を" + a_sKind + "します。よろしいですか？")) return;
+    m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
+    //alert($('#inp_engineer_no').val());
+    $.ajax({
+        url: m_parentURL + "unregist_charge_calc.php",
+        type: 'POST',
+        dataType: "html",
+        async: true,
+        data:{
+            'no': h_no,
+            'eno': h_eno,
+            'sd': h_sd,
+            'ed': h_ed,
+        },
+        success: function(data, dataType){
+            if (data == 'OK'){
+                alert(a_sKind + "しました。");
+                //$.unblockUI();
+                //document.location.href = "./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90100']; ?>";
+                location.href = "./index.php?mnu=90500";
+            }else{
+                $("#my-result").empty().append(data);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown.message);
+        },
+       complete: function (data) {
+            $.unblockUI();
+       }
+   });
+
 }

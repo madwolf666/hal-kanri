@@ -98,8 +98,22 @@ while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
         #支払日の計算（J10）
         if ($accounts_bai_previous_day != ''){
             $a_split = explode("/", $accounts_bai_previous_day);
-            $a_clac_day_pay = date("Y/m/d", strtotime($a_split[0]."/".$a_split[1]."/01 2 month"));
-            $a_clac_day_pay = date("Y/m/d", strtotime($a_clac_day_pay." -1 day"));
+            #[2017.12.01]
+            if (($GLOBALS['claim_settlement_paymentday'] == '') || ($GLOBALS['claim_settlement_paymentday'] == '翌月末')){
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_split[0]."/".$a_split[1]."/01 2 month"));
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_clac_day_pay." -1 day"));
+            }elseif ($GLOBALS['claim_settlement_paymentday'] == '翌月25日'){
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_split[0]."/".$a_split[1]."/25 1 month"));
+            }elseif ($GLOBALS['claim_settlement_paymentday'] == '翌々月10日'){
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_split[0]."/".$a_split[1]."/10 2 month"));
+            }elseif ($GLOBALS['claim_settlement_paymentday'] == '翌々月20日'){
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_split[0]."/".$a_split[1]."/20 2 month"));
+            }elseif ($GLOBALS['claim_settlement_paymentday'] == '翌々月25日'){
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_split[0]."/".$a_split[1]."/25 2 month"));
+            }elseif ($GLOBALS['claim_settlement_paymentday'] == '翌々月末'){
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_split[0]."/".$a_split[1]."/01 3 month"));
+                $a_clac_day_pay = date("Y/m/d", strtotime($a_clac_day_pay." -1 day"));
+            }
             com_setValue_Date($a_clac_day_pay, $obj_sheet, "J10", 'yyyy年m月d日');
         }
     }

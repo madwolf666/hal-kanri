@@ -2326,3 +2326,11 @@ function set_jigyousya_info(h_src, h_dst)
         //事業所名・事業所名を入力可とし、空を設定
     }
 }
+
+//給与計算
+function confirm_allowance(h_no){
+    var  a_val = $('[name=optAllowance] option:selected').val();
+    //alert(h_no + "," + a_val);
+    location.href = m_parentURL + "excel_out_10108.php?NO=" + h_no + "&KIND=" + a_val;
+    return false;
+}

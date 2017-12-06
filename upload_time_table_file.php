@@ -7,6 +7,16 @@
  */
 
 require_once('./global.php');
+
+$zip_array = [];
+/*
+com_unzip($GLOBALS['g_EXCEL_TMP_PATH']."/勤務表（雛形）.zip", $GLOBALS['g_EXCEL_TMP_PATH'], 0755, $zip_array);
+foreach ($zip_array as $a_zip){
+    echo $a_zip.'<br>';
+}
+return;
+*/
+
 require_once($GLOBALS['g_EXCEL_LIB_PATH']."PHPExcel.php");
 require_once($GLOBALS['g_EXCEL_LIB_PATH']."PHPExcel/IOFactory.php");
 
@@ -26,275 +36,322 @@ try {
     /**/
     if ($_FILES["file"]["tmp_name"]) {
         list($file_name,$file_type) = explode(".",$_FILES['file']['name']);
+        #echo $file_name.'<br>';
         //ファイル名を日付と時刻にしている。
-        $name = date("YmdHis").".".$file_type;
+        $target_dir = date("YmdHis");
+        $name = $target_dir.".".$file_type;
         //$file = "./tmp";
         $file = $GLOBALS['g_EXCEL_TMP_PATH'];
         //読み書きするファイルのパスを設定
-        $target_file = $file.$name;
+        $target_file_src = $file.$name;
         //$a_sRet = $target_file;
         //ディレクトリを作成してその中にアップロードしている。
         if(!file_exists($file)){
             mkdir($file,0755);
         }
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
-            chmod($target_file, 0644);
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file_src)) {
+            chmod($target_file_src, 0644);
             //var_dump($dir."/".$name);
         }
     /**/
-        //$target_file = $GLOBALS['g_EXCEL_TMP_PATH']."time-table.xlsx";
-        $a_sTrace = $target_file.'<br>';
-        try{
-            //DBからユーザ情報取得
-            $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
-            $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        if (strtolower($file_type) == 'xlsx'){
+            array_push($zip_array, $target_file_src);
+        }elseif (strtolower($file_type) == 'zip') {
+            com_unzip($target_file_src, $GLOBALS['g_EXCEL_TMP_PATH'].$target_dir, 0755, $zip_array);
+        }
+        
+        foreach ($zip_array as $target_file){
 
-            //1. リーダーを作成して既存ファイルを読み込む
-            $obj_reader = PHPExcel_IOFactory::createReader('Excel2007');
-            $obj_book   = $obj_reader->load($target_file);
-            if ($obj_book == NULL){
-                $a_sTrace = 'book is null<br>';
-            }
-            $obj_sheet = $obj_book->getSheetByName("勤務表");
-            if ($obj_sheet == NULL){
-                $a_sTrace = 'sheet is null<br>';
-            }
-            //PHPExcelでは、rowは1始まり、colは0始まりのようである。
-            //エンジニアNo.を取得
-            $a_engineer_no = $obj_sheet->getCellByColumnAndRow(10, 3)->getCalculatedValue();
-            #$a_engineer_no = $obj_sheet->getCellByColumnAndRow(9, 2)->getCalculatedValue();
-            $a_sTrace = 'エンジニアNo.：'.$a_engineer_no.'<br>';
-            //報告日範囲を取得
-            $a_time_table_year = $obj_sheet->getCellByColumnAndRow(0, 6)->getCalculatedValue();
-            $a_time_table_month = $obj_sheet->getCellByColumnAndRow(3, 6)->getCalculatedValue();
-            #$a_time_table_year = $obj_sheet->getCellByColumnAndRow(0, 6)->getCalculatedValue();
-            #$a_time_table_month = $obj_sheet->getCellByColumnAndRow(2, 6)->getCalculatedValue();
-            $a_sTrace = '年：'.$a_time_table_year.'<br>';
-            $a_sTrace = '月：'.$a_time_table_month.'<br>';
-            $a_row = 9;
-            
-            //報告日が空になるまで繰り返す。
-            $a_time_table_day_last = '';
-            $a_time_table_day = strval($obj_sheet->getCellByColumnAndRow(0, $a_row)->getCalculatedValue());
-            while ($a_time_table_day != ''){
-                $a_sTrace = '----------------------------------------<br>';
-                $a_sTrace = '日付：'.$a_time_table_day.'<br>';
-                $a_time_table_day_last = $a_time_table_day;
-                //合致する契約レポートから情報を抽出する
-                $a_bRet =
-                        _getContractReport(
+            //$target_file = $GLOBALS['g_EXCEL_TMP_PATH']."time-table.xlsx";
+
+            $a_sTrace = $target_file.'<br>';
+            try{
+                //DBからユーザ情報取得
+                $a_conn = new PDO("mysql:server=".$GLOBALS['g_DB_server'].";dbname=".$GLOBALS['g_DB_name'].";charset=utf8mb4", $GLOBALS['g_DB_uid'], $GLOBALS['g_DB_pwd']);
+                $a_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                //1. リーダーを作成して既存ファイルを読み込む
+                $obj_reader = PHPExcel_IOFactory::createReader('Excel2007');
+                $obj_book   = $obj_reader->load($target_file);
+                if ($obj_book == NULL){
+                    $a_sTrace = 'book is null<br>';
+                }
+                $obj_sheet = $obj_book->getSheetByName("勤務表");
+                if ($obj_sheet == NULL){
+                    $a_sTrace = 'sheet is null<br>';
+                }
+                //PHPExcelでは、rowは1始まり、colは0始まりのようである。
+                //エンジニアNo.を取得
+                $a_engineer_no = $obj_sheet->getCellByColumnAndRow(10, 3)->getCalculatedValue();
+                #$a_engineer_no = $obj_sheet->getCellByColumnAndRow(9, 2)->getCalculatedValue();
+                $a_sTrace = 'エンジニアNo.：'.$a_engineer_no.'<br>';
+                //報告日範囲を取得
+                $a_time_table_year = $obj_sheet->getCellByColumnAndRow(0, 6)->getCalculatedValue();
+                $a_time_table_month = $obj_sheet->getCellByColumnAndRow(3, 6)->getCalculatedValue();
+                #$a_time_table_year = $obj_sheet->getCellByColumnAndRow(0, 6)->getCalculatedValue();
+                #$a_time_table_month = $obj_sheet->getCellByColumnAndRow(2, 6)->getCalculatedValue();
+                $a_sTrace = '年：'.$a_time_table_year.'<br>';
+                $a_sTrace = '月：'.$a_time_table_month.'<br>';
+                $a_row = 9;
+
+                //報告日が空になるまで繰り返す。
+                $a_time_table_day_last = '';
+                $a_time_table_day = strval($obj_sheet->getCellByColumnAndRow(0, $a_row)->getCalculatedValue());
+                $a_isOk = false;    #[2017.12.06]
+                while ($a_time_table_day != ''){
+                    $a_sTrace = '----------------------------------------<br>';
+                    $a_sTrace = '日付：'.$a_time_table_day.'<br>';
+                    $a_time_table_day_last = $a_time_table_day;
+                    //合致する契約レポートから情報を抽出する
+                    $a_bRet =
+                            _getContractReport(
+                                    $a_conn,
+                                    $a_engineer_no,
+                                    $a_time_table_year,
+                                    $a_time_table_month,
+                                    $a_time_table_day
+                                    );
+                    if ($a_bRet == true){
+                        $a_isOk = true;    #[2017.12.06]
+
+                        $a_work_time_contract = 0;
+                        $a_break_time_contract = 0;
+
+                        $a_time_start_hour_src = '';
+                        $a_time_start_minute_src = '';
+                        $a_time_end_hour_src = '';
+                        $a_time_end_minute_src = '';
+
+                        $a_time_start_minute_dst_bill = '';
+                        $a_time_end_minute_dst_bill = '';
+
+                        $a_time_start_minute_dst_pay1 = '';
+                        $a_time_end_minute_dst_pay1 = '';
+
+                        $a_time_start_minute_dst_pay2 = '';
+                        $a_time_end_minute_dst_pay2 = '';
+
+                        $a_work_time_actualy_bill = 0;
+                        $a_break_time_actualy_bill = 0;
+                        $a_deduction_time_actualy_bill = 0;
+                        $a_over_time_actualy_bill = 0;
+
+                        $a_work_time_actualy_pay1 = 0;
+                        $a_break_time_actualy_pay1 = 0;
+                        $a_deduction_time_actualy_pay1 = 0;
+                        $a_over_time_actualy_pay1 = 0;
+
+                        $a_work_time_actualy_pay2 = 0;
+                        $a_break_time_actualy_pay2 = 0;
+                        $a_deduction_time_actualy_pay2 = 0;
+                        $a_over_time_actualy_pay2 = 0;
+
+                        //時間刻み「日次」の値で作業開始・作業終了を調整する。
+                        _adjustmentWorkTime(
+                                $obj_sheet,
+                                $a_row,
+                                $a_time_table_year,
+                                $a_time_table_month,
+                                $a_time_table_day,
+                                $a_work_time_contract,
+                                $a_break_time_contract,
+                                $a_time_start_hour_src,
+                                $a_time_start_minute_src,
+                                $a_time_end_hour_src,
+                                $a_time_end_minute_src,
+                                $a_time_start_minute_dst_bill,
+                                $a_time_end_minute_dst_bill,
+                                $a_time_start_minute_dst_pay1,
+                                $a_time_end_minute_dst_pay1,
+                                $a_time_start_minute_dst_pay2,
+                                $a_time_end_minute_dst_pay2,
+                                $a_work_time_actualy_bill,
+                                $a_break_time_actualy_bill,
+                                $a_deduction_time_actualy_bill,
+                                $a_over_time_actualy_bill,
+                                $a_work_time_actualy_pay1,
+                                $a_break_time_actualy_pay1,
+                                $a_deduction_time_actualy_pay1,
+                                $a_over_time_actualy_pay1,
+                                $a_work_time_actualy_pay2,
+                                $a_break_time_actualy_pay2,
+                                $a_deduction_time_actualy_pay2,
+                                $a_over_time_actualy_pay2
+                                );
+
+                        $a_conn->beginTransaction();  //トランザクション開始
+
+                        //DBから該報告日のレコードを削除
+                        $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_time_table'];
+                        $a_sql .= " WHERE (engineer_no=:engineer_no)";
+                        $a_sql .= " AND (work_day=:work_day);";
+                        $a_stmt = $a_conn->prepare($a_sql);
+                        $a_stmt->bindParam(':engineer_no', $a_engineer_no, PDO::PARAM_STR);
+                        com_pdo_bindValue($a_stmt,':work_day', $a_time_table_year."/".$a_time_table_month."/".$a_time_table_day);
+                        $a_stmt->execute();
+
+                        //DBから該報告日のレコードを削除
+                        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_time_table'].
+                                "(engineer_no,
+                                  work_day,
+                                  cr_id,
+                                  work_time_contract,
+                                  break_time_contract,
+                                  start_hour_src,
+                                  start_minute_src,
+                                  end_hour_src,
+                                  end_minute_src,
+                                  start_minute_dst_bill,
+                                  end_minute_dst_bill,
+                                  start_minute_dst_pay1,
+                                  end_minute_dst_pay1,
+                                  start_minute_dst_pay2,
+                                  end_minute_dst_pay2,
+                                  work_time_actualy_bill,
+                                  break_time_actualy_bill,
+                                  deduction_time_actualy_bill,
+                                  over_time_actualy_bill,
+                                  work_time_actualy_pay1,
+                                  break_time_actualy_pay1,
+                                  deduction_time_actualy_pay1,
+                                  over_time_actualy_pay1,
+                                  work_time_actualy_pay2,
+                                  break_time_actualy_pay2,
+                                  deduction_time_actualy_pay2,
+                                  over_time_actualy_pay2
+                                )VALUES(";
+                        $a_sql .= ":engineer_no,
+                                  :work_day,
+                                  :cr_id,
+                                  :work_time_contract,
+                                  :break_time_contract,
+                                  :start_hour_src,
+                                  :start_minute_src,
+                                  :end_hour_src,
+                                  :end_minute_src,
+                                  :start_minute_dst_bill,
+                                  :end_minute_dst_bill,
+                                  :start_minute_dst_pay1,
+                                  :end_minute_dst_pay1,
+                                  :start_minute_dst_pay2,
+                                  :end_minute_dst_pay2,
+                                  :work_time_actualy_bill,
+                                  :break_time_actualy_bill,
+                                  :deduction_time_actualy_bill,
+                                  :over_time_actualy_bill,
+                                  :work_time_actualy_pay1,
+                                  :break_time_actualy_pay1,
+                                  :deduction_time_actualy_pay1,
+                                  :over_time_actualy_pay1,
+                                  :work_time_actualy_pay2,
+                                  :break_time_actualy_pay2,
+                                  :deduction_time_actualy_pay2,
+                                  :over_time_actualy_pay2
+                                );";
+                        $a_stmt = $a_conn->prepare($a_sql);
+                        $a_stmt->bindParam(':engineer_no', $a_engineer_no, PDO::PARAM_STR);
+                        com_pdo_bindValue($a_stmt,':work_day', $a_time_table_year."/".$a_time_table_month."/".$a_time_table_day);
+                        com_pdo_bindValue($a_stmt, ':cr_id', $GLOBALS['cr_id']);
+                        com_pdo_bindValue($a_stmt, ':work_time_contract', $a_work_time_contract);
+                        com_pdo_bindValue($a_stmt, ':break_time_contract', $a_break_time_contract);
+
+                        $a_stmt->bindParam(':start_hour_src', $a_time_start_hour_src, PDO::PARAM_STR);
+                        $a_stmt->bindParam(':start_minute_src', $a_time_start_minute_src, PDO::PARAM_STR);
+                        $a_stmt->bindParam(':end_hour_src', $a_time_end_hour_src, PDO::PARAM_STR);
+                        $a_stmt->bindParam(':end_minute_src', $a_time_end_minute_src, PDO::PARAM_STR);
+
+                        $a_stmt->bindParam(':start_minute_dst_bill', $a_time_start_minute_dst_bill, PDO::PARAM_STR);
+                        $a_stmt->bindParam(':end_minute_dst_bill', $a_time_end_minute_dst_bill, PDO::PARAM_STR);
+
+                        $a_stmt->bindParam(':start_minute_dst_pay1', $a_time_start_minute_dst_pay1, PDO::PARAM_STR);
+                        $a_stmt->bindParam(':end_minute_dst_pay1', $a_time_end_minute_dst_pay1, PDO::PARAM_STR);
+
+                        $a_stmt->bindParam(':start_minute_dst_pay2', $a_time_start_minute_dst_pay2, PDO::PARAM_STR);
+                        $a_stmt->bindParam(':end_minute_dst_pay2', $a_time_end_minute_dst_pay2, PDO::PARAM_STR);
+
+                        com_pdo_bindValue($a_stmt, ':work_time_actualy_bill', $a_work_time_actualy_bill);
+                        com_pdo_bindValue($a_stmt, ':break_time_actualy_bill', $a_break_time_actualy_bill);
+                        com_pdo_bindValue($a_stmt, ':deduction_time_actualy_bill', $a_deduction_time_actualy_bill);
+                        com_pdo_bindValue($a_stmt, ':over_time_actualy_bill', $a_over_time_actualy_bill);
+
+                        com_pdo_bindValue($a_stmt, ':work_time_actualy_pay1', $a_work_time_actualy_pay1);
+                        com_pdo_bindValue($a_stmt, ':break_time_actualy_pay1', $a_break_time_actualy_pay1);
+                        com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay1', $a_deduction_time_actualy_pay1);
+                        com_pdo_bindValue($a_stmt, ':over_time_actualy_pay1', $a_over_time_actualy_pay1);
+
+                        com_pdo_bindValue($a_stmt, ':work_time_actualy_pay2', $a_work_time_actualy_pay2);
+                        com_pdo_bindValue($a_stmt, ':break_time_actualy_pay2', $a_break_time_actualy_pay2);
+                        com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay2', $a_deduction_time_actualy_pay2);
+                        com_pdo_bindValue($a_stmt, ':over_time_actualy_pay2', $a_over_time_actualy_pay2);
+
+                        $a_stmt->execute();
+
+                        $a_conn->commit();    //コミット
+                    }
+
+                    //日毎に作業時間を調整する。
+                    $a_row++;
+                    $a_time_table_day = $obj_sheet->getCellByColumnAndRow(0, $a_row)->getCalculatedValue();
+                }
+
+                //print_r($GLOBALS['cr_id_array']);
+                $a_sTrace = '<br>';
+
+                if ($a_isOk == true){    #[2017.12.06]
+                    //給与の計算
+                    foreach ($GLOBALS['cr_id_array'] as $a_cr_id){
+                        _calcAllowance(
                                 $a_conn,
                                 $a_engineer_no,
                                 $a_time_table_year,
                                 $a_time_table_month,
-                                $a_time_table_day
+                                $a_time_table_day_last,
+                                $a_cr_id
                                 );
-                if ($a_bRet == true){
-                    $a_work_time_contract = 0;
-                    $a_break_time_contract = 0;
-
-                    $a_time_start_hour_src = '';
-                    $a_time_start_minute_src = '';
-                    $a_time_end_hour_src = '';
-                    $a_time_end_minute_src = '';
-                    
-                    $a_time_start_minute_dst_bill = '';
-                    $a_time_end_minute_dst_bill = '';
-
-                    $a_time_start_minute_dst_pay1 = '';
-                    $a_time_end_minute_dst_pay1 = '';
-
-                    $a_time_start_minute_dst_pay2 = '';
-                    $a_time_end_minute_dst_pay2 = '';
-                    
-                    $a_work_time_actualy_bill = 0;
-                    $a_break_time_actualy_bill = 0;
-                    $a_deduction_time_actualy_bill = 0;
-                    $a_over_time_actualy_bill = 0;
-
-                    $a_work_time_actualy_pay1 = 0;
-                    $a_break_time_actualy_pay1 = 0;
-                    $a_deduction_time_actualy_pay1 = 0;
-                    $a_over_time_actualy_pay1 = 0;
-
-                    $a_work_time_actualy_pay2 = 0;
-                    $a_break_time_actualy_pay2 = 0;
-                    $a_deduction_time_actualy_pay2 = 0;
-                    $a_over_time_actualy_pay2 = 0;
-
-                    //時間刻み「日次」の値で作業開始・作業終了を調整する。
-                    _adjustmentWorkTime(
-                            $obj_sheet,
-                            $a_row,
-                            $a_time_table_year,
-                            $a_time_table_month,
-                            $a_time_table_day,
-                            $a_work_time_contract,
-                            $a_break_time_contract,
-                            $a_time_start_hour_src,
-                            $a_time_start_minute_src,
-                            $a_time_end_hour_src,
-                            $a_time_end_minute_src,
-                            $a_time_start_minute_dst_bill,
-                            $a_time_end_minute_dst_bill,
-                            $a_time_start_minute_dst_pay1,
-                            $a_time_end_minute_dst_pay1,
-                            $a_time_start_minute_dst_pay2,
-                            $a_time_end_minute_dst_pay2,
-                            $a_work_time_actualy_bill,
-                            $a_break_time_actualy_bill,
-                            $a_deduction_time_actualy_bill,
-                            $a_over_time_actualy_bill,
-                            $a_work_time_actualy_pay1,
-                            $a_break_time_actualy_pay1,
-                            $a_deduction_time_actualy_pay1,
-                            $a_over_time_actualy_pay1,
-                            $a_work_time_actualy_pay2,
-                            $a_break_time_actualy_pay2,
-                            $a_deduction_time_actualy_pay2,
-                            $a_over_time_actualy_pay2
-                            );
-
-                    $a_conn->beginTransaction();  //トランザクション開始
-                    
-                    //DBから該報告日のレコードを削除
-                    $a_sql = "DELETE FROM ".$GLOBALS['g_DB_t_time_table'];
-                    $a_sql .= " WHERE (engineer_no=:engineer_no)";
-                    $a_sql .= " AND (work_day=:work_day);";
-                    $a_stmt = $a_conn->prepare($a_sql);
-                    $a_stmt->bindParam(':engineer_no', $a_engineer_no, PDO::PARAM_STR);
-                    com_pdo_bindValue($a_stmt,':work_day', $a_time_table_year."/".$a_time_table_month."/".$a_time_table_day);
-                    $a_stmt->execute();
-                    
-                    //DBから該報告日のレコードを削除
-                    $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_time_table'].
-                            "(engineer_no,
-                              work_day,
-                              cr_id,
-                              work_time_contract,
-                              break_time_contract,
-                              start_hour_src,
-                              start_minute_src,
-                              end_hour_src,
-                              end_minute_src,
-                              start_minute_dst_bill,
-                              end_minute_dst_bill,
-                              start_minute_dst_pay1,
-                              end_minute_dst_pay1,
-                              start_minute_dst_pay2,
-                              end_minute_dst_pay2,
-                              work_time_actualy_bill,
-                              break_time_actualy_bill,
-                              deduction_time_actualy_bill,
-                              over_time_actualy_bill,
-                              work_time_actualy_pay1,
-                              break_time_actualy_pay1,
-                              deduction_time_actualy_pay1,
-                              over_time_actualy_pay1,
-                              work_time_actualy_pay2,
-                              break_time_actualy_pay2,
-                              deduction_time_actualy_pay2,
-                              over_time_actualy_pay2
-                            )VALUES(";
-                    $a_sql .= ":engineer_no,
-                              :work_day,
-                              :cr_id,
-                              :work_time_contract,
-                              :break_time_contract,
-                              :start_hour_src,
-                              :start_minute_src,
-                              :end_hour_src,
-                              :end_minute_src,
-                              :start_minute_dst_bill,
-                              :end_minute_dst_bill,
-                              :start_minute_dst_pay1,
-                              :end_minute_dst_pay1,
-                              :start_minute_dst_pay2,
-                              :end_minute_dst_pay2,
-                              :work_time_actualy_bill,
-                              :break_time_actualy_bill,
-                              :deduction_time_actualy_bill,
-                              :over_time_actualy_bill,
-                              :work_time_actualy_pay1,
-                              :break_time_actualy_pay1,
-                              :deduction_time_actualy_pay1,
-                              :over_time_actualy_pay1,
-                              :work_time_actualy_pay2,
-                              :break_time_actualy_pay2,
-                              :deduction_time_actualy_pay2,
-                              :over_time_actualy_pay2
-                            );";
-                    $a_stmt = $a_conn->prepare($a_sql);
-                    $a_stmt->bindParam(':engineer_no', $a_engineer_no, PDO::PARAM_STR);
-                    com_pdo_bindValue($a_stmt,':work_day', $a_time_table_year."/".$a_time_table_month."/".$a_time_table_day);
-                    com_pdo_bindValue($a_stmt, ':cr_id', $GLOBALS['cr_id']);
-                    com_pdo_bindValue($a_stmt, ':work_time_contract', $a_work_time_contract);
-                    com_pdo_bindValue($a_stmt, ':break_time_contract', $a_break_time_contract);
-
-                    $a_stmt->bindParam(':start_hour_src', $a_time_start_hour_src, PDO::PARAM_STR);
-                    $a_stmt->bindParam(':start_minute_src', $a_time_start_minute_src, PDO::PARAM_STR);
-                    $a_stmt->bindParam(':end_hour_src', $a_time_end_hour_src, PDO::PARAM_STR);
-                    $a_stmt->bindParam(':end_minute_src', $a_time_end_minute_src, PDO::PARAM_STR);
-
-                    $a_stmt->bindParam(':start_minute_dst_bill', $a_time_start_minute_dst_bill, PDO::PARAM_STR);
-                    $a_stmt->bindParam(':end_minute_dst_bill', $a_time_end_minute_dst_bill, PDO::PARAM_STR);
-
-                    $a_stmt->bindParam(':start_minute_dst_pay1', $a_time_start_minute_dst_pay1, PDO::PARAM_STR);
-                    $a_stmt->bindParam(':end_minute_dst_pay1', $a_time_end_minute_dst_pay1, PDO::PARAM_STR);
-
-                    $a_stmt->bindParam(':start_minute_dst_pay2', $a_time_start_minute_dst_pay2, PDO::PARAM_STR);
-                    $a_stmt->bindParam(':end_minute_dst_pay2', $a_time_end_minute_dst_pay2, PDO::PARAM_STR);
-
-                    com_pdo_bindValue($a_stmt, ':work_time_actualy_bill', $a_work_time_actualy_bill);
-                    com_pdo_bindValue($a_stmt, ':break_time_actualy_bill', $a_break_time_actualy_bill);
-                    com_pdo_bindValue($a_stmt, ':deduction_time_actualy_bill', $a_deduction_time_actualy_bill);
-                    com_pdo_bindValue($a_stmt, ':over_time_actualy_bill', $a_over_time_actualy_bill);
-
-                    com_pdo_bindValue($a_stmt, ':work_time_actualy_pay1', $a_work_time_actualy_pay1);
-                    com_pdo_bindValue($a_stmt, ':break_time_actualy_pay1', $a_break_time_actualy_pay1);
-                    com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay1', $a_deduction_time_actualy_pay1);
-                    com_pdo_bindValue($a_stmt, ':over_time_actualy_pay1', $a_over_time_actualy_pay1);
-
-                    com_pdo_bindValue($a_stmt, ':work_time_actualy_pay2', $a_work_time_actualy_pay2);
-                    com_pdo_bindValue($a_stmt, ':break_time_actualy_pay2', $a_break_time_actualy_pay2);
-                    com_pdo_bindValue($a_stmt, ':deduction_time_actualy_pay2', $a_deduction_time_actualy_pay2);
-                    com_pdo_bindValue($a_stmt, ':over_time_actualy_pay2', $a_over_time_actualy_pay2);
-
-                    $a_stmt->execute();
-                    
-                    $a_conn->commit();    //コミット
+                    }
+                }else{
+                    echo '対象の契約レポートが見つかりません。('.$a_engineer_no.')<br>';
                 }
 
-                //日毎に作業時間を調整する。
-                $a_row++;
-                $a_time_table_day = $obj_sheet->getCellByColumnAndRow(0, $a_row)->getCalculatedValue();
-            }
-            
-            //print_r($GLOBALS['cr_id_array']);
-            $a_sTrace = '<br>';
-
-            //給与の計算
-            foreach ($GLOBALS['cr_id_array'] as $a_cr_id){
-                _calcAllowance(
-                        $a_conn,
-                        $a_engineer_no,
-                        $a_time_table_year,
-                        $a_time_table_month,
-                        $a_time_table_day_last,
-                        $a_cr_id
-                        );
+            } catch (PDOException $e){
+                if ($a_conn) {
+                    $a_conn->rollBack();  //ロールバック
+                }
+                $a_sRet = 'Error:'.$e->getMessage();
+                //$a_sRet .= $a_sql;
             }
 
-        } catch (PDOException $e){
-            if ($a_conn) {
-                $a_conn->rollBack();  //ロールバック
-            }
-            $a_sRet = 'Error:'.$e->getMessage();
-            //$a_sRet .= $a_sql;
+            $a_conn = null;
+        /**/    
+            unlink($target_file);   //ファイル削除
         }
-        $a_conn = null;
-    /**/    
-        unlink($target_file);   //ファイル削除
+        if (file_exists($target_file_src) == TRUE){
+            unlink($target_file_src);   //ファイル削除
+        }
+        $a_del_dir = $GLOBALS['g_EXCEL_TMP_PATH'].$target_dir;
+        #echo $a_del_dir.'<br>';
+        if (file_exists($a_del_dir) == TRUE){
+            #Windows
+            #$a_sRet = system("del /q ".str_replace("/","\\",$a_del_dir)."\\*");
+            #print_r($a_sRet);
+            #$a_sRet = system("del /f ".str_replace("/","\\",$a_del_dir));
+            #print_r($a_sRet);
+            #Linux
+            $a_sRet = system("rm -rf ".$a_del_dir);
+            #rmdir($a_del_dir);  //ディレクトリ削除
+            /*
+            $a_dirs = scandir($a_del_dir);
+            foreach($a_dirs as $a_dir)
+            {
+                if (($a_dir != '') && ($a_dir != '.') && ($a_dir != '..')){
+                    echo $a_dir.'<br>';
+                    chmod($a_dir, 0644);
+                    unlink($a_dir);
+                }
+            }
+            */
+        }
     }
     /**/
 } catch (Exception $e) {
@@ -340,10 +397,15 @@ function _getContractReport(
                 $a_isFound = true;
             }
         }
-        if ($a_isFound == false){
-            array_push($GLOBALS['cr_id_array'], $GLOBALS['cr_id']);
-        }
-        
+        #[2017.12.06]
+        if ($GLOBALS['cr_id'] != ''){
+            if ($a_isFound == false){
+                array_push($GLOBALS['cr_id_array'], $GLOBALS['cr_id']);
+            }
+        }else{
+            #契約レポートなし
+            $a_bRet = false;
+        }        
     } catch (Exception $e) {
         echo 'Error:'.$e->getMessage();
     }

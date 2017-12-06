@@ -830,4 +830,39 @@ function com_make_estimate_no($h_estimate_date, $h_estimate_no)
     return "HAL".str_replace("/", "", $h_estimate_date).str_pad($h_estimate_no, 3, "0",STR_PAD_LEFT);
 }
 
+#Zipファイルの解凍
+function com_unzip($zip_path, $unzip_dir, $file_mod = 0755, &$file_list) {
+    $zip = new ZipArchive();
+    if ($zip->open($zip_path) !== TRUE)
+        return FALSE;
+
+    $unzip_dir = (substr($unzip_dir, -1) == '/') ? $unzip_dir : $unzip_dir.'/';
+    /**/
+    for ($i = 0; $i < $zip->numFiles; $i++){
+        if(file_exists($unzip_dir.$zip->getNameIndex($i)) == TRUE){
+            unlink($unzip_dir.$zip->getNameIndex($i));
+        }
+    }
+    /**/
+    #echo $unzip_dir.'<br>';
+    if ($zip->extractTo($unzip_dir) !== TRUE) {
+        $zip->close();
+        return FALSE;
+    }
+
+    $files = [];
+    for ($i = 0; $i < $zip->numFiles; $i++) {
+        $files[] = $zip->getNameIndex($i);
+        if(file_exists($unzip_dir.$zip->getNameIndex($i)) == TRUE){
+            #echo $zip->getNameIndex($i).'<br>';
+            #echo mb_convert_encoding($zip->getNameIndex($i), "UTF-8", "auto").'<br>';
+            chmod($unzip_dir.$zip->getNameIndex($i), $file_mod);
+            #echo $unzip_dir.$zip->getNameIndex($i).'----<br>';
+            array_push($file_list, $unzip_dir.$zip->getNameIndex($i));
+        }
+    }
+    $zip->close();
+    return $files;
+}
+
 ?>

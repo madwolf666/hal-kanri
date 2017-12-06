@@ -129,8 +129,11 @@ try{
         }
 
         $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>";
-        $a_sRet_L .= $a_result['engineer_no'];
-        #$a_sRet_L .= "<a href='#' onclick='choice_covering_letter_method(\"".$a_result[0]."\");'>".$a_result[0]."</a>";
+        
+        #[2017.12.06]
+        $a_sRet_L .= "<a href='#' onclick='choice_charge_calc_method(\"".$a_result['cc_id']."\");'>".$a_result['engineer_no']."</a>";
+        #$a_sRet_L .= $a_result['engineer_no'];
+        ##$a_sRet_L .= "<a href='#' onclick='choice_covering_letter_method(\"".$a_result[0]."\");'>".$a_result[0]."</a>";
         $a_sRet_L .= "</td>";
         $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['engineer_name']."</td>";
         $a_sRet_L .= "<td class='td_line2' style='width: 100px;'><div class='myover'>".$a_result['contract_number']."</td>";

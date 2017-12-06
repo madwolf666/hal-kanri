@@ -26,7 +26,7 @@ require_once('./header.php');
 </center>
 
 <div id="my-popup" class="popup">
-	<div id="my-engineer" class="popup_inner" style="">
+	<div id="my-charge-calc" class="popup_inner" style="">
             <a href="#" onclick="hide_popup();">閉じる</a>
 	</div>
 </div>

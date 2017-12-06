@@ -35,7 +35,7 @@ try{
         $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10107']."&NO=".$a_result['cr_id']."'>見積書へ</a></td>";
         $a_sRet .= "</tr>";
 
-        $a_sRet .= "<tr>";
+        $a_sRet .= "<tr valign='top'>";
         #[2017.08.04]「管理承認」のみ契約継続
         $status_cd_num = $a_result['status_cd_num'];
         $a_sRet .= "<td>";
@@ -53,7 +53,14 @@ try{
         if (($_SESSION['hal_department_cd'] != 3) && (($status_cd_num == 1) || ($status_cd_num == 2))){
             $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         }else{
-            $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
+            $a_sRet .= "<td>●<a href='#' onclick=\"return confirm_allowance(".$a_result['cr_id'].");\">給与計算</a><br>";
+            $a_sRet .= "&nbsp;&nbsp;<select id='optAllowance' name='optAllowance'>";
+            $a_sRet .= "<option value='1'>変形還元";
+            $a_sRet .= "<option value='2'>還元率";
+            $a_sRet .= "<option value='3'>社会保険適用";
+            $a_sRet .= "<option value='4'>有休対応";
+            $a_sRet .= "</select>";
+            $a_sRet .= "</td>";
         }
 
         $a_sRet .= "</tr>";
@@ -65,7 +72,7 @@ try{
             if ($status_cd_num == 2){
                 $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a>";
             }else{
-                $a_sRet .= "&nbsp;&nbsp;";
+            $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
             }
             $a_sRet .= "</td>";
         } else {
