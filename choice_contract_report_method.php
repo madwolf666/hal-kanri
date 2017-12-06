@@ -72,7 +72,7 @@ try{
             if ($status_cd_num == 2){
                 $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a>";
             }else{
-            $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
+                $a_sRet .= "●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a>";
             }
             $a_sRet .= "</td>";
         } else {
