@@ -1591,7 +1591,6 @@ function regist_contract_report(h_act)
         if (check_IsRequired('#chs_tel1', '電話番号（苦情：派遣元責任者）が入力されていません！') == false) return;
     }
     
-
     if (!confirm("契約レポートを" + a_sKind + "します。よろしいですか？")) return;
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
@@ -1771,6 +1770,7 @@ function regist_contract_report(h_act)
             'status_cd': $('[name=status_cd] option:selected').text(),
             'status_cd_num': $('[name=status_cd] option:selected').val(),
             'cr_id_src': $('#cr_id_src').val(),
+            'claim_accounts_invoicing': $('#claim_accounts_invoicing').val(),
         },
         success: function(data, dataType){
             //[2017.11.08]↓課題No.81
@@ -1779,7 +1779,8 @@ function regist_contract_report(h_act)
                 if (a_wk[0] == 'OK'){
                     //[2017.11.08]↓課題No.81
                     if (a_wk != null){
-                        a_bRet = file_upload(a_wk[1]);
+                        var a_bRet = file_upload('regist_evidence', a_wk[1]);   //[2017.12.14]要望
+                        a_bRet = file_upload('regist_payroll', a_wk[1]);        //[2017.12.14]要望
                     }
                     //[2017.11.08]↑課題No.81
 
@@ -2213,19 +2214,22 @@ function check_input_key_enter(h_key, h_cr_id, h_field, h_id, h_kind)
 }
 
 //[2017.11.08]課題No.81
-function file_upload(h_cr_id){
+//[2017.12.13]要望
+function file_upload(h_inp_id, h_cr_id){
     var a_fd = new FormData();
     var a_iCnt = 1;
     
-    var files = $("#input-file2")[0].files;
+    var files = $("#" + h_inp_id)[0].files;
+    //var files = $("#input-file2")[0].files;
     var a_max_count = files.length;
     var a_count = 0;
     for (var i = 0; i < a_max_count; i++){
         //alert(files[i].name);
         a_fd.append("file", files[i]);
+        a_fd.append("inp_id", h_inp_id);
         a_fd.append("cr_id", h_cr_id);
         $.ajax({
-            url: m_parentURL + "regist_evidence.php",
+            url: m_parentURL + "regist_file.php",
             type: "POST",
             contentType: false,
             processData: false,
@@ -2249,32 +2253,41 @@ function file_upload(h_cr_id){
            }
         });
     }
-    $("#input-file2").val('');
+    $("#" + h_inp_id).val('');
+    //$("#input-file2").val('');
     //alert('ファイルのアップロードが完了しました！');
 }
 
 //[2017.11.08]課題No.81
-function edit_file_upload(h_cr_id){
+//[2017.12.13]要望
+function edit_file_upload(h_inp_id, h_cr_id){
     if (!confirm("ファイルをアップロードします。よろしいですか？")) return;
-    file_upload(h_cr_id);
-    make_evidence_list('e', h_cr_id);
+    file_upload(h_inp_id, h_cr_id);
+    if (h_inp_id == 'regist_evidence'){
+        make_regist_file_list('my-evidence', 'e', h_cr_id);
+    }else if (h_inp_id == 'regist_payroll'){
+        make_regist_file_list('my-payroll', 'e', h_cr_id);
+    }
 }
 
 //[2017.11.08]課題No.81
-function make_evidence_list(h_act, h_cr_id){
+//[2017.12.13]要望
+function make_regist_file_list(h_my_id, h_act, h_cr_id){
+    //alert(h_my_id + "," +  h_act + "," + h_cr_id);
     $.ajax({
-        url: m_parentURL + "make_evidence_list.php",
+        url: m_parentURL + "make_regist_file_list.php",
         type: 'POST',
         dataType: "html",
         async: true,
         data:{
+            'my_id': h_my_id,
             'act': h_act,
             'cr_id': h_cr_id,
         },
         success: function(data, dataType){
             //alert(data);
             if (data != '') {
-                $("#my-evidence").empty().append(data);
+                $("#" + h_my_id).empty().append(data);
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -2286,21 +2299,24 @@ function make_evidence_list(h_act, h_cr_id){
 }
 
 //[2017.11.08]課題No.81
-function delete_evidence(h_cr_id, h_ed_id){
-    if (!confirm("エビデンスを削除します。よろしいですか？")) return;
+//[2017.12.13]要望
+function delete_regist_file(h_my_id, h_cr_id, h_ed_id){
+    if (!confirm("ファイルを削除します。よろしいですか？")) return;
     $.ajax({
-        url: m_parentURL + "delete_evidence.php",
+        url: m_parentURL + "delete_regist_file.php",
         type: 'POST',
         dataType: "html",
         async: false,
         data:{
+            'my_id': h_my_id,
             'cr_id': h_cr_id,
             'ed_id': h_ed_id,
         },
         success: function(data, dataType){
             //alert(data);
             if (data == 'OK') {
-                make_evidence_list('e', h_cr_id);
+                make_regist_file_list(h_my_id, 'e', h_cr_id);
+                //make_evidence_list('e', h_cr_id);
             }else{
                 alert(data);
             }

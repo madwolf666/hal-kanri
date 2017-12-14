@@ -63,6 +63,7 @@ $g_DB_t_contract_report = "t_contract_report";
 $g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
 $g_DB_t_evidence = "t_evidence";    //[2017.11.08]課題No.81
 $g_DB_t_payroll = "t_payroll";
+$g_DB_t_payroll_file = "t_payroll_file";    #[2017.12.13]要望
 $g_DB_t_purchase_order_ledger = "t_purchase_order_ledger";
 $g_DB_t_time_table = "t_time_table";    //[2017.11.28]要望
 
@@ -140,9 +141,13 @@ $g_MENU_LOGOUT_00000 = 0;           //ログアウト
 //windows
 $g_EVIDENCE_PATH = "C:/Users/hal/Documents/NetBeansProjects/hal-kanri/evidence/";
 $g_EVIDENCE_URL = "/hal-kanri/evidence/";
+$g_PAYROLL_PATH = "C:/Users/hal/Documents/NetBeansProjects/hal-kanri/payroll/";
+$g_PAYROLL_URL = "/hal-kanri/payroll/";
 //linux
 //$g_EVIDENCE_PATH = "/var/www/html/evidence/";
 //$g_EVIDENCE_URL = "/evidence/";
+//$g_PAYROLL_PATH = "/var/www/html/payroll/";
+//$g_PAYROLL_URL = "/payroll/";
 
 /*******************************************************************************
 * Excel出力

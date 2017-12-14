@@ -11,6 +11,7 @@ require_once('./global.php');
 $a_sRet = 'OK';
 
 //POST情報取得
+$a_inp_id = $_POST['inp_id'];
 $a_cr_id = $_POST['cr_id'];
 
 try{
@@ -26,7 +27,13 @@ try{
         list($a_file_name, $a_file_type) = explode(".", $_FILES['file']['name']);
         $a_name_sys = date("YmdHis").".".$a_file_type;
         $a_name_sys_html = date("YmdHis").".html";
-        $a_file = $GLOBALS['g_EVIDENCE_PATH'].$a_cr_id;
+        #[2017.12.13]要望
+        if ($a_inp_id == 'regist_evidence'){
+            $a_file = $GLOBALS['g_EVIDENCE_PATH'];
+        }else if ($a_inp_id == 'regist_payroll'){
+            $a_file = $GLOBALS['g_PAYROLL_PATH'];
+        }
+        $a_file .= $a_cr_id;
         if (!file_exists($a_file)){
             mkdir($a_file, 0755);
         }
@@ -46,7 +53,14 @@ try{
             //var_dump($a_file."/".$a_name_sys);
         }
 
-        $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_evidence']." (";
+        $a_sql = "INSERT INTO ";
+        #[2017.12.13]要望
+        if ($a_inp_id == 'regist_evidence'){
+            $a_sql .= $GLOBALS['g_DB_t_evidence'];
+        }else if ($a_inp_id == 'regist_payroll'){
+            $a_sql .= $GLOBALS['g_DB_t_payroll_file'];
+        }
+        $a_sql .= " (";
         $a_sql .= "
             cr_id
             ,file_name_src

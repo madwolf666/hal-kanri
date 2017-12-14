@@ -192,6 +192,7 @@ try{
             ,remarks_pay
             ,status_cd
             ,cr_id_src
+            ,claim_accounts_invoicing
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -355,6 +356,7 @@ try{
             ,:remarks_pay
             ,:status_cd
             ,:cr_id_src
+            ,:claim_accounts_invoicing
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -519,6 +521,7 @@ try{
             ,chs_tel2=:chs_tel2
             ,remarks_pay=:remarks_pay
             ,status_cd=:status_cd
+            ,claim_accounts_invoicing=:claim_accounts_invoicing
             ";
         #[2017.11.20]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -830,7 +833,11 @@ try{
     $a_stmt->bindParam(':chs_tel2', $_POST['chs_tel2'], PDO::PARAM_STR);
     $a_stmt->bindParam(':remarks_pay', $_POST['remarks_pay'], PDO::PARAM_STR);
     $a_stmt->bindParam(':status_cd', $_POST['status_cd'], PDO::PARAM_STR);
-        
+    
+    #[2017.12.14]要望
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_accounts_invoicing']));
+    com_pdo_bindValue($a_stmt, ':claim_accounts_invoicing', $a_val);
+
     if ($a_act == 'e'){
         #[2017.11.20]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -860,7 +867,7 @@ try{
     }
     
     $a_stmt->execute();
-
+/**/
     //検収元台帳レコードの作成
     if ($a_act != 'e'){
         //直近のcr_idを取得
@@ -884,7 +891,7 @@ try{
         com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
         $a_stmt->execute();
     }
-        
+/**/        
     #$a_sRet = 'OK'.'-->.'.$_SESSION['hal_department_cd'].'-->'.$_POST['status_cd'];
     $a_sRet = 'OK';
     $a_sRet .= "#".$a_cr_id;    //[2017.11.08]課題No.81

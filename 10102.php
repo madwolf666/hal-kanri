@@ -412,7 +412,46 @@ $a_selected = false;
             </tr>
         </table>
         <br>
-        <br style="line-height: 34px;">
+        <table border="0" rules="" width=340 height="220">
+            <tr>
+                <td class="" height="22">
+                    &nbsp;
+                </td>
+            </tr>
+            <?php
+                if ($a_act == '') {
+            ?>
+            <tr>
+                <td colspan="3" class="">
+                    <div id="my-dummy" name="my-dummy" style="line-height: 24px; text-align: left;"></div>
+                </td>
+            </tr>
+            <?php
+                } else {
+            ?>
+            <tr>
+                <td colspan="3" class="">
+                    <div id="my-dummy" name="my-dummy" style="line-height: 24px; text-align: left;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="" style="width: auto; height:100px; text-align: left;">
+                    &nbsp;
+             <?php
+                        if ($a_act == 'e') {
+            ?>
+                        &nbsp;
+            <?php
+                        }
+            ?>
+                </td>
+            </tr>
+            <?php
+                }
+            ?>
+        </table>
+        <br>
+        <br style="line-height: 34px;" >
 <!-- 左3番目のテーブル -->
         <table border="1" rules="all" width=340 height=330>
             <tr>
@@ -807,7 +846,7 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td colspan="4" class="yellow" height=15>派遣個別契約書</td>
+                <td colspan="4" class="yellow" height=15>派遣個別<br>契約書</td>
                 <td colspan="3">
                     <?php
                         if ($a_act == ''){
@@ -848,6 +887,19 @@ $a_selected = false;
                             echo com_make_tag_option($a_act, $opt_m_contract_yesno_b4, "opt_m_contract_yesno_b4", $GLOBALS['g_DB_m_contract_yesno'], "width: 50px;", $a_selected);
                         }
                     ?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="yellow" height=15>請求書送付日</td>
+                <td colspan="8">
+                    <?php
+                        if ($a_act == ''){
+                            echo $claim_accounts_invoicing;
+                        }else{
+                            echo com_make_tag_input($a_act, $claim_accounts_invoicing, "claim_accounts_invoicing", "width: 100px; text-align: center;");
+                        }
+                    ?>
+                    &nbsp;&nbsp;営業日
                 </td>
             </tr>
         </table>
@@ -1072,6 +1124,55 @@ $a_selected = false;
         <table border="1" rules="all" width=340 height="220">
             <tr>
                 <td class="yellow" height="22">
+                    給与計算
+                </td>
+            </tr>
+            <?php
+                if ($a_act == '') {
+            ?>
+            <tr>
+                <td colspan="3" class="">
+                    <div id="my-payroll" name="my-payroll" style="line-height: 24px; text-align: left;"></div>
+                </td>
+            </tr>
+            <?php
+                } else {
+            ?>
+            <tr>
+                <td colspan="3" class="">
+                    <div id="my-payroll" name="my-payroll" style="line-height: 24px; text-align: left;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="" style="width: auto; height:100px; text-align: left;">
+                    <!-- div style="height: 100px; line-height: 24px;" -->
+                        <input type="file" name="regist_payroll" id="regist_payroll" multiple>
+                        <!-- input type="file" name="input-file" id="input-file" class="multi max-3" -->
+                    <!-- /div -->
+             <?php
+                        if ($a_act == 'e') {
+            ?>
+                        <input type="button" value="ｱｯﾌﾟﾛｰﾄﾞ" onClick="edit_file_upload('regist_payroll', '<?php echo $cr_id; ?>');" style="padding: 0px 4px 0px 4px;">
+            <?php
+                        }
+            ?>
+                   <!--
+                    <div id="image_upload_section">
+                        <div id="drop" style="width:autopx; height:80px; padding:0px; border:3px solid #ff0000" ondragover="onDragOver(event)" ondrop="onDrop(event)">
+                            ファイルをドラッグアンドドロップして下さい。
+                        </div>
+                    </div>
+                    -->
+                </td>
+            </tr>
+            <?php
+                }
+            ?>
+        </table>
+        <br>
+        <table border="1" rules="all" width=340 height="220">
+            <tr>
+                <td class="yellow" height="22">
                     エビデンス
                 </td>
             </tr>
@@ -1094,13 +1195,13 @@ $a_selected = false;
             <tr>
                 <td class="" style="width: auto; height:100px; text-align: left;">
                     <!-- div style="height: 100px; line-height: 24px;" -->
-                        <input type="file" name="input-file2" id="input-file2" multiple>
+                        <input type="file" name="regist_evidence" id="regist_evidence" multiple>
                         <!-- input type="file" name="input-file" id="input-file" class="multi max-3" -->
                     <!-- /div -->
              <?php
                         if ($a_act == 'e') {
             ?>
-                        <input type="button" value="ｱｯﾌﾟﾛｰﾄﾞ" onClick="edit_file_upload(<?php echo $cr_id; ?>);" style="padding: 0px 4px 0px 4px;">
+                        <input type="button" value="ｱｯﾌﾟﾛｰﾄﾞ" onClick="edit_file_upload('regist_evidence', '<?php echo $cr_id; ?>');" style="padding: 0px 4px 0px 4px;">
             <?php
                         }
             ?>
@@ -2027,5 +2128,6 @@ require_once('./footer.php');
 
 <script src="./js/hal-kanri-10100.js"></script>
 <script type="text/javascript">
-    make_evidence_list('<?php echo $a_act; ?>', <?php echo $cr_id; ?>);
+    make_regist_file_list('my-evidence', '<?php echo $a_act; ?>', '<?php echo $cr_id; ?>');
+    make_regist_file_list('my-payroll', '<?php echo $a_act; ?>', '<?php echo $cr_id; ?>');
 </script>

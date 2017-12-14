@@ -257,6 +257,8 @@ $upd_id = "";
 $upd_person = "";
 $cnf_person = "";
 
+$claim_accounts_invoicing = ""; #[2017.12.14]要望
+    
 function set_10100_selectDB()
 {
     $a_sql_src = "SELECT t1.*";
@@ -445,6 +447,7 @@ function set_10100_fromDB($a_result)
     $GLOBALS['upd_person'] = $a_result['upd_person'];
     $GLOBALS['cnf_person'] = $a_result['cnf_person'];
 
+    $GLOBALS['claim_accounts_invoicing'] = $a_result['claim_accounts_invoicing'];   #[2017.12.14]要望
 }
 
 ?>
