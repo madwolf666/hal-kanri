@@ -1586,9 +1586,12 @@ function regist_contract_report(h_act)
         if (check_IsRequired('#chs_position2', '職名（苦情：派遣先責任者）が入力されていません！') == false) return;
         if (check_IsRequired('#chs_name2', '氏名（苦情：派遣先責任者）が入力されていません！') == false) return;
         if (check_IsRequired('#chs_tel2', '電話番号（苦情：派遣先責任者）が入力されていません！') == false) return;
+        //[2018.01.09]上段に３項目記載ある場合は、下段に記載なくてもOK
+        /*
         if (check_IsRequired('#chs_position1', '職名（苦情：派遣元責任者）が入力されていません！') == false) return;
         if (check_IsRequired('#chs_name1', '氏名（苦情：派遣元責任者）が入力されていません！') == false) return;
         if (check_IsRequired('#chs_tel1', '電話番号（苦情：派遣元責任者）が入力されていません！') == false) return;
+        */
     }
     
     if (!confirm("契約レポートを" + a_sKind + "します。よろしいですか？")) return;
