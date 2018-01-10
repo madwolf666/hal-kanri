@@ -125,10 +125,15 @@ $(function () {
     $('#inp_hakkobi').datepicker({onSelect: function(dataText){}});
     
     //契約形態の変更
-    $('#opt_contract_pay_form').change(function(){calc_pay_person(); calc_pay_settlement(); calc_teisyoku();});
+    calc_pay_person();  //[2018.01.10]協の場合還元率を手入力
+    $('#opt_contract_pay_form').change(function(){calc_pay_person(); calc_pay_settlement(); calc_teisyoku();
+        calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement();
+    });
 
     //還元率
     $('#opt_contract_reduction').change(function(){calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement();});
+    //[2018.01.10]協の場合還元率を手入力
+    $('#txt_contract_reduction').keyup(function(){calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement();});
 
     //ｴﾝｼﾞﾆｱNo.
     $('#inp_engineer_no').keyup(function(){get_engineer_info();});
@@ -256,6 +261,8 @@ $(function () {
     $('#remarks_pay').keyup(function(){check_value_changed_10102(1, 'remarks_pay', $('#remarks_pay').val(), '#remarks_pay');});
 
     $('#status_cd').change(function(){check_value_changed_10102(1, 'status_cd', $('[name=status_cd] option:selected').text(), '#status_cd');});
+    //[2018.01.10]協の場合還元率を手入力
+    $('#txt_contract_reduction').keyup(function(){check_value_changed_10102(1, 'redemption_ratio', $('#txt_contract_reduction').val(), '#txt_contract_reduction');});
 });
 
 function calc_bill_work_time()
@@ -969,6 +976,17 @@ function calc_pay_person()
     
     //契約終了日⇒請求サイド契約終了日
     $('#txt_kyakusaki_syuryo').val($('#inp_kyakusaki_syuryo').val());
+    
+    //[2018.01.10]協の場合還元率を手入力
+    if (a_contract_form == '協'){
+        $('#opt_contract_reduction').val(0);
+        //$('#opt_contract_reduction').attr('readonly',true);
+        $('#txt_contract_reduction').attr('readonly',false);
+    }else{
+        $('#txt_contract_reduction').val('');
+        $('#txt_contract_reduction').attr('readonly',true);
+        //$('#opt_contract_reduction').attr('readonly',false);
+    }
 }
 
 //通常期間の計算
@@ -984,6 +1002,11 @@ function calc_pay_normal_period()
     var a_upper_txt = $('#txt_contract_upper_limit_b1').val();
     
     var a_kangen = $('[name=opt_contract_reduction] option:selected').text();
+    //[2018.01.10]協の場合還元率を手入力
+    var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
+    if (a_contract_form == '協'){
+        a_kangen = $('#txt_contract_reduction').val();
+    }
 
     //①エンジニア還元金額
     var a_tankin_p11;
@@ -1188,6 +1211,11 @@ function calc_pay_middle_admission()
     var a_upper_txt = $('#txt_contract_upper_limit_b2').val();
 
     var a_kangen = $('[name=opt_contract_reduction] option:selected').text();
+    //[2018.01.10]協の場合還元率を手入力
+    var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
+    if (a_contract_form == '協'){
+        a_kangen = $('#txt_contract_reduction').val();
+    }
 
     //①エンジニア還元金額
     var a_syugyonisu_p12;
@@ -1307,6 +1335,11 @@ function calc_pay_midway_retirement()
     var a_upper_txt = $('#txt_contract_upper_limit_b3').val();
 
     var a_kangen = $('[name=opt_contract_reduction] option:selected').text();
+    //[2018.01.10]協の場合還元率を手入力
+    var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
+    if (a_contract_form == '協'){
+        a_kangen = $('#txt_contract_reduction').val();
+    }
     
     //①エンジニア還元金額
     var a_syugyonisu_p13;
@@ -1594,6 +1627,15 @@ function regist_contract_report(h_act)
         */
     }
     
+    //[2018.01.10]協の場合還元率を手入力
+    var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
+    var contract_reduction = '';
+    if (a_contract_form == "協"){
+        contract_reduction = $('#txt_contract_reduction').val();
+    }else{
+        contract_reduction = $('[name=opt_contract_reduction] option:selected').text();
+    }
+    
     if (!confirm("契約レポートを" + a_sKind + "します。よろしいですか？")) return;
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
@@ -1686,7 +1728,7 @@ function regist_contract_report(h_act)
             'inp_jigyosya_tanto': $('#inp_jigyosya_tanto').val(),
             'opt_social_insurance': $('[name=opt_social_insurance] option:selected').text(),
             'opt_tax_withholding': $('[name=opt_tax_withholding] option:selected').text(),
-            'opt_contract_reduction': $('[name=opt_contract_reduction] option:selected').text(),
+            'opt_contract_reduction': contract_reduction,
             'txt_kyakusaki_kaishi': $('#txt_kyakusaki_kaishi').val(),
             'txt_kyakusaki_syuryo': $('#txt_kyakusaki_syuryo').val(),
 

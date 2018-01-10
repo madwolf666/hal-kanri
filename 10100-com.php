@@ -258,6 +258,8 @@ $upd_person = "";
 $cnf_person = "";
 
 $claim_accounts_invoicing = ""; #[2017.12.14]要望
+$txt_contract_reduction = "";  #[2018.01.10]協の場合還元率を手入力
+$dsp_contract_reduction = "";  #[2018.01.10]協の場合還元率を手入力
     
 function set_10100_selectDB()
 {
@@ -448,6 +450,14 @@ function set_10100_fromDB($a_result)
     $GLOBALS['cnf_person'] = $a_result['cnf_person'];
 
     $GLOBALS['claim_accounts_invoicing'] = $a_result['claim_accounts_invoicing'];   #[2017.12.14]要望
+    #[2018.01.10]協の場合還元率を手入力
+    if ($GLOBALS['opt_contract_pay_form'] == "協"){
+        $GLOBALS['txt_contract_reduction'] = $GLOBALS['opt_contract_reduction'];
+        $GLOBALS['opt_contract_reduction'] = "";
+        $GLOBALS['dsp_contract_reduction'] = $GLOBALS['txt_contract_reduction'];
+    }else{
+        $GLOBALS['dsp_contract_reduction'] = $GLOBALS['opt_contract_reduction'];
+    }
 }
 
 ?>

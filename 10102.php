@@ -1086,6 +1086,8 @@ $a_selected = false;
                             echo $opt_contract_reduction;
                         }else{
                             echo com_make_tag_option($a_act, $opt_contract_reduction, "opt_contract_reduction", $GLOBALS['g_DB_m_contract_reduction'], "width: 40px;", $a_selected);
+                            #[2018.01.10]協の場合還元率を手入力
+                            echo com_make_tag_input($a_act, $txt_contract_reduction, "txt_contract_reduction", "width: 40px; text-align: center;");
                         }
                     ?>
                 </td>

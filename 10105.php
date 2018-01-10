@@ -406,7 +406,7 @@ $a_selected = false;
                 <td colspan="4" width=65><?php echo $opt_social_insurance; ?></td>
                 <td colspan="1" width=65><font size="-2">源泉徴収</font></td>
                 <td colspan="4" width=65><?php echo $opt_tax_withholding; ?></td>
-                <td colspan="3" rowspan="3"><?php echo $opt_contract_reduction; ?>%</td>
+                <td colspan="3" rowspan="3"><?php echo $dsp_contract_reduction; ?>%</td>
             </tr>
             <tr>
                 <td colspan="4" class="gray" height=15>契約開始日</td>
