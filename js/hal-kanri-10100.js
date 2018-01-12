@@ -230,6 +230,16 @@ $(function () {
     $('#opt_contarct_engineer_list').change(function(){check_value_changed_10105(1, 'engineer_list', $('[name=opt_contarct_engineer_list] option:selected').text(), '#opt_contarct_engineer_list');});
     $('#inp_biko').keyup(function(){check_value_changed_10105(1, 'remarks', $('#inp_biko').val(), '#inp_biko');});
 
+    // [2018.01.12]追加
+    $('#retirement_date').datepicker({});
+    $('#leave_date_start').datepicker({});
+    $('#leave_date_end').datepicker({});
+    $('#retirement_date').keyup(function(){check_value_changed_10105(2, 'retirement_date', $('#retirement_date').val(), '#retirement_date');});
+    $('#leave_date_start').keyup(function(){check_value_changed_10105(2, 'leave_date_start', $('#leave_date_start').val(), '#leave_date_start');});
+    $('#leave_date_end').keyup(function(){check_value_changed_10105(2, 'leave_date_end', $('#leave_date_end').val(), '#leave_date_end');});
+    $('#insurance_card_retirement').change(function(){check_value_changed_10105(1, 'insurance_card_retirement', $('[name=insurance_card_retirement] option:selected').text(), '#insurance_card_retirement');});
+    $('#insurance_card_leave').change(function(){check_value_changed_10105(1, 'insurance_card_leave', $('[name=insurance_card_leave] option:selected').text(), '#insurance_card_leave');});
+
     //条件検索
     $('#f_claim_agreement_start').datepicker({});
     $('#f_claim_agreement_end').datepicker({});
@@ -263,6 +273,7 @@ $(function () {
     $('#status_cd').change(function(){check_value_changed_10102(1, 'status_cd', $('[name=status_cd] option:selected').text(), '#status_cd');});
     //[2018.01.10]協の場合還元率を手入力
     $('#txt_contract_reduction').keyup(function(){check_value_changed_10102(1, 'redemption_ratio', $('#txt_contract_reduction').val(), '#txt_contract_reduction');});
+    
 });
 
 function calc_bill_work_time()
@@ -1991,6 +2002,11 @@ function regist_contract_end_report(h_act, h_no)
             'opt_contarct_engineer_list': $('[name=opt_contarct_engineer_list] option:selected').text(),
             'remarks_pay': $('#remarks_pay').val(),
             'reg_id':$('#reg_id').val(),
+            'retirement_date': $('#retirement_date').val(),
+            'insurance_card_retirement': $('[name=insurance_card_retirement] option:selected').text(),
+            'leave_date_start': $('#leave_date_start').val(),
+            'leave_date_end': $('#leave_date_end').val(),
+            'insurance_card_leave': $('[name=insurance_card_leave] option:selected').text(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

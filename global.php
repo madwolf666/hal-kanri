@@ -20,6 +20,7 @@ $g_DB_uid = "root";
 $g_DB_pwd = "kanri999";
 
 $g_DB_m_base = "m_base";
+$g_DB_m_contract_already = "m_contract_already";    #[2018.01.12]追加
 $g_DB_m_contract_absence_deduction = "m_contract_absence_deduction";
 $g_DB_m_contract_bill_form = "m_contract_bill_form";
 $g_DB_m_contract_bill_pay = "m_contract_bill_pay";

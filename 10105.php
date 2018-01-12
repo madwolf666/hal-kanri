@@ -35,6 +35,13 @@ $opt_contarct_engineer_list = "";
 
 $cnf_person = "";
 
+# [2018.01.12]追加
+$retirement_date = "";              # 退職日
+$insurance_card_retirement = "";    # 保険証回収ステータス（退職）
+$leave_date_start = "";             # 休職日（開始）
+$leave_date_end = "";               # 休職日（終了）
+$insurance_card_leave = "";         # 保険証回収ステータス（休職）
+
 if (isset($_GET['NO'])) {
     $a_no = $_GET['NO'];
     try{
@@ -46,6 +53,7 @@ if (isset($_GET['NO'])) {
 
         //担当営業情報は契約レポートから持ってくる。
         $a_sql = "SELECT s1.*";
+        # [2018.01.12]追加
         $a_sql .= "
             ,s2.replace_person
             ,s2.end_status
@@ -65,6 +73,11 @@ if (isset($_GET['NO'])) {
             ,s2.projects_confirm
             ,s2.engineer_list
             ,s2.remarks_pay AS remarks_pay_end
+            ,s2.retirement_date
+            ,s2.insurance_card_retirement
+            ,s2.leave_date_start
+            ,s2.leave_date_end
+            ,s2.insurance_card_leave
             ,(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=s2.cnf_id)) AS cnf_person_end
             ";
         $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
@@ -113,6 +126,13 @@ if (isset($_GET['NO'])) {
                 $remarks_pay = $a_result['remarks_pay_end'];
             }
 
+            # [2018.01.12]追加
+            $retirement_date = str_replace("-", "/", $a_result['retirement_date']);
+            $insurance_card_retirement = $a_result['insurance_card_retirement'];
+            $leave_date_start = str_replace("-", "/", $a_result['leave_date_start']);
+            $leave_date_end = str_replace("-", "/", $a_result['leave_date_end']);
+            $insurance_card_leave = $a_result['insurance_card_leave'];
+            
             /*$reg_id = $a_result['reg_id'];
             $reg_person = $a_result['reg_person'];
             $upd_id = $a_result['upd_id'];
@@ -171,11 +191,11 @@ $a_selected = false;
                 <td colspan="10"><?php echo $inp_kenmei; ?></td>
             </tr>
             <tr>
-                <td colspan="2" class="gray" height=15>契約形態</td>
+                <td colspan="2" class="gray" height=15>契約<br>形態</td>
                 <td colspan="10"><?php echo $opt_contarct_bill_form; ?></td>
             </tr>
             <tr>
-                <td colspan="2" class="gray" height=15>作業場所</td>
+                <td colspan="2" class="gray" height=15>作業<br>場所</td>
                 <td colspan="10"><?php echo $inp_sagyo_basyo; ?></td>
             </tr>
             <tr>
@@ -306,6 +326,9 @@ $a_selected = false;
                 <td colspan="2" class="gray">支払日</td>
                 <td colspan="2"><?php echo $opt_contract_bill_pay; ?></td>
             </tr>
+            <!-- [2018.01.12] hidden化 -->
+            <input type="hidden" id="opt_contarct_replace" name="opt_contarct_replace" readonly="true" value="" style="text-align: center;">
+            <!-- [2018.01.12]削除
             <tr>
                 <td colspan="12" classs="hiddencell_l hiddencell_r" height=15></td>
             </tr>
@@ -313,14 +336,17 @@ $a_selected = false;
                 <td colspan="4" class="yellow" height=15>交代要員</td>
                 <td colspan="8">
                     <?php
+                    /*
                         if ($a_act == '') {
                             echo $opt_contarct_replace;
                         } else {
                             echo com_make_tag_option($a_act, $opt_contarct_replace, "opt_contarct_replace", $GLOBALS['g_DB_m_contract_replace'], "width: 220px;", $a_selected);
                         }
+                    */
                     ?>
                 </td>
             </tr>
+            [2018.01.12]削除 -->
         </table>
     </li>
     <br>
@@ -515,13 +541,13 @@ $a_selected = false;
                 <td colspan="12" class="hiddencell_l" height=15></td>
             </tr -->
             <tr>
-                <td colspan="5" class="yellow" height=15>保険証</td>
+                <td colspan="5" class="yellow" height=15 style="width:80px;">保険証</td>
                 <td colspan="3">
                     <?php
                         if ($a_act == '') {
                             echo $opt_contarct_insurance_crad;
                         } else {
-                            echo com_make_tag_option($a_act, $opt_contarct_insurance_crad, "opt_contarct_insurance_crad", $GLOBALS['g_DB_m_contract_insurance_crad'], "width: 90px;", $a_selected);
+                            echo com_make_tag_option($a_act, $opt_contarct_insurance_crad, "opt_contarct_insurance_crad", $GLOBALS['g_DB_m_contract_insurance_crad'], "width: 120px;", $a_selected);
                         }
                     ?>
                 </td>
@@ -535,6 +561,57 @@ $a_selected = false;
                     ?>
                 </td>
             </tr>
+            <!-- [2018.01.12]↓追加 -->
+            <tr>
+                <td colspan="5" class="yellow" height=15>退職</td>
+                <td colspan="3">
+                    <?php
+                        if ($a_act == '') {
+                            echo $retirement_date;
+                        } else {
+                            echo com_make_tag_input($a_act, $retirement_date, "retirement_date", "width: 120px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $insurance_card_retirement;
+                        } else {
+                            echo com_make_tag_option($a_act, $insurance_card_retirement, "insurance_card_retirement", $GLOBALS['g_DB_m_contract_already'], "width: 110px;", $a_selected);
+                        }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="yellow" height=15>休職</td>
+                <td colspan="3">
+                    <?php
+                        echo '開始&nbsp;';
+                        if ($a_act == '') {
+                            echo $leave_date_start;
+                        } else {
+                            echo com_make_tag_input($a_act, $leave_date_start, "leave_date_start", "width: 80px; text-align: center;");
+                        }
+                        echo '終了&nbsp;';
+                        if ($a_act == '') {
+                            echo $leave_date_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $leave_date_end, "leave_date_end", "width: 80px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $insurance_card_leave;
+                        } else {
+                            echo com_make_tag_option($a_act, $insurance_card_leave, "insurance_card_leave", $GLOBALS['g_DB_m_contract_already'], "width: 110px;", $a_selected);
+                        }
+                    ?>
+                </td>
+            </tr>
+            <!-- [2018.01.12]↑追加 -->
             <tr>
                 <td colspan="12" width=80>管理本部</td>
             </tr>
@@ -660,30 +737,39 @@ $a_selected = false;
         </table>
         <br>
         <!-- 左下2番目のテーブル -->
+        <!-- [2018.01.12] hidden化 -->
+        <input type="hidden" id="opt_contarct_projects_confirm" name="opt_contarct_projects_confirm" readonly="true" value="" style="text-align: center;">
+        <input type="hidden" id="opt_contarct_engineer_list" name="opt_contarct_engineer_list" readonly="true" value="" style="text-align: center;">
+        <!-- [2018.01.12] 削除]
         <table border="1" rules="all" width=340 height=200>
             <tr>
                 <td colspan="3" height=19 width=68 class="yellow"><font size="-2">他社決定時の<br>案件内容確認</font></td>
                 <td colspan="3" width=68>
                     <?php
+                    /*
                         if ($a_act == '') {
                             echo $opt_contarct_projects_confirm;
                         } else {
                             echo com_make_tag_option($a_act, $opt_contarct_projects_confirm, "opt_contarct_projects_confirm", $GLOBALS['g_DB_m_contract_projects_confirm'], "width: 100px;", $a_selected);
                         }
+                     */
                     ?>
                 </td>
                 <td colspan="3" width=68 class="yellow"><font size="-2">新ＨＡＬ<br>ｴﾝｼﾞﾆｱﾘｽﾄ更新</font></td>
                 <td colspan="3" width=68>
                     <?php
+                    /*
                         if ($a_act == '') {
                             echo $opt_contarct_engineer_list;
                         } else {
                             echo com_make_tag_option($a_act, $opt_contarct_engineer_list, "opt_contarct_engineer_list", $GLOBALS['g_DB_m_contract_engineer_list'], "width: 100px;", $a_selected);
                         }
+                     */
                     ?>
                 </td>
             </tr>
         </table>
+        -->
     </li>
 </ul>
 <br>

@@ -35,6 +35,13 @@ $opt_contarct_personality = "";
 $opt_contarct_projects_confirm = "";
 $opt_contarct_engineer_list = "";
 
+# [2018.01.12]追加
+$retirement_date = "";              # 退職日
+$insurance_card_retirement = "";    # 保険証回収ステータス（退職）
+$leave_date_start = "";             # 休職日（開始）
+$leave_date_end = "";               # 休職日（終了）
+$insurance_card_leave = "";         # 保険証回収ステータス（休職）
+
 if (isset($_GET['NO'])) {
     $a_no = $_GET['NO'];
     try{
@@ -46,6 +53,7 @@ if (isset($_GET['NO'])) {
 
         //担当営業情報は契約レポートから持ってくる。
         $a_sql = "SELECT s1.*";
+        # [2018.01.12]追加
         $a_sql .= "
             ,s2.replace_person
             ,s2.end_status
@@ -65,6 +73,11 @@ if (isset($_GET['NO'])) {
             ,s2.projects_confirm
             ,s2.engineer_list
             ,s2.remarks_pay AS remarks_pay_end
+            ,s2.retirement_date
+            ,s2.insurance_card_retirement
+            ,s2.leave_date_start
+            ,s2.leave_date_end
+            ,s2.insurance_card_leave
             ,(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=s2.cnf_id)) AS cnf_person_end
             ";
         $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
@@ -96,6 +109,13 @@ if (isset($_GET['NO'])) {
             $opt_contarct_projects_confirm = $a_result['projects_confirm'];
             $opt_contarct_engineer_list = $a_result['engineer_list'];
             $remarks_pay = $a_result['remarks_pay_end'];
+
+            # [2018.01.12]追加
+            $retirement_date = str_replace("-", "/", $a_result['retirement_date']);
+            $insurance_card_retirement = $a_result['insurance_card_retirement'];
+            $leave_date_start = str_replace("-", "/", $a_result['leave_date_start']);
+            $leave_date_end = str_replace("-", "/", $a_result['leave_date_end']);
+            $insurance_card_leave = $a_result['insurance_card_leave'];
 
             /*$reg_id = $a_result['reg_id'];
             $reg_person = $a_result['reg_person'];
@@ -219,24 +239,43 @@ $obj_sheet->setCellValue("AF32",$opt_m_contract_time_inc_pm);
 $obj_sheet->setCellValue("Z33",$opt_contract_tighten_p);
 $obj_sheet->setCellValue("AF33",$opt_contract_pay_pay);
 
-$obj_sheet->setCellValue("E35",$opt_contarct_replace);
+#$obj_sheet->setCellValue("E35",$opt_contarct_replace); # [2018.01.12]削除
+
 $obj_sheet->setCellValue("Y2",$opt_contarct_end_status);
 com_setValue_Date($inp_retire_date, $obj_sheet, "Y3", 'yyyy年m月d日');
 $obj_sheet->setCellValue("W35",$opt_contarct_insurance_crad);
 $obj_sheet->setCellValue("AC35",$opt_contarct_employ_insurance);
-$obj_sheet->setCellValue("E37",$opt_contarct_end_reason1);
-$obj_sheet->setCellValue("O37",$opt_contarct_end_reason2);
-$obj_sheet->setCellValue("Y37",$opt_contarct_end_reason3);
-$obj_sheet->setCellValue("E38",$inp_end_reason_detail);
-$obj_sheet->setCellValue("E46",$opt_contarct_from_now);
-$obj_sheet->setCellValue("N46",$opt_contarct_skill);
-$obj_sheet->setCellValue("C50",$inp_biko);
-$obj_sheet->setCellValue("W46",$opt_contarct_conversation);
-$obj_sheet->setCellValue("AA46",$opt_contarct_work_attitude);
-$obj_sheet->setCellValue("AE46",$opt_contarct_personality);
-$obj_sheet->setCellValue("W48",$opt_contarct_projects_confirm);
-$obj_sheet->setCellValue("AE48",$opt_contarct_engineer_list);
-$obj_sheet->setCellValue("U50",$remarks_pay);
+
+# [2018.01.12]追加
+if ($retirement_date != ''){
+    com_setValue_Date($retirement_date, $obj_sheet, "W36", 'yyyy年m月d日');
+}
+$obj_sheet->setCellValue("AC36",$insurance_card_retirement);
+if ($leave_date_start != ''){
+    com_setValue_Date($leave_date_start, $obj_sheet, "W37", 'yyyy年m月d日');
+}
+if ($leave_date_end != ''){
+    com_setValue_Date($leave_date_end, $obj_sheet, "W38", 'yyyy年m月d日');
+}
+$obj_sheet->setCellValue("AC37",$insurance_card_leave);
+
+# [2018.01.12]出力位置の変更
+$obj_sheet->setCellValue("E40",$opt_contarct_end_reason1);
+$obj_sheet->setCellValue("O40",$opt_contarct_end_reason2);
+$obj_sheet->setCellValue("Y40",$opt_contarct_end_reason3);
+$obj_sheet->setCellValue("E41",$inp_end_reason_detail);
+$obj_sheet->setCellValue("E49",$opt_contarct_from_now);
+$obj_sheet->setCellValue("N49",$opt_contarct_skill);
+$obj_sheet->setCellValue("C53",$inp_biko);
+$obj_sheet->setCellValue("W49",$opt_contarct_conversation);
+$obj_sheet->setCellValue("AA49",$opt_contarct_work_attitude);
+$obj_sheet->setCellValue("AE49",$opt_contarct_personality);
+
+#$obj_sheet->setCellValue("W48",$opt_contarct_projects_confirm);    # [2018.01.12]削除
+#$obj_sheet->setCellValue("AE48",$opt_contarct_engineer_list);      # [2018.01.12]削除
+
+# [2018.01.12]出力位置の変更
+$obj_sheet->setCellValue("U53",$remarks_pay);
 
 $obj_sheet->setCellValue("AI3",$reg_person);
 $obj_sheet->setCellValue("AI33",$cnf_person);

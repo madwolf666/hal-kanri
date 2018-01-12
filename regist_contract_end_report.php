@@ -33,6 +33,7 @@ try{
 
     if ($a_isExists == false){
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_contract_end_report']." (";
+        # [2018.01.12]追加
         $a_sql .= "
             cr_id
             ,replace_person
@@ -57,8 +58,14 @@ try{
             ,remarks_pay
             ,cnf_id
             ,cnf_date
+            ,retirement_date
+            ,insurance_card_retirement
+            ,leave_date_start
+            ,leave_date_end
+            ,insurance_card_leave
             ";
         $a_sql .= ") VALUES(";
+        # [2018.01.12]追加
         $a_sql .= "
             :cr_id
             ,:replace_person
@@ -83,10 +90,16 @@ try{
             ,:remarks_pay
             ,:cnf_id
             ,:cnf_date
+            ,:retirement_date
+            ,:insurance_card_retirement
+            ,:leave_date_start
+            ,:leave_date_end
+            ,:insurance_card_leave
             ";
         $a_sql .= ");";
     }else{
         $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_end_report']." SET ";
+        # [2018.01.12]追加
         $a_sql .= "
             replace_person=:replace_person
             ,end_status=:end_status
@@ -110,6 +123,11 @@ try{
             ,remarks_pay=:remarks_pay
             ,cnf_id=:cnf_id
             ,cnf_date=:cnf_date
+            ,retirement_date=:retirement_date
+            ,insurance_card_retirement=:insurance_card_retirement
+            ,leave_date_start=:leave_date_start
+            ,leave_date_end=:leave_date_end
+            ,insurance_card_leave=:insurance_card_leave
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -136,6 +154,13 @@ try{
     $a_stmt->bindParam(':engineer_list', $_POST['opt_contarct_engineer_list'], PDO::PARAM_STR);
     $a_stmt->bindParam(':remarks_pay', $_POST['remarks_pay'], PDO::PARAM_STR);
 
+    # [2018.01.12]追加
+    com_pdo_bindValue($a_stmt, ':retirement_date', $_POST['retirement_date']);
+    $a_stmt->bindParam(':insurance_card_retirement', $_POST['insurance_card_retirement'], PDO::PARAM_STR);
+    com_pdo_bindValue($a_stmt, ':leave_date_start', $_POST['leave_date_start']);
+    com_pdo_bindValue($a_stmt, ':leave_date_end', $_POST['leave_date_end']);
+    $a_stmt->bindParam(':insurance_card_leave', $_POST['insurance_card_leave'], PDO::PARAM_STR);
+    
     if ($a_isExists == false) {
         com_pdo_bindValue($a_stmt, ':reg_id', $_POST['reg_id']);
         #com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
