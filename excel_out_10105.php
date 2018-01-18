@@ -53,7 +53,8 @@ if (isset($_GET['NO'])) {
 
         //担当営業情報は契約レポートから持ってくる。
         $a_sql = "SELECT s1.*";
-        # [2018.01.12]追加
+        #[2018.01.12]追加
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             ,s2.replace_person
             ,s2.end_status
@@ -78,6 +79,8 @@ if (isset($_GET['NO'])) {
             ,s2.leave_date_start
             ,s2.leave_date_end
             ,s2.insurance_card_leave
+            ,s2.remarks2 AS remarks_end2
+            ,s2.remarks_pay2 AS remarks_pay_end2
             ,(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=s2.cnf_id)) AS cnf_person_end
             ";
         $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
@@ -116,6 +119,10 @@ if (isset($_GET['NO'])) {
             $leave_date_start = str_replace("-", "/", $a_result['leave_date_start']);
             $leave_date_end = str_replace("-", "/", $a_result['leave_date_end']);
             $insurance_card_leave = $a_result['insurance_card_leave'];
+
+            #[2018.01.18]課題解決管理表No.92
+            $remarks2 = $a_result['remarks_end2'];
+            $remarks_pay2 = $a_result['remarks_pay_end2'];
 
             /*$reg_id = $a_result['reg_id'];
             $reg_person = $a_result['reg_person'];
@@ -276,6 +283,10 @@ $obj_sheet->setCellValue("AE49",$opt_contarct_personality);
 
 # [2018.01.12]出力位置の変更
 $obj_sheet->setCellValue("U53",$remarks_pay);
+
+#[2018.01.18]課題解決管理表No.92
+$obj_sheet->setCellValue("C58",$remarks2);
+$obj_sheet->setCellValue("U58",$remarks_pay2);
 
 $obj_sheet->setCellValue("AI3",$reg_person);
 $obj_sheet->setCellValue("AI33",$cnf_person);

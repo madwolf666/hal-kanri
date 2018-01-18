@@ -33,7 +33,29 @@ try{
     $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', 'f_claim_contract_form', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_andor");
     $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', 'f_claim_settlement_closingday', $GLOBALS['g_DB_m_contract_tighten'], "f_claim_settlement_closingday_andor");
     $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', 'f_claim_settlement_paymentday', $GLOBALS['g_DB_m_contract_bill_pay'], "f_claim_settlement_paymentday_andor");
-    $a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "", "f_remarks_andor");
+    
+    #[2018.01.18]課題解決管理表No.92
+    #remarksの場合、remarks2/remarks_pay/remarks_pay2も含める
+    $a_where_sub = "";
+    $a_where_andor = "";
+    if (isset($_SESSION['f_remarks'])){
+        $a_sess = $_SESSION['f_remarks'];
+        if ($a_sess != ""){
+            $a_where_sub = "((remarks LIKE '%".$a_sess."%') OR (remarks2 LIKE '%".$a_sess."%') OR (remarks_pay LIKE '%".$a_sess."%') OR (remarks_pay2 LIKE '%".$a_sess."%'))";
+        }
+    }
+    if (isset($_SESSION['f_remarks_andor'])){
+        $a_where_andor = " ".$_SESSION['f_remarks_andor']." ";
+    }else{
+        $a_where_andor = " AND ";
+    }
+    if (($a_where != "") && ($a_where_sub != "")){
+        $a_where .= " ".$a_where_andor." ".$a_where_sub;
+    }else{
+        $a_where = $a_where_sub;
+    }
+    #$a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "", "f_remarks_andor");
+    
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }

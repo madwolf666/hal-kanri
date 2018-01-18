@@ -45,6 +45,7 @@ try{
 
     if ($a_act == 'n'){
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_contract_report']." (";
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             customer_name
             ,subject
@@ -193,6 +194,8 @@ try{
             ,status_cd
             ,cr_id_src
             ,claim_accounts_invoicing
+            ,remarks2
+            ,remarks_pay2
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -209,6 +212,7 @@ try{
         #        ";
         #}
         $a_sql .= ") VALUES(";
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             :customer_name
             ,:subject
@@ -357,6 +361,8 @@ try{
             ,:status_cd
             ,:cr_id_src
             ,:claim_accounts_invoicing
+            ,:remarks2
+            ,:remarks_pay2
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -375,6 +381,7 @@ try{
         $a_sql .= ");";
     }else{
         $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_report']." SET ";
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             customer_name=:customer_name
             ,subject=:subject
@@ -522,6 +529,8 @@ try{
             ,remarks_pay=:remarks_pay
             ,status_cd=:status_cd
             ,claim_accounts_invoicing=:claim_accounts_invoicing
+            ,remarks2=:remarks2
+            ,remarks_pay2=:remarks_pay2
             ";
         #[2017.11.20]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -837,6 +846,10 @@ try{
     #[2017.12.14]要望
     $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_accounts_invoicing']));
     com_pdo_bindValue($a_stmt, ':claim_accounts_invoicing', $a_val);
+
+    #[2018.01.18]課題解決管理表No.92
+    $a_stmt->bindParam(':remarks2', $_POST['remarks2'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':remarks_pay2', $_POST['remarks_pay2'], PDO::PARAM_STR);
 
     if ($a_act == 'e'){
         #[2017.11.20]bug-fixed.

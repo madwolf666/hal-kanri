@@ -2038,15 +2038,17 @@ $a_selected = false;
 <br>
 <ul class="myul" style="list-style:none;">
     <li class="myli">
-        <table border="1" rules="all" width=340 height=200>
+        <table border="1" rules="all" width=340 height=400>
             <tr>
-                <td colspan="2" class="yellow" height=200 nowrap>備考<br>(営業)</td>
+                <td colspan="2" class="yellow" height=400 nowrap>備考<br>(営業)</td>
                 <td colspan="10" class="remarks">
                     <?php
                         if ($a_act == ''){
                             echo com_db_string_format($inp_biko);   #[2017.11.07]
+                            echo com_db_string_format($remarks2);   #[2018.01.18]課題解決管理表No.92
                         }else{
-                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 96%;");
+                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 46%;");
+                            echo com_make_tag_textarea($a_act, $remarks2, "remarks2", "width: 96%; height: 46%;");  #[2018.01.18]課題解決管理表No.92
                         }
                     ?>
                 </td>
@@ -2055,15 +2057,17 @@ $a_selected = false;
     </li>
     <!-- 右側のテーブル群 -->
     <li class="myli">
-        <table border="1" rules="all" width=340 height=200>
+        <table border="1" rules="all" width=340 height=400>
             <tr>
-                <td colspan="2" class="yellow" height=200 nowrap>備考<br>(管理)</td>
+                <td colspan="2" class="yellow" height=400 nowrap>備考<br>(管理)</td>
                 <td colspan="10" class="remarks">
                     <?php
                         if ($a_act == ''){
                             echo com_db_string_format($remarks_pay);    #[2017.11.07]
+                            echo com_db_string_format($remarks_pay2);   #[2018.01.18]課題解決管理表No.92
                         }else{
-                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 96%;");
+                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 46%;");
+                            echo com_make_tag_textarea($a_act, $remarks_pay2, "remarks_pay2", "width: 96%; height: 46%;");  #[2018.01.18]課題解決管理表No.92
                         }
                     ?>
                 </td>

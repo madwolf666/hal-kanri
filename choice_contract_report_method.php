@@ -72,14 +72,16 @@ try{
             if ($status_cd_num == 2){
                 $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10105']."&NO=".$a_result['cr_id']."'>契約終了レポートへ</a>";
             }else{
-                $a_sRet .= "●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a>";
+                #[2018.01.18]課題解決管理表No.85
+                #$a_sRet .= "●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a>";
             }
             $a_sRet .= "</td>";
         } else {
             $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         }
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>&nbsp;&nbsp;</td>";
+        #[2018.01.18]課題解決管理表No.85
+        $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";

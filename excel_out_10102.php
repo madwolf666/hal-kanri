@@ -219,6 +219,10 @@ $obj_sheet->setCellValue("R62",$chs_tel1);
 $obj_sheet->setCellValue("C64",$inp_biko);
 $obj_sheet->setCellValue("V64",$remarks_pay);
 
+#[2018.01.18]課題解決管理表No.92
+$obj_sheet->setCellValue("C69",$remarks2);
+$obj_sheet->setCellValue("V69",$remarks_pay2);
+
 $obj_sheet->setCellValue("AJ3",$reg_person);
 $obj_sheet->setCellValue("AJ42",$cnf_person);
 

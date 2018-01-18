@@ -53,7 +53,8 @@ if (isset($_GET['NO'])) {
 
         //担当営業情報は契約レポートから持ってくる。
         $a_sql = "SELECT s1.*";
-        # [2018.01.12]追加
+        #[2018.01.12]追加
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             ,s2.replace_person
             ,s2.end_status
@@ -78,6 +79,8 @@ if (isset($_GET['NO'])) {
             ,s2.leave_date_start
             ,s2.leave_date_end
             ,s2.insurance_card_leave
+            ,s2.remarks2 AS remarks_end2
+            ,s2.remarks_pay2 AS remarks_pay_end2
             ,(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=s2.cnf_id)) AS cnf_person_end
             ";
         $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
@@ -112,8 +115,10 @@ if (isset($_GET['NO'])) {
             $opt_contarct_skill = $a_result['skill'];
             if ($opt_contarct_end_status == ''){
                 $inp_biko = $a_result['remarks'];
+                $remarks2 = $a_result['remarks2'];  #[2018.01.18]課題解決管理表No.92
             }else{
                 $inp_biko = $a_result['remarks_end'];
+                $remarks2 = $a_result['remarks_end2'];  #[2018.01.18]課題解決管理表No.92
             }
             $opt_contarct_conversation = $a_result['conversation'];
             $opt_contarct_work_attitude = $a_result['work_attitude'];
@@ -122,8 +127,10 @@ if (isset($_GET['NO'])) {
             $opt_contarct_engineer_list = $a_result['engineer_list'];
             if ($opt_contarct_end_status == ''){
                 $remarks_pay = $a_result['remarks_pay'];
+                $remarks_pay2 = $a_result['remarks_pay2'];  #[2018.01.18]課題解決管理表No.92
             }else{
                 $remarks_pay = $a_result['remarks_pay_end'];
+                $remarks_pay2 = $a_result['remarks_pay_end2'];  #[2018.01.18]課題解決管理表No.92
             }
 
             # [2018.01.12]追加
@@ -776,15 +783,17 @@ $a_selected = false;
 <ul style="list-style:none;" class="Responsive">
     <li class="myli">
         <!-- 右下1番目のテーブル -->
-        <table border="1" rules="all" width=340 height=230>
+        <table border="1" rules="all" width=340 height=400>
             <tr>
-                <td colspan="2" width=60 class="yellow" height=230>備考<br>(営業)</td>
+                <td colspan="2" width=60 class="yellow" height=400>備考<br>(営業)</td>
                 <td colspan="10" width=280 class="remarks">
                     <?php
                         if ($a_act == ''){
                             echo $inp_biko;
+                            echo com_db_string_format($remarks2);   #[2018.01.18]課題解決管理表No.92
                         }else{
-                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 96%;");
+                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 46%;");
+                            echo com_make_tag_textarea($a_act, $remarks2, "remarks2", "width: 96%; height: 46%;");  #[2018.01.18]課題解決管理表No.92
                         }
                     ?>
                 </td>
@@ -795,15 +804,17 @@ $a_selected = false;
     <!-- 左下のテーブル群 -->
     <li class="myli">
         <!-- 左下1番目のテーブル -->
-        <table border="1" rules="all" width=340 height=230>
+        <table border="1" rules="all" width=340 height=400>
             <tr>
-                <td colspan="2" width=60 class="yellow" height=230>備考<br>(管理)</td>
+                <td colspan="2" width=60 class="yellow" height=400>備考<br>(管理)</td>
                 <td colspan="10" width=280 class="remarks">
                     <?php
                         if ($a_act == ''){
                             echo $remarks_pay;
+                            echo com_db_string_format($remarks_pay2);   #[2018.01.18]課題解決管理表No.92
                         }else{
-                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 96%;");
+                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 46%;");
+                            echo com_make_tag_textarea($a_act, $remarks_pay2, "remarks_pay2", "width: 96%; height: 46%;");  #[2018.01.18]課題解決管理表No.92
                         }
                     ?>
                 </td>

@@ -36,7 +36,17 @@ $(function () {
     $('#inp_kyakusaki_syuryo').change(function(){calc_pay_person(); check_value_changed_10102(2, 'claim_agreement_end', $('#inp_kyakusaki_syuryo').val(), '#inp_kyakusaki_syuryo');});
     
     //通常期間：単金・下限時間・上限時間
-    $('#opt_contract_calc_b1').change(function(){$('#opt_contract_calc_p11').val($('#opt_contract_calc_b1').val()); $('#opt_contract_calc_p21').val($('#opt_contract_calc_b1').val()); check_value_changed_10102(1, 'claim_normal_calculation', $('[name=opt_contract_calc_b1] option:selected').text(), '#opt_contract_calc_b1');});
+    $('#opt_contract_calc_b1').change(function(){
+        $('#opt_contract_calc_p11').val($('#opt_contract_calc_b1').val()); $('#opt_contract_calc_p21').val($('#opt_contract_calc_b1').val());
+        check_value_changed_10102(1, 'claim_normal_calculation', $('[name=opt_contract_calc_b1] option:selected').text(), '#opt_contract_calc_b1');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_b1] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_bd').val('7');
+            $('#opt_m_contract_time_inc_bm').val('7');
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
     //[2017.11.07]課題No.79
     $('#inp_tankin_b1').keyup(function(){
         calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement();
@@ -90,7 +100,17 @@ $(function () {
     //$('#opt_contract_trunc_unit_zangyo').change(function(){calc_bill_normal_period(); calc_bill_middle_admission(); calc_bill_midway_retirement(); calc_pay_normal_period(); calc_pay_middle_admission(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_normal_overtime_unit_price_truncation_unit', $('[name=opt_contract_trunc_unit_zangyo] option:selected').text(), '#opt_contract_trunc_unit_zangyo');});
 
     //途中入場：自動計算・手入力・通常単金・通常下限時間・通常上限時間・通常控除単価・通常残業単価・就業日数・全営業日数
-    $('#opt_contract_calc_b2').change(function(){$('#opt_contract_calc_p12').val($('#opt_contract_calc_b2').val()); $('#opt_contract_calc_p22').val($('#opt_contract_calc_b2').val()); check_value_changed_10102(1, 'claim_middle_calculation', $('[name=opt_contract_calc_b2] option:selected').text(), '#opt_contract_calc_b2');});
+    $('#opt_contract_calc_b2').change(function(){
+        $('#opt_contract_calc_p12').val($('#opt_contract_calc_b2').val()); $('#opt_contract_calc_p22').val($('#opt_contract_calc_b2').val());
+        check_value_changed_10102(1, 'claim_middle_calculation', $('[name=opt_contract_calc_b2] option:selected').text(), '#opt_contract_calc_b2');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_b2] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_bd').val('7');
+            $('#opt_m_contract_time_inc_bm').val('7');
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
     $('#inp_wariai_nyujyo_c1').keyup(function(){calc_bill_middle_admission();});
     $('#inp_wariai_nyujyo_c2').keyup(function(){calc_bill_middle_admission(); calc_pay_middle_admission(); check_value_changed_10102(1, 'payment_middle_daily_manual', $('#inp_wariai_nyujyo_c2').val(), '#inp_wariai_nyujyo_c2');});
     
@@ -106,7 +126,17 @@ $(function () {
     $('#inp_zeneigyonisu_b2').keyup(function(){calc_bill_middle_admission(); calc_pay_middle_admission(); check_value_changed_10102(1, 'claim_middle_allbusiness_day', $('#inp_zeneigyonisu_b2').val(), '#inp_zeneigyonisu_b2');});
 
     //途中退場：自動計算・手入力・通常単金・通常下限時間・通常上限時間・通常控除単価・通常残業単価・就業日数・全営業日数
-    $('#opt_contract_calc_b3').change(function(){$('#opt_contract_calc_p13').val($('#opt_contract_calc_b3').val()); $('#opt_contract_calc_p23').val($('#opt_contract_calc_b3').val()); check_value_changed_10102(1, 'claim_leaving_calculation', $('[name=opt_contract_calc_b3] option:selected').text(), '#opt_contract_calc_b3');});
+    $('#opt_contract_calc_b3').change(function(){
+        $('#opt_contract_calc_p13').val($('#opt_contract_calc_b3').val()); $('#opt_contract_calc_p23').val($('#opt_contract_calc_b3').val());
+        check_value_changed_10102(1, 'claim_leaving_calculation', $('[name=opt_contract_calc_b3] option:selected').text(), '#opt_contract_calc_b3');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_b3] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_bd').val('7');
+            $('#opt_m_contract_time_inc_bm').val('7');
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
     $('#inp_wariai_taijyo_c1').keyup(function(){calc_bill_midway_retirement();});
     $('#inp_wariai_taijyo_c2').keyup(function(){calc_bill_midway_retirement(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'payment_leaving_daily_manual', $('#inp_wariai_taijyo_c2').val(), '#inp_wariai_taijyo_c2');});
     /*[2017.11.09]課題No.81
@@ -173,12 +203,54 @@ $(function () {
     $('#opt_tax_withholding').change(function(){check_value_changed_10102(1, 'tax_withholding', $('[name=opt_tax_withholding] option:selected').text(), '#opt_tax_withholding');});
     $('#opt_contract_reduction').change(function(){check_value_changed_10102(1, 'redemption_ratio', $('[name=opt_contract_reduction] option:selected').text(), '#opt_contract_reduction');});
 
-    $('#opt_contract_calc_p11').change(function(){check_value_changed_10102(1, 'payment_normal_calculation_1', $('[name=opt_contract_calc_p11] option:selected').text(), '#opt_contract_calc_p11');});
-    $('#opt_contract_calc_p21').change(function(){check_value_changed_10102(1, 'payment_normal_calculation_2', $('[name=opt_contract_calc_p21] option:selected').text(), '#opt_contract_calc_p21');});
-    $('#opt_contract_calc_p12').change(function(){check_value_changed_10102(1, 'payment_middle_calculation_1', $('[name=opt_contract_calc_p12] option:selected').text(), '#opt_contract_calc_p12');});
-    $('#opt_contract_calc_p22').change(function(){check_value_changed_10102(1, 'payment_middle_calculation_2', $('[name=opt_contract_calc_p22] option:selected').text(), '#opt_contract_calc_p22');});
-    $('#opt_contract_calc_p13').change(function(){check_value_changed_10102(1, 'payment_leaving_calculation_1', $('[name=opt_contract_calc_p13] option:selected').text(), '#opt_contract_calc_p13');});
-    $('#opt_contract_calc_p23').change(function(){check_value_changed_10102(1, 'payment_leaving_calculation_2', $('[name=opt_contract_calc_p23] option:selected').text(), '#opt_contract_calc_p23');});
+    $('#opt_contract_calc_p11').change(function(){
+        check_value_changed_10102(1, 'payment_normal_calculation_1', $('[name=opt_contract_calc_p11] option:selected').text(), '#opt_contract_calc_p11');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_p11] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
+    $('#opt_contract_calc_p21').change(function(){
+        check_value_changed_10102(1, 'payment_normal_calculation_2', $('[name=opt_contract_calc_p21] option:selected').text(), '#opt_contract_calc_p21');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_p21] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
+    $('#opt_contract_calc_p12').change(function(){
+        check_value_changed_10102(1, 'payment_middle_calculation_1', $('[name=opt_contract_calc_p12] option:selected').text(), '#opt_contract_calc_p12');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_p12] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
+    $('#opt_contract_calc_p22').change(function(){
+        check_value_changed_10102(1, 'payment_middle_calculation_2', $('[name=opt_contract_calc_p22] option:selected').text(), '#opt_contract_calc_p22');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_p22] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
+    $('#opt_contract_calc_p13').change(function(){
+        check_value_changed_10102(1, 'payment_leaving_calculation_1', $('[name=opt_contract_calc_p13] option:selected').text(), '#opt_contract_calc_p13');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_p13] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
+    $('#opt_contract_calc_p23').change(function(){
+        check_value_changed_10102(1, 'payment_leaving_calculation_2', $('[name=opt_contract_calc_p23] option:selected').text(), '#opt_contract_calc_p23');
+        //[2018.01.18]課題解決管理表No.89
+        if ($('[name=opt_contract_calc_p23] option:selected').text() == '固定'){
+            $('#opt_m_contract_time_inc_pd').val('7');
+            $('#opt_m_contract_time_inc_pm').val('7');
+        }
+    });
 
     $('#opt_m_contract_time_inc_pd').change(function(){check_value_changed_10102(1, 'payment_hourly_daily', $('[name=opt_m_contract_time_inc_pd] option:selected').text(), '#opt_m_contract_time_inc_pd');});
     $('#opt_m_contract_time_inc_pm').change(function(){check_value_changed_10102(1, 'payment_hourly_monthly', $('[name=opt_m_contract_time_inc_pm] option:selected').text(), '#opt_m_contract_time_inc_pm');});
@@ -194,6 +266,40 @@ $(function () {
     $('#txt_engineer_name').change(function(){set_jigyousya_info('txt_engineer_name','txt_jigyosya_name');});
     $('#txt_engineer_kana').keyup(function(){set_jigyousya_info('txt_engineer_kana','txt_jigyosya_kana');});
     $('#txt_engineer_kana').change(function(){set_jigyousya_info('txt_engineer_kana','txt_jigyosya_kana');});
+
+    //[2018.01.18]項目追加
+    //$('#contact_date_org').datepicker({});
+    $('#contact_date_org').keyup(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
+    //$('#contact_date_org').change(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
+    
+    $('#organization').keyup(function(){check_value_changed_10102(1, 'organization', $('#organization').val(), '#organization');});
+    $('#dd_name').keyup(function(){check_value_changed_10102(1, 'dd_name', $('#dd_name').val(), '#dd_name');});
+    $('#dd_branch').keyup(function(){check_value_changed_10102(1, 'dd_branch', $('#dd_branch').val(), '#dd_branch');});
+    $('#dd_address').keyup(function(){check_value_changed_10102(1, 'dd_address', $('#dd_address').val(), '#dd_address');});
+    $('#dd_tel').keyup(function(){check_value_changed_10102(1, 'dd_tel', $('#dd_tel').val(), '#dd_tel');});
+    $('#ip_position').keyup(function(){check_value_changed_10102(1, 'ip_position', $('#ip_position').val(), '#ip_position');});
+    $('#ip_name').keyup(function(){check_value_changed_10102(1, 'ip_name', $('#ip_name').val(), '#ip_name');});
+    $('#dm_responsible_position').keyup(function(){check_value_changed_10102(1, 'dm_responsible_position', $('#dm_responsible_position').val(), '#dm_responsible_position');});
+    $('#dm_responsible_name').keyup(function(){check_value_changed_10102(1, 'dm_responsible_name', $('#dm_responsible_name').val(), '#dm_responsible_name');});
+    $('#dm_responsible_tel').keyup(function(){check_value_changed_10102(1, 'dm_responsible_tel', $('#dm_responsible_tel').val(), '#dm_responsible_tel');});
+    $('#dd_responsible_position').keyup(function(){check_value_changed_10102(1, 'dd_responsible_position', $('#dd_responsible_position').val(), '#dd_responsible_position');});
+    $('#dd_responsible_name').keyup(function(){check_value_changed_10102(1, 'dd_responsible_name', $('#dd_responsible_name').val(), '#dd_responsible_name');});
+    $('#dd_responsible_tel').keyup(function(){check_value_changed_10102(1, 'dd_responsible_tel', $('#dd_responsible_tel').val(), '#dd_responsible_tel');});
+    $('#chs_position1').keyup(function(){check_value_changed_10102(1, 'chs_position1', $('#chs_position1').val(), '#chs_position1');});
+    $('#chs_name1').keyup(function(){check_value_changed_10102(1, 'chs_name1', $('#chs_name1').val(), '#chs_name1');});
+    $('#chs_tel1').keyup(function(){check_value_changed_10102(1, 'chs_tel1', $('#chs_tel1').val(), '#chs_tel1');});
+    $('#chs_position2').keyup(function(){check_value_changed_10102(1, 'chs_position2', $('#chs_position2').val(), '#chs_position2');});
+    $('#chs_name2').keyup(function(){check_value_changed_10102(1, 'chs_name2', $('#chs_name2').val(), '#chs_name2');});
+    $('#chs_tel2').keyup(function(){check_value_changed_10102(1, 'chs_tel2', $('#chs_tel2').val(), '#chs_tel2');});
+    $('#remarks_pay').keyup(function(){check_value_changed_10102(1, 'remarks_pay', $('#remarks_pay').val(), '#remarks_pay');});
+
+    $('#status_cd').change(function(){check_value_changed_10102(1, 'status_cd', $('[name=status_cd] option:selected').text(), '#status_cd');});
+    //[2018.01.10]協の場合還元率を手入力
+    $('#txt_contract_reduction').keyup(function(){check_value_changed_10102(1, 'redemption_ratio', $('#txt_contract_reduction').val(), '#txt_contract_reduction');});
+    
+    //[2018.01.18]課題解決管理表No.92
+    $('#remarks2').keyup(function(){check_value_changed_10102(1, 'remarks2', $('#remarks2').val(), '#remarks2');});
+    $('#remarks_pay2').keyup(function(){check_value_changed_10102(1, 'remarks_pay2', $('#remarks_pay2').val(), '#remarks_pay2');});
 
     //--------------------------------------------------------------------------
     //見積書
@@ -234,45 +340,23 @@ $(function () {
     $('#retirement_date').datepicker({});
     $('#leave_date_start').datepicker({});
     $('#leave_date_end').datepicker({});
+    //[2018.01.18]bug-fixed.
     $('#retirement_date').keyup(function(){check_value_changed_10105(2, 'retirement_date', $('#retirement_date').val(), '#retirement_date');});
+    $('#retirement_date').change(function(){check_value_changed_10105(2, 'retirement_date', $('#retirement_date').val(), '#retirement_date');});
     $('#leave_date_start').keyup(function(){check_value_changed_10105(2, 'leave_date_start', $('#leave_date_start').val(), '#leave_date_start');});
+    $('#leave_date_start').change(function(){check_value_changed_10105(2, 'leave_date_start', $('#leave_date_start').val(), '#leave_date_start');});
     $('#leave_date_end').keyup(function(){check_value_changed_10105(2, 'leave_date_end', $('#leave_date_end').val(), '#leave_date_end');});
+    $('#leave_date_end').change(function(){check_value_changed_10105(2, 'leave_date_end', $('#leave_date_end').val(), '#leave_date_end');});
     $('#insurance_card_retirement').change(function(){check_value_changed_10105(1, 'insurance_card_retirement', $('[name=insurance_card_retirement] option:selected').text(), '#insurance_card_retirement');});
     $('#insurance_card_leave').change(function(){check_value_changed_10105(1, 'insurance_card_leave', $('[name=insurance_card_leave] option:selected').text(), '#insurance_card_leave');});
+
+    //[2018.01.18]課題解決管理表No.92
+    $('#remarks2').keyup(function(){check_value_changed_10105(1, 'remarks2', $('#remarks2').val(), '#remarks2');});
+    $('#remarks_pay2').keyup(function(){check_value_changed_10105(1, 'remarks_pay2', $('#remarks_pay2').val(), '#remarks_pay2');});
 
     //条件検索
     $('#f_claim_agreement_start').datepicker({});
     $('#f_claim_agreement_end').datepicker({});
-    
-    //項目追加
-    //$('#contact_date_org').datepicker({});
-    $('#contact_date_org').keyup(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
-    //$('#contact_date_org').change(function(){check_value_changed_10102(2, 'contact_date_org', $('#contact_date_org').val(), '#contact_date_org');});
-    
-    $('#organization').keyup(function(){check_value_changed_10102(1, 'organization', $('#organization').val(), '#organization');});
-    $('#dd_name').keyup(function(){check_value_changed_10102(1, 'dd_name', $('#dd_name').val(), '#dd_name');});
-    $('#dd_branch').keyup(function(){check_value_changed_10102(1, 'dd_branch', $('#dd_branch').val(), '#dd_branch');});
-    $('#dd_address').keyup(function(){check_value_changed_10102(1, 'dd_address', $('#dd_address').val(), '#dd_address');});
-    $('#dd_tel').keyup(function(){check_value_changed_10102(1, 'dd_tel', $('#dd_tel').val(), '#dd_tel');});
-    $('#ip_position').keyup(function(){check_value_changed_10102(1, 'ip_position', $('#ip_position').val(), '#ip_position');});
-    $('#ip_name').keyup(function(){check_value_changed_10102(1, 'ip_name', $('#ip_name').val(), '#ip_name');});
-    $('#dm_responsible_position').keyup(function(){check_value_changed_10102(1, 'dm_responsible_position', $('#dm_responsible_position').val(), '#dm_responsible_position');});
-    $('#dm_responsible_name').keyup(function(){check_value_changed_10102(1, 'dm_responsible_name', $('#dm_responsible_name').val(), '#dm_responsible_name');});
-    $('#dm_responsible_tel').keyup(function(){check_value_changed_10102(1, 'dm_responsible_tel', $('#dm_responsible_tel').val(), '#dm_responsible_tel');});
-    $('#dd_responsible_position').keyup(function(){check_value_changed_10102(1, 'dd_responsible_position', $('#dd_responsible_position').val(), '#dd_responsible_position');});
-    $('#dd_responsible_name').keyup(function(){check_value_changed_10102(1, 'dd_responsible_name', $('#dd_responsible_name').val(), '#dd_responsible_name');});
-    $('#dd_responsible_tel').keyup(function(){check_value_changed_10102(1, 'dd_responsible_tel', $('#dd_responsible_tel').val(), '#dd_responsible_tel');});
-    $('#chs_position1').keyup(function(){check_value_changed_10102(1, 'chs_position1', $('#chs_position1').val(), '#chs_position1');});
-    $('#chs_name1').keyup(function(){check_value_changed_10102(1, 'chs_name1', $('#chs_name1').val(), '#chs_name1');});
-    $('#chs_tel1').keyup(function(){check_value_changed_10102(1, 'chs_tel1', $('#chs_tel1').val(), '#chs_tel1');});
-    $('#chs_position2').keyup(function(){check_value_changed_10102(1, 'chs_position2', $('#chs_position2').val(), '#chs_position2');});
-    $('#chs_name2').keyup(function(){check_value_changed_10102(1, 'chs_name2', $('#chs_name2').val(), '#chs_name2');});
-    $('#chs_tel2').keyup(function(){check_value_changed_10102(1, 'chs_tel2', $('#chs_tel2').val(), '#chs_tel2');});
-    $('#remarks_pay').keyup(function(){check_value_changed_10102(1, 'remarks_pay', $('#remarks_pay').val(), '#remarks_pay');});
-
-    $('#status_cd').change(function(){check_value_changed_10102(1, 'status_cd', $('[name=status_cd] option:selected').text(), '#status_cd');});
-    //[2018.01.10]協の場合還元率を手入力
-    $('#txt_contract_reduction').keyup(function(){check_value_changed_10102(1, 'redemption_ratio', $('#txt_contract_reduction').val(), '#txt_contract_reduction');});
     
 });
 
@@ -1650,6 +1734,7 @@ function regist_contract_report(h_act)
     if (!confirm("契約レポートを" + a_sKind + "します。よろしいですか？")) return;
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
+    //[2018.01.18]課題解決管理表No.92
     $.ajax({
         url: m_parentURL + "regist_contract_report.php",
         type: 'POST',
@@ -1827,6 +1912,8 @@ function regist_contract_report(h_act)
             'status_cd_num': $('[name=status_cd] option:selected').val(),
             'cr_id_src': $('#cr_id_src').val(),
             'claim_accounts_invoicing': $('#claim_accounts_invoicing').val(),
+            'remarks2': $('#remarks2').val(),
+            'remarks_pay2': $('#remarks_pay2').val(),
         },
         success: function(data, dataType){
             //[2017.11.08]↓課題No.81
@@ -1975,6 +2062,7 @@ function regist_contract_end_report(h_act, h_no)
     if (!confirm("契約終了レポートを" + a_sKind + "します。よろしいですか？")) return;
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
+    //[2018.01.18]課題解決管理表No.92
     $.ajax({
         url: m_parentURL + "regist_contract_end_report.php",
         type: 'POST',
@@ -2007,6 +2095,8 @@ function regist_contract_end_report(h_act, h_no)
             'leave_date_start': $('#leave_date_start').val(),
             'leave_date_end': $('#leave_date_end').val(),
             'insurance_card_leave': $('[name=insurance_card_leave] option:selected').text(),
+            'remarks2': $('#remarks2').val(),
+            'remarks_pay2': $('#remarks_pay2').val(),
         },
         success: function(data, dataType){
             if (data == 'OK'){

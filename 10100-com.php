@@ -260,7 +260,11 @@ $cnf_person = "";
 $claim_accounts_invoicing = ""; #[2017.12.14]要望
 $txt_contract_reduction = "";  #[2018.01.10]協の場合還元率を手入力
 $dsp_contract_reduction = "";  #[2018.01.10]協の場合還元率を手入力
-    
+
+#[2018.01.18]課題解決管理表No.92
+$remarks2 = "";
+$remarks_pay2 = "";
+
 function set_10100_selectDB()
 {
     $a_sql_src = "SELECT t1.*";
@@ -458,6 +462,10 @@ function set_10100_fromDB($a_result)
     }else{
         $GLOBALS['dsp_contract_reduction'] = $GLOBALS['opt_contract_reduction'];
     }
+
+    #[2018.01.18]課題解決管理表No.92
+    $GLOBALS['remarks2'] = $a_result['remarks2'];
+    $GLOBALS['remarks_pay2'] = $a_result['remarks_pay2'];
 }
 
 ?>

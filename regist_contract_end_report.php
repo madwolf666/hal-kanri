@@ -33,7 +33,8 @@ try{
 
     if ($a_isExists == false){
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_contract_end_report']." (";
-        # [2018.01.12]追加
+        #[2018.01.12]追加
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             cr_id
             ,replace_person
@@ -63,9 +64,12 @@ try{
             ,leave_date_start
             ,leave_date_end
             ,insurance_card_leave
+            ,remarks2
+            ,remarks_pay2
             ";
         $a_sql .= ") VALUES(";
-        # [2018.01.12]追加
+        #[2018.01.12]追加
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             :cr_id
             ,:replace_person
@@ -95,11 +99,14 @@ try{
             ,:leave_date_start
             ,:leave_date_end
             ,:insurance_card_leave
+            ,:remarks2
+            ,:remarks_pay2
             ";
         $a_sql .= ");";
     }else{
         $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_end_report']." SET ";
-        # [2018.01.12]追加
+        #[2018.01.12]追加
+        #[2018.01.18]課題解決管理表No.92
         $a_sql .= "
             replace_person=:replace_person
             ,end_status=:end_status
@@ -128,6 +135,8 @@ try{
             ,leave_date_start=:leave_date_start
             ,leave_date_end=:leave_date_end
             ,insurance_card_leave=:insurance_card_leave
+            ,remarks2=:remarks2
+            ,remarks_pay2=:remarks_pay2
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -161,6 +170,10 @@ try{
     com_pdo_bindValue($a_stmt, ':leave_date_end', $_POST['leave_date_end']);
     $a_stmt->bindParam(':insurance_card_leave', $_POST['insurance_card_leave'], PDO::PARAM_STR);
     
+    #[2018.01.18]課題解決管理表No.92
+    $a_stmt->bindParam(':remarks2', $_POST['remarks2'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':remarks_pay2', $_POST['remarks_pay2'], PDO::PARAM_STR);
+
     if ($a_isExists == false) {
         com_pdo_bindValue($a_stmt, ':reg_id', $_POST['reg_id']);
         #com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
