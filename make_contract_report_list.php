@@ -56,6 +56,63 @@ try{
     }
     #$a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "", "f_remarks_andor");
     
+    #[2018.01.18]課題解決管理表No.93
+    #当日配信の場合
+    $a_today = date("Y/m/d");
+    $a_where_sub = "";
+    $a_where_andor = "";
+    #echo "f_send_mail_date1=".isset($_SESSION['f_send_mail_date1'])."<br>";
+    if (isset($_SESSION['f_send_mail_date1'])){
+        $a_sess = $_SESSION['f_send_mail_date1'];
+        #echo "checkbox=".$a_sess."<br>";
+        if ($a_sess != ""){
+            $a_where_sub .= "(send_mail_date1='".$a_today."')";
+        }
+    }
+    if (isset($_SESSION['f_send_mail_date2'])){
+        $a_sess = $_SESSION['f_send_mail_date2'];
+        #echo "checkbox=".$a_sess."<br>";
+        if ($a_sess != ""){
+            if ($a_where_sub != ""){
+                $a_where_sub .= " OR ";
+            }
+            $a_where_sub .= "(send_mail_date2='".$a_today."')";
+        }
+    }
+    if (isset($_SESSION['f_send_mail_date3'])){
+        $a_sess = $_SESSION['f_send_mail_date3'];
+        #echo "checkbox=".$a_sess."<br>";
+        if ($a_sess != ""){
+            if ($a_where_sub != ""){
+                $a_where_sub .= " OR ";
+            }
+            $a_where_sub .= "(send_mail_date3='".$a_today."')";
+        }
+    }
+    if (isset($_SESSION['f_send_mail_date4'])){
+        $a_sess = $_SESSION['f_send_mail_date4'];
+        #echo "checkbox=".$a_sess."<br>";
+        if ($a_sess != ""){
+            if ($a_where_sub != ""){
+                $a_where_sub .= " OR ";
+            }
+            $a_where_sub .= "(send_mail_date4='".$a_today."')";
+        }
+    }
+    if ($a_where_sub != ""){
+        $a_where_sub = "(".$a_where_sub.")";
+    }
+    if (isset($_SESSION['f_send_mail_date_andor'])){
+        $a_where_andor = " ".$_SESSION['f_send_mail_date_andor']." ";
+    }else{
+        $a_where_andor = " AND ";
+    }
+    if (($a_where != "") && ($a_where_sub != "")){
+        $a_where .= " ".$a_where_andor." ".$a_where_sub;
+    }else{
+        $a_where = $a_where_sub;
+    }
+
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }

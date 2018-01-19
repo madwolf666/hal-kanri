@@ -592,6 +592,33 @@ function com_make_tag_option_andor(
     return $a_sRet;
 }
 
+//checkboxタグ生成[2018.01.19]
+function com_make_tag_checkbox(
+        $h_act,
+        $h_idx,
+        $h_title,
+        $h_val,
+        $h_name,
+        $h_style
+        )
+{
+    $a_sRet = "";
+   
+    try{
+        $a_sRet = "<input type='checkbox' id='".$h_name."' name='".$h_name."' value='".$h_idx."'";
+        if (isset($_SESSION[$h_val])){
+            $a_sess = $_SESSION[$h_val];
+            if ($a_sess != ""){
+                $a_sRet .= " checked='checked'";
+            }
+        }
+        $a_sRet .= " style='".$h_style."'>".$h_title;
+    } catch (Exception $e){
+    }
+    
+    return $a_sRet;
+}
+
 //PDOのbindValue
 function com_pdo_bindValue($h_stmt, $h_name, $h_value)
 {

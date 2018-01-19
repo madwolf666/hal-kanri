@@ -17,6 +17,12 @@ $f_claim_contract_form = "";
 $f_claim_settlement_closingday = "";
 $f_claim_settlement_paymentday = "";
 $f_remarks = "";
+#[2018.01.19]課題解決管理表No.93
+$f_send_mail_date1 = "";
+$f_send_mail_date2 = "";
+$f_send_mail_date3 = "";
+$f_send_mail_date4 = "";
+
 if (isset($_SESSION['f_engineer_number'])){
     $f_engineer_number = $_SESSION['f_engineer_number'];
 }
@@ -47,6 +53,28 @@ if (isset($_SESSION['f_claim_settlement_paymentday'])){
 if (isset($_SESSION['f_remarks'])){
     $f_remarks = $_SESSION['f_remarks'];
 }
+#[2018.01.19]課題解決管理表No.93
+            #checkboxはcheckされないとPOSTされない！
+if (isset($_SESSION['f_send_mail_date1'])){
+    $f_send_mail_date1 = $_SESSION['f_send_mail_date1'];
+}else{
+    $_SESSION['f_send_mail_date1'] = "";
+}
+if (isset($_SESSION['f_send_mail_date2'])){
+    $f_send_mail_date2 = $_SESSION['f_send_mail_date2'];
+}else{
+    $_SESSION['f_send_mail_date2'] = "";
+}
+if (isset($_SESSION['f_send_mail_date3'])){
+    $f_send_mail_date3 = $_SESSION['f_send_mail_date3'];
+}else{
+    $_SESSION['f_send_mail_date3'] = "";
+}
+if (isset($_SESSION['f_send_mail_date4'])){
+    $f_send_mail_date4 = $_SESSION['f_send_mail_date4'];
+}else{
+    $_SESSION['f_send_mail_date4'] = "";
+}
 
 #Session(AND OR)
 $f_engineer_number_andor = "";
@@ -58,6 +86,9 @@ $f_claim_contract_form_andor = "";
 $f_claim_settlement_closingday_andor = "";
 $f_claim_settlement_paymentday_andor = "";
 $f_remarks_andor = "";
+#[2018.01.19]課題解決管理表No.93
+$f_send_mail_date_andor = "";
+
 if (isset($_SESSION['f_engineer_number_andor'])){
     $f_engineer_number_andor = $_SESSION['f_engineer_number_andor'];
 }
@@ -84,6 +115,10 @@ if (isset($_SESSION['f_claim_settlement_paymentday_andor'])){
 }
 if (isset($_SESSION['f_remarks_andor'])){
     $f_remarks_andor = $_SESSION['f_remarks_andor'];
+}
+#[2018.01.19]課題解決管理表No.93
+if (isset($_SESSION['f_send_mail_date_andor'])){
+    $f_send_mail_date_andor = $_SESSION['f_send_mail_date_andor'];
 }
 
 $cr_id = "";

@@ -28,6 +28,11 @@ if (!isset($_GET['mnu'])){
             $_SESSION['f_claim_settlement_closingday'] = "";
             $_SESSION['f_claim_settlement_paymentday'] = "";
             $_SESSION['f_remarks'] = "";
+            #[2018.01.18]課題解決管理表No.93
+            $_SESSION['f_send_mail_date1'] = "";
+            $_SESSION['f_send_mail_date2'] = "";
+            $_SESSION['f_send_mail_date3'] = "";
+            $_SESSION['f_send_mail_date4'] = "";
         } else {
             #POST
             if (isset($_POST['f_engineer_number'])){
@@ -60,6 +65,28 @@ if (!isset($_GET['mnu'])){
             if (isset($_POST['f_remarks'])){
                 $_SESSION['f_remarks'] = $_POST['f_remarks'];
             }
+            #[2018.01.18]課題解決管理表No.93
+            #checkboxはcheckされないとPOSTされない！
+            if (isset($_POST['f_send_mail_date1'])){
+                $_SESSION['f_send_mail_date1'] = $_POST['f_send_mail_date1'];
+            }else{
+                $_SESSION['f_send_mail_date1'] = "";
+            }
+            if (isset($_POST['f_send_mail_date2'])){
+                $_SESSION['f_send_mail_date2'] = $_POST['f_send_mail_date2'];
+            }else{
+                $_SESSION['f_send_mail_date2'] = "";
+            }
+            if (isset($_POST['f_send_mail_date3'])){
+                $_SESSION['f_send_mail_date3'] = $_POST['f_send_mail_date3'];
+            }else{
+                $_SESSION['f_send_mail_date3'] = "";
+            }
+            if (isset($_POST['f_send_mail_date4'])){
+                $_SESSION['f_send_mail_date4'] = $_POST['f_send_mail_date4'];
+            }else{
+                $_SESSION['f_send_mail_date4'] = "";
+            }
             #AND OR
             if (isset($_POST['f_engineer_number_andor'])){
             $_SESSION['f_engineer_number_andor'] = $_POST['f_engineer_number_andor'];
@@ -87,6 +114,10 @@ if (!isset($_GET['mnu'])){
             }
             if (isset($_POST['f_remarks_andor'])){
                 $_SESSION['f_remarks_andor'] = $_POST['f_remarks_andor'];
+            }
+            #[2018.01.18]課題解決管理表No.93
+            if (isset($_POST['f_send_mail_date_andor'])){
+                $_SESSION['f_send_mail_date_andor'] = $_POST['f_send_mail_date_andor'];
             }
         }
         

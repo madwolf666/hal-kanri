@@ -121,6 +121,18 @@ $h_selected = false;
 </td>
 <td><?php echo com_make_tag_option_andor("", "f_remarks_andor", "f_remarks_andor", "", $h_selected); ?></td>
 </tr>
+<tr>
+<td class="td_titlee">当日配信</td>
+<td>
+    <?php
+    echo com_make_tag_checkbox("", "1", "次契約レポートなし", "f_send_mail_date1", "f_send_mail_date1", "")."<br>";
+    echo com_make_tag_checkbox("", "2", "請求書未発行", "f_send_mail_date2", "f_send_mail_date2", "")."<br>";
+    echo com_make_tag_checkbox("", "3", "管理差戻し", "f_send_mail_date3", "f_send_mail_date3", "")."<br>";
+    echo com_make_tag_checkbox("", "4", "退職日／休職終了日", "f_send_mail_date4", "f_send_mail_date4", "")."<br>";
+    ?>
+</td>
+<td><?php echo com_make_tag_option_andor("", "f_send_mail_date_andor", "f_send_mail_date_andor", "", $h_selected); ?></td>
+</tr>
 </table>
 </center>
 <br>
