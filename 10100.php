@@ -8,6 +8,9 @@
 
 require_once('./header.php');
 
+#echo "一覧：f_send_mail_date1=".$_SESSION['f_send_mail_date1']."<br>";
+#echo "一覧：f_send_mail_date1_del=".$_SESSION['f_send_mail_date1_del']."<br>";
+
 ?>
 
 <link rel="stylesheet" href="./jquery/jquery-ui.css">
@@ -21,11 +24,13 @@ require_once('./header.php');
 
 <section>
     
-<h2>契約管理全体</h2>
+<h2>契約管理全体<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h2>
 
 <p class="c">
     <input type="button" value="条件検索" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10101']; ?>'">
+    <?php if ($_SESSION['contract_del'] != 1){ ?>
     <input type="button" value="契約レポート作成" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10102']; ?>&ACT=n'">
+    <?php } ?>
     <input type="button" value="Excelへ一覧出力" onclick="return excel_out_10100();">
 </p>
 

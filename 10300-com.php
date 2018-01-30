@@ -103,6 +103,104 @@ if (isset($_SESSION['f_payment_settlement_paymentday_10300_andor'])){
     $f_payment_settlement_paymentday_10300_andor = $_SESSION['f_payment_settlement_paymentday_10300_andor'];
 }
 
+#[2018.01.30]課題解決管理表No.87
+#Session
+$f_contract_number_10300_del = "";
+$f_engineer_number_10300_del = "";
+$f_engineer_name_10300_del = "";
+$f_customer_name_10300_del = "";
+$f_claim_contract_form_10300_del = "";
+$f_ag_no_10300_del = "";
+$f_accounts_bai_previous_day_10300_del = "";
+$f_accounts_actual_working_hours_10300_del = "";
+$f_accounts_expenses_10300_del = "";
+$f_payment_contract_form_10300_del = "";
+$f_payment_acceptance_date_10300_del = "";
+$f_payment_settlement_paymentday_10300_del = "";
+if (isset($_SESSION['f_contract_number_10300_del'])){
+    $f_contract_number_10300_del = $_SESSION['f_contract_number_10300_del'];
+}
+if (isset($_SESSION['f_engineer_number_10300_del'])){
+    $f_engineer_number_10300_del = $_SESSION['f_engineer_number_10300_del'];
+}
+if (isset($_SESSION['f_engineer_name_10300_del'])){
+    $f_engineer_name_10300_del = $_SESSION['f_engineer_name_10300_del'];
+}
+if (isset($_SESSION['f_customer_name_10300_del'])){
+    $f_customer_name_10300_del = $_SESSION['f_customer_name_10300_del'];
+}
+if (isset($_SESSION['f_claim_contract_form_10300_del'])){
+    $f_claim_contract_form_10300_del = $_SESSION['f_claim_contract_form_10300_del'];
+}
+if (isset($_SESSION['f_ag_no_10300_del'])){
+    $f_ag_no_10300_del = $_SESSION['f_ag_no_10300_del'];
+}
+if (isset($_SESSION['f_accounts_bai_previous_day_10300_del'])){
+    $f_accounts_bai_previous_day_10300_del = $_SESSION['f_accounts_bai_previous_day_10300_del'];
+}
+if (isset($_SESSION['f_accounts_actual_working_hours_10300_del'])){
+    $f_accounts_actual_working_hours_10300_del = $_SESSION['f_accounts_actual_working_hours_10300_del'];
+}
+if (isset($_SESSION['f_accounts_expenses_10300_del'])){
+    $f_accounts_expenses_10300_del = $_SESSION['f_accounts_expenses_10300_del'];
+}
+if (isset($_SESSION['f_payment_contract_form_10300_del'])){
+    $f_payment_contract_form_10300_del = $_SESSION['f_payment_contract_form_10300_del'];
+}
+if (isset($_SESSION['f_payment_acceptance_date_10300_del'])){
+    $f_payment_acceptance_date_10300_del = $_SESSION['f_payment_acceptance_date_10300_del'];
+    #echo '検収日⇒'.$f_payment_acceptance_date_10300;
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10300_del'])){
+    $f_payment_settlement_paymentday_10300_del = $_SESSION['f_payment_settlement_paymentday_10300_del'];
+}
+
+#Session(AND OR)
+$f_engineer_number_10300_andor_del = "";
+$f_engineer_name_10300_andor_del = "";
+$f_customer_name_10300_andor_del = "";
+$f_claim_contract_form_10300_andor_del = "";
+$f_ag_no_10300_andor_del = "";
+$f_accounts_bai_previous_day_10300_andor_del = "";
+$f_accounts_actual_working_hours_10300_andor_del = "";
+$f_accounts_expenses_10300_andor_del = "";
+$f_payment_contract_form_10300_andor_del = "";
+$f_payment_acceptance_date_10300_andor_del = "";
+$f_payment_settlement_paymentday_10300_andor_del = "";
+if (isset($_SESSION['f_engineer_number_10300_andor_del'])){
+    $f_engineer_number_10300_andor_del = $_SESSION['f_engineer_number_10300_andor_del'];
+}
+if (isset($_SESSION['f_engineer_name_10300_andor_del'])){
+    $f_engineer_name_10300_andor_del = $_SESSION['f_engineer_name_10300_andor_del'];
+}
+if (isset($_SESSION['f_customer_name_10300_andor_del'])){
+    $f_customer_name_10300_andor_del = $_SESSION['f_customer_name_10300_andor_del'];
+}
+if (isset($_SESSION['f_claim_contract_form_10300_andor_del'])){
+    $f_claim_contract_form_10300_andor_del = $_SESSION['f_claim_contract_form_10300_andor_del'];
+}
+if (isset($_SESSION['f_ag_no_10300_andor_del'])){
+    $f_ag_no_10300_andor_del = $_SESSION['f_ag_no_10300_andor_del'];
+}
+if (isset($_SESSION['f_accounts_bai_previous_day_10300_andor_del'])){
+    $f_accounts_bai_previous_day_10300_andor_del = $_SESSION['f_accounts_bai_previous_day_10300_andor_del'];
+}
+if (isset($_SESSION['f_accounts_actual_working_hours_10300_andor_del'])){
+    $f_accounts_actual_working_hours_10300_andor_del = $_SESSION['f_accounts_actual_working_hours_10300_andor_del'];
+}
+if (isset($_SESSION['f_accounts_expenses_10300_andor_del'])){
+    $f_accounts_expenses_10300_andor_del = $_SESSION['f_accounts_expenses_10300_andor_del'];
+}
+if (isset($_SESSION['f_payment_contract_form_10300_andor_del'])){
+    $f_payment_contract_form_10300_andor_del = $_SESSION['f_payment_contract_form_10300_andor_del'];
+}
+if (isset($_SESSION['f_payment_acceptance_date_10300_andor_del'])){
+    $f_payment_acceptance_date_10300_andor_del = $_SESSION['f_payment_acceptance_date_10300_andor_del'];
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10300_andor_del'])){
+    $f_payment_settlement_paymentday_10300_andor_del = $_SESSION['f_payment_settlement_paymentday_10300_andor_del'];
+}
+
 $cr_id = "";
 
 $contract_number = "";
@@ -214,7 +312,16 @@ function set_10300_selectDB()
 ,t3.ag_no
 ,t2.cc_id
         ";
-    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+    
+    #[2018.01.29]課題解決管理表No.87
+    $a_sql_src .= " FROM (SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE ";
+    if ($_SESSION['contract_del'] == 1){
+        $a_sql_src .= "(del_flag='1')";
+    }else{
+        $a_sql_src .= "((del_flag IS NULL) OR (del_flag<>'1'))";
+    }
+    $a_sql_src .= ") t1";
+    
     $a_sql_src .= " LEFT JOIN ";
     $a_sql_src .= $GLOBALS['g_DB_t_acceptance_ledger']." t2";
     $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";

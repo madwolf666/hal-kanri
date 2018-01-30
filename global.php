@@ -61,6 +61,7 @@ $g_DB_t_charge_calc = "t_charge_calc";    //[2017.11.29]要望
 $g_DB_t_contract_estimate = "t_contract_estimate";
 $g_DB_t_contract_end_report = "t_contract_end_report";
 $g_DB_t_contract_report = "t_contract_report";
+$g_DB_t_contract_report_submission = "t_contract_report_submission";    #[2018.01.26]課題解決管理表No.88
 $g_DB_t_dispatching_management_ledger = "t_dispatching_management_ledger";
 $g_DB_t_evidence = "t_evidence";    //[2017.11.08]課題No.81
 $g_DB_t_payroll = "t_payroll";
@@ -607,6 +608,7 @@ function com_make_tag_checkbox(
     try{
         $a_sRet = "<input type='checkbox' id='".$h_name."' name='".$h_name."' value='".$h_idx."'";
         if (isset($_SESSION[$h_val])){
+            #echo 'session='.$_SESSION[$h_val];
             $a_sess = $_SESSION[$h_val];
             if ($a_sess != ""){
                 $a_sRet .= " checked='checked'";

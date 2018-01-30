@@ -86,6 +86,87 @@ if (isset($_SESSION['f_labor_remarks_10200_andor'])){
     $f_labor_remarks_10200_andor = $_SESSION['f_labor_remarks_10200_andor'];
 }
 
+#[2018.01.30]課題解決管理表No.87
+#Session
+$f_payment_contract_form_10200_del = "";
+$f_engineer_name_10200_del = "";
+$f_date_entering_10200_del = "";
+$f_date_retire_10200_del = "";
+$f_payment_settlement_paymentday_10200_del = "";
+$f_date_modify_salary_10200_del = "";
+$f_date_first_salary_10200_del = "";
+$f_labor_contact_date_10200_del = "";
+$f_labor_yayoi_changed_10200_del = "";
+$f_labor_remarks_10200_del = "";
+if (isset($_SESSION['f_payment_contract_form_10200_del'])){
+    $f_payment_contract_form_10200_del = $_SESSION['f_payment_contract_form_10200_del'];
+}
+if (isset($_SESSION['f_engineer_name_10200_del'])){
+    $f_engineer_name_10200_del = $_SESSION['f_engineer_name_10200_del'];
+}
+if (isset($_SESSION['f_date_entering_10200_del'])){
+    $f_date_entering_10200_del = $_SESSION['f_date_entering_10200_del'];
+}
+if (isset($_SESSION['f_date_retire_10200_del'])){
+    $f_date_retire_10200_del = $_SESSION['f_date_retire_10200_del'];
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10200_del'])){
+    $f_payment_settlement_paymentday_10200_del = $_SESSION['f_payment_settlement_paymentday_10200_del'];
+}
+if (isset($_SESSION['f_date_modify_salary_10200_del'])){
+    $f_date_modify_salary_10200_del = $_SESSION['f_date_modify_salary_10200_del'];
+}
+if (isset($_SESSION['f_date_first_salary_10200_del'])){
+    $f_date_first_salary_10200_del = $_SESSION['f_date_first_salary_10200_del'];
+}
+if (isset($_SESSION['f_labor_contact_date_10200_del'])){
+    $f_labor_contact_date_10200_del = $_SESSION['f_labor_contact_date_10200_del'];
+}
+if (isset($_SESSION['f_labor_yayoi_changed_10200_del'])){
+    $f_labor_yayoi_changed_10200_del = $_SESSION['f_labor_yayoi_changed_10200_del'];
+}
+if (isset($_SESSION['f_labor_remarks_10200_del'])){
+    $f_labor_remarks_10200_del = $_SESSION['f_labor_remarks_10200_del'];
+}
+
+#Session(AND OR)
+$f_engineer_name_10200_andor_del = "";
+$f_date_entering_10200_andor_del = "";
+$f_date_retire_10200_andor_del = "";
+$f_payment_settlement_paymentday_10200_andor_del = "";
+$f_date_modify_salary_10200_andor_del = "";
+$f_date_first_salary_10200_andor_del = "";
+$f_labor_contact_date_10200_andor_del = "";
+$f_labor_yayoi_changed_10200_andor_del = "";
+$f_labor_remarks_10200_andor_del = "";
+if (isset($_SESSION['f_engineer_name_10200_andor_del'])){
+    $f_engineer_name_10200_andor_del = $_SESSION['f_engineer_name_10200_andor_del'];
+}
+if (isset($_SESSION['f_date_entering_10200_andor_del'])){
+    $f_date_entering_10200_andor_del = $_SESSION['f_date_entering_10200_andor_del'];
+}
+if (isset($_SESSION['f_date_retire_10200_andor_del'])){
+    $f_date_retire_10200_andor_del = $_SESSION['f_date_retire_10200_andor_del'];
+}
+if (isset($_SESSION['f_payment_settlement_paymentday_10200_andor_del'])){
+    $f_payment_settlement_paymentday_10200_andor_del = $_SESSION['f_payment_settlement_paymentday_10200_andor_del'];
+}
+if (isset($_SESSION['f_date_modify_salary_10200_andor_del'])){
+    $f_date_modify_salary_10200_andor_del = $_SESSION['f_date_modify_salary_10200_andor_del'];
+}
+if (isset($_SESSION['f_date_first_salary_10200_andor_del'])){
+    $f_date_first_salary_10200_andor_del = $_SESSION['f_date_first_salary_10200_andor_del'];
+}
+if (isset($_SESSION['f_labor_contact_date_10200_andor_del'])){
+    $f_labor_contact_date_10200_andor_del = $_SESSION['f_labor_contact_date_10200_andor_del'];
+}
+if (isset($_SESSION['f_labor_yayoi_changed_10200_andor_del'])){
+    $f_labor_yayoi_changed_10200_andor_del = $_SESSION['f_labor_yayoi_changed_10200_andor_del'];
+}
+if (isset($_SESSION['f_labor_remarks_10200_andor_del'])){
+    $f_labor_remarks_10200_andor_del = $_SESSION['f_labor_remarks_10200_andor_del'];
+}
+
 $cr_id = "";
 
 $payment_contract_form = "";
@@ -260,7 +341,13 @@ SELECT *
     $a_sql_src .= ")";    
     #echo $a_sql_src.'<br>';
     
-    $a_sql_src = " SELECT u1.* FROM (".$a_sql_src.") u1";    
+    #[2018.01.29]課題解決管理表No.87
+    $a_sql_src = " SELECT u1.* FROM (".$a_sql_src.") u1 WHERE ";
+    if ($_SESSION['contract_del'] == 1){
+        $a_sql_src .= "(del_flag='1')";
+    }else{
+        $a_sql_src .= "((del_flag IS NULL) OR (del_flag<>'1'))";
+    }
     
     return $a_sql_src;
 }

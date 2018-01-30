@@ -40,7 +40,12 @@ try{
         $status_cd_num = $a_result['status_cd_num'];
         $a_sRet .= "<td>";
         if ($status_cd_num == 2){
-            $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a>";
+            #[2018.01.29]課題解決管理表No.87
+            if ($_SESSION['contract_del'] != 1){
+                $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10103']."&ACT=c&NO=".$a_result['cr_id']."'>契約継続へ</a>";
+            }else{
+                $a_sRet .= "&nbsp;&nbsp;";
+            }
         }else{
             $a_sRet .= "&nbsp;&nbsp;";
         }
@@ -81,7 +86,15 @@ try{
         }
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
         #[2018.01.18]課題解決管理表No.85
-        $a_sRet .= "<td>●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a></td>";
+        $a_sRet .= "<td>";
+        #[2018.01.29]課題解決管理表No.87
+        if ($_SESSION['contract_del'] != 1){
+            $a_sRet .= "●<a href='#' onclick=\"return unregist_contract_report(".$a_result['cr_id'].");\">契約レポート削除</a>";
+        }else{
+            $a_sRet .= "&nbsp;&nbsp;";
+        }
+        $a_sRet .= "</td>";
+
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";

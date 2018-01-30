@@ -28,9 +28,27 @@ try{
         $a_sRet = $a_result['contract_number']." ".$a_result['engineer_number']." ".$a_result['engineer_name']."<br>";
         $a_sRet .= "<table border='0'>";
         $a_sRet .= "<tr>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10210']."&NO=".$a_result['cr_id']."&SN=".$a_pr_id."'>行を追加</a></td>";
+
+        #[2018.01.29]課題解決管理表No.87
+        $a_sRet .= "<td>";
+        if ($_SESSION['contract_del'] != 1){
+            $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10210']."&NO=".$a_result['cr_id']."&SN=".$a_pr_id."'>行を追加</a></a>";
+        }else{
+            $a_sRet .= "&nbsp;&nbsp;";
+        }
+        $a_sRet .= "</td>";
+
         $a_sRet .= "<td>&nbsp;&nbsp;</td>";
-        $a_sRet .= "<td>●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10211']."&NO=".$a_result['cr_id']."&SN=".$a_pr_id."'>現在行を削除</a></td>";
+
+        #[2018.01.29]課題解決管理表No.87
+        $a_sRet .= "<td>";
+        if ($_SESSION['contract_del'] != 1){
+            $a_sRet .= "●<a href='./index.php?mnu=".$GLOBALS['g_MENU_CONTRACT_10211']."&NO=".$a_result['cr_id']."&SN=".$a_pr_id."'>現在行を削除</a></a>";
+        }else{
+            $a_sRet .= "&nbsp;&nbsp;";
+        }
+        $a_sRet .= "</td>";
+
         $a_sRet .= "</tr>";
         $a_sRet .= "</table>";
         $a_sRet .= "<br>";

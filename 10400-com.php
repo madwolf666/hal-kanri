@@ -22,6 +22,23 @@ if (isset($_SESSION['f_engineer_name_10400_andor'])){
     $f_engineer_name_10400_andor = $_SESSION['f_engineer_name_10400_andor'];
 }
 
+#[2018.01.30]課題解決管理表No.87
+#Session
+$f_contract_number_10400_del = "";
+$f_engineer_name_10400_del = "";
+if (isset($_SESSION['f_contract_number_10400_del'])){
+    $f_contract_number_10400_del = $_SESSION['f_contract_number_10400_del'];
+}
+if (isset($_SESSION['f_engineer_name_10400_del'])){
+    $f_engineer_name_10400_del = $_SESSION['f_engineer_name_10400_del'];
+}
+
+#Session(AND OR)
+$f_engineer_name_10400_andor_del = "";
+if (isset($_SESSION['f_engineer_name_10400_andor_del'])){
+    $f_engineer_name_10400_andor_del = $_SESSION['f_engineer_name_10400_andor_del'];
+}
+
 $cr_id = "";
 $po_no = "";
 $contract_number = "";
@@ -78,19 +95,29 @@ $ag_no = "";
 
 function set_10400_selectDB()
 {
+    #[2018.01.26]bug-fixed.
     $a_sql_src = "SELECT t1.*,";
     $a_sql_src .= "
  t2.po_no				
 ,t2.publication AS publication_purchase_order
 ,t2.remarks1			
-,t2.remarks2			
+,t2.remarks2 AS remarks2_purchase_order		
 ,t2.remarks3				
 ,t2.remarks4				
 ,t2.inheriting			
 ,t2.sending_back
 ,t3.ag_no
         ";
-    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+
+    #[2018.01.29]課題解決管理表No.87
+    $a_sql_src .= " FROM (SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE ";
+    if ($_SESSION['contract_del'] == 1){
+        $a_sql_src .= "(del_flag='1')";
+    }else{
+        $a_sql_src .= "((del_flag IS NULL) OR (del_flag<>'1'))";
+    }
+    $a_sql_src .= ") t1";
+
     $a_sql_src .= " LEFT JOIN ";
     $a_sql_src .= $GLOBALS['g_DB_t_purchase_order_ledger']." t2";
     $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";
@@ -150,7 +177,7 @@ function set_10400_fromDB($a_result)
     $GLOBALS['payment_absence_deduction_subject'] = $a_result['payment_absence_deduction_subject'];
     
     $GLOBALS['remarks1'] = $a_result['remarks1'];
-    $GLOBALS['remarks2'] = $a_result['remarks2'];
+    $GLOBALS['remarks2'] = $a_result['remarks2_purchase_order'];    #[2018.01.26]bug-fixed.
     $GLOBALS['remarks3'] = $a_result['remarks3'];
     $GLOBALS['remarks4'] = $a_result['remarks4'];
     $GLOBALS['inheriting'] = $a_result['inheriting'];

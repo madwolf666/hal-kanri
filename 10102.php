@@ -15,6 +15,12 @@ if (!isset($_GET['ACT'])){
     $a_act = $_GET['ACT'];
 }
 
+#[2018.01.29]課題解決管理表No.87
+if ($_SESSION['contract_del'] == 1){
+    $a_act = '';
+}
+
+
 require_once('./10100-com.php');
 
 $cr_id_src = '';   #[2017.07.20]課題解決表No.67
@@ -65,6 +71,9 @@ if ($a_act == 'n'){
             echo 'Error:'.$e->getMessage();
             die();
         }
+        
+        #[2018.01.29]課題解決管理表No.88-90
+        get_10100_selectDB_submission();
     }
 }
 
@@ -117,8 +126,8 @@ $a_selected = false;
 
 <section>
     
-<h2>契約管理全体</h2>
-<h3>契約レポート</h3>
+<h2>契約管理全体<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h2>
+<h3>契約レポート<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h3>
 
 <form action="" method="post">
 
@@ -135,7 +144,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15>客先名</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_customer_name; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_kyakusaki;
@@ -147,7 +156,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15>件名</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_subject; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_kenmei;
@@ -159,7 +168,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15 nowrap>契約形態</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_claim_contract_form; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $opt_contarct_bill_form;
@@ -171,7 +180,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15 nowrap>作業場所</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_workplace; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_sagyo_basyo;
@@ -183,7 +192,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15 nowrap>開始</td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_work_start; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_kaishi1;
@@ -193,7 +202,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="yellow" nowrap>終了</td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_work_end; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_syuryo1;
@@ -203,7 +212,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="gray" nowrap>作業時間</td>
-                <td colspan="2" width="50">
+                <td colspan="2" width="50" style="background-color: <?php echo $color_work_hours; ?>">
                     <!-- 自動計算：終了－開始－休憩時間 -->
                     <?php
                         if ($a_act == '') {
@@ -218,7 +227,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15 nowrap>開始</td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_break_start; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_kaishi2;
@@ -228,7 +237,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="yellow" nowrap>終了</td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_break_end; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_syuryo2;
@@ -238,7 +247,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="gray" nowrap>休憩時間</td>
-                <td colspan="2" width="50">
+                <td colspan="2" width="50" style="background-color: <?php echo $color_break_hours; ?>">
                 <!-- 終了－開始 -->
                     <?php
                         if ($a_act == '') {
@@ -257,7 +266,7 @@ $a_selected = false;
         <table border="1" rules="all" width=340 height=280>
             <tr>
                 <td colspan="2" class="yellow" height=15>客先担当部署</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_customer_department_charge; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_kyakusaki_busyo;
@@ -269,7 +278,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15>客先担当者名</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_customer_charge_name; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_kyakusaki_tantosya;
@@ -296,7 +305,7 @@ $a_selected = false;
             -->
             <tr>
                 <td colspan="2" class="yellow" height=15>担当者役職</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_charge_position; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_kyakusaki_yakusyoku;
@@ -308,7 +317,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15>連絡先TEL</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_contact_phone_number; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_kyakusaki_tel;
@@ -320,7 +329,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15>契約開始日</td>
-                <td colspan="10">
+                <td colspan="10" style="background-color: <?php echo $color_claim_agreement_start; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_kyakusaki_kaishi;
@@ -332,7 +341,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow" height=15>契約終了日</td>
-                  <td colspan="10">
+                  <td colspan="10" style="background-color: <?php echo $color_claim_agreement_end; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_kyakusaki_syuryo;
@@ -351,7 +360,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td class="gray" style="width: 120px;">自動計算</td>
-                <td>
+                <td style="background-color: <?php echo $color_payment_middle_daily_auto; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_wariai_nyujyo_c1;
@@ -366,7 +375,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td class="yellow" style="width: 120px;">手入力</td>
-                <td>
+                <td style="background-color: <?php echo $color_payment_middle_daily_manual; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_wariai_nyujyo_c2;
@@ -384,7 +393,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td class="gray" style="width: 120px;">自動計算</td>
-                <td>
+                <td style="background-color: <?php echo $color_payment_leaving_daily_auto; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $inp_wariai_taijyo_c1;
@@ -399,7 +408,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td class="yellow" style="width: 120px;">手入力</td>
-                <td>
+                <td style="background-color: <?php echo $color_payment_leaving_daily_manual; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_wariai_taijyo_c2;
@@ -455,9 +464,9 @@ $a_selected = false;
 <!-- 左3番目のテーブル -->
         <table border="1" rules="all" width=340 height=330>
             <tr>
-                <td rowspan="6" width=6 class="Length yellow" height=90>通常期間</td>
+                <td rowspan="7" width=6 class="Length yellow" height=90>通常期間</td>
                 <td colspan="2" class="yellow">計算方法</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_normal_calculation; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_b1;
@@ -469,7 +478,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">単金</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_normal__unit_price; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_tankin_b1;
@@ -480,8 +489,20 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
+                <td colspan="2" class="yellow">ﾍﾞｰｽ単金</td>
+                <td colspan="9" style="background-color: <?php echo $color_claim_normal_unit_price_base; ?>">
+                    <?php
+                        if ($a_act == ''){
+                            echo $claim_normal_unit_price_base;
+                        }else{
+                            echo com_make_tag_input($a_act, $claim_normal_unit_price_base, "claim_normal_unit_price_base", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" class="yellow">下限時間</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_normal_lower_limit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $contract_lower_limit_b1;
@@ -498,7 +519,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">上限時間</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_normal_upper_limit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $contract_upper_limit_b1;
@@ -516,7 +537,7 @@ $a_selected = false;
             <tr>
                 <td colspan="2" class="yellow">控除単価</td>
                 <td colspan="3" class="yellow">単位</td>
-                <td colspan="3">
+                <td colspan="3" style="background-color: <?php echo $color_claim_normal_deduction_unit_price_truncation_unit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_trunc_unit_kojyo;
@@ -525,7 +546,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" width="70">
+                <td colspan="3" width="70" style="background-color: <?php echo $color_claim_normal_deduction_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_b1;
@@ -540,7 +561,7 @@ $a_selected = false;
             <tr>
                 <td colspan="2" class="yellow">残業単価</td>
                 <td colspan="3" class="yellow">単位</td>
-                <td colspan="3">
+                <td colspan="3" style="background-color: <?php echo $color_claim_normal_overtime_unit_price_truncation_unit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_trunc_unit_zangyo;
@@ -549,7 +570,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" width="70">
+                <td colspan="3" width="70" style="background-color: <?php echo $color_claim_normal_overtime_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_b1;
@@ -562,9 +583,9 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td rowspan="8" class="Length yellow" height=120 width="6">途中入場</td>
+                <td rowspan="9" class="Length yellow" height=120 width="6">途中入場</td>
                 <td colspan="2" class="yellow">就業日数</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_employment_day; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_syugyonisu_b2;
@@ -576,7 +597,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">全営業日数</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_allbusiness_day; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_zeneigyonisu_b2;
@@ -588,7 +609,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">計算方法</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_calculation; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_b2;
@@ -600,7 +621,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_b2;
@@ -613,8 +634,20 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
+                <td colspan="2" class="yellow">ﾍﾞｰｽ単金</td>
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_unit_price_base; ?>">
+                    <?php
+                        if ($a_act == ''){
+                            echo $claim_middle_unit_price_base;
+                        }else{
+                            echo com_make_tag_input($a_act, $claim_middle_unit_price_base, "claim_middle_unit_price_base", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" class="yellow">下限時間</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_lower_limit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $contract_lower_limit_b2;
@@ -633,7 +666,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">上限時間</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_upper_limit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $contract_upper_limit_b2;
@@ -652,7 +685,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_deduction_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_b2;
@@ -666,7 +699,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_middle_overtime_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_b2;
@@ -679,9 +712,9 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td rowspan="8" class="Length yellow" height=120 width="6">途中退場</td>
+                <td rowspan="9" class="Length yellow" height=120 width="6">途中退場</td>
                 <td colspan="2" class="yellow">就業日数</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_employment_day; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_syugyonisu_b3;
@@ -693,7 +726,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">全営業日数</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_allbusiness_day; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_zeneigyonisu_b3;
@@ -705,7 +738,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">計算方法</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_calculation; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_b3;
@@ -717,7 +750,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_b3;
@@ -730,8 +763,20 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
+                <td colspan="2" class="yellow">ﾍﾞｰｽ単金</td>
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_unit_price_base; ?>">
+                    <?php
+                        if ($a_act == ''){
+                            echo $claim_leaving_unit_price_base;
+                        }else{
+                            echo com_make_tag_input($a_act, $claim_leaving_unit_price_base, "claim_leaving_unit_price_base", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" class="yellow">下限時間</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_lower_limit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $contract_lower_limit_b3;
@@ -750,7 +795,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="yellow">上限時間</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_upper_limit; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $contract_upper_limit_b3;
@@ -769,7 +814,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_deduction_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_b3;
@@ -783,7 +828,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_claim_leaving_overtime_unit_price; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_b3;
@@ -802,7 +847,7 @@ $a_selected = false;
             <tr>
                 <td colspan="4" class="yellow" height=15 width="180">時間刻み</td>
                 <td colspan="2" class="yellow" width="50">日次</td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_claim_hourly_daily; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_bd;
@@ -812,7 +857,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="yellow">月次</td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_claim_hourly_monthly; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_bm;
@@ -825,7 +870,7 @@ $a_selected = false;
             <tr>
                 <td colspan="4" class="yellow" height=15>決済</td>
                 <td colspan="2" class="yellow">締め</td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_claim_settlement_closingday; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_tighten_b;
@@ -835,7 +880,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="yellow"><font size="-1">支払日</font></td>
-                <td colspan="2">
+                <td colspan="2" style="background-color: <?php echo $color_claim_settlement_paymentday; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_bill_pay;
@@ -847,7 +892,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>派遣個別<br>契約書</td>
-                <td colspan="3">
+                <td colspan="3" style="background-color: <?php echo $color_claim_dispatch_individual_contract; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b1;
@@ -857,7 +902,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="yellow">見積書</td>
-                <td colspan="3">
+                <td colspan="3" style="background-color: <?php echo $color_claim_quotation; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b2;
@@ -869,7 +914,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>注文書</td>
-                <td colspan="3">
+                <td colspan="3" style="background-color: <?php echo $color_claim_purchase_order; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b3;
@@ -879,7 +924,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="yellow">注文請書</td>
-                <td colspan="3">
+                <td colspan="3" style="background-color: <?php echo $color_claim_confirmation_order; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_yesno_b4;
@@ -891,7 +936,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>請求書送付日</td>
-                <td colspan="8">
+                <td colspan="8" style="background-color: <?php echo $color_claim_accounts_invoicing; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $claim_accounts_invoicing;
@@ -911,7 +956,7 @@ $a_selected = false;
         <table border="1" rules="all" width=340 height=280>
             <tr>
 		<td colspan="4" class="yellow" height=15 nowrap="true">新規or継続</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_new_or_continued; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_kind;
@@ -924,7 +969,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>契約No</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_contract_number; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_keiyaku_no;
@@ -933,7 +978,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" rowspan="4">
+                <td colspan="3" rowspan="4" style="background-color: <?php echo $color_upd_person; ?>">
                     <?php
                         if ($upd_person != ''){
                             echo $upd_person;
@@ -945,7 +990,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>発行日</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_publication; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_hakkobi;
@@ -957,7 +1002,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>作成者</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_author; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_sakuseisya;
@@ -972,7 +1017,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>ｴﾝｼﾞﾆｱNo</td>
-                <td colspan="7">
+                <td colspan="7" style="background-color: <?php echo $color_engineer_number; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_engineer_no;
@@ -984,7 +1029,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="gray" height=15>ｴﾝｼﾞﾆｱ氏名</td>
-                <td colspan="3" width="100">
+                <td colspan="3" width="100" style="background-color: <?php echo $color_engineer_name; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_engineer_name;
@@ -994,7 +1039,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td class="gray">ﾌﾘｶﾞﾅ</td>
-                <td colspan="3" width="100">
+                <td colspan="3" width="100" style="background-color: <?php echo $color_engneer_name_phonetic; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_engineer_kana;
@@ -1010,7 +1055,7 @@ $a_selected = false;
         <table border="1" rules="all" width=340 height=280>
             <tr>
 		<td colspan="4" class="yellow" height=15 nowrap="true">事業者名</td>
-                <td colspan="9">
+                <td colspan="9" style="background-color: <?php echo $color_business_name; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_jigyosya_name;
@@ -1024,7 +1069,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>契約形態</td>
-                <td>
+                <td style="background-color: <?php echo $color_payment_contract_form; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_pay_form;
@@ -1034,7 +1079,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="2" class="yellow"nowrap="true">事業者名ﾌﾘｶﾞﾅ</td>
-                <td colspan="6">
+                <td colspan="6" style="background-color: <?php echo $color_business_name_phonetic; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_jigyosya_kana;
@@ -1048,7 +1093,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15 nowrap="true">事業者担当者名</td>
-                <td colspan="6">
+                <td colspan="6" style="background-color: <?php echo $color_business_charge_name; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $inp_jigyosya_tanto;
@@ -1061,7 +1106,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="yellow" height=15>社会保険</td>
-                <td colspan="2" width="40">
+                <td colspan="2" width="40" style="background-color: <?php echo $color_social_insurance; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_social_insurance;
@@ -1071,7 +1116,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="1" class="yellow">源泉徴収</td>
-                <td colspan="3" width="40">
+                <td colspan="3" width="40" style="background-color: <?php echo $color_tax_withholding; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_tax_withholding;
@@ -1080,7 +1125,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="3" rowspan="3">
+                <td colspan="3" rowspan="3" style="background-color: <?php echo $color_redemption_ratio; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_reduction;
@@ -1094,7 +1139,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="gray" height=15 nowrap="true">契約開始日</td>
-                <td colspan="6">
+                <td colspan="6" style="background-color: <?php echo $color_payment_agreement_start; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_kyakusaki_kaishi;
@@ -1108,7 +1153,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" class="gray" height=15>契約終了日</td>
-                <td colspan="6">
+                <td colspan="6" style="background-color: <?php echo $color_payment_agreement_end; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_kyakusaki_syuryo;
@@ -1133,7 +1178,7 @@ $a_selected = false;
                 if ($a_act == '') {
             ?>
             <tr>
-                <td colspan="3" class="">
+                <td colspan="3" class="" style="background-color: <?php echo $color_payroll; ?>">
                     <div id="my-payroll" name="my-payroll" style="line-height: 24px; text-align: left;"></div>
                 </td>
             </tr>
@@ -1141,7 +1186,7 @@ $a_selected = false;
                 } else {
             ?>
             <tr>
-                <td colspan="3" class="">
+                <td colspan="3" class="" style="background-color: <?php echo $color_payroll; ?>">
                     <div id="my-payroll" name="my-payroll" style="line-height: 24px; text-align: left;"></div>
                 </td>
             </tr>
@@ -1182,7 +1227,7 @@ $a_selected = false;
                 if ($a_act == '') {
             ?>
             <tr>
-                <td colspan="3" class="">
+                <td colspan="3" class="" style="background-color: <?php echo $color_evidence; ?>">
                     <div id="my-evidence" name="my-evidence" style="line-height: 24px; text-align: left;"></div>
                 </td>
             </tr>
@@ -1190,7 +1235,7 @@ $a_selected = false;
                 } else {
             ?>
             <tr>
-                <td colspan="3" class="">
+                <td colspan="3" class="" style="background-color: <?php echo $color_evidence; ?>">
                     <div id="my-evidence" name="my-evidence" style="line-height: 24px; text-align: left;"></div>
                 </td>
             </tr>
@@ -1229,9 +1274,9 @@ $a_selected = false;
                 <td colspan="4" class="gray"><B>②本人名目給与</B></td>
             </tr>
             <tr>
-		<td rowspan="6" width=4 class="Length gray" height=90>通常期間</td>
+		<td rowspan="7" width=4 class="Length gray" height=90>通常期間</td>
                 <td colspan="2" class="gray">計算方法</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_calculation_1; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_p11;
@@ -1240,7 +1285,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_calculation_2; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_p21;
@@ -1252,7 +1297,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_p11;
@@ -1261,7 +1306,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_p21;
@@ -1272,8 +1317,17 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
+                <td colspan="2" class="gray">ﾍﾞｰｽ単金</td>
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_unit_price_1_base; ?>">
+                    <input type="text" id="payment_normal_unit_price_1_base" readonly="true" value="<?php echo $payment_normal_unit_price_1_base; ?>" style="width:110px; text-align: center;">
+                </td>
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_unit_price_2_base; ?>">
+                    <input type="text" id="payment_normal_unit_price_2_base" readonly="true" value="<?php echo $payment_normal_unit_price_2_base; ?>" style="width:110px; text-align: center;">
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" class="gray">下限時間</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_lower_limit_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p11;
@@ -1282,7 +1336,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_lower_limit_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p21;
@@ -1294,7 +1348,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">上限時間</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_upper_limit_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p11;
@@ -1303,7 +1357,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_upper_limit_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p21;
@@ -1315,7 +1369,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_deduction_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p11;
@@ -1324,7 +1378,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_deduction_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p21;
@@ -1336,7 +1390,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_overtime_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p11;
@@ -1345,7 +1399,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_normal_overtime_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p21;
@@ -1356,9 +1410,9 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td rowspan="8" width=4 class="Length gray" height=120>途中入場</td>
+                <td rowspan="9" width=4 class="Length gray" height=120>途中入場</td>
                 <td colspan="2" class="gray">就業日数</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_employment_day_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p12;
@@ -1367,7 +1421,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_employment_day_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p22;
@@ -1379,7 +1433,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">全営業日数</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_allbusiness_day_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p12;
@@ -1388,7 +1442,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_allbusiness_day_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p22;
@@ -1400,7 +1454,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">計算方法</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_calculation_1; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_p12;
@@ -1409,7 +1463,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_calculation_2; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_p22;
@@ -1421,7 +1475,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_p12;
@@ -1430,7 +1484,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_p22;
@@ -1441,8 +1495,17 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
+                <td colspan="2" class="gray">ﾍﾞｰｽ単金</td>
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_unit_price_1_base; ?>">
+                    <input type="text" id="payment_middle_unit_price_1_base" readonly="true" value="<?php echo $payment_middle_unit_price_1_base; ?>" style="width:110px; text-align: center;">
+                </td>
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_unit_price_2_base; ?>">
+                    <input type="text" id="payment_middle_unit_price_2_base" readonly="true" value="<?php echo $payment_middle_unit_price_2_base; ?>" style="width:110px; text-align: center;">
+                </td>
+            </tr>
+            <tr>
             <td colspan="2" class="gray">下限時間</td>
-            <td colspan="4">
+            <td colspan="4" style="background-color: <?php echo $color_payment_middle_lower_limit_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p12;
@@ -1451,7 +1514,7 @@ $a_selected = false;
                         }
                     ?>
             </td>
-            <td colspan="4">
+            <td colspan="4" style="background-color: <?php echo $color_payment_middle_lower_limit_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p22;
@@ -1463,7 +1526,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">上限時間</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_upper_limit_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p12;
@@ -1472,7 +1535,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_upper_limit_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p22;
@@ -1484,7 +1547,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_deduction_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p12;
@@ -1493,7 +1556,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_deduction_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p22;
@@ -1505,7 +1568,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_overtime_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p12;
@@ -1514,7 +1577,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_middle_overtime_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p22;
@@ -1525,9 +1588,9 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
-                <td rowspan="8" width=4 class="Length gray" height=120>途中退場</td>
+                <td rowspan="9" width=4 class="Length gray" height=120>途中退場</td>
                 <td colspan="2" class="gray">就業日数</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_employment_day_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p13;
@@ -1536,7 +1599,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_employment_day_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_syugyonisu_p23;
@@ -1548,7 +1611,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">全営業日数</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_allbusiness_day_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p13;
@@ -1557,7 +1620,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_allbusiness_day_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_zeneigyonisu_p23;
@@ -1569,7 +1632,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">計算方法</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_calculation_1; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_p13;
@@ -1578,7 +1641,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_calculation_2; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_calc_p23;
@@ -1590,7 +1653,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_p13;
@@ -1599,7 +1662,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_tankin_p23;
@@ -1610,8 +1673,17 @@ $a_selected = false;
                 </td>
             </tr>
             <tr>
+                <td colspan="2" class="gray">ﾍﾞｰｽ単金</td>
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_unit_price_1_base; ?>">
+                    <input type="text" id="payment_leaving_unit_price_1_base" readonly="true" value="<?php echo $payment_leaving_unit_price_1_base; ?>" style="width:110px; text-align: center;">
+                </td>
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_unit_price_2_base; ?>">
+                    <input type="text" id="payment_leaving_unit_price_2_base" readonly="true" value="<?php echo $payment_leaving_unit_price_2_base; ?>" style="width:110px; text-align: center;">
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" class="gray">下限時間</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_lower_limit_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p13;
@@ -1620,7 +1692,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_lower_limit_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_lower_limit_p23;
@@ -1632,7 +1704,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">上限時間</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_upper_limit_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p13;
@@ -1641,7 +1713,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_upper_limit_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_upper_limit_p23;
@@ -1653,7 +1725,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_deduction_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p13;
@@ -1662,7 +1734,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_deduction_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_kojyo_unit_p23;
@@ -1674,7 +1746,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_overtime_unit_price_1; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p13;
@@ -1683,7 +1755,7 @@ $a_selected = false;
                         }
                     ?>
                 </td>
-                <td colspan="4">
+                <td colspan="4" style="background-color: <?php echo $color_payment_leaving_overtime_unit_price_2; ?>">
                     <?php
                         if ($a_act == '') {
                             echo $txt_contract_zangyo_unit_p23;
@@ -1700,7 +1772,7 @@ $a_selected = false;
             <tr>
                 <td colspan="5" class="yellow" height=15 nowrap="true">時間刻み</td>
                 <td colspan="2" class="yellow" nowrap="true">日次</td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_hourly_daily; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_pd;
@@ -1710,7 +1782,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="3" class="yellow" nowrap="true">月次</td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_hourly_monthly; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_m_contract_time_inc_pm;
@@ -1723,7 +1795,7 @@ $a_selected = false;
             <tr>
                 <td colspan="5" class="yellow" height=15>決済</td>
                 <td colspan="2" class="yellow">締め</td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_settlement_closingday; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_tighten_p;
@@ -1733,7 +1805,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="3" class="yellow">支払日</td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_settlement_paymentday; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_pay_pay;
@@ -1745,7 +1817,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="7" class="yellow" height=15><font size="-2" nowrap="true">欠勤控除対象者</font></td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_absence_deduction_subject; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p1;
@@ -1755,7 +1827,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="3" class="yellow" nowrap="true">見積書</td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_quotation; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p2;
@@ -1767,7 +1839,7 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="7" class="yellow" height=15>注文書</td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_purchase_order; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p3;
@@ -1777,7 +1849,7 @@ $a_selected = false;
                     ?>
                 </td>
                 <td colspan="3" class="yellow"><font size="-2" nowrap="true">注文請書</font></td>
-                <td colspan="1">
+                <td colspan="1" style="background-color: <?php echo $color_payment_confirmation_order; ?>">
                     <?php
                         if ($a_act == ''){
                             echo $opt_contract_yesno_p4;
@@ -1791,7 +1863,7 @@ $a_selected = false;
                 <td colspan="12">管理本部</td>
             </tr>
             <tr>
-                <td colspan="12"><?php echo $cnf_person; ?></td>
+                <td colspan="12" style="background-color: <?php echo $color_cnf_person; ?>"><?php echo $cnf_person; ?></td>
             </tr>
         </table>
     </li>
@@ -1807,7 +1879,7 @@ $a_selected = false;
 	<tr>
             <td class="yellow" style="width:60px;">抵触日</td>
             <td class="yellow" style="width:60px;" nowrap="true">組織単位</td>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_contact_date_org; ?>">
             <!-- td style="width:auto;" -->
             <?php
                 if ($a_act == '') {
@@ -1824,7 +1896,7 @@ $a_selected = false;
             <td class="yellow">名称・部署</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_dd_name; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $dd_name;
@@ -1846,7 +1918,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">組織単位</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_organization; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $organization;
@@ -1860,7 +1932,7 @@ $a_selected = false;
             <td colspan="4" class="yellow" nowrap="true">所在地</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_dd_address; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $dd_address;
@@ -1874,7 +1946,7 @@ $a_selected = false;
             <td colspan="4" class="yellow" nowrap="true">電話番号</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_dd_tel; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $dd_tel;
@@ -1889,7 +1961,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">職名・氏名</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_ip_position; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $ip_position;
@@ -1912,7 +1984,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">職名・氏名・電話番号</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_dd_responsible_position; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $dd_responsible_position;
@@ -1943,7 +2015,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">職名・氏名・電話番号</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_dm_responsible_position; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $dm_responsible_position;
@@ -1974,7 +2046,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">派遣先：職名・氏名・電話番号</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_chs_position2; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $chs_position2;
@@ -2004,7 +2076,7 @@ $a_selected = false;
             <td class="yellow" nowrap="true">派遣元：職名・氏名・電話番号</td>
 	</tr>
 	<tr>
-            <td class="">
+            <td class="" style="background-color: <?php echo $color_chs_position1; ?>">
                 <?php
                     if ($a_act == '') {
                         echo $chs_position1;
@@ -2038,17 +2110,21 @@ $a_selected = false;
 <br>
 <ul class="myul" style="list-style:none;">
     <li class="myli">
-        <table border="1" rules="all" width=340 height=400>
+        <table border="1" rules="all" width=340 height=440>
             <tr>
-                <td colspan="2" class="yellow" height=400 nowrap>備考<br>(営業)</td>
-                <td colspan="10" class="remarks">
+                <td colspan="2" class="yellow" height=440 nowrap>備考<br>(営業)</td>
+                <td colspan="10" class="remarks" style="background-color: <?php echo $color_remarks; ?>">
                     <?php
                         if ($a_act == ''){
+                            echo "・該当レポートのみの場合<br>";
                             echo com_db_string_format($inp_biko);   #[2017.11.07]
+                            echo "・継続する内容<br>";
                             echo com_db_string_format($remarks2);   #[2018.01.18]課題解決管理表No.92
                         }else{
-                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 46%;");
-                            echo com_make_tag_textarea($a_act, $remarks2, "remarks2", "width: 96%; height: 46%;");  #[2018.01.18]課題解決管理表No.92
+                            echo "・該当レポートのみの場合<br>";
+                            echo com_make_tag_textarea($a_act, $inp_biko, "inp_biko", "width: 96%; height: 40%;");
+                            echo "・継続する内容<br>";
+                            echo com_make_tag_textarea($a_act, $remarks2, "remarks2", "width: 96%; height: 40%;");  #[2018.01.18]課題解決管理表No.92
                         }
                     ?>
                 </td>
@@ -2057,17 +2133,21 @@ $a_selected = false;
     </li>
     <!-- 右側のテーブル群 -->
     <li class="myli">
-        <table border="1" rules="all" width=340 height=400>
+        <table border="1" rules="all" width=340 height=440>
             <tr>
-                <td colspan="2" class="yellow" height=400 nowrap>備考<br>(管理)</td>
-                <td colspan="10" class="remarks">
+                <td colspan="2" class="yellow" height=440 nowrap>備考<br>(管理)</td>
+                <td colspan="10" class="remarks" style="background-color: <?php echo $color_remarks_pay; ?>">
                     <?php
                         if ($a_act == ''){
+                            echo "・該当レポートのみの場合<br>";
                             echo com_db_string_format($remarks_pay);    #[2017.11.07]
+                            echo "・継続する内容<br>";
                             echo com_db_string_format($remarks_pay2);   #[2018.01.18]課題解決管理表No.92
                         }else{
-                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 46%;");
-                            echo com_make_tag_textarea($a_act, $remarks_pay2, "remarks_pay2", "width: 96%; height: 46%;");  #[2018.01.18]課題解決管理表No.92
+                            echo "・該当レポートのみの場合<br>";
+                            echo com_make_tag_textarea($a_act, $remarks_pay, "remarks_pay", "width: 96%; height: 40%;");
+                            echo "・継続する内容<br>";
+                            echo com_make_tag_textarea($a_act, $remarks_pay2, "remarks_pay2", "width: 96%; height: 40%;");  #[2018.01.18]課題解決管理表No.92
                         }
                     ?>
                 </td>
@@ -2117,7 +2197,7 @@ $a_selected = false;
 <input type="button" value="見積書" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10107']; ?>&NO=<?php echo $cr_id; ?>'">
 <!-- ↑後でコメントアウトする -->
 <?php } ?>
-<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>'">
+<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>&DEL=<?php echo $_SESSION['contract_del']; ?>'">
 </p>
 
 <center>

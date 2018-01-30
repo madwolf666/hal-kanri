@@ -14,11 +14,23 @@ if (!isset($_GET['mnu'])){
 }else{
     switch($_GET['mnu']){
     case $GLOBALS['g_MENU_CONTRACT_10000']:   //台帳：モバイル用
-        header('Location: ./10000.php');
+        header('Location: ./10000.php?DEL='.$_GET['DEL']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10100']:   //契約管理全体
-        if (isset($_GET['ENO'])){
-            $_SESSION['f_engineer_number'] = $_GET['ENO'];
+        #[2018.01.29]課題解決管理表No.87
+        $_SESSION['contract_del'] = 0;
+        if (isset($_GET['DEL'])){
+            $_SESSION['contract_del'] = $_GET['DEL'];
+        }
+        #[2018.01.29]課題解決管理表No.87
+        $a_exc = 0;
+        if (isset($_GET['EXC'])){
+            $a_exc = $_GET['EXC'];
+        }
+        #echo 'session='.$_SESSION['f_send_mail_date1'];
+        #return;
+        if (isset($_GET['ENM'])){
+            $_SESSION['f_engineer_number'] = $_GET['ENM'];
             $_SESSION['f_engineer_name'] = "";
             $_SESSION['f_contract_number'] = "";
             $_SESSION['f_customer_name'] = "";
@@ -33,6 +45,22 @@ if (!isset($_GET['mnu'])){
             $_SESSION['f_send_mail_date2'] = "";
             $_SESSION['f_send_mail_date3'] = "";
             $_SESSION['f_send_mail_date4'] = "";
+            #[2018.01.30]課題解決管理表No.87
+            $_SESSION['f_engineer_number_del'] = $_GET['ENM'];
+            $_SESSION['f_engineer_name_del'] = "";
+            $_SESSION['f_contract_number_del'] = "";
+            $_SESSION['f_customer_name_del'] = "";
+            $_SESSION['f_claim_agreement_start_del'] = "";
+            $_SESSION['f_claim_agreement_end_del'] = "";
+            $_SESSION['f_claim_contract_form_del'] = "";
+            $_SESSION['f_claim_settlement_closingday_del'] = "";
+            $_SESSION['f_claim_settlement_paymentday_del'] = "";
+            $_SESSION['f_remarks_del'] = "";
+            #[2018.01.18]課題解決管理表No.93
+            $_SESSION['f_send_mail_date1_del'] = "";
+            $_SESSION['f_send_mail_date2_del'] = "";
+            $_SESSION['f_send_mail_date3_del'] = "";
+            $_SESSION['f_send_mail_date4_del'] = "";
         } else {
             #POST
             if (isset($_POST['f_engineer_number'])){
@@ -67,29 +95,33 @@ if (!isset($_GET['mnu'])){
             }
             #[2018.01.18]課題解決管理表No.93
             #checkboxはcheckされないとPOSTされない！
-            if (isset($_POST['f_send_mail_date1'])){
-                $_SESSION['f_send_mail_date1'] = $_POST['f_send_mail_date1'];
-            }else{
-                $_SESSION['f_send_mail_date1'] = "";
-            }
-            if (isset($_POST['f_send_mail_date2'])){
-                $_SESSION['f_send_mail_date2'] = $_POST['f_send_mail_date2'];
-            }else{
-                $_SESSION['f_send_mail_date2'] = "";
-            }
-            if (isset($_POST['f_send_mail_date3'])){
-                $_SESSION['f_send_mail_date3'] = $_POST['f_send_mail_date3'];
-            }else{
-                $_SESSION['f_send_mail_date3'] = "";
-            }
-            if (isset($_POST['f_send_mail_date4'])){
-                $_SESSION['f_send_mail_date4'] = $_POST['f_send_mail_date4'];
-            }else{
-                $_SESSION['f_send_mail_date4'] = "";
+            if ($_SESSION['contract_del'] != 1){
+                if ($a_exc == 1){
+                    if (isset($_POST['f_send_mail_date1'])){
+                        $_SESSION['f_send_mail_date1'] = $_POST['f_send_mail_date1'];
+                    }else{
+                        $_SESSION['f_send_mail_date1'] = "";
+                    }
+                    if (isset($_POST['f_send_mail_date2'])){
+                        $_SESSION['f_send_mail_date2'] = $_POST['f_send_mail_date2'];
+                    }else{
+                        $_SESSION['f_send_mail_date2'] = "";
+                    }
+                    if (isset($_POST['f_send_mail_date3'])){
+                        $_SESSION['f_send_mail_date3'] = $_POST['f_send_mail_date3'];
+                    }else{
+                        $_SESSION['f_send_mail_date3'] = "";
+                    }
+                    if (isset($_POST['f_send_mail_date4'])){
+                        $_SESSION['f_send_mail_date4'] = $_POST['f_send_mail_date4'];
+                    }else{
+                        $_SESSION['f_send_mail_date4'] = "";
+                    }
+                }
             }
             #AND OR
             if (isset($_POST['f_engineer_number_andor'])){
-            $_SESSION['f_engineer_number_andor'] = $_POST['f_engineer_number_andor'];
+                $_SESSION['f_engineer_number_andor'] = $_POST['f_engineer_number_andor'];
             }
             if (isset($_POST['f_contract_number_andor'])){
                 $_SESSION['f_contract_number_andor'] = $_POST['f_contract_number_andor'];
@@ -119,6 +151,101 @@ if (!isset($_GET['mnu'])){
             if (isset($_POST['f_send_mail_date_andor'])){
                 $_SESSION['f_send_mail_date_andor'] = $_POST['f_send_mail_date_andor'];
             }
+            #[2018.01.18]課題解決管理表No.93
+            #POST
+            if (isset($_POST['f_engineer_number_del'])){
+                $_SESSION['f_engineer_number_del'] = $_POST['f_engineer_number_del'];
+            }
+            if (isset($_POST['f_engineer_name_del'])){
+                $_SESSION['f_engineer_name_del'] = $_POST['f_engineer_name_del'];
+            }
+            if (isset($_POST['f_contract_number_del'])){
+                $_SESSION['f_contract_number_del'] = $_POST['f_contract_number_del'];
+            }
+            if (isset($_POST['f_customer_name_del'])){
+                $_SESSION['f_customer_name_del'] = $_POST['f_customer_name_del'];
+            }
+            if (isset($_POST['f_claim_agreement_start_del'])){
+                $_SESSION['f_claim_agreement_start_del'] = $_POST['f_claim_agreement_start_del'];
+            }
+            if (isset($_POST['f_claim_agreement_end_del'])){
+                $_SESSION['f_claim_agreement_end_del'] = $_POST['f_claim_agreement_end_del'];
+            }
+            if (isset($_POST['f_claim_contract_form_del'])){
+                $_SESSION['f_claim_contract_form_del'] = $_POST['f_claim_contract_form_del'];
+            }
+            if (isset($_POST['f_claim_settlement_closingday_del'])){
+                $_SESSION['f_claim_settlement_closingday_del'] = $_POST['f_claim_settlement_closingday_del'];
+            }
+            if (isset($_POST['f_claim_settlement_paymentday_del'])){
+                $_SESSION['f_claim_settlement_paymentday_del'] = $_POST['f_claim_settlement_paymentday_del'];
+            }
+            if (isset($_POST['f_remarks_del'])){
+                $_SESSION['f_remarks_del'] = $_POST['f_remarks_del'];
+            }
+            #[2018.01.18]課題解決管理表No.93
+            #checkboxはcheckされないとPOSTされない！
+            if ($_SESSION['contract_del'] == 1){
+                if ($a_exc == 1){
+                    if (isset($_POST['f_send_mail_date1_del'])){
+                        $_SESSION['f_send_mail_date1_del'] = $_POST['f_send_mail_date1_del'];
+                    }else{
+                        $_SESSION['f_send_mail_date1_del'] = "";
+                    }
+                    #echo 'f_send_mail_date1_del='.$_SESSION['f_send_mail_date1_del'];
+                    #return;
+                    if (isset($_POST['f_send_mail_date2_del'])){
+                        $_SESSION['f_send_mail_date2_del'] = $_POST['f_send_mail_date2_del'];
+                    }else{
+                        $_SESSION['f_send_mail_date2_del'] = "";
+                    }
+                    if (isset($_POST['f_send_mail_date3_del'])){
+                        $_SESSION['f_send_mail_date3_del'] = $_POST['f_send_mail_date3_del'];
+                    }else{
+                        $_SESSION['f_send_mail_date3_del'] = "";
+                    }
+                    if (isset($_POST['f_send_mail_date4_del'])){
+                        $_SESSION['f_send_mail_date4_del'] = $_POST['f_send_mail_date4_del'];
+                    }else{
+                        $_SESSION['f_send_mail_date4_del'] = "";
+                    }
+                }
+            }
+            #AND OR
+            if (isset($_POST['f_engineer_number_andor_del'])){
+                $_SESSION['f_engineer_number_andor_del'] = $_POST['f_engineer_number_andor_del'];
+            }
+            if (isset($_POST['f_contract_number_andor_del'])){
+                $_SESSION['f_contract_number_andor_del'] = $_POST['f_contract_number_andor_del'];
+            }
+            if (isset($_POST['f_customer_name_andor_del'])){
+                $_SESSION['f_customer_name_andor_del'] = $_POST['f_customer_name_andor_del'];
+            }
+            if (isset($_POST['f_claim_agreement_start_andor_del'])){
+                $_SESSION['f_claim_agreement_start_andor_del'] = $_POST['f_claim_agreement_start_andor_del'];
+            }
+            if (isset($_POST['f_claim_agreement_end_andor_del'])){
+                $_SESSION['f_claim_agreement_end_andor_del'] = $_POST['f_claim_agreement_end_andor_del'];
+            }
+            if (isset($_POST['f_claim_contract_form_andor_del'])){
+                $_SESSION['f_claim_contract_form_andor_del'] = $_POST['f_claim_contract_form_andor_del'];
+            }
+            if (isset($_POST['f_claim_settlement_closingday_andor_del'])){
+                $_SESSION['f_claim_settlement_closingday_andor_del'] = $_POST['f_claim_settlement_closingday_andor_del'];
+            }
+            if (isset($_POST['f_claim_settlement_paymentday_andor_del'])){
+                $_SESSION['f_claim_settlement_paymentday_andor_del'] = $_POST['f_claim_settlement_paymentday_andor_del'];
+            }
+            if (isset($_POST['f_remarks_andor_del'])){
+                $_SESSION['f_remarks_andor_del'] = $_POST['f_remarks_andor_del'];
+            }
+            #[2018.01.18]課題解決管理表No.93
+            if (isset($_POST['f_send_mail_date_andor_del'])){
+                $_SESSION['f_send_mail_date_andor_del'] = $_POST['f_send_mail_date_andor_del'];
+            }
+
+            #echo 'session='.$_SESSION['f_send_mail_date1'];
+            #return;
         }
         
         header('Location: ./10100.php');
@@ -147,6 +274,12 @@ if (!isset($_GET['mnu'])){
         header('Location: ./10107.php?ACT=e&NO='.$_GET['NO']);
         break;
     case $GLOBALS['g_MENU_CONTRACT_10200']:   //給与台帳
+        #[2018.01.29]課題解決管理表No.87
+        $_SESSION['contract_del'] = 0;
+        if (isset($_GET['DEL'])){
+            $_SESSION['contract_del'] = $_GET['DEL'];
+        }
+        
         if ($_SESSION["hal_auth"] <= 0) {
             if (isset($_GET['ENM'])){
                 #$_SESSION['f_engineer_number_10200'] = $_GET['ENO'];
@@ -160,6 +293,17 @@ if (!isset($_GET['mnu'])){
                 $_SESSION['f_labor_contact_date_10200'] = "";
                 $_SESSION['f_labor_yayoi_changed_10200'] = "";
                 $_SESSION['f_labor_remarks_10200'] = "";
+                #[2018.01.30]課題解決管理表No.87
+                $_SESSION['f_payment_contract_form_10200_del'] = "";
+                $_SESSION['f_engineer_name_10200_del'] = $_GET['ENM'];
+                $_SESSION['f_date_entering_10200_del'] = "";
+                $_SESSION['f_date_retire_10200_del'] = "";
+                $_SESSION['f_payment_settlement_paymentday_10200_del'] = "";
+                $_SESSION['f_date_modify_salary_10200_del'] = "";
+                $_SESSION['f_date_first_salary_10200_del'] = "";
+                $_SESSION['f_labor_contact_date_10200_del'] = "";
+                $_SESSION['f_labor_yayoi_changed_10200_del'] = "";
+                $_SESSION['f_labor_remarks_10200_del'] = "";
             } else {
                 #POST
                 #$_SESSION['f_engineer_number_10200'] = "";
@@ -220,6 +364,67 @@ if (!isset($_GET['mnu'])){
                 }
                 if (isset($_POST['f_labor_remarks_10200_andor'])){
                     $_SESSION['f_labor_remarks_10200_andor'] = $_POST['f_labor_remarks_10200_andor'];
+                }
+                #[2018.01.30]課題解決管理表No.87
+                #POST
+                #$_SESSION['f_engineer_number_10200'] = "";
+                if (isset($_POST['f_payment_contract_form_10200_del'])){
+                    $_SESSION['f_payment_contract_form_10200_del'] = $_POST['f_payment_contract_form_10200_del'];
+                }
+                if (isset($_POST['f_engineer_name_10200_del'])){
+                $_SESSION['f_engineer_name_10200_del'] = $_POST['f_engineer_name_10200_del'];
+                }
+                if (isset($_POST['f_date_entering_10200_del'])){
+                    $_SESSION['f_date_entering_10200_del'] = $_POST['f_date_entering_10200_del'];
+                }
+                if (isset($_POST['f_date_retire_10200_del'])){
+                    $_SESSION['f_date_retire_10200_del'] = $_POST['f_date_retire_10200_del'];
+                }
+                if (isset($_POST['f_payment_settlement_paymentday_10200_del'])){
+                    $_SESSION['f_payment_settlement_paymentday_10200_del'] = $_POST['f_payment_settlement_paymentday_10200_del'];
+                }
+                if (isset($_POST['f_date_modify_salary_10200_del'])){
+                    $_SESSION['f_date_modify_salary_10200_del'] = $_POST['f_date_modify_salary_10200_del'];
+                }
+                if (isset($_POST['f_date_first_salary_10200_del'])){
+                    $_SESSION['f_date_first_salary_10200_del'] = $_POST['f_date_first_salary_10200_del'];
+                }
+                if (isset($_POST['f_labor_contact_date_10200_del'])){
+                    $_SESSION['f_labor_contact_date_10200_del'] = $_POST['f_labor_contact_date_10200_del'];
+                }
+                if (isset($_POST['f_labor_yayoi_changed_10200_del'])){
+                    $_SESSION['f_labor_yayoi_changed_10200_del'] = $_POST['f_labor_yayoi_changed_10200_del'];
+                }
+                if (isset($_POST['f_labor_remarks_10200_del'])){
+                    $_SESSION['f_labor_remarks_10200_del'] = $_POST['f_labor_remarks_10200_del'];
+                }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10200_andor_del'])){
+                    $_SESSION['f_engineer_name_10200_andor_del'] = $_POST['f_engineer_name_10200_andor_del'];
+                }
+                if (isset($_POST['f_date_entering_10200_andor_del'])){
+                    $_SESSION['f_date_entering_10200_andor_del'] = $_POST['f_date_entering_10200_andor_del'];
+                }
+                if (isset($_POST['f_date_retire_10200_andor_del'])){
+                    $_SESSION['f_date_retire_10200_andor_del'] = $_POST['f_date_retire_10200_andor_del'];
+                }
+                if (isset($_POST['f_payment_settlement_paymentday_10200_andor_del'])){
+                    $_SESSION['f_payment_settlement_paymentday_10200_andor_del'] = $_POST['f_payment_settlement_paymentday_10200_andor_del'];
+                }
+                if (isset($_POST['f_date_modify_salary_10200_andor_del'])){
+                    $_SESSION['f_date_modify_salary_10200_andor_del'] = $_POST['f_date_modify_salary_10200_andor_del'];
+                }
+                if (isset($_POST['f_date_first_salary_10200_andor_del'])){
+                    $_SESSION['f_date_first_salary_10200_andor_del'] = $_POST['f_date_first_salary_10200_andor_del'];
+                }
+                if (isset($_POST['f_labor_contact_date_10200_andor_del'])){
+                    $_SESSION['f_labor_contact_date_10200_andor_del'] = $_POST['f_labor_contact_date_10200_andor_del'];
+                }
+                if (isset($_POST['f_labor_yayoi_changed_10200_andor_del'])){
+                    $_SESSION['f_labor_yayoi_changed_10200_andor_del'] = $_POST['f_labor_yayoi_changed_10200_andor_del'];
+                }
+                if (isset($_POST['f_labor_remarks_10200_andor_del'])){
+                    $_SESSION['f_labor_remarks_10200_andor_del'] = $_POST['f_labor_remarks_10200_andor_del'];
                 }
             }
 
@@ -333,10 +538,16 @@ if (!isset($_GET['mnu'])){
         }
         break;
     case $GLOBALS['g_MENU_CONTRACT_10300']:   //検収台帳
+        #[2018.01.29]課題解決管理表No.87
+        $_SESSION['contract_del'] = 0;
+        if (isset($_GET['DEL'])){
+            $_SESSION['contract_del'] = $_GET['DEL'];
+        }
+
         if ($_SESSION["hal_auth"] <= 0) {
-            if (isset($_GET['ENO'])){
+            if (isset($_GET['ENM'])){
                 $_SESSION['f_contract_number_10300'] = "";
-                $_SESSION['f_engineer_number_10300'] = $_GET['ENO'];
+                $_SESSION['f_engineer_number_10300'] = $_GET['ENM'];
                 #$_SESSION['f_engineer_number_10300'] = "";
                 $_SESSION['f_engineer_name_10300'] = "";
                 $_SESSION['f_customer_name_10300'] = "";
@@ -348,6 +559,20 @@ if (!isset($_GET['mnu'])){
                 $_SESSION['f_payment_contract_form_10300'] = "";
                 $_SESSION['f_payment_acceptance_date_10300'] = "";
                 $_SESSION['f_payment_settlement_paymentday_10300'] = "";
+                #[2018.01.30]課題解決管理表No.87
+                $_SESSION['f_contract_number_10300_del'] = "";
+                $_SESSION['f_engineer_number_10300_del'] = $_GET['ENM'];
+                #$_SESSION['f_engineer_number_10300'] = "";
+                $_SESSION['f_engineer_name_10300_del'] = "";
+                $_SESSION['f_customer_name_10300_del'] = "";
+                $_SESSION['f_claim_contract_form_10300_del'] = "";
+                $_SESSION['f_ag_no_10300_del'] = "";
+                $_SESSION['f_accounts_bai_previous_day_10300_del'] = "";
+                $_SESSION['f_accounts_actual_working_hours_10300_del'] = "";
+                $_SESSION['f_accounts_expenses_10300_del'] = "";
+                $_SESSION['f_payment_contract_form_10300_del'] = "";
+                $_SESSION['f_payment_acceptance_date_10300_del'] = "";
+                $_SESSION['f_payment_settlement_paymentday_10300_del'] = "";
             } else {
                 #POST
                 if (isset($_POST['f_contract_number_10300'])){
@@ -419,6 +644,78 @@ if (!isset($_GET['mnu'])){
                 }
                 if (isset($_POST['f_payment_settlement_paymentday_10300_andor'])){
                     $_SESSION['f_payment_settlement_paymentday_10300_andor'] = $_POST['f_payment_settlement_paymentday_10300_andor'];
+                }
+                #[2018.01.30]課題解決管理表No.87
+                #POST
+                if (isset($_POST['f_contract_number_10300_del'])){
+                    $_SESSION['f_contract_number_10300_del'] = $_POST['f_contract_number_10300_del'];
+                }
+                if (isset($_POST['f_engineer_number_10300_del'])){
+                    $_SESSION['f_engineer_number_10300_del'] = $_POST['f_engineer_number_10300_del'];
+                }
+                if (isset($_POST['f_engineer_name_10300_del'])){
+                    $_SESSION['f_engineer_name_10300_del'] = $_POST['f_engineer_name_10300_del'];
+                }
+                if (isset($_POST['f_customer_name_10300_del'])){
+                    $_SESSION['f_customer_name_10300_del'] = $_POST['f_customer_name_10300_del'];
+                }
+                if (isset($_POST['f_claim_contract_form_10300_del'])){
+                    $_SESSION['f_claim_contract_form_10300_del'] = $_POST['f_claim_contract_form_10300_del'];
+                }
+                if (isset($_POST['f_ag_no_10300_del'])){
+                    $_SESSION['f_ag_no_10300_del'] = $_POST['f_ag_no_10300_del'];
+                }
+                if (isset($_POST['f_accounts_bai_previous_day_10300_del'])){
+                    $_SESSION['f_accounts_bai_previous_day_10300_del'] = $_POST['f_accounts_bai_previous_day_10300_del'];
+                }
+                if (isset($_POST['f_accounts_actual_working_hours_10300_del'])){
+                    $_SESSION['f_accounts_actual_working_hours_10300_del'] = $_POST['f_accounts_actual_working_hours_10300_del'];
+                }
+                if (isset($_POST['f_accounts_expenses_10300_del'])){
+                    $_SESSION['f_accounts_expenses_10300_del'] = $_POST['f_accounts_expenses_10300_del'];
+                }
+                if (isset($_POST['f_payment_contract_form_10300_del'])){
+                    $_SESSION['f_payment_contract_form_10300_del'] = $_POST['f_payment_contract_form_10300_del'];
+                }
+                if (isset($_POST['f_payment_acceptance_date_10300_del'])){
+                    $_SESSION['f_payment_acceptance_date_10300_del'] = $_POST['f_payment_acceptance_date_10300_del'];
+                }
+                if (isset($_POST['f_payment_settlement_paymentday_10300_del'])){
+                    $_SESSION['f_payment_settlement_paymentday_10300_del'] = $_POST['f_payment_settlement_paymentday_10300_del'];
+                }
+                # AND OR
+                if (isset($_POST['f_engineer_number_10300_andor_del'])){
+                    $_SESSION['f_engineer_number_10300_andor_del'] = $_POST['f_engineer_number_10300_andor_del'];
+                }
+                if (isset($_POST['f_engineer_name_10300_andor_del'])){
+                    $_SESSION['f_engineer_name_10300_andor_del'] = $_POST['f_engineer_name_10300_andor_del'];
+                }
+                if (isset($_POST['f_customer_name_10300_andor_del'])){
+                    $_SESSION['f_customer_name_10300_andor_del'] = $_POST['f_customer_name_10300_andor_del'];
+                }
+                if (isset($_POST['f_claim_contract_form_10300_andor_del'])){
+                    $_SESSION['f_claim_contract_form_10300_andor_del'] = $_POST['f_claim_contract_form_10300_andor_del'];
+                }
+                if (isset($_POST['f_ag_no_10300_andor_del'])){
+                    $_SESSION['f_ag_no_10300_andor_del'] = $_POST['f_ag_no_10300_andor_del'];
+                }
+                if (isset($_POST['f_accounts_bai_previous_day_10300_andor_del'])){
+                    $_SESSION['f_accounts_bai_previous_day_10300_andor_del'] = $_POST['f_accounts_bai_previous_day_10300_andor_del'];
+                }
+                if (isset($_POST['f_accounts_actual_working_hours_10300_andor_del'])){
+                    $_SESSION['f_accounts_actual_working_hours_10300_andor_del'] = $_POST['f_accounts_actual_working_hours_10300_andor_del'];
+                }
+                if (isset($_POST['f_accounts_expenses_10300_andor_del'])){
+                    $_SESSION['f_accounts_expenses_10300_andor_del'] = $_POST['f_accounts_expenses_10300_andor_del'];
+                }
+                if (isset($_POST['f_payment_contract_form_10300_andor_del'])){
+                    $_SESSION['f_payment_contract_form_10300_andor_del'] = $_POST['f_payment_contract_form_10300_andor_del'];
+                }
+                if (isset($_POST['f_payment_acceptance_date_10300_andor_del'])){
+                    $_SESSION['f_payment_acceptance_date_10300_andor_del'] = $_POST['f_payment_acceptance_date_10300_andor_del'];
+                }
+                if (isset($_POST['f_payment_settlement_paymentday_10300_andor_del'])){
+                    $_SESSION['f_payment_settlement_paymentday_10300_andor_del'] = $_POST['f_payment_settlement_paymentday_10300_andor_del'];
                 }
             }
 
@@ -616,11 +913,20 @@ if (!isset($_GET['mnu'])){
         }
         break;
     case $GLOBALS['g_MENU_CONTRACT_10400']:   //注文書台帳
+        #[2018.01.29]課題解決管理表No.87
+        $_SESSION['contract_del'] = 0;
+        if (isset($_GET['DEL'])){
+            $_SESSION['contract_del'] = $_GET['DEL'];
+        }
+
         if ($_SESSION["hal_auth"] <= 0) {
             if (isset($_GET['ENM'])){
                 #$_SESSION['f_engineer_number_10400'] = $_GET['ENO'];
                 $_SESSION['f_contract_number_10400'] = "";
                 $_SESSION['f_engineer_name_10400'] = $_GET['ENM'];
+                #[2018.01.30]課題解決管理表No.87
+                $_SESSION['f_contract_number_10400_del'] = "";
+                $_SESSION['f_engineer_name_10400_del'] = $_GET['ENM'];
             } else {
                 #$_SESSION['f_engineer_number_10400'] = "";
                 #POST
@@ -633,6 +939,18 @@ if (!isset($_GET['mnu'])){
                 #AND OR
                 if (isset($_POST['f_engineer_name_10400_andor'])){
                     $_SESSION['f_engineer_name_10400_andor'] = $_POST['f_engineer_name_10400_andor'];
+                }
+                #[2018.01.30]課題解決管理表No.87
+                #POST
+                if (isset($_POST['f_contract_number_10400_del'])){
+                    $_SESSION['f_contract_number_10400_del'] = $_POST['f_contract_number_10400_del'];
+                }
+                if (isset($_POST['f_engineer_name_10400_del'])){
+                    $_SESSION['f_engineer_name_10400_del'] = $_POST['f_engineer_name_10400_del'];
+                }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10400_andor_del'])){
+                    $_SESSION['f_engineer_name_10400_andor_del'] = $_POST['f_engineer_name_10400_andor_del'];
                 }
             }
 
@@ -655,11 +973,20 @@ if (!isset($_GET['mnu'])){
         }
         break;
     case $GLOBALS['g_MENU_CONTRACT_10500']:   //契約書台帳
+        #[2018.01.29]課題解決管理表No.87
+        $_SESSION['contract_del'] = 0;
+        if (isset($_GET['DEL'])){
+            $_SESSION['contract_del'] = $_GET['DEL'];
+        }
+
         if ($_SESSION["hal_auth"] <= 0) {
             if (isset($_GET['ENM'])){
                 #$_SESSION['f_engineer_number_10500'] = $_GET['ENO'];
                 $_SESSION['f_contract_number_10500'] = "";
                 $_SESSION['f_engineer_name_10500'] = $_GET['ENM'];
+                #[2018.01.30]課題解決管理表No.87
+                $_SESSION['f_contract_number_10500_del'] = "";
+                $_SESSION['f_engineer_name_10500_del'] = $_GET['ENM'];
             } else {
                 #$_SESSION['f_engineer_number_10500'] = "";
                 #POST
@@ -672,6 +999,18 @@ if (!isset($_GET['mnu'])){
                 #AND OR
                 if (isset($_POST['f_engineer_name_10500_andor'])){
                     $f_engineer_name_10500_andor = $_POST['f_engineer_name_10500_andor'];
+                }
+                #[2018.01.30]課題解決管理表No.87
+                #POST
+                if (isset($_POST['f_contract_number_10500_del'])){
+                    $_SESSION['f_contract_number_10500_del'] = $_POST['f_contract_number_10500_del'];
+                }
+                if (isset($_POST['f_engineer_name_10500_del'])){
+                    $_SESSION['f_engineer_name_10500_del'] = $_POST['f_engineer_name_10500_del'];
+                }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10500_andor_del'])){
+                    $f_engineer_name_10500_andor_del = $_POST['f_engineer_name_10500_andor_del'];
                 }
             }
 
@@ -699,11 +1038,20 @@ if (!isset($_GET['mnu'])){
         }
         break;
     case $GLOBALS['g_MENU_CONTRACT_10600']:   //派遣元台帳
+        #[2018.01.29]課題解決管理表No.87
+        $_SESSION['contract_del'] = 0;
+        if (isset($_GET['DEL'])){
+            $_SESSION['contract_del'] = $_GET['DEL'];
+        }
+
         if ($_SESSION["hal_auth"] <= 0) {
             if (isset($_GET['ENM'])){
                 #$_SESSION['f_engineer_number_10600'] = $_GET['ENO'];
                 $_SESSION['f_contract_number_10600'] = "";
                 $_SESSION['f_engineer_name_10600'] = $_GET['ENM'];
+                #[2018.01.30]課題解決管理表No.87
+                $_SESSION['f_contract_number_10600_del'] = "";
+                $_SESSION['f_engineer_name_10600_del'] = $_GET['ENM'];
             } else {
                 #$_SESSION['f_engineer_number_10600'] = "";
                 #POST
@@ -716,6 +1064,18 @@ if (!isset($_GET['mnu'])){
                 #AND OR
                 if (isset($_POST['f_engineer_name_10600_andor'])){
                     $f_engineer_name_10600_andor = $_POST['f_engineer_name_10600_andor'];
+                }
+                #[2018.01.30]課題解決管理表No.87
+                #POST
+                if (isset($_POST['f_contract_number_10600_del'])){
+                    $_SESSION['f_contract_number_10600_del'] = $_POST['f_contract_number_10600_del'];
+                }
+                if (isset($_POST['f_engineer_name_10600_del'])){
+                    $_SESSION['f_engineer_name_10600_del'] = $_POST['f_engineer_name_10600_del'];
+                }
+                #AND OR
+                if (isset($_POST['f_engineer_name_10600_andor_del'])){
+                    $f_engineer_name_10600_andor_del = $_POST['f_engineer_name_10600_andor_del'];
                 }
             }
 

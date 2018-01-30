@@ -148,6 +148,20 @@ $(function () {
     $('#inp_syugyonisu_b3').keyup(function(){calc_bill_midway_retirement(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_leaving_employment_day', $('#inp_syugyonisu_b3').val(), '#inp_syugyonisu_b3');});
     $('#inp_zeneigyonisu_b3').keyup(function(){calc_bill_midway_retirement(); calc_pay_midway_retirement(); check_value_changed_10102(1, 'claim_leaving_allbusiness_day', $('#inp_zeneigyonisu_b3').val(), '#inp_zeneigyonisu_b3');});
 
+    //[2018.01.26]課題解決管理表No.91
+    $('#claim_normal_unit_price_base').keyup(function(){
+        check_value_changed_10102(1, 'claim_normal_unit_price_base', $('#claim_normal_unit_price_base').val(), '#claim_normal_unit_price_base');
+        calc_pay_normal_period();
+    });
+    $('#claim_middle_unit_price_base').keyup(function(){
+        check_value_changed_10102(1, 'claim_middle_unit_price_base', $('#claim_middle_unit_price_base').val(), '#claim_middle_unit_price_base');
+        calc_pay_middle_admission();
+    });
+    $('#claim_leaving_unit_price_base').keyup(function(){
+        check_value_changed_10102(1, 'claim_leaving_unit_price_base', $('#claim_leaving_unit_price_base').val(), '#claim_leaving_unit_price_base');
+        calc_pay_midway_retirement();
+    });
+
     //--------------------------------------------------------------------------
     //支払いサイド
     //--------------------------------------------------------------------------
@@ -357,6 +371,9 @@ $(function () {
     //条件検索
     $('#f_claim_agreement_start').datepicker({});
     $('#f_claim_agreement_end').datepicker({});
+    //[2018.01.30]課題解決管理表No.87
+    $('#f_claim_agreement_start_del').datepicker({});
+    $('#f_claim_agreement_end_del').datepicker({});
     
 });
 
@@ -1090,7 +1107,8 @@ function calc_pay_normal_period()
     //--------------------------------------------------------------------------
     //支払いサイド
     //--------------------------------------------------------------------------
-    var a_tankin = $('#inp_tankin_b1').val().replace(/,/g,"");  //[2017.11.09]課題No,82
+    var a_tankin = $('#inp_tankin_b1').val().replace(/,/g,"");  //[2017.11.09]課題No.82
+    var a_tankin_base = $('#claim_normal_unit_price_base').val().replace(/,/g,""); //[2018.01.26]↓課題No.91
     var a_lower_opt = $('[name=opt_contract_lower_limit_b1] option:selected').text();
     var a_upper_opt = $('[name=opt_contract_upper_limit_b1] option:selected').text();
     var a_lower_txt = $('#txt_contract_lower_limit_b1').val();
@@ -1135,6 +1153,22 @@ function calc_pay_normal_period()
     a_tankin_p11 = $('#txt_tankin_p11').val().replace(/,/g,""); //[2017.11.07]課題No.79
     a_tankin_p21 = $('#txt_tankin_p21').val().replace(/,/g,""); //[2017.11.07]課題No.79
     
+    //[2018.01.26]↓課題No.91
+    //ベース単金
+    if ((a_tankin_base == '') || (a_kangen == '')) {
+        $('#payment_normal_unit_price_1_base').val('');
+        $('#payment_normal_unit_price_2_base').val('');
+    } else {
+        if (isFinite(a_kangen) == true){
+            $('#payment_normal_unit_price_1_base').val(Number(Math.round(a_tankin_base*(a_kangen/100))).toLocaleString());
+            $('#payment_normal_unit_price_2_base').val(Number(Math.round(a_tankin_base*((a_kangen-20)/100))).toLocaleString());
+            a_tankin_p11 = $('#payment_normal_unit_price_1_base').val().replace(/,/g,"");
+            a_tankin_p21 = $('#payment_normal_unit_price_2_base').val().replace(/,/g,"");
+        }else{
+        }
+    }
+    //[2018.01.26]↑課題No.91
+
     //下限時間⇒IF(請求サイド通常下限時間="","",請求サイド通常下限時間)
     //if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
     if (a_lower_txt == '') {
@@ -1298,6 +1332,7 @@ function calc_pay_middle_admission()
     var a_zeneigyonisu = $('#inp_zeneigyonisu_b2').val();
     
     var a_tankin = $('#txt_tankin_b2').val().replace(/,/g,""); //[2017.11.07]課題No.79
+    var a_tankin_base = $('#claim_middle_unit_price_base').val().replace(/,/g,""); //[2018.01.26]↓課題No.91
     /*[2017.11.09]課題No.81
     var a_lower_opt = $('[name=opt_contract_lower_limit_b2] option:selected').text();
     var a_upper_opt = $('[name=opt_contract_upper_limit_b2] option:selected').text();
@@ -1359,6 +1394,22 @@ function calc_pay_middle_admission()
     }
     a_tankin_p12 = $('#txt_tankin_p12').val().replace(/,/g,""); //[2017.11.07]課題No.79
     a_tankin_p22 = $('#txt_tankin_p22').val().replace(/,/g,""); //[2017.11.07]課題No.79
+
+    //[2018.01.26]↓課題No.91
+    //ベース単金
+    if ((a_tankin_base == '') || (a_kangen == '')) {
+        $('#payment_middle_unit_price_1_base').val('');
+        $('#payment_middle_unit_price_2_base').val('');
+    } else {
+        if (isFinite(a_kangen) == true){
+            $('#payment_middle_unit_price_1_base').val(Number(Math.round(a_tankin_base*(a_kangen/100))).toLocaleString());
+            $('#payment_middle_unit_price_2_base').val(Number(Math.round(a_tankin_base*((a_kangen-20)/100))).toLocaleString());
+            a_tankin_p12 = $('#payment_middle_unit_price_1_base').val().replace(/,/g,"");
+            a_tankin_p22 = $('#payment_middle_unit_price_2_base').val().replace(/,/g,"");
+        }else{
+        }
+    }
+    //[2018.01.26]↑課題No.91
 
     //下限時間⇒IF(請求サイド途中入場下限時間="","",請求サイド途中入場下限時間)
     //if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
@@ -1422,6 +1473,7 @@ function calc_pay_midway_retirement()
     var a_zeneigyonisu = $('#inp_zeneigyonisu_b3').val();
     
     var a_tankin = $('#txt_tankin_b3').val().replace(/,/g,""); //[2017.11.07]課題No.79
+    var a_tankin_base = $('#claim_leaving_unit_price_base').val().replace(/,/g,""); //[2018.01.26]↓課題No.91
     /*[2017.11.09]課題No.81
     var a_lower_opt = $('[name=opt_contract_lower_limit_b3] option:selected').text();
     var a_upper_opt = $('[name=opt_contract_upper_limit_b3] option:selected').text();
@@ -1484,6 +1536,22 @@ function calc_pay_midway_retirement()
     a_tankin_p13 = $('#txt_tankin_p13').val().replace(/,/g,""); //[2017.11.07]課題No.79
     a_tankin_p23 = $('#txt_tankin_p23').val().replace(/,/g,""); //[2017.11.07]課題No.79
     
+    //[2018.01.26]↓課題No.91
+    //ベース単金
+    if ((a_tankin_base == '') || (a_kangen == '')) {
+        $('#payment_leaving_unit_price_1_base').val('');
+        $('#payment_leaving_unit_price_2_base').val('');
+    } else {
+        if (isFinite(a_kangen) == true){
+            $('#payment_leaving_unit_price_1_base').val(Number(Math.round(a_tankin_base*(a_kangen/100))).toLocaleString());
+            $('#payment_leaving_unit_price_2_base').val(Number(Math.round(a_tankin_base*((a_kangen-20)/100))).toLocaleString());
+            a_tankin_p13 = $('#payment_leaving_unit_price_1_base').val().replace(/,/g,"");
+            a_tankin_p23 = $('#payment_leaving_unit_price_2_base').val().replace(/,/g,"");
+        }else{
+        }
+    }
+    //[2018.01.26]↑課題No.91
+
     //下限時間⇒IF(請求サイド途中入場下限時間="","",請求サイド途中入場下限時間)
     //if ((a_lower_txt == '') || (isFinite(a_lower_txt) == false)) {
     if (a_lower_txt == '') {
@@ -1735,6 +1803,7 @@ function regist_contract_report(h_act)
     m_ProgressMsg('処理中です...<br><img src="./images/upload.gif" /> ');
     //alert($('#inp_engineer_no').val());
     //[2018.01.18]課題解決管理表No.92
+    //[2018.01.26]課題解決管理表No.91
     $.ajax({
         url: m_parentURL + "regist_contract_report.php",
         type: 'POST',
@@ -1914,6 +1983,16 @@ function regist_contract_report(h_act)
             'claim_accounts_invoicing': $('#claim_accounts_invoicing').val(),
             'remarks2': $('#remarks2').val(),
             'remarks_pay2': $('#remarks_pay2').val(),
+
+            'claim_normal_unit_price_base': $('#claim_normal_unit_price_base').val(),
+            'claim_middle_unit_price_base': $('#claim_middle_unit_price_base').val(),
+            'claim_leaving_unit_price_base': $('#claim_leaving_unit_price_base').val(),
+            'payment_normal_unit_price_1_base': $('#payment_normal_unit_price_1_base').val(),
+            'payment_normal_unit_price_2_base': $('#payment_normal_unit_price_2_base').val(),
+            'payment_middle_unit_price_1_base': $('#payment_middle_unit_price_1_base').val(),
+            'payment_middle_unit_price_2_base': $('#payment_middle_unit_price_2_base').val(),
+            'payment_leaving_unit_price_1_base': $('#payment_leaving_unit_price_1_base').val(),
+            'payment_leaving_unit_price_2_base': $('#payment_leaving_unit_price_2_base').val(),
         },
         success: function(data, dataType){
             //[2017.11.08]↓課題No.81

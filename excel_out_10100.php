@@ -38,17 +38,188 @@ try{
 
     $a_sql = set_10100_selectDB();
 
-    $a_where = "";
-    $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name', "", "");
-    $a_where = com_make_where_session(1, $a_where, 'engineer_number', 'f_engineer_number', "", "f_engineer_number_andor");
-    $a_where = com_make_where_session(1, $a_where, 'contract_number', 'f_contract_number', "", "f_contract_number_andor");
-    $a_where = com_make_where_session(1, $a_where, 'customer_name', 'f_customer_name', "", "f_customer_name_andor");
-    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', 'f_claim_agreement_start', "", "f_claim_agreement_start_andor");
-    $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', 'f_claim_agreement_end', "", "f_claim_agreement_end_andor");
-    $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', 'f_claim_contract_form', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_andor");
-    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', 'f_claim_settlement_closingday', $GLOBALS['g_DB_m_contract_tighten'], "f_claim_settlement_closingday_andor");
-    $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', 'f_claim_settlement_paymentday', $GLOBALS['g_DB_m_contract_bill_pay'], "f_claim_settlement_paymentday_andor");
-    $a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "", "f_remarks_andor");
+    #$a_where = "((del_flag IS NULL) OR (del_flag<>'1'))";    #[2018.01.26]課題解決管理表No.87
+    #[2018.01.30]課題解決管理表No.87
+    if ($_SESSION['contract_del'] != 1){
+        $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name', "", "");
+        $a_where = com_make_where_session(1, $a_where, 'engineer_number', 'f_engineer_number', "", "f_engineer_number_andor");
+        $a_where = com_make_where_session(1, $a_where, 'contract_number', 'f_contract_number', "", "f_contract_number_andor");
+        $a_where = com_make_where_session(1, $a_where, 'customer_name', 'f_customer_name', "", "f_customer_name_andor");
+        $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', 'f_claim_agreement_start', "", "f_claim_agreement_start_andor");
+        $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', 'f_claim_agreement_end', "", "f_claim_agreement_end_andor");
+        $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', 'f_claim_contract_form', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_andor");
+        $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', 'f_claim_settlement_closingday', $GLOBALS['g_DB_m_contract_tighten'], "f_claim_settlement_closingday_andor");
+        $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', 'f_claim_settlement_paymentday', $GLOBALS['g_DB_m_contract_bill_pay'], "f_claim_settlement_paymentday_andor");
+
+        #[2018.01.18]課題解決管理表No.92
+        #remarksの場合、remarks2/remarks_pay/remarks_pay2も含める
+        $a_where_sub = "";
+        $a_where_andor = "";
+        if (isset($_SESSION['f_remarks'])){
+            $a_sess = $_SESSION['f_remarks'];
+            if ($a_sess != ""){
+                $a_where_sub = "((remarks LIKE '%".$a_sess."%') OR (remarks2 LIKE '%".$a_sess."%') OR (remarks_pay LIKE '%".$a_sess."%') OR (remarks_pay2 LIKE '%".$a_sess."%'))";
+            }
+        }
+        if (isset($_SESSION['f_remarks_andor'])){
+            $a_where_andor = " ".$_SESSION['f_remarks_andor']." ";
+        }else{
+            $a_where_andor = " AND ";
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= " ".$a_where_andor." ".$a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;   #[2018.01.26]bug-fixed.
+        }
+        #$a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "", "f_remarks_andor");
+
+        #[2018.01.18]課題解決管理表No.93
+        #当日配信の場合
+        $a_today = date("Y/m/d");
+        $a_where_sub = "";
+        $a_where_andor = "";
+        #echo "f_send_mail_date1=".isset($_SESSION['f_send_mail_date1'])."<br>";
+        if (isset($_SESSION['f_send_mail_date1'])){
+            $a_sess = $_SESSION['f_send_mail_date1'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                $a_where_sub .= "(send_mail_date1='".$a_today."')";
+            }
+        }
+        if (isset($_SESSION['f_send_mail_date2'])){
+            $a_sess = $_SESSION['f_send_mail_date2'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                if ($a_where_sub != ""){
+                    $a_where_sub .= " OR ";
+                }
+                $a_where_sub .= "(send_mail_date2='".$a_today."')";
+            }
+        }
+        if (isset($_SESSION['f_send_mail_date3'])){
+            $a_sess = $_SESSION['f_send_mail_date3'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                if ($a_where_sub != ""){
+                    $a_where_sub .= " OR ";
+                }
+                $a_where_sub .= "(send_mail_date3='".$a_today."')";
+            }
+        }
+        if (isset($_SESSION['f_send_mail_date4'])){
+            $a_sess = $_SESSION['f_send_mail_date4'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                if ($a_where_sub != ""){
+                    $a_where_sub .= " OR ";
+                }
+                $a_where_sub .= "(send_mail_date4='".$a_today."')";
+            }
+        }
+        if ($a_where_sub != ""){
+            $a_where_sub = "(".$a_where_sub.")";
+        }
+        if (isset($_SESSION['f_send_mail_date_andor'])){
+            $a_where_andor = " ".$_SESSION['f_send_mail_date_andor']." ";
+        }else{
+            $a_where_andor = " AND ";
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= " ".$a_where_andor." ".$a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;   #[2018.01.26]bug-fixed.
+        }
+    }else{
+        $a_where = com_make_where_session(1, $a_where, 'engineer_name', 'f_engineer_name_del', "", "");
+        $a_where = com_make_where_session(1, $a_where, 'engineer_number', 'f_engineer_number_del', "", "f_engineer_number_andor_del");
+        $a_where = com_make_where_session(1, $a_where, 'contract_number', 'f_contract_number_del', "", "f_contract_number_andor_del");
+        $a_where = com_make_where_session(1, $a_where, 'customer_name', 'f_customer_name_del', "", "f_customer_name_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'claim_agreement_start', 'f_claim_agreement_start_del', "", "f_claim_agreement_start_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'claim_agreement_end', 'f_claim_agreement_end_del', "", "f_claim_agreement_end_andor_del");
+        $a_where = com_make_where_session(3, $a_where, 'claim_contract_form', 'f_claim_contract_form_del', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_andor_del");
+        $a_where = com_make_where_session(3, $a_where, 'claim_settlement_closingday', 'f_claim_settlement_closingday_del', $GLOBALS['g_DB_m_contract_tighten'], "f_claim_settlement_closingday_andor_del");
+        $a_where = com_make_where_session(3, $a_where, 'claim_settlement_paymentday', 'f_claim_settlement_paymentday_del', $GLOBALS['g_DB_m_contract_bill_pay'], "f_claim_settlement_paymentday_andor_del");
+
+        #[2018.01.18]課題解決管理表No.92
+        #remarksの場合、remarks2/remarks_pay/remarks_pay2も含める
+        $a_where_sub = "";
+        $a_where_andor = "";
+        if (isset($_SESSION['f_remarks_del'])){
+            $a_sess = $_SESSION['f_remarks_del'];
+            if ($a_sess != ""){
+                $a_where_sub = "((remarks LIKE '%".$a_sess."%') OR (remarks2 LIKE '%".$a_sess."%') OR (remarks_pay LIKE '%".$a_sess."%') OR (remarks_pay2 LIKE '%".$a_sess."%'))";
+            }
+        }
+        if (isset($_SESSION['f_remarks_andor_del'])){
+            $a_where_andor = " ".$_SESSION['f_remarks_andor_del']." ";
+        }else{
+            $a_where_andor = " AND ";
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= " ".$a_where_andor." ".$a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;   #[2018.01.26]bug-fixed.
+        }
+        #$a_where = com_make_where_session(1, $a_where, 'remarks', 'f_remarks', "", "f_remarks_andor");
+
+        #[2018.01.18]課題解決管理表No.93
+        #当日配信の場合
+        $a_today = date("Y/m/d");
+        $a_where_sub = "";
+        $a_where_andor = "";
+        #echo "f_send_mail_date1=".isset($_SESSION['f_send_mail_date1'])."<br>";
+        if (isset($_SESSION['f_send_mail_date1_del'])){
+            $a_sess = $_SESSION['f_send_mail_date1_del'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                $a_where_sub .= "(send_mail_date1='".$a_today."')";
+            }
+        }
+        if (isset($_SESSION['f_send_mail_date2_del'])){
+            $a_sess = $_SESSION['f_send_mail_date2_del'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                if ($a_where_sub != ""){
+                    $a_where_sub .= " OR ";
+                }
+                $a_where_sub .= "(send_mail_date2='".$a_today."')";
+            }
+        }
+        if (isset($_SESSION['f_send_mail_date3_del'])){
+            $a_sess = $_SESSION['f_send_mail_date3_del'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                if ($a_where_sub != ""){
+                    $a_where_sub .= " OR ";
+                }
+                $a_where_sub .= "(send_mail_date3='".$a_today."')";
+            }
+        }
+        if (isset($_SESSION['f_send_mail_date4_del'])){
+            $a_sess = $_SESSION['f_send_mail_date4_del'];
+            #echo "checkbox=".$a_sess."<br>";
+            if ($a_sess != ""){
+                if ($a_where_sub != ""){
+                    $a_where_sub .= " OR ";
+                }
+                $a_where_sub .= "(send_mail_date4='".$a_today."')";
+            }
+        }
+        if ($a_where_sub != ""){
+            $a_where_sub = "(".$a_where_sub.")";
+        }
+        if (isset($_SESSION['f_send_mail_date_andor_del'])){
+            $a_where_andor = " ".$_SESSION['f_send_mail_date_andor_del']." ";
+        }else{
+            $a_where_andor = " AND ";
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= " ".$a_where_andor." ".$a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;   #[2018.01.26]bug-fixed.
+        }
+    }
+
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }

@@ -22,24 +22,41 @@ try{
     $a_sql_src = set_10200_selectDB();
     
     $a_where = "";
+    #$a_where = "((del_flag IS NULL) OR (del_flag<>'1'))";    #[2018.01.26]課題解決管理表No.87
     #[2017.07.20]課題解決表No.72
     #$a_where = com_make_where_session(1, $a_where, 'u1.engineer_number', 'f_engineer_number_10200', "", "");
-    $a_where = com_make_where_session(3, $a_where, 'u1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form'], "");
-    $a_where = com_make_where_session(1, $a_where, 'u1.engineer_name', 'f_engineer_name_10200', "", "f_engineer_name_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 'u1.date_entering', 'f_date_entering_10200', "", "f_date_entering_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 'u1.date_retire', 'f_date_retire_10200', "", "f_date_retire_10200_andor");
-    $a_where = com_make_where_session(3, $a_where, 'u1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10200', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 'u1.date_modify_salary', 'f_date_modify_salary_10200', "", "f_date_modify_salary_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 'u1.date_first_salary', 'f_date_first_salary_10200', "", "f_date_first_salary_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 'u1.labor_contact_date', 'f_labor_contact_date_10200', "", "f_labor_contact_date_10200_andor");
-    $a_where = com_make_where_session(2, $a_where, 'u1.labor_yayoi_changed', 'f_labor_yayoi_changed_10200', "", "f_labor_yayoi_changed_10200_andor");
-    $a_where = com_make_where_session(1, $a_where, 'u1.labor_remarks', 'f_labor_remarks_10200', "", "f_labor_remarks_10200_andor");
-
+    #[2018.01.30]課題解決管理表No.87
+    if ($_SESSION['contract_del'] != 1){
+        $a_where = com_make_where_session(3, $a_where, 'u1.payment_contract_form', 'f_payment_contract_form_10200', $GLOBALS['g_DB_m_contract_pay_form'], "");
+        $a_where = com_make_where_session(1, $a_where, 'u1.engineer_name', 'f_engineer_name_10200', "", "f_engineer_name_10200_andor");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_entering', 'f_date_entering_10200', "", "f_date_entering_10200_andor");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_retire', 'f_date_retire_10200', "", "f_date_retire_10200_andor");
+        $a_where = com_make_where_session(3, $a_where, 'u1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10200', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10200_andor");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_modify_salary', 'f_date_modify_salary_10200', "", "f_date_modify_salary_10200_andor");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_first_salary', 'f_date_first_salary_10200', "", "f_date_first_salary_10200_andor");
+        $a_where = com_make_where_session(2, $a_where, 'u1.labor_contact_date', 'f_labor_contact_date_10200', "", "f_labor_contact_date_10200_andor");
+        $a_where = com_make_where_session(2, $a_where, 'u1.labor_yayoi_changed', 'f_labor_yayoi_changed_10200', "", "f_labor_yayoi_changed_10200_andor");
+        $a_where = com_make_where_session(1, $a_where, 'u1.labor_remarks', 'f_labor_remarks_10200', "", "f_labor_remarks_10200_andor");
+    }else{
+        $a_where = com_make_where_session(3, $a_where, 'u1.payment_contract_form', 'f_payment_contract_form_10200_del', $GLOBALS['g_DB_m_contract_pay_form'], "");
+        $a_where = com_make_where_session(1, $a_where, 'u1.engineer_name', 'f_engineer_name_10200_del', "", "f_engineer_name_10200_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_entering', 'f_date_entering_10200_del', "", "f_date_entering_10200_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_retire', 'f_date_retire_10200_del', "", "f_date_retire_10200_andor_del");
+        $a_where = com_make_where_session(3, $a_where, 'u1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10200_del', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10200_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_modify_salary', 'f_date_modify_salary_10200_del', "", "f_date_modify_salary_10200_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'u1.date_first_salary', 'f_date_first_salary_10200_del', "", "f_date_first_salary_10200_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'u1.labor_contact_date', 'f_labor_contact_date_10200_del', "", "f_labor_contact_date_10200_andor_del");
+        $a_where = com_make_where_session(2, $a_where, 'u1.labor_yayoi_changed', 'f_labor_yayoi_changed_10200_del', "", "f_labor_yayoi_changed_10200_andor_del");
+        $a_where = com_make_where_session(1, $a_where, 'u1.labor_remarks', 'f_labor_remarks_10200_del', "", "f_labor_remarks_10200_andor_del");
+    }
     if ($a_where != ""){
-        $a_where = " WHERE ".$a_where;
+        #[2018.01.30]課題解決管理表No.87⇒既にWHERE句あり
+        $a_where = " AND ".$a_where;
+        #$a_where = " WHERE ".$a_where;
     }
     
     $a_sql_src .= $a_where;
+    #echo $a_sql_src;
 
     #[2017.07.20]課題解決表No.72
     $a_sql_src .= " ORDER BY u1.engineer_number,u1.cr_id,u1.pr_id";

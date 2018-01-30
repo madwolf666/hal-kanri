@@ -19,7 +19,7 @@ require_once('./header.php');
 <link rel="stylesheet" href="css/hal-kanri-common.css">
 
 <section>
-<h2>給与台帳</h2>
+<h2>給与台帳<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h2>
 
 <p class="c">
     <input type="button" value="条件検索" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10201']; ?>'">

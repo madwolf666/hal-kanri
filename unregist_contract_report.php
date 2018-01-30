@@ -22,6 +22,14 @@ try{
 
     $a_conn->beginTransaction();  //トランザクション開始
 
+    #[2018.01.26]↓課題解決管理表No.87
+    $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_report']." SET del_flag='1' WHERE (cr_id=:cr_id);";
+    $a_stmt = $a_conn->prepare($a_sql);
+    $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
+    $a_stmt->execute();
+    goto METHOD_END;
+    #[2018.01.26]↑課題解決管理表No.87
+    
     //[2017.11.09]↓課題No.81
     $a_sql = "SELECT * FROM ".$GLOBALS['g_DB_t_evidence']." WHERE (cr_id=:cr_id);";
     $a_stmt = $a_conn->prepare($a_sql);
@@ -83,6 +91,8 @@ try{
     $a_stmt->bindParam(':cr_id', $a_cr_id,PDO::PARAM_STR);
     $a_stmt->execute();
 
+    #[2018.01.26]課題解決管理表No.87
+METHOD_END:
     $a_conn->commit();
     
     $a_sRet = 'OK';

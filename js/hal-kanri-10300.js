@@ -9,6 +9,9 @@ $(function () {
     //条件検索
     $('#f_accounts_bai_previous_day_10300').datepicker({});
     $('#f_payment_acceptance_date_10300').datepicker({});
+    //[2018.01.30]課題解決管理表No.87
+    $('#f_accounts_bai_previous_day_10300_del').datepicker({});
+    $('#f_payment_acceptance_date_10300_del').datepicker({});
 });
 
 function make_acceptance_ledger_list(h_pageNo)

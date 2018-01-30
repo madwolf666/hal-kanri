@@ -46,6 +46,7 @@ try{
     if ($a_act == 'n'){
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_contract_report']." (";
         #[2018.01.18]課題解決管理表No.92
+        #[2018.01.26]課題解決管理表No.91
         $a_sql .= "
             customer_name
             ,subject
@@ -196,6 +197,15 @@ try{
             ,claim_accounts_invoicing
             ,remarks2
             ,remarks_pay2
+            ,claim_normal_unit_price_base
+            ,claim_middle_unit_price_base
+            ,claim_leaving_unit_price_base
+            ,payment_normal_unit_price_1_base
+            ,payment_normal_unit_price_2_base
+            ,payment_middle_unit_price_1_base
+            ,payment_middle_unit_price_2_base
+            ,payment_leaving_unit_price_1_base
+            ,payment_leaving_unit_price_2_base
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -213,6 +223,7 @@ try{
         #}
         $a_sql .= ") VALUES(";
         #[2018.01.18]課題解決管理表No.92
+        #[2018.01.26]課題解決管理表No.91
         $a_sql .= "
             :customer_name
             ,:subject
@@ -363,6 +374,15 @@ try{
             ,:claim_accounts_invoicing
             ,:remarks2
             ,:remarks_pay2
+            ,:claim_normal_unit_price_base
+            ,:claim_middle_unit_price_base
+            ,:claim_leaving_unit_price_base
+            ,:payment_normal_unit_price_1_base
+            ,:payment_normal_unit_price_2_base
+            ,:payment_middle_unit_price_1_base
+            ,:payment_middle_unit_price_2_base
+            ,:payment_leaving_unit_price_1_base
+            ,:payment_leaving_unit_price_2_base
             ";
         #[2017.11.21]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -382,6 +402,7 @@ try{
     }else{
         $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_report']." SET ";
         #[2018.01.18]課題解決管理表No.92
+        #[2018.01.18]課題解決管理表No.91
         $a_sql .= "
             customer_name=:customer_name
             ,subject=:subject
@@ -531,6 +552,15 @@ try{
             ,claim_accounts_invoicing=:claim_accounts_invoicing
             ,remarks2=:remarks2
             ,remarks_pay2=:remarks_pay2
+            ,claim_normal_unit_price_base=:claim_normal_unit_price_base
+            ,claim_middle_unit_price_base=:claim_middle_unit_price_base
+            ,claim_leaving_unit_price_base=:claim_leaving_unit_price_base
+            ,payment_normal_unit_price_1_base=:payment_normal_unit_price_1_base
+            ,payment_normal_unit_price_2_base=:payment_normal_unit_price_2_base
+            ,payment_middle_unit_price_1_base=:payment_middle_unit_price_1_base
+            ,payment_middle_unit_price_2_base=:payment_middle_unit_price_2_base
+            ,payment_leaving_unit_price_1_base=:payment_leaving_unit_price_1_base
+            ,payment_leaving_unit_price_2_base=:payment_leaving_unit_price_2_base
             ";
         #[2017.11.20]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -851,6 +881,26 @@ try{
     $a_stmt->bindParam(':remarks2', $_POST['remarks2'], PDO::PARAM_STR);
     $a_stmt->bindParam(':remarks_pay2', $_POST['remarks_pay2'], PDO::PARAM_STR);
 
+    #[2018.01.18]課題解決管理表No.91
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_normal_unit_price_base']));
+    com_pdo_bindValue($a_stmt, ':claim_normal_unit_price_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_middle_unit_price_base']));
+    com_pdo_bindValue($a_stmt, ':claim_middle_unit_price_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_unit_price_base']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_unit_price_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_unit_price_1_base']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_unit_price_1_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_unit_price_2_base']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_unit_price_2_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_middle_unit_price_1_base']));
+    com_pdo_bindValue($a_stmt, ':payment_middle_unit_price_1_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_middle_unit_price_2_base']));
+    com_pdo_bindValue($a_stmt, ':payment_middle_unit_price_2_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_unit_price_1_base']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_unit_price_1_base', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_unit_price_2_base']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_unit_price_2_base', $a_val);
+
     if ($a_act == 'e'){
         #[2017.11.20]bug-fixed.
         #if (($_SESSION['hal_department_cd'] != 3) || ($_POST['status_cd_num'] < 2)){
@@ -880,6 +930,7 @@ try{
     }
     
     $a_stmt->execute();
+    
 /**/
     //検収元台帳レコードの作成
     if ($a_act != 'e'){
@@ -915,6 +966,383 @@ try{
     //print('Error:'.$e->getMessage());
     //die();
 }
+
+    #[2018.01.26]課題解決管理表No.88
+if ($_POST['status_cd'] == '営業提出'){
+    #t_contract_report_submissionにレコードがなかったら、INSERTする
+    try{
+        $a_sql = "
+INSERT INTO t_contract_report_submission(
+cr_id
+,customer_name
+,subject
+,claim_contract_form
+,workplace
+,work_start
+,work_end
+,work_hours
+,break_start
+,break_end
+,break_hours
+,customer_department_charge
+,customer_charge_name
+,customer_clerk_charge
+,charge_position
+,contact_phone_number
+,claim_agreement_start
+,claim_agreement_end
+,claim_normal_calculation
+,claim_normal__unit_price
+,claim_normal_lower_limit
+,claim_normal_upper_limit
+,claim_normal_deduction_unit_price_truncation_unit
+,claim_normal_deduction_unit_price
+,claim_normal_overtime_unit_price_truncation_unit
+,claim_normal_overtime_unit_price
+,claim_middle_employment_day
+,claim_middle_allbusiness_day
+,claim_middle_calculation
+,claim_middle_unit_price
+,claim_middle_lower_limit
+,claim_middle_upper_limit
+,claim_middle_deduction_unit_price
+,claim_middle_overtime_unit_price
+,claim_leaving_employment_day
+,claim_leaving_allbusiness_day
+,claim_leaving_calculation
+,claim_leaving_unit_price
+,claim_leaving_lower_limit
+,claim_leaving_upper_limit
+,claim_leaving_deduction_unit_price
+,claim_leaving_overtime_unit_price
+,claim_hourly_daily
+,claim_hourly_monthly
+,claim_settlement_closingday
+,claim_settlement_paymentday
+,claim_dispatch_individual_contract
+,claim_quotation
+,claim_purchase_order
+,claim_confirmation_order
+,remarks
+,new_or_continued
+,contract_number
+,publication
+,author
+,sales_representative
+,engineer_number
+,engineer_name
+,engneer_name_phonetic
+,business_name
+,payment_contract_form
+,business_name_phonetic
+,business_charge_name
+,social_insurance
+,tax_withholding
+,payment_agreement_start
+,payment_agreement_end
+,redemption_ratio
+,payment_normal_calculation_1
+,payment_normal_calculation_2
+,payment_normal_unit_price_1
+,payment_normal_unit_price_2
+,payment_normal_lower_limit_1
+,payment_normal_lower_limit_2
+,payment_normal_upper_limit_1
+,payment_normal_upper_limit_2
+,payment_normal_deduction_unit_price_1
+,payment_normal_deduction_unit_price_2
+,payment_normal_overtime_unit_price_1
+,payment_normal_overtime_unit_price_2
+,payment_middle_employment_day_1
+,payment_middle_employment_day_2
+,payment_middle_allbusiness_day_1
+,payment_middle_allbusiness_day_2
+,payment_middle_calculation_1
+,payment_middle_calculation_2
+,payment_middle_unit_price_1
+,payment_middle_unit_price_2
+,payment_middle_lower_limit_1
+,payment_middle_lower_limit_2
+,payment_middle_upper_limit_1
+,payment_middle_upper_limit_2
+,payment_middle_deduction_unit_price_1
+,payment_middle_deduction_unit_price_2
+,payment_middle_overtime_unit_price_1
+,payment_middle_overtime_unit_price_2
+,payment_leaving_employment_day_1
+,payment_leaving_employment_day_2
+,payment_leaving_allbusiness_day_1
+,payment_leaving_allbusiness_day_2
+,payment_leaving_calculation_1
+,payment_leaving_calculation_2
+,payment_leaving_unit_price_1
+,payment_leaving_unit_price_2
+,payment_leaving_lower_limit_1
+,payment_leaving_lower_limit_2
+,payment_leaving_upper_limit_1
+,payment_leaving_upper_limit_2
+,payment_leaving_deduction_unit_price_1
+,payment_leaving_deduction_unit_price_2
+,payment_leaving_overtime_unit_price_1
+,payment_leaving_overtime_unit_price_2
+,payment_hourly_daily
+,payment_hourly_monthly
+,payment_settlement_closingday
+,payment_settlement_paymentday
+,payment_absence_deduction_subject
+,payment_quotation
+,payment_purchase_order
+,payment_confirmation_order
+,payment_middle_daily_auto
+,payment_middle_daily_manual
+,payment_leaving_daily_auto
+,payment_leaving_daily_manual
+,reg_id
+,upd_id
+,reg_date
+,upd_date
+,check_remarks1
+,check_correct_date
+,check_correct_person
+,check_date_start
+,check_date_end
+,check_remarks2
+,organization
+,dd_name
+,dd_branch
+,dd_address
+,dd_tel
+,ip_position
+,ip_name
+,dm_responsible_position
+,dm_responsible_name
+,dd_responsible_position
+,dd_responsible_name
+,chs_position1
+,chs_name1
+,chs_position2
+,chs_name2
+,remarks_pay
+,status_cd
+,contact_date_org
+,cnf_id
+,cnf_date
+,dm_responsible_tel
+,dd_responsible_tel
+,chs_tel1
+,chs_tel2
+,cr_id_src
+,claim_accounts_invoicing
+,remarks2
+,remarks_pay2
+,send_mail_date1
+,send_mail_date2
+,send_mail_date3
+,send_mail_date4
+,claim_normal_unit_price_base
+,claim_middle_unit_price_base
+,claim_leaving_unit_price_base
+,payment_normal_unit_price_1_base
+,payment_normal_unit_price_2_base
+,payment_middle_unit_price_1_base
+,payment_middle_unit_price_2_base
+,payment_leaving_unit_price_1_base
+,payment_leaving_unit_price_2_base
+,file_payroll
+,file_evidence
+)
+SELECT
+cr_id
+,customer_name
+,subject
+,claim_contract_form
+,workplace
+,work_start
+,work_end
+,work_hours
+,break_start
+,break_end
+,break_hours
+,customer_department_charge
+,customer_charge_name
+,customer_clerk_charge
+,charge_position
+,contact_phone_number
+,claim_agreement_start
+,claim_agreement_end
+,claim_normal_calculation
+,claim_normal__unit_price
+,claim_normal_lower_limit
+,claim_normal_upper_limit
+,claim_normal_deduction_unit_price_truncation_unit
+,claim_normal_deduction_unit_price
+,claim_normal_overtime_unit_price_truncation_unit
+,claim_normal_overtime_unit_price
+,claim_middle_employment_day
+,claim_middle_allbusiness_day
+,claim_middle_calculation
+,claim_middle_unit_price
+,claim_middle_lower_limit
+,claim_middle_upper_limit
+,claim_middle_deduction_unit_price
+,claim_middle_overtime_unit_price
+,claim_leaving_employment_day
+,claim_leaving_allbusiness_day
+,claim_leaving_calculation
+,claim_leaving_unit_price
+,claim_leaving_lower_limit
+,claim_leaving_upper_limit
+,claim_leaving_deduction_unit_price
+,claim_leaving_overtime_unit_price
+,claim_hourly_daily
+,claim_hourly_monthly
+,claim_settlement_closingday
+,claim_settlement_paymentday
+,claim_dispatch_individual_contract
+,claim_quotation
+,claim_purchase_order
+,claim_confirmation_order
+,remarks
+,new_or_continued
+,contract_number
+,publication
+,author
+,sales_representative
+,engineer_number
+,engineer_name
+,engneer_name_phonetic
+,business_name
+,payment_contract_form
+,business_name_phonetic
+,business_charge_name
+,social_insurance
+,tax_withholding
+,payment_agreement_start
+,payment_agreement_end
+,redemption_ratio
+,payment_normal_calculation_1
+,payment_normal_calculation_2
+,payment_normal_unit_price_1
+,payment_normal_unit_price_2
+,payment_normal_lower_limit_1
+,payment_normal_lower_limit_2
+,payment_normal_upper_limit_1
+,payment_normal_upper_limit_2
+,payment_normal_deduction_unit_price_1
+,payment_normal_deduction_unit_price_2
+,payment_normal_overtime_unit_price_1
+,payment_normal_overtime_unit_price_2
+,payment_middle_employment_day_1
+,payment_middle_employment_day_2
+,payment_middle_allbusiness_day_1
+,payment_middle_allbusiness_day_2
+,payment_middle_calculation_1
+,payment_middle_calculation_2
+,payment_middle_unit_price_1
+,payment_middle_unit_price_2
+,payment_middle_lower_limit_1
+,payment_middle_lower_limit_2
+,payment_middle_upper_limit_1
+,payment_middle_upper_limit_2
+,payment_middle_deduction_unit_price_1
+,payment_middle_deduction_unit_price_2
+,payment_middle_overtime_unit_price_1
+,payment_middle_overtime_unit_price_2
+,payment_leaving_employment_day_1
+,payment_leaving_employment_day_2
+,payment_leaving_allbusiness_day_1
+,payment_leaving_allbusiness_day_2
+,payment_leaving_calculation_1
+,payment_leaving_calculation_2
+,payment_leaving_unit_price_1
+,payment_leaving_unit_price_2
+,payment_leaving_lower_limit_1
+,payment_leaving_lower_limit_2
+,payment_leaving_upper_limit_1
+,payment_leaving_upper_limit_2
+,payment_leaving_deduction_unit_price_1
+,payment_leaving_deduction_unit_price_2
+,payment_leaving_overtime_unit_price_1
+,payment_leaving_overtime_unit_price_2
+,payment_hourly_daily
+,payment_hourly_monthly
+,payment_settlement_closingday
+,payment_settlement_paymentday
+,payment_absence_deduction_subject
+,payment_quotation
+,payment_purchase_order
+,payment_confirmation_order
+,payment_middle_daily_auto
+,payment_middle_daily_manual
+,payment_leaving_daily_auto
+,payment_leaving_daily_manual
+,reg_id
+,upd_id
+,reg_date
+,upd_date
+,check_remarks1
+,check_correct_date
+,check_correct_person
+,check_date_start
+,check_date_end
+,check_remarks2
+,organization
+,dd_name
+,dd_branch
+,dd_address
+,dd_tel
+,ip_position
+,ip_name
+,dm_responsible_position
+,dm_responsible_name
+,dd_responsible_position
+,dd_responsible_name
+,chs_position1
+,chs_name1
+,chs_position2
+,chs_name2
+,remarks_pay
+,status_cd
+,contact_date_org
+,cnf_id
+,cnf_date
+,dm_responsible_tel
+,dd_responsible_tel
+,chs_tel1
+,chs_tel2
+,cr_id_src
+,claim_accounts_invoicing
+,remarks2
+,remarks_pay2
+,send_mail_date1
+,send_mail_date2
+,send_mail_date3
+,send_mail_date4
+,claim_normal_unit_price_base
+,claim_middle_unit_price_base
+,claim_leaving_unit_price_base
+,payment_normal_unit_price_1_base
+,payment_normal_unit_price_2_base
+,payment_middle_unit_price_1_base
+,payment_middle_unit_price_2_base
+,payment_leaving_unit_price_1_base
+,payment_leaving_unit_price_2_base
+,(SELECT GROUP_CONCAT(file_name_src ORDER BY file_name_src) FROM t_payroll_file WHERE cr_id=:cr_id_f1) AS file_payroll
+,(SELECT GROUP_CONCAT(file_name_src ORDER BY file_name_src) FROM t_evidence WHERE cr_id=:cr_id_f2) AS file_evidence
+FROM t_contract_report
+WHERE (cr_id=:cr_id);
+";
+        $a_stmt = $a_conn->prepare($a_sql);
+        com_pdo_bindValue($a_stmt, ':cr_id_f1', $a_cr_id);
+        com_pdo_bindValue($a_stmt, ':cr_id_f2', $a_cr_id);
+        com_pdo_bindValue($a_stmt, ':cr_id', $a_cr_id);
+        $a_stmt->execute();
+    } catch (PDOException $e) {
+        #何もしない
+        #$a_sRet = 'Error:'.$e->getMessage();
+    }
+}
+
 $a_conn = null;
 
 echo $a_sRet;

@@ -22,6 +22,23 @@ if (isset($_SESSION['f_engineer_name_10600_andor'])){
     $f_engineer_name_10600_andor = $_SESSION['f_engineer_name_10600_andor'];
 }
 
+#[2018.01.30]課題解決管理表No.87
+#Session
+$f_contract_number_10600_del = "";
+$f_engineer_name_10600_del = "";
+if (isset($_SESSION['f_contract_number_10600_del'])){
+    $f_contract_number_10600_del = $_SESSION['f_contract_number_10600_del'];
+}
+if (isset($_SESSION['f_engineer_name_10600_del'])){
+    $f_engineer_name_10600_del = $_SESSION['f_engineer_name_10600_del'];
+}
+
+#Session(AND OR)
+$f_engineer_name_10600_andor_del = "";
+if (isset($_SESSION['f_engineer_name_10600_andor_del'])){
+    $f_engineer_name_10600_andor_del = $_SESSION['f_engineer_name_10600_andor_del'];
+}
+
 $cr_id = "";
 $dm_no = "";
 $contract_number = "";
@@ -112,7 +129,16 @@ function set_10600_selectDB()
 ,t2.jurisdiction		
 ,t2.specified_worker
         ";
-    $a_sql_src .= " FROM ".$GLOBALS['g_DB_t_contract_report']." t1";
+
+    #[2018.01.29]課題解決管理表No.87
+    $a_sql_src .= " FROM (SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE ";
+    if ($_SESSION['contract_del'] == 1){
+        $a_sql_src .= "(del_flag='1')";
+    }else{
+        $a_sql_src .= "((del_flag IS NULL) OR (del_flag<>'1'))";
+    }
+    $a_sql_src .= ") t1";
+
     $a_sql_src .= " LEFT JOIN ";
     $a_sql_src .= $GLOBALS['g_DB_t_dispatching_management_ledger']." t2";
     $a_sql_src .= " ON (t1.cr_id=t2.cr_id)";

@@ -22,9 +22,16 @@ try{
     $a_sql_src = set_10600_selectDB();
 
     $a_where = "";
+    #$a_where = "((t1.del_flag IS NULL) OR (t1.del_flag<>'1'))";    #[2018.01.26]課題解決管理表No.87
     #$a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10600', "", "");
-    $a_where = com_make_where_session(3, $a_where, 't1.contract_number', 'f_contract_number_10600', "", "");
-    $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10600', "", "f_engineer_name_10600_andor");
+    #[2018.01.30]課題解決管理表No.87
+    if ($_SESSION['contract_del'] != 1){
+        $a_where = com_make_where_session(3, $a_where, 't1.contract_number', 'f_contract_number_10600', "", "");
+        $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10600', "", "f_engineer_name_10600_andor");
+    }else{
+        $a_where = com_make_where_session(3, $a_where, 't1.contract_number', 'f_contract_number_10600_del', "", "");
+        $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10600_del', "", "f_engineer_name_10600_andor_del");
+    }
     if ($a_where != ""){
         $a_where = " WHERE ".$a_where;
     }

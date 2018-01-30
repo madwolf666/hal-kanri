@@ -55,13 +55,26 @@ echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_S
 <li><a href="./index.php">ホーム</a></li>
 <li class="arrow1"><a href="">台帳関連</a>
     <ul class="ddmenu">
-        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>">契約管理全体</a></li>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>&DEL=0">契約管理全体</a></li>
 <?php if ($_SESSION["hal_auth"] <= 0) { ?>
-        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10200']; ?>">給与台帳</a></li>
-	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>">検収台帳</a></li>
-        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10400']; ?>">注文書台帳</a></li>
-	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>">契約書台帳</a></li>
-	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10600']; ?>">派遣元台帳</a></li>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10200']; ?>&DEL=0">給与台帳</a></li>
+	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>&DEL=0">検収台帳</a></li>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10400']; ?>&DEL=0">注文書台帳</a></li>
+	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>&DEL=0">契約書台帳</a></li>
+	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10600']; ?>&DEL=0">派遣元台帳</a></li>
+<?php } ?>
+    </ul>
+</li>
+
+<li class="arrow1"><a href="">台帳関連(削除済)</a>
+    <ul class="ddmenu">
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>&DEL=1">契約管理全体</a></li>
+<?php if ($_SESSION["hal_auth"] <= 0) { ?>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10200']; ?>&DEL=1">給与台帳</a></li>
+	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>&DEL=1">検収台帳</a></li>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10400']; ?>&DEL=1">注文書台帳</a></li>
+	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>&DEL=1">契約書台帳</a></li>
+	<li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10600']; ?>&DEL=1">派遣元台帳</a></li>
 <?php } ?>
     </ul>
 </li>
@@ -88,7 +101,8 @@ echo "<p style='padding-left: 4px;; color: #ffff00; margin-bottom: -20px;'>".$_S
 <ul>
     <ul>
         <li><a href="./index.php">ホーム</a></li>
-        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10000']; ?>">台帳関連</a></li>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10000']; ?>&DEL=0">台帳関連</a></li>
+        <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10000']; ?>&DEL=1">台帳関連(削除済)</a></li>
 <?php if ($_SESSION['hal_auth'] == 0){ ?>
         <li><a href="./index.php?mnu=<?php echo $GLOBALS['g_MENU_MAINTENANCE_90000']; ?>">マスタ情報</a></li>
 <?php } ?>

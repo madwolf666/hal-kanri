@@ -14,6 +14,11 @@ if (!isset($_GET['ACT'])){
     $a_act = $_GET['ACT'];
 }
 
+#[2018.01.29]課題解決管理表No.87
+if ($_SESSION['contract_del'] == 1){
+    $a_act = '';
+}
+
 require_once('./10500-com.php');
 
 if (isset($_GET['NO'])) {
@@ -52,8 +57,8 @@ if (isset($_GET['NO'])) {
 
 <section>
     
-<h2>契約書台帳</h2>
-<h3>就業条件明示書</h3>
+<h2>契約書台帳<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h2>
+<h3>就業条件明示書<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h3>
 
 <form action="index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>" method="post">
 <center>
@@ -249,9 +254,11 @@ if (isset($_GET['NO'])) {
 </center>
 
 <p class="c">
+<?php if ($a_act != ''){ ?>
 <input type="button" value="更新" onclick="return regist_agreement_10504('e',<?php echo $cr_id; ?>);">
+<?php } ?>
 <input type="button" value="Excelへ出力" onclick="return excel_out_10504(<?php echo $cr_id; ?>);">
-<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>'">
+<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>&DEL=<?php echo $_SESSION['contract_del']; ?>'">
 </p>
 
 </form>

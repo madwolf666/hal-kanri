@@ -14,6 +14,11 @@ if (!isset($_GET['ACT'])){
     $a_act = $_GET['ACT'];
 }
 
+#[2018.01.29]課題解決管理表No.87
+if ($_SESSION['contract_del'] == 1){
+    $a_act = '';
+}
+
 require_once('./10100-com.php');
 
 $opt_contarct_replace = "";
@@ -174,8 +179,8 @@ $a_selected = false;
 
 <section>
     
-<h2>契約管理全体</h2>
-<h3>契約終了レポート</h3>
+<h2>契約管理全体<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h2>
+<h3>契約終了レポート<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h3>
 
 <form action="index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>" method="post">
 
@@ -838,7 +843,7 @@ $a_selected = false;
 <input type="button" value="Excelへ出力" onclick="return excel_out_10105(<?php echo $cr_id; ?>);">
 <!-- ↑後でコメントアウトする -->
 <?php } ?>
-<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>'">
+<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10100']; ?>&DEL=<?php echo $_SESSION['contract_del']; ?>'">
 </p>
 
 <center>

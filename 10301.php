@@ -24,16 +24,20 @@ require_once('./10300-com.php');
 
 <section>
     
-<h2>検収台帳</h2>
+<h2>検収台帳<?php if($_SESSION['contract_del'] == 1){echo '(削除済)';} ?></h2>
 
-<form action="index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>" method="post">
+<form action="index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>&DEL=<?php echo $_SESSION['contract_del']; ?>" method="post">
 <center>
 <table class="tbl_list">
 <tr>
 <td class="td_titlee">契約管理No.</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_contract_number_10300, "f_contract_number_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_contract_number_10300_del, "f_contract_number_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
 <td>&nbsp;</td>
@@ -42,100 +46,232 @@ require_once('./10300-com.php');
 <td class="td_titlee">HAL No.</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_engineer_number_10300, "f_engineer_number_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_engineer_number_10300_del, "f_engineer_number_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_engineer_number_10300_andor", "f_engineer_number_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_engineer_number_10300_andor", "f_engineer_number_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_engineer_number_10300_andor_del", "f_engineer_number_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">エンジニア氏名</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_engineer_name_10300, "f_engineer_name_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_engineer_name_10300_del, "f_engineer_name_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_engineer_name_10300_andor", "f_engineer_name_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_engineer_name_10300_andor", "f_engineer_name_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_engineer_name_10300_andor_del", "f_engineer_name_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">得意先</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_customer_name_10300, "f_customer_name_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_customer_name_10300_del, "f_customer_name_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_customer_name_10300_andor", "f_customer_name_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_customer_name_10300_andor", "f_customer_name_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_customer_name_10300_andor_del", "f_customer_name_10300_ando_delr", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">契約形態（受注サイド）</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_option2($a_act, $f_claim_contract_form_10300, "f_claim_contract_form_10300", $GLOBALS['g_DB_m_contract_bill_form'], "width: 260px;", $a_selected);
+    }else{
+        echo com_make_tag_option2($a_act, $f_claim_contract_form_10300_del, "f_claim_contract_form_10300_del", $GLOBALS['g_DB_m_contract_bill_form'], "width: 260px;", $a_selected);
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_claim_contract_form_10300_andor", "f_claim_contract_form_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_claim_contract_form_10300_andor", "f_claim_contract_form_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_claim_contract_form_10300_andor_del", "f_claim_contract_form_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">注文書/契約書No.</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_ag_no_10300, "f_ag_no_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_ag_no_10300_del, "f_ag_no_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_ag_no_10300_andor", "f_ag_no_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_ag_no_10300_andor", "f_ag_no_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_ag_no_10300_andor_del", "f_ag_no_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">売上日</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_accounts_bai_previous_day_10300, "f_accounts_bai_previous_day_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_accounts_bai_previous_day_10300_del, "f_accounts_bai_previous_day_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_accounts_bai_previous_day_10300_andor", "f_accounts_bai_previous_day_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_accounts_bai_previous_day_10300_andor", "f_accounts_bai_previous_day_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_accounts_bai_previous_day_10300_andor_del", "f_accounts_bai_previous_day_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">実働時間</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_accounts_actual_working_hours_10300, "f_accounts_actual_working_hours_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_accounts_actual_working_hours_10300_del, "f_accounts_actual_working_hours_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_accounts_actual_working_hours_10300_andor", "f_accounts_actual_working_hours_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_accounts_actual_working_hours_10300_andor", "f_accounts_actual_working_hours_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_accounts_actual_working_hours_10300_andor_del", "f_accounts_actual_working_hours_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">諸経費</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_accounts_expenses_10300, "f_accounts_expenses_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_accounts_expenses_10300_del, "f_accounts_expenses_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_accounts_expenses_10300_andor", "f_accounts_expenses_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_accounts_expenses_10300_andor", "f_accounts_expenses_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_accounts_expenses_10300_andor_del", "f_accounts_expenses_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">契約形態（発注サイド）</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_option2($a_act, $f_payment_contract_form_10300, "f_payment_contract_form_10300", $GLOBALS['g_DB_m_contract_pay_form'], "width: 260px; text-align: center;", $a_selected);
+    }else{
+        echo com_make_tag_option2($a_act, $f_payment_contract_form_10300_del, "f_payment_contract_form_10300_del", $GLOBALS['g_DB_m_contract_pay_form'], "width: 260px; text-align: center;", $a_selected);
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_payment_contract_form_10300_andor", "f_payment_contract_form_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_payment_contract_form_10300_andor", "f_payment_contract_form_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_payment_contract_form_10300_andor_del", "f_payment_contract_form_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">検収日</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_input($a_act, $f_payment_acceptance_date_10300, "f_payment_acceptance_date_10300", "width: 260px; text-align: center;");
+    }else{
+        echo com_make_tag_input($a_act, $f_payment_acceptance_date_10300_del, "f_payment_acceptance_date_10300_del", "width: 260px; text-align: center;");
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_payment_acceptance_date_10300_andor", "f_payment_acceptance_date_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_payment_acceptance_date_10300_andor", "f_payment_acceptance_date_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_payment_acceptance_date_10300_andor_del", "f_payment_acceptance_date_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 <tr>
 <td class="td_titlee">支払日</td>
 <td>
     <?php
+    if ($_SESSION['contract_del'] != 1){
         echo com_make_tag_option2($a_act, $f_payment_settlement_paymentday_10300, "f_payment_settlement_paymentday_10300", $GLOBALS['g_DB_m_contract_pay_pay'], "", $a_selected);
+    }else{
+        echo com_make_tag_option2($a_act, $f_payment_settlement_paymentday_10300_del, "f_payment_settlement_paymentday_10300_del", $GLOBALS['g_DB_m_contract_pay_pay'], "", $a_selected);
+    }
     ?>
 </td>
-<td><?php echo com_make_tag_option_andor("", "f_payment_settlement_paymentday_10300_andor", "f_payment_settlement_paymentday_10300_andor", "", $h_selected); ?></td>
+<td>
+    <?php
+    if ($_SESSION['contract_del'] != 1){
+        echo com_make_tag_option_andor("", "f_payment_settlement_paymentday_10300_andor", "f_payment_settlement_paymentday_10300_andor", "", $h_selected);
+    }else{
+        echo com_make_tag_option_andor("", "f_payment_settlement_paymentday_10300_andor_del", "f_payment_settlement_paymentday_10300_andor_del", "", $h_selected);
+    }
+    ?>
+</td>
 </tr>
 </table>
 </center>
@@ -143,7 +279,7 @@ require_once('./10300-com.php');
 
 <p class="c">
 <input type="submit" value="検索実行">
-<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>'">
+<input type="button" value="一覧に戻る" onclick="location.href='./index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10300']; ?>&DEL=<?php echo $_SESSION['contract_del']; ?>'">
 </p>
 
 </form>
