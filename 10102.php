@@ -1319,10 +1319,26 @@ $a_selected = false;
             <tr>
                 <td colspan="2" class="gray">ﾍﾞｰｽ単金</td>
                 <td colspan="4" style="background-color: <?php echo $color_payment_normal_unit_price_1_base; ?>">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_unit_price_1_base;
+                        } else {
+                    ?>
                     <input type="text" id="payment_normal_unit_price_1_base" readonly="true" value="<?php echo $payment_normal_unit_price_1_base; ?>" style="width:110px; text-align: center;">
+                    <?php
+                        }
+                    ?>
                 </td>
                 <td colspan="4" style="background-color: <?php echo $color_payment_normal_unit_price_2_base; ?>">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_unit_price_2_base;
+                        } else {
+                    ?>
                     <input type="text" id="payment_normal_unit_price_2_base" readonly="true" value="<?php echo $payment_normal_unit_price_2_base; ?>" style="width:110px; text-align: center;">
+                    <?php
+                        }
+                    ?>
                 </td>
             </tr>
             <tr>
@@ -1497,10 +1513,26 @@ $a_selected = false;
             <tr>
                 <td colspan="2" class="gray">ﾍﾞｰｽ単金</td>
                 <td colspan="4" style="background-color: <?php echo $color_payment_middle_unit_price_1_base; ?>">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_middle_unit_price_1_base;
+                        } else {
+                    ?>
                     <input type="text" id="payment_middle_unit_price_1_base" readonly="true" value="<?php echo $payment_middle_unit_price_1_base; ?>" style="width:110px; text-align: center;">
+                    <?php
+                        }
+                    ?>
                 </td>
                 <td colspan="4" style="background-color: <?php echo $color_payment_middle_unit_price_2_base; ?>">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_middle_unit_price_2_base;
+                        } else {
+                    ?>
                     <input type="text" id="payment_middle_unit_price_2_base" readonly="true" value="<?php echo $payment_middle_unit_price_2_base; ?>" style="width:110px; text-align: center;">
+                    <?php
+                        }
+                    ?>
                 </td>
             </tr>
             <tr>
@@ -1675,10 +1707,26 @@ $a_selected = false;
             <tr>
                 <td colspan="2" class="gray">ﾍﾞｰｽ単金</td>
                 <td colspan="4" style="background-color: <?php echo $color_payment_leaving_unit_price_1_base; ?>">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_unit_price_1_base;
+                        } else {
+                    ?>
                     <input type="text" id="payment_leaving_unit_price_1_base" readonly="true" value="<?php echo $payment_leaving_unit_price_1_base; ?>" style="width:110px; text-align: center;">
+                    <?php
+                        }
+                    ?>
                 </td>
                 <td colspan="4" style="background-color: <?php echo $color_payment_leaving_unit_price_2_base; ?>">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_unit_price_2_base;
+                        } else {
+                    ?>
                     <input type="text" id="payment_leaving_unit_price_2_base" readonly="true" value="<?php echo $payment_leaving_unit_price_2_base; ?>" style="width:110px; text-align: center;">
+                    <?php
+                        }
+                    ?>
                 </td>
             </tr>
             <tr>
