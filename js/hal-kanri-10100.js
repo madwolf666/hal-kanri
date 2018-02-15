@@ -1077,8 +1077,8 @@ function calc_pay_person()
         $('#opt_social_insurance').val(2);
         $('#opt_tax_withholding').val(2);
         //事業所名・事業所名を入力可とし、空を設定
-        $('#txt_jigyosya_name').val('');
-        $('#txt_jigyosya_kana').val('');
+        //$('#txt_jigyosya_name').val('');  //[2018.02.15]課題解決管理表No.97
+        //$('#txt_jigyosya_kana').val('');  //[2018.02.15]課題解決管理表No.97
         $('#txt_jigyosya_name').attr('readonly',false);
         $('#txt_jigyosya_kana').attr('readonly',false);
     }
