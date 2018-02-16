@@ -47,6 +47,50 @@ $leave_date_start = "";             # 休職日（開始）
 $leave_date_end = "";               # 休職日（終了）
 $insurance_card_leave = "";         # 保険証回収ステータス（休職）
 
+#[2018.02.16]課題解決管理表No.99
+$claim_normal_calculation_end = "";
+$claim_normal_unit_price_end = "";
+$claim_normal_lower_limit_end = "";
+$claim_normal_upper_limit_end = "";
+$claim_normal_deduction_unit_price_end = "";
+$claim_normal_over_unit_price_end = "";
+$claim_leaving_employment_day_end = "";
+$claim_leaving_allbusiness_day_end = "";
+$claim_leaving_calculation_end = "";
+$claim_leaving_unit_price_end = "";
+$claim_leaving_lower_limit_end = "";
+$claim_leaving_upper_limit_end = "";
+$claim_leaving_deduction_unit_price_end = "";
+$claim_leaving_over_unit_price_end = "";
+$payment_normal_calculation_1_end = "";
+$payment_normal_calculation_2_end = "";
+$payment_normal_unit_price_1_end = "";
+$payment_normal_unit_price_2_end = "";
+$payment_normal_lower_limit_1_end = "";
+$payment_normal_lower_limit_2_end = "";
+$payment_normal_upper_limit_1_end = "";
+$payment_normal_upper_limit_2_end = "";
+$payment_normal_deduction_unit_price_1_end = "";
+$payment_normal_deduction_unit_price_2_end = "";
+$payment_normal_over_unit_price_1_end = "";
+$payment_normal_over_unit_price_2_end = "";
+$payment_leaving_employment_day_1_end = "";
+$payment_leaving_employment_day_2_end = "";
+$payment_leaving_allbusiness_day_1_end = "";
+$payment_leaving_allbusiness_day_2_end = "";
+$payment_leaving_calculation_1_end = "";
+$payment_leaving_calculation_2_end = "";
+$payment_leaving_unit_price_1_end = "";
+$payment_leaving_unit_price_2_end = "";
+$payment_leaving_lower_limit_1_end = "";
+$payment_leaving_lower_limit_2_end = "";
+$payment_leaving_upper_limit_1_end = "";
+$payment_leaving_upper_limit_2_end = "";
+$payment_leaving_deduction_unit_price_1_end = "";
+$payment_leaving_deduction_unit_price_2_end = "";
+$payment_leaving_over_unit_price_1_end = "";
+$payment_leaving_over_unit_price_2_end = "";
+
 if (isset($_GET['NO'])) {
     $a_no = $_GET['NO'];
     try{
@@ -60,6 +104,7 @@ if (isset($_GET['NO'])) {
         $a_sql = "SELECT s1.*";
         #[2018.01.12]追加
         #[2018.01.18]課題解決管理表No.92
+        #[2018.02.16]課題解決管理表No.99
         $a_sql .= "
             ,s2.replace_person
             ,s2.end_status
@@ -86,6 +131,48 @@ if (isset($_GET['NO'])) {
             ,s2.insurance_card_leave
             ,s2.remarks2 AS remarks_end2
             ,s2.remarks_pay2 AS remarks_pay_end2
+            ,s2.claim_normal_calculation_end
+            ,s2.claim_normal_unit_price_end
+            ,s2.claim_normal_lower_limit_end
+            ,s2.claim_normal_upper_limit_end
+            ,s2.claim_normal_deduction_unit_price_end
+            ,s2.claim_normal_over_unit_price_end
+            ,s2.claim_leaving_employment_day_end
+            ,s2.claim_leaving_allbusiness_day_end
+            ,s2.claim_leaving_calculation_end
+            ,s2.claim_leaving_unit_price_end
+            ,s2.claim_leaving_lower_limit_end
+            ,s2.claim_leaving_upper_limit_end
+            ,s2.claim_leaving_deduction_unit_price_end
+            ,s2.claim_leaving_over_unit_price_end
+            ,s2.payment_normal_calculation_1_end
+            ,s2.payment_normal_calculation_2_end
+            ,s2.payment_normal_unit_price_1_end
+            ,s2.payment_normal_unit_price_2_end
+            ,s2.payment_normal_lower_limit_1_end
+            ,s2.payment_normal_lower_limit_2_end
+            ,s2.payment_normal_upper_limit_1_end
+            ,s2.payment_normal_upper_limit_2_end
+            ,s2.payment_normal_deduction_unit_price_1_end
+            ,s2.payment_normal_deduction_unit_price_2_end
+            ,s2.payment_normal_over_unit_price_1_end
+            ,s2.payment_normal_over_unit_price_2_end
+            ,s2.payment_leaving_employment_day_1_end
+            ,s2.payment_leaving_employment_day_2_end
+            ,s2.payment_leaving_allbusiness_day_1_end
+            ,s2.payment_leaving_allbusiness_day_2_end
+            ,s2.payment_leaving_calculation_1_end
+            ,s2.payment_leaving_calculation_2_end
+            ,s2.payment_leaving_unit_price_1_end
+            ,s2.payment_leaving_unit_price_2_end
+            ,s2.payment_leaving_lower_limit_1_end
+            ,s2.payment_leaving_lower_limit_2_end
+            ,s2.payment_leaving_upper_limit_1_end
+            ,s2.payment_leaving_upper_limit_2_end
+            ,s2.payment_leaving_deduction_unit_price_1_end
+            ,s2.payment_leaving_deduction_unit_price_2_end
+            ,s2.payment_leaving_over_unit_price_1_end
+            ,s2.payment_leaving_over_unit_price_2_end
             ,(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=s2.cnf_id)) AS cnf_person_end
             ";
         $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
@@ -106,53 +193,8 @@ if (isset($_GET['NO'])) {
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
             set_10100_fromDB($a_result);
-
-            $opt_contarct_replace = $a_result['replace_person'];
-            $opt_contarct_end_status = $a_result['end_status'];
-            $inp_retire_date = str_replace("-", "/", $a_result['retire_date']);
-            $opt_contarct_insurance_crad = $a_result['insurance_crad'];
-            $opt_contarct_employ_insurance = $a_result['employ_insurance'];
-            $opt_contarct_end_reason1 = $a_result['end_reason1'];
-            $opt_contarct_end_reason2 = $a_result['end_reason2'];
-            $opt_contarct_end_reason3 = $a_result['end_reason3'];
-            $inp_end_reason_detail = $a_result['end_reason_detail'];
-            $opt_contarct_from_now = $a_result['from_now'];
-            $opt_contarct_skill = $a_result['skill'];
-            if ($opt_contarct_end_status == ''){
-                $inp_biko = $a_result['remarks'];
-                $remarks2 = $a_result['remarks2'];  #[2018.01.18]課題解決管理表No.92
-            }else{
-                $inp_biko = $a_result['remarks_end'];
-                $remarks2 = $a_result['remarks_end2'];  #[2018.01.18]課題解決管理表No.92
-            }
-            $opt_contarct_conversation = $a_result['conversation'];
-            $opt_contarct_work_attitude = $a_result['work_attitude'];
-            $opt_contarct_personality = $a_result['personality'];
-            $opt_contarct_projects_confirm = $a_result['projects_confirm'];
-            $opt_contarct_engineer_list = $a_result['engineer_list'];
-            if ($opt_contarct_end_status == ''){
-                $remarks_pay = $a_result['remarks_pay'];
-                $remarks_pay2 = $a_result['remarks_pay2'];  #[2018.01.18]課題解決管理表No.92
-            }else{
-                $remarks_pay = $a_result['remarks_pay_end'];
-                $remarks_pay2 = $a_result['remarks_pay_end2'];  #[2018.01.18]課題解決管理表No.92
-            }
-
-            # [2018.01.12]追加
-            $retirement_date = str_replace("-", "/", $a_result['retirement_date']);
-            $insurance_card_retirement = $a_result['insurance_card_retirement'];
-            $leave_date_start = str_replace("-", "/", $a_result['leave_date_start']);
-            $leave_date_end = str_replace("-", "/", $a_result['leave_date_end']);
-            $insurance_card_leave = $a_result['insurance_card_leave'];
-            
-            /*$reg_id = $a_result['reg_id'];
-            $reg_person = $a_result['reg_person'];
-            $upd_id = $a_result['upd_id'];
-            $upd_person = $a_result['upd_person'];
-            $cnf_person = $a_result['cnf_person'];*/
-            
-            $cnf_person = $a_result['cnf_person_end'];
-            
+            set_10105_fromDB_com($a_result);    #[2018.02.15]課題解決管理表No.99
+            set_10105_fromDB($a_result);    #[2018.02.15]課題解決管理表No.99
         }
         if ($upd_person != ''){
             $reg_id = $upd_id;
@@ -265,60 +307,172 @@ $a_selected = false;
             <tr>
                 <td rowspan="6" width=20 class="Length gray" height=120>通常期間</td>
                 <td colspan="2" class="gray">計算方法</td>
-                <td colspan="9"><?php echo $opt_contract_calc_b1; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                             echo $claim_normal_calculation_end;
+                        } else {
+                            echo com_make_tag_option($a_act, $claim_normal_calculation_end, "claim_normal_calculation_end", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;", $a_selected);
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="9"><?php echo com_db_number_format_symbol($inp_tankin_b1); ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($claim_normal_unit_price_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_normal_unit_price_end, "claim_normal_unit_price_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">下限時間</td>
-                <td colspan="9"><?php echo $opt_contract_lower_limit_b1; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo $claim_normal_lower_limit_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_normal_lower_limit_end, "claim_normal_lower_limit_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">上限時間</td>
-                <td colspan="9"><?php echo $opt_contract_upper_limit_b1; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo $claim_normal_upper_limit_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_normal_upper_limit_end, "claim_normal_upper_limit_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="9"><?php echo com_db_number_format_symbol($txt_contract_kojyo_unit_b1); ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($claim_normal_deduction_unit_price_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_normal_deduction_unit_price_end, "claim_normal_deduction_unit_price_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="9"><?php echo com_db_number_format_symbol($txt_contract_zangyo_unit_b1); ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($claim_normal_over_unit_price_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_normal_over_unit_price_end, "claim_normal_over_unit_price_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td rowspan="8" class="Length gray" height=120>途中退場</td>
                 <td colspan="2" class="gray">就業日数</td>
-                <td colspan="9"><?php echo $inp_syugyonisu_b3; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo $claim_leaving_employment_day_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_leaving_employment_day_end, "claim_leaving_employment_day_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">全営業日数</td>
-                <td colspan="9"><?php echo $inp_zeneigyonisu_b3; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo $claim_leaving_allbusiness_day_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_leaving_allbusiness_day_end, "claim_leaving_allbusiness_day_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">計算方法</td>
-                <td colspan="9"><?php echo $opt_contract_calc_b3; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo $claim_leaving_calculation_end;
+                        } else {
+                            echo com_make_tag_option($a_act, $claim_leaving_calculation_end, "claim_leaving_calculation_end", $GLOBALS['g_DB_m_contract_calc'], "width: 230px;", $a_selected);
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="9"><?php echo com_db_number_format_symbol($txt_tankin_b3); ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($claim_leaving_unit_price_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_leaving_unit_price_end, "claim_leaving_unit_price_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">下限時間</td>
-                <td colspan="9"><?php echo $opt_contract_lower_limit_b3; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo $claim_leaving_lower_limit_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_leaving_lower_limit_end, "claim_leaving_lower_limit_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">上限時間</td>
-                <td colspan="9"><?php echo $opt_contract_upper_limit_b3; ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo $claim_leaving_upper_limit_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_leaving_upper_limit_end, "claim_leaving_upper_limit_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="9"><?php echo com_db_number_format_symbol($txt_contract_kojyo_unit_b3); ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($claim_leaving_deduction_unit_price_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_leaving_deduction_unit_price_end, "claim_leaving_deduction_unit_price_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="9"><?php echo com_db_number_format_symbol($txt_contract_zangyo_unit_b3); ?></td>
+                <td colspan="9">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($claim_leaving_over_unit_price_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $claim_leaving_over_unit_price_end, "claim_leaving_over_unit_price_end", "width: 230px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
         </table>
         <br>
@@ -419,6 +573,8 @@ $a_selected = false;
             </tr>
         </table>
         <br>
+        <br>
+        <br>
         <!-- 右2番目のテーブル -->
         <table border="1" rules="all" width=340 height=105>
             <tr>
@@ -436,23 +592,23 @@ $a_selected = false;
             </tr>
             <tr>
                 <td colspan="4" width=100 class="gray" height=15 nowrap><font size="-2">事業者担当者名</font></td>
-                <td colspan="6" width=140><?php echo $inp_jigyosya_tanto; ?></td>
-                <td colspan="3" width=100>還元率</td>
+                <td colspan="4" width=140><?php echo $inp_jigyosya_tanto; ?></td>
+                <td colspan="5" width=100>還元率(%)</td>
             </tr>
             <tr>
-                <td colspan="1" width=65 class="gray" height=15><font size="-2">社会保険</font></td>
-                <td colspan="4" width=65><?php echo $opt_social_insurance; ?></td>
+                <td colspan="4" width=65 class="gray" height=15><font size="-2">社会保険</font></td>
+                <td colspan="1" width=40><?php echo $opt_social_insurance; ?></td>
                 <td colspan="1" width=65><font size="-2">源泉徴収</font></td>
-                <td colspan="4" width=65><?php echo $opt_tax_withholding; ?></td>
-                <td colspan="3" rowspan="3"><?php echo $dsp_contract_reduction; ?>%</td>
+                <td colspan="2" width=65><?php echo $opt_tax_withholding; ?></td>
+                <td colspan="5" rowspan="3"><?php echo $dsp_contract_reduction; ?></td>
             </tr>
             <tr>
                 <td colspan="4" class="gray" height=15>契約開始日</td>
-                <td colspan="6"><?php echo $txt_kyakusaki_kaishi; ?></td>
+                <td colspan="4"><?php echo $txt_kyakusaki_kaishi; ?></td>
             </tr>
             <tr>
                 <td colspan="4" width=100 class="gray" height=15>契約終了日</td>
-                <td colspan="6" width=140><?php echo $txt_kyakusaki_syuryo; ?></td>
+                <td colspan="4" width=140><?php echo $txt_kyakusaki_syuryo; ?></td>
             </tr>
         </table>
         <br>
@@ -461,75 +617,299 @@ $a_selected = false;
             <tr>
                 <td rowspan="6" width=20 class="Length gray" height=115>通常期間</td>
                 <td colspan="2" class="gray">計算方法</td>
-                <td colspan="4"><?php echo $opt_contract_calc_p11; ?></td>
-                <td colspan="4"><?php echo $opt_contract_calc_p21; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_calculation_1_end;
+                        } else {
+                            echo com_make_tag_option($a_act, $payment_normal_calculation_1_end, "payment_normal_calculation_1_end", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_calculation_2_end;
+                        } else {
+                            echo com_make_tag_option($a_act, $payment_normal_calculation_2_end, "payment_normal_calculation_2_end", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">単金</td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_tankin_p11); ?></td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_tankin_p21); ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_normal_unit_price_1_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_unit_price_1_end, "payment_normal_unit_price_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_normal_unit_price_2_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_unit_price_2_end, "payment_normal_unit_price_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">下限時間</td>
-                <td colspan="4"><?php echo $txt_contract_lower_limit_p11; ?></td>
-                <td colspan="4"><?php echo $txt_contract_lower_limit_p21; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_lower_limit_1_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_lower_limit_1_end, "payment_normal_lower_limit_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_lower_limit_2_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_lower_limit_2_end, "payment_normal_lower_limit_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">上限時間</td>
-                <td colspan="4"><?php echo $txt_contract_upper_limit_p11; ?></td>
-                <td colspan="4"><?php echo $txt_contract_upper_limit_p21; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_upper_limit_1_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_upper_limit_1_end, "payment_normal_upper_limit_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_normal_upper_limit_2_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_upper_limit_2_end, "payment_normal_upper_limit_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
 
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_kojyo_unit_p11); ?></td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_kojyo_unit_p21); ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_normal_deduction_unit_price_1_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_deduction_unit_price_1_end, "payment_normal_deduction_unit_price_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_normal_deduction_unit_price_2_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_deduction_unit_price_2_end, "payment_normal_deduction_unit_price_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_zangyo_unit_p11); ?></td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_zangyo_unit_p21); ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_normal_over_unit_price_1_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_over_unit_price_1_end, "payment_normal_over_unit_price_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_normal_over_unit_price_2_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_normal_over_unit_price_2_end, "payment_normal_over_unit_price_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td rowspan="8" class="Length gray" height=115>途中退場</td>
                 <td colspan="2" class="gray">就業日数</td>
-                <td colspan="4"><?php echo $txt_syugyonisu_p13; ?></td>
-                <td colspan="4"><?php echo $txt_syugyonisu_p23; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_employment_day_1_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_employment_day_1_end, "payment_leaving_employment_day_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_employment_day_2_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_employment_day_2_end, "payment_leaving_employment_day_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">全営業日数</td>
-                <td colspan="4"><?php echo $txt_zeneigyonisu_p13; ?></td>
-                <td colspan="4"><?php echo $txt_zeneigyonisu_p23; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_allbusiness_day_1_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_allbusiness_day_1_end, "payment_leaving_allbusiness_day_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_allbusiness_day_2_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_allbusiness_day_2_end, "payment_leaving_allbusiness_day_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">計算方法</td>
-                <td colspan="4"><?php echo $opt_contract_calc_p13; ?></td>
-                <td colspan="4"><?php echo $opt_contract_calc_p23; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_calculation_1_end;
+                        } else {
+                            echo com_make_tag_option($a_act, $payment_leaving_calculation_1_end, "payment_leaving_calculation_1_end", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_calculation_2_end;
+                        } else {
+                            echo com_make_tag_option($a_act, $payment_leaving_calculation_2_end, "payment_leaving_calculation_2_end", $GLOBALS['g_DB_m_contract_calc'], "width: 110px;", $a_selected);
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
-                    <td colspan="2" class="gray">単金</td>
-                    <td colspan="4"><?php echo com_db_number_format_symbol($txt_tankin_p13); ?></td>
-                    <td colspan="4"><?php echo com_db_number_format_symbol($txt_tankin_p23); ?></td>
+                <td colspan="2" class="gray">単金</td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_leaving_unit_price_1_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_unit_price_1_end, "payment_leaving_unit_price_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_leaving_unit_price_2_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_unit_price_2_end, "payment_leaving_unit_price_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">下限時間</td>
-                <td colspan="4"><?php echo $txt_contract_lower_limit_p13; ?></td>
-                <td colspan="4"><?php echo $txt_contract_lower_limit_p23; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_lower_limit_1_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_lower_limit_1_end, "payment_leaving_lower_limit_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_lower_limit_2_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_lower_limit_2_end, "payment_leaving_lower_limit_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">上限時間</td>
-                <td colspan="4"><?php echo $txt_contract_upper_limit_p13; ?></td>
-                <td colspan="4"><?php echo $txt_contract_upper_limit_p23; ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_upper_limit_1_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_upper_limit_1_end, "payment_leaving_upper_limit_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo $payment_leaving_upper_limit_2_end;
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_upper_limit_2_end, "payment_leaving_upper_limit_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">控除単価</td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_kojyo_unit_p13); ?></td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_kojyo_unit_p23); ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_leaving_deduction_unit_price_1_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_deduction_unit_price_1_end, "payment_leaving_deduction_unit_price_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_leaving_deduction_unit_price_2_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_deduction_unit_price_2_end, "payment_leaving_deduction_unit_price_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" class="gray">残業単価</td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_zangyo_unit_p13); ?></td>
-                <td colspan="4"><?php echo com_db_number_format_symbol($txt_contract_zangyo_unit_p23); ?></td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_leaving_over_unit_price_1_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_over_unit_price_1_end, "payment_leaving_over_unit_price_1_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
+                <td colspan="4">
+                    <?php
+                        if ($a_act == '') {
+                            echo com_db_number_format_symbol($payment_leaving_over_unit_price_2_end);
+                        } else {
+                            echo com_make_tag_input($a_act, $payment_leaving_over_unit_price_2_end, "payment_leaving_over_unit_price_2_end", "width: 110px; text-align: center;");
+                        }
+                    ?>
+                </td>
             </tr>
         </table>
         <br>

@@ -34,6 +34,7 @@ if (isset($_GET['NO'])) {
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
             set_10100_fromDB($a_result);
+            set_10105_fromDB_com($a_result);    #[2018.02.15]課題解決管理表No.99
         }
     } catch (PDOException $e){
         echo 'Error:'.$e->getMessage();
@@ -124,7 +125,7 @@ $obj_sheet->setCellValue("W13",$opt_social_insurance);
 $obj_sheet->setCellValue("AE13",$opt_tax_withholding);
 com_setValue_Date($txt_kyakusaki_kaishi, $obj_sheet, "Z14", 'yyyy年m月d日');
 com_setValue_Date($txt_kyakusaki_syuryo, $obj_sheet, "Z15", 'yyyy年m月d日');
-$obj_sheet->setCellValue("AJ13",$opt_contract_reduction);
+$obj_sheet->setCellValue("AJ13",$dsp_contract_reduction);   #[2018.02.16]bug-fixed.
 
 $obj_sheet->setCellValue("Z18",$opt_contract_calc_p11);
 $obj_sheet->setCellValue("AG18",$opt_contract_calc_p21);

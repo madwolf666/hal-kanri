@@ -1051,4 +1051,186 @@ function chk_10100_fromDB_submission($a_result)
 
 }
 
+#[2018.02.15]課題解決管理表No.99
+function set_10105_fromDB_com($a_result)
+{
+    if ($GLOBALS['claim_normal_unit_price_base'] != ""){
+        $GLOBALS['inp_tankin_b1'] = $GLOBALS['claim_normal_unit_price_base'];
+    }
+    if ($GLOBALS['claim_middle_unit_price_base'] != ""){
+        $GLOBALS['txt_tankin_b2'] = $GLOBALS['claim_middle_unit_price_base'];
+    }
+    if ($GLOBALS['claim_leaving_unit_price_base'] != ""){
+        $GLOBALS['txt_tankin_b3'] = $GLOBALS['claim_leaving_unit_price_base'];
+    }
+    if ($GLOBALS['payment_normal_unit_price_1_base'] != ""){
+        $GLOBALS['txt_tankin_p11'] = $GLOBALS['payment_normal_unit_price_1_base'];
+    }
+    if ($GLOBALS['payment_normal_unit_price_2_base'] != ""){
+        $GLOBALS['txt_tankin_p21'] = $GLOBALS['payment_normal_unit_price_2_base'];
+    }
+    if ($GLOBALS['payment_middle_unit_price_1_base'] != ""){
+        $GLOBALS['txt_tankin_p12'] = $GLOBALS['payment_middle_unit_price_1_base'];
+    }
+    if ($GLOBALS['payment_middle_unit_price_2_base'] != ""){
+        $GLOBALS['txt_tankin_p22'] = $GLOBALS['payment_middle_unit_price_2_base'];
+    }
+    if ($GLOBALS['payment_leaving_unit_price_1_base'] != ""){
+        $GLOBALS['txt_tankin_p13'] = $GLOBALS['payment_leaving_unit_price_1_base'];
+    }
+    if ($GLOBALS['payment_leaving_unit_price_2_base'] != ""){
+        $GLOBALS['txt_tankin_p23'] = $GLOBALS['payment_leaving_unit_price_2_base'];
+    }
+}
+
+#[2018.02.15]課題解決管理表No.99
+function set_10105_fromDB($a_result)
+{
+    $GLOBALS['opt_contarct_replace'] = $a_result['replace_person'];
+    $GLOBALS['opt_contarct_end_status'] = $a_result['end_status'];
+    $GLOBALS['inp_retire_date'] = str_replace("-", "/", $a_result['retire_date']);
+    $GLOBALS['opt_contarct_insurance_crad'] = $a_result['insurance_crad'];
+    $GLOBALS['opt_contarct_employ_insurance'] = $a_result['employ_insurance'];
+    $GLOBALS['opt_contarct_end_reason1'] = $a_result['end_reason1'];
+    $GLOBALS['opt_contarct_end_reason2'] = $a_result['end_reason2'];
+    $GLOBALS['opt_contarct_end_reason3'] = $a_result['end_reason3'];
+    $GLOBALS['inp_end_reason_detail'] = $a_result['end_reason_detail'];
+    $GLOBALS['opt_contarct_from_now'] = $a_result['from_now'];
+    $GLOBALS['opt_contarct_skill'] = $a_result['skill'];
+    if ($GLOBALS['opt_contarct_end_status'] == ''){
+        $GLOBALS['inp_biko'] = $a_result['remarks'];
+        $GLOBALS['remarks2'] = $a_result['remarks2'];  #[2018.01.18]課題解決管理表No.92
+    }else{
+        $GLOBALS['inp_biko'] = $a_result['remarks_end'];
+        $GLOBALS['remarks2'] = $a_result['remarks_end2'];  #[2018.01.18]課題解決管理表No.92
+    }
+    $GLOBALS['opt_contarct_conversation'] = $a_result['conversation'];
+    $GLOBALS['opt_contarct_work_attitude'] = $a_result['work_attitude'];
+    $GLOBALS['opt_contarct_personality'] = $a_result['personality'];
+    $GLOBALS['opt_contarct_projects_confirm'] = $a_result['projects_confirm'];
+    $GLOBALS['opt_contarct_engineer_list'] = $a_result['engineer_list'];
+    if ($GLOBALS['opt_contarct_end_status'] == ''){
+        $GLOBALS['remarks_pay'] = $a_result['remarks_pay'];
+        $GLOBALS['remarks_pay2'] = $a_result['remarks_pay2'];  #[2018.01.18]課題解決管理表No.92
+    }else{
+        $GLOBALS['remarks_pay'] = $a_result['remarks_pay_end'];
+        $GLOBALS['remarks_pay2'] = $a_result['remarks_pay_end2'];  #[2018.01.18]課題解決管理表No.92
+    }
+
+    # [2018.01.12]追加
+    $GLOBALS['retirement_date'] = str_replace("-", "/", $a_result['retirement_date']);
+    $GLOBALS['insurance_card_retirement'] = $a_result['insurance_card_retirement'];
+    $GLOBALS['leave_date_start'] = str_replace("-", "/", $a_result['leave_date_start']);
+    $GLOBALS['leave_date_end'] = str_replace("-", "/", $a_result['leave_date_end']);
+    $GLOBALS['insurance_card_leave'] = $a_result['insurance_card_leave'];
+
+    /*$reg_id = $a_result['reg_id'];
+    $reg_person = $a_result['reg_person'];
+    $upd_id = $a_result['upd_id'];
+    $upd_person = $a_result['upd_person'];
+    $cnf_person = $a_result['cnf_person'];*/
+
+    $GLOBALS['cnf_person'] = $a_result['cnf_person_end'];
+    
+    #[2018.02.16]課題解決管理表No.99
+    if ($GLOBALS['opt_contarct_end_status'] != ""){
+        #終了レポートありの場合
+        $GLOBALS['claim_normal_calculation_end'] = $a_result['claim_normal_calculation_end'];
+        $GLOBALS['claim_normal_unit_price_end'] = $a_result['claim_normal_unit_price_end'];
+        $GLOBALS['claim_normal_lower_limit_end'] = $a_result['claim_normal_lower_limit_end'];
+        $GLOBALS['claim_normal_upper_limit_end'] = $a_result['claim_normal_upper_limit_end'];
+        $GLOBALS['claim_normal_deduction_unit_price_end'] = $a_result['claim_normal_deduction_unit_price_end'];
+        $GLOBALS['claim_normal_over_unit_price_end'] = $a_result['claim_normal_over_unit_price_end'];
+
+        $GLOBALS['claim_leaving_employment_day_end'] = $a_result['claim_leaving_employment_day_end'];
+        $GLOBALS['claim_leaving_allbusiness_day_end'] = $a_result['claim_leaving_allbusiness_day_end'];
+        $GLOBALS['claim_leaving_calculation_end'] = $a_result['claim_leaving_calculation_end'];
+        $GLOBALS['claim_leaving_unit_price_end'] = $a_result['claim_leaving_unit_price_end'];
+        $GLOBALS['claim_leaving_lower_limit_end'] = $a_result['claim_leaving_lower_limit_end'];
+        $GLOBALS['claim_leaving_upper_limit_end'] = $a_result['claim_leaving_upper_limit_end'];
+        $GLOBALS['claim_leaving_deduction_unit_price_end'] = $a_result['claim_leaving_deduction_unit_price_end'];
+        $GLOBALS['claim_leaving_over_unit_price_end'] = $a_result['claim_leaving_over_unit_price_end'];
+        
+        $GLOBALS['payment_normal_calculation_1_end'] = $a_result['payment_normal_calculation_1_end'];
+        $GLOBALS['payment_normal_calculation_2_end'] = $a_result['payment_normal_calculation_2_end'];
+        $GLOBALS['payment_normal_unit_price_1_end'] = $a_result['payment_normal_unit_price_1_end'];
+        $GLOBALS['payment_normal_unit_price_2_end'] = $a_result['payment_normal_unit_price_2_end'];
+        $GLOBALS['payment_normal_lower_limit_1_end'] = $a_result['payment_normal_lower_limit_1_end'];
+        $GLOBALS['payment_normal_lower_limit_2_end'] = $a_result['payment_normal_lower_limit_2_end'];
+        $GLOBALS['payment_normal_upper_limit_1_end'] = $a_result['payment_normal_upper_limit_1_end'];
+        $GLOBALS['payment_normal_upper_limit_2_end'] = $a_result['payment_normal_upper_limit_2_end'];
+        $GLOBALS['payment_normal_deduction_unit_price_1_end'] = $a_result['payment_normal_deduction_unit_price_1_end'];
+        $GLOBALS['payment_normal_deduction_unit_price_2_end'] = $a_result['payment_normal_deduction_unit_price_2_end'];
+        $GLOBALS['payment_normal_over_unit_price_1_end'] = $a_result['payment_normal_over_unit_price_1_end'];
+        $GLOBALS['payment_normal_over_unit_price_2_end'] = $a_result['payment_normal_over_unit_price_2_end'];
+        
+        $GLOBALS['payment_leaving_employment_day_1_end'] = $a_result['payment_leaving_employment_day_1_end'];
+        $GLOBALS['payment_leaving_employment_day_2_end'] = $a_result['payment_leaving_employment_day_2_end'];
+        $GLOBALS['payment_leaving_allbusiness_day_1_end'] = $a_result['payment_leaving_allbusiness_day_1_end'];
+        $GLOBALS['payment_leaving_allbusiness_day_2_end'] = $a_result['payment_leaving_allbusiness_day_2_end'];
+        $GLOBALS['payment_leaving_calculation_1_end'] = $a_result['payment_leaving_calculation_1_end'];
+        $GLOBALS['payment_leaving_calculation_2_end'] = $a_result['payment_leaving_calculation_2_end'];
+        $GLOBALS['payment_leaving_unit_price_1_end'] = $a_result['payment_leaving_unit_price_1_end'];
+        $GLOBALS['payment_leaving_unit_price_2_end'] = $a_result['payment_leaving_unit_price_2_end'];
+        $GLOBALS['payment_leaving_lower_limit_1_end'] = $a_result['payment_leaving_lower_limit_1_end'];
+        $GLOBALS['payment_leaving_lower_limit_2_end'] = $a_result['payment_leaving_lower_limit_2_end'];
+        $GLOBALS['payment_leaving_upper_limit_1_end'] = $a_result['payment_leaving_upper_limit_1_end'];
+        $GLOBALS['payment_leaving_upper_limit_2_end'] = $a_result['payment_leaving_upper_limit_2_end'];
+        $GLOBALS['payment_leaving_deduction_unit_price_1_end'] = $a_result['payment_leaving_deduction_unit_price_1_end'];
+        $GLOBALS['payment_leaving_deduction_unit_price_2_end'] = $a_result['payment_leaving_deduction_unit_price_2_end'];
+        $GLOBALS['payment_leaving_over_unit_price_1_end'] = $a_result['payment_leaving_over_unit_price_1_end'];
+        $GLOBALS['payment_leaving_over_unit_price_2_end'] = $a_result['payment_leaving_over_unit_price_2_end'];
+    }else{
+        #終了レポートなしの場合
+        $GLOBALS['claim_normal_calculation_end'] = $GLOBALS['opt_contract_calc_b1'];
+        $GLOBALS['claim_normal_unit_price_end'] = $GLOBALS['inp_tankin_b1'];
+        $GLOBALS['claim_normal_lower_limit_end'] = $a_result['claim_normal_lower_limit'];
+        $GLOBALS['claim_normal_upper_limit_end'] = $a_result['claim_normal_upper_limit'];
+        $GLOBALS['claim_normal_deduction_unit_price_end'] = $GLOBALS['txt_contract_kojyo_unit_b1'];
+        $GLOBALS['claim_normal_over_unit_price_end'] = $GLOBALS['txt_contract_zangyo_unit_b1'];
+
+        $GLOBALS['claim_leaving_employment_day_end'] = $GLOBALS['inp_syugyonisu_b3'];
+        $GLOBALS['claim_leaving_allbusiness_day_end'] = $GLOBALS['inp_zeneigyonisu_b3'];
+        $GLOBALS['claim_leaving_calculation_end'] = $GLOBALS['opt_contract_calc_b3'];
+        $GLOBALS['claim_leaving_unit_price_end'] = $GLOBALS['txt_tankin_b3'];
+        $GLOBALS['claim_leaving_lower_limit_end'] = $a_result['claim_leaving_lower_limit'];
+        $GLOBALS['claim_leaving_upper_limit_end'] = $a_result['claim_leaving_upper_limit'];
+        $GLOBALS['claim_leaving_deduction_unit_price_end'] = $GLOBALS['txt_contract_kojyo_unit_b3'];
+        $GLOBALS['claim_leaving_over_unit_price_end'] = $GLOBALS['txt_contract_zangyo_unit_b3'];
+        
+        $GLOBALS['payment_normal_calculation_1_end'] = $GLOBALS['opt_contract_calc_p11'];
+        $GLOBALS['payment_normal_calculation_2_end'] = $GLOBALS['opt_contract_calc_p21'];
+        $GLOBALS['payment_normal_unit_price_1_end'] = $GLOBALS['txt_tankin_p11'];
+        $GLOBALS['payment_normal_unit_price_2_end'] = $GLOBALS['txt_tankin_p21'];
+        $GLOBALS['payment_normal_lower_limit_1_end'] = $GLOBALS['txt_contract_lower_limit_p11'];
+        $GLOBALS['payment_normal_lower_limit_2_end'] = $GLOBALS['txt_contract_lower_limit_p21'];
+        $GLOBALS['payment_normal_upper_limit_1_end'] = $GLOBALS['txt_contract_upper_limit_p11'];
+        $GLOBALS['payment_normal_upper_limit_2_end'] = $GLOBALS['txt_contract_upper_limit_p21'];
+        $GLOBALS['payment_normal_deduction_unit_price_1_end'] = $GLOBALS['txt_contract_kojyo_unit_p11'];
+        $GLOBALS['payment_normal_deduction_unit_price_2_end'] = $GLOBALS['txt_contract_kojyo_unit_p21'];
+        $GLOBALS['payment_normal_over_unit_price_1_end'] = $GLOBALS['txt_contract_zangyo_unit_p11'];
+        $GLOBALS['payment_normal_over_unit_price_2_end'] = $GLOBALS['txt_contract_zangyo_unit_p21'];
+        
+        $GLOBALS['payment_leaving_employment_day_1_end'] = $GLOBALS['txt_syugyonisu_p13'];
+        $GLOBALS['payment_leaving_employment_day_2_end'] = $GLOBALS['txt_syugyonisu_p23'];
+        $GLOBALS['payment_leaving_allbusiness_day_1_end'] = $GLOBALS['txt_zeneigyonisu_p13'];
+        $GLOBALS['payment_leaving_allbusiness_day_2_end'] = $GLOBALS['txt_zeneigyonisu_p23'];
+        $GLOBALS['payment_leaving_calculation_1_end'] = $GLOBALS['opt_contract_calc_p13'];
+        $GLOBALS['payment_leaving_calculation_2_end'] = $GLOBALS['opt_contract_calc_p23'];
+        $GLOBALS['payment_leaving_unit_price_1_end'] = $GLOBALS['txt_tankin_p13'];
+        $GLOBALS['payment_leaving_unit_price_2_end'] = $GLOBALS['txt_tankin_p23'];
+        $GLOBALS['payment_leaving_lower_limit_1_end'] = $GLOBALS['txt_contract_lower_limit_p13'];
+        $GLOBALS['payment_leaving_lower_limit_2_end'] = $GLOBALS['txt_contract_lower_limit_p23'];
+        $GLOBALS['payment_leaving_upper_limit_1_end'] = $GLOBALS['txt_contract_upper_limit_p13'];
+        $GLOBALS['payment_leaving_upper_limit_2_end'] = $GLOBALS['txt_contract_upper_limit_p23'];
+        $GLOBALS['payment_leaving_deduction_unit_price_1_end'] = $GLOBALS['txt_contract_kojyo_unit_p13'];
+        $GLOBALS['payment_leaving_deduction_unit_price_2_end'] = $GLOBALS['txt_contract_kojyo_unit_p23'];
+        $GLOBALS['payment_leaving_over_unit_price_1_end'] = $GLOBALS['txt_contract_zangyo_unit_p13'];
+        $GLOBALS['payment_leaving_over_unit_price_2_end'] = $GLOBALS['txt_contract_zangyo_unit_p23'];
+    }
+    
+
+    
+}
+
 ?>

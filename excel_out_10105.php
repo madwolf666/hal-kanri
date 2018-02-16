@@ -42,6 +42,50 @@ $leave_date_start = "";             # 休職日（開始）
 $leave_date_end = "";               # 休職日（終了）
 $insurance_card_leave = "";         # 保険証回収ステータス（休職）
 
+#[2018.02.16]課題解決管理表No.99
+$claim_normal_calculation_end = "";
+$claim_normal_unit_price_end = "";
+$claim_normal_lower_limit_end = "";
+$claim_normal_upper_limit_end = "";
+$claim_normal_deduction_unit_price_end = "";
+$claim_normal_over_unit_price_end = "";
+$claim_leaving_employment_day_end = "";
+$claim_leaving_allbusiness_day_end = "";
+$claim_leaving_calculation_end = "";
+$claim_leaving_unit_price_end = "";
+$claim_leaving_lower_limit_end = "";
+$claim_leaving_upper_limit_end = "";
+$claim_leaving_deduction_unit_price_end = "";
+$claim_leaving_over_unit_price_end = "";
+$payment_normal_calculation_1_end = "";
+$payment_normal_calculation_2_end = "";
+$payment_normal_unit_price_1_end = "";
+$payment_normal_unit_price_2_end = "";
+$payment_normal_lower_limit_1_end = "";
+$payment_normal_lower_limit_2_end = "";
+$payment_normal_upper_limit_1_end = "";
+$payment_normal_upper_limit_2_end = "";
+$payment_normal_deduction_unit_price_1_end = "";
+$payment_normal_deduction_unit_price_2_end = "";
+$payment_normal_over_unit_price_1_end = "";
+$payment_normal_over_unit_price_2_end = "";
+$payment_leaving_employment_day_1_end = "";
+$payment_leaving_employment_day_2_end = "";
+$payment_leaving_allbusiness_day_1_end = "";
+$payment_leaving_allbusiness_day_2_end = "";
+$payment_leaving_calculation_1_end = "";
+$payment_leaving_calculation_2_end = "";
+$payment_leaving_unit_price_1_end = "";
+$payment_leaving_unit_price_2_end = "";
+$payment_leaving_lower_limit_1_end = "";
+$payment_leaving_lower_limit_2_end = "";
+$payment_leaving_upper_limit_1_end = "";
+$payment_leaving_upper_limit_2_end = "";
+$payment_leaving_deduction_unit_price_1_end = "";
+$payment_leaving_deduction_unit_price_2_end = "";
+$payment_leaving_over_unit_price_1_end = "";
+$payment_leaving_over_unit_price_2_end = "";
+
 if (isset($_GET['NO'])) {
     $a_no = $_GET['NO'];
     try{
@@ -55,6 +99,7 @@ if (isset($_GET['NO'])) {
         $a_sql = "SELECT s1.*";
         #[2018.01.12]追加
         #[2018.01.18]課題解決管理表No.92
+        #[2018.02.16]課題解決管理表No.99
         $a_sql .= "
             ,s2.replace_person
             ,s2.end_status
@@ -81,6 +126,48 @@ if (isset($_GET['NO'])) {
             ,s2.insurance_card_leave
             ,s2.remarks2 AS remarks_end2
             ,s2.remarks_pay2 AS remarks_pay_end2
+            ,s2.claim_normal_calculation_end
+            ,s2.claim_normal_unit_price_end
+            ,s2.claim_normal_lower_limit_end
+            ,s2.claim_normal_upper_limit_end
+            ,s2.claim_normal_deduction_unit_price_end
+            ,s2.claim_normal_over_unit_price_end
+            ,s2.claim_leaving_employment_day_end
+            ,s2.claim_leaving_allbusiness_day_end
+            ,s2.claim_leaving_calculation_end
+            ,s2.claim_leaving_unit_price_end
+            ,s2.claim_leaving_lower_limit_end
+            ,s2.claim_leaving_upper_limit_end
+            ,s2.claim_leaving_deduction_unit_price_end
+            ,s2.claim_leaving_over_unit_price_end
+            ,s2.payment_normal_calculation_1_end
+            ,s2.payment_normal_calculation_2_end
+            ,s2.payment_normal_unit_price_1_end
+            ,s2.payment_normal_unit_price_2_end
+            ,s2.payment_normal_lower_limit_1_end
+            ,s2.payment_normal_lower_limit_2_end
+            ,s2.payment_normal_upper_limit_1_end
+            ,s2.payment_normal_upper_limit_2_end
+            ,s2.payment_normal_deduction_unit_price_1_end
+            ,s2.payment_normal_deduction_unit_price_2_end
+            ,s2.payment_normal_over_unit_price_1_end
+            ,s2.payment_normal_over_unit_price_2_end
+            ,s2.payment_leaving_employment_day_1_end
+            ,s2.payment_leaving_employment_day_2_end
+            ,s2.payment_leaving_allbusiness_day_1_end
+            ,s2.payment_leaving_allbusiness_day_2_end
+            ,s2.payment_leaving_calculation_1_end
+            ,s2.payment_leaving_calculation_2_end
+            ,s2.payment_leaving_unit_price_1_end
+            ,s2.payment_leaving_unit_price_2_end
+            ,s2.payment_leaving_lower_limit_1_end
+            ,s2.payment_leaving_lower_limit_2_end
+            ,s2.payment_leaving_upper_limit_1_end
+            ,s2.payment_leaving_upper_limit_2_end
+            ,s2.payment_leaving_deduction_unit_price_1_end
+            ,s2.payment_leaving_deduction_unit_price_2_end
+            ,s2.payment_leaving_over_unit_price_1_end
+            ,s2.payment_leaving_over_unit_price_2_end
             ,(SELECT person FROM ".$GLOBALS['g_DB_m_user']." WHERE (idx=s2.cnf_id)) AS cnf_person_end
             ";
         $a_sql .= " FROM (".$a_sql_src.") s1 LEFT JOIN ".$GLOBALS['g_DB_t_contract_end_report']." s2";
@@ -93,44 +180,8 @@ if (isset($_GET['NO'])) {
 
         while($a_result = $a_stmt->fetch(PDO::FETCH_ASSOC)){
             set_10100_fromDB($a_result);
-
-            $opt_contarct_replace = $a_result['replace_person'];
-            $opt_contarct_end_status = $a_result['end_status'];
-            $inp_retire_date = str_replace("-", "/", $a_result['retire_date']);
-            $opt_contarct_insurance_crad = $a_result['insurance_crad'];
-            $opt_contarct_employ_insurance = $a_result['employ_insurance'];
-            $opt_contarct_end_reason1 = $a_result['end_reason1'];
-            $opt_contarct_end_reason2 = $a_result['end_reason2'];
-            $opt_contarct_end_reason3 = $a_result['end_reason3'];
-            $inp_end_reason_detail = $a_result['end_reason_detail'];
-            $opt_contarct_from_now = $a_result['from_now'];
-            $opt_contarct_skill = $a_result['skill'];
-            $inp_biko = $a_result['remarks_end'];
-            $opt_contarct_conversation = $a_result['conversation'];
-            $opt_contarct_work_attitude = $a_result['work_attitude'];
-            $opt_contarct_personality = $a_result['personality'];
-            $opt_contarct_projects_confirm = $a_result['projects_confirm'];
-            $opt_contarct_engineer_list = $a_result['engineer_list'];
-            $remarks_pay = $a_result['remarks_pay_end'];
-
-            # [2018.01.12]追加
-            $retirement_date = str_replace("-", "/", $a_result['retirement_date']);
-            $insurance_card_retirement = $a_result['insurance_card_retirement'];
-            $leave_date_start = str_replace("-", "/", $a_result['leave_date_start']);
-            $leave_date_end = str_replace("-", "/", $a_result['leave_date_end']);
-            $insurance_card_leave = $a_result['insurance_card_leave'];
-
-            #[2018.01.18]課題解決管理表No.92
-            $remarks2 = $a_result['remarks_end2'];
-            $remarks_pay2 = $a_result['remarks_pay_end2'];
-
-            /*$reg_id = $a_result['reg_id'];
-            $reg_person = $a_result['reg_person'];
-            $upd_id = $a_result['upd_id'];
-            $upd_person = $a_result['upd_person'];
-            $cnf_person = $a_result['cnf_person'];*/
-
-            $cnf_person = $a_result['cnf_person_end'];
+            set_10105_fromDB_com($a_result);    #[2018.02.15]課題解決管理表No.99
+            set_10105_fromDB($a_result);    #[2018.02.15]課題解決管理表No.99
         }
         if ($upd_person != ''){
             $reg_id = $upd_id;
@@ -172,21 +223,23 @@ $obj_sheet->setCellValue("D14",$inp_kyakusaki_tel);
 com_setValue_Date($inp_kyakusaki_kaishi, $obj_sheet, "G15", 'yyyy年m月d日');
 com_setValue_Date($inp_kyakusaki_syuryo, $obj_sheet, "G16", 'yyyy年m月d日');
 
-$obj_sheet->setCellValue("G18",$opt_contract_calc_b1);
-$obj_sheet->setCellValue("G19",str_replace(",", "", $inp_tankin_b1));
-$obj_sheet->setCellValue("G20",$opt_contract_lower_limit_b1);
-$obj_sheet->setCellValue("G21",$opt_contract_upper_limit_b1);
-$obj_sheet->setCellValue("G22",str_replace(",", "", $txt_contract_kojyo_unit_b1));
-$obj_sheet->setCellValue("G23",str_replace(",", "", $txt_contract_zangyo_unit_b1));
+#[2018.02.16]課題解決管理表No.99
+$obj_sheet->setCellValue("G18",$claim_normal_calculation_end);
+$obj_sheet->setCellValue("G19",str_replace(",", "", $claim_normal_unit_price_end));
+$obj_sheet->setCellValue("G20",$claim_normal_lower_limit_end);
+$obj_sheet->setCellValue("G21",$claim_normal_upper_limit_end);
+$obj_sheet->setCellValue("G22",str_replace(",", "", $claim_normal_deduction_unit_price_end));
+$obj_sheet->setCellValue("G23",str_replace(",", "", $claim_normal_over_unit_price_end));
 
-$obj_sheet->setCellValue("G24",$inp_syugyonisu_b3);
-$obj_sheet->setCellValue("G25",$inp_zeneigyonisu_b3);
-$obj_sheet->setCellValue("G26",$opt_contract_calc_b3);
-$obj_sheet->setCellValue("G27",str_replace(",", "", $txt_tankin_b3));
-$obj_sheet->setCellValue("G28",$opt_contract_lower_limit_b3);
-$obj_sheet->setCellValue("G29",$opt_contract_upper_limit_b3);
-$obj_sheet->setCellValue("G30",str_replace(",", "", $txt_contract_kojyo_unit_b3));
-$obj_sheet->setCellValue("G31",str_replace(",", "", $txt_contract_zangyo_unit_b3));
+#[2018.02.16]課題解決管理表No.99
+$obj_sheet->setCellValue("G24",$claim_leaving_employment_day_end);
+$obj_sheet->setCellValue("G25",$claim_leaving_allbusiness_day_end);
+$obj_sheet->setCellValue("G26",$claim_leaving_calculation_end);
+$obj_sheet->setCellValue("G27",str_replace(",", "", $claim_leaving_unit_price_end));
+$obj_sheet->setCellValue("G28",$claim_leaving_lower_limit_end);
+$obj_sheet->setCellValue("G29",$claim_leaving_upper_limit_end);
+$obj_sheet->setCellValue("G30",str_replace(",", "", $claim_leaving_deduction_unit_price_end));
+$obj_sheet->setCellValue("G31",str_replace(",", "", $claim_leaving_over_unit_price_end));
 
 $obj_sheet->setCellValue("H32",$opt_m_contract_time_inc_bd);
 $obj_sheet->setCellValue("N32",$opt_m_contract_time_inc_bm);
@@ -209,37 +262,39 @@ $obj_sheet->setCellValue("V14",$opt_social_insurance);
 $obj_sheet->setCellValue("AD14",$opt_tax_withholding);
 com_setValue_Date($txt_kyakusaki_kaishi, $obj_sheet, "Y15", 'yyyy年m月d日');
 com_setValue_Date($txt_kyakusaki_syuryo, $obj_sheet, "Y16", 'yyyy年m月d日');
-$obj_sheet->setCellValue("AI14",$opt_contract_reduction);
+$obj_sheet->setCellValue("AI14",$dsp_contract_reduction);   #[2018.02.16]bug-fixed.
 
-$obj_sheet->setCellValue("Y18",$opt_contract_calc_p11);
-$obj_sheet->setCellValue("AF18",$opt_contract_calc_p21);
-$obj_sheet->setCellValue("Y19",str_replace(",", "", $txt_tankin_p11));
-$obj_sheet->setCellValue("AF19",str_replace(",", "", $txt_tankin_p21));
-$obj_sheet->setCellValue("Y20",$txt_contract_lower_limit_p11);
-$obj_sheet->setCellValue("AF20",$txt_contract_lower_limit_p21);
-$obj_sheet->setCellValue("Y21",$txt_contract_upper_limit_p11);
-$obj_sheet->setCellValue("AF21",$txt_contract_upper_limit_p21);
-$obj_sheet->setCellValue("Y22",str_replace(",", "", $txt_contract_kojyo_unit_p11));
-$obj_sheet->setCellValue("AF22",str_replace(",", "", $txt_contract_kojyo_unit_p21));
-$obj_sheet->setCellValue("Y23",str_replace(",", "", $txt_contract_zangyo_unit_p11));
-$obj_sheet->setCellValue("AF23",str_replace(",", "", $txt_contract_zangyo_unit_p21));
+#[2018.02.16]課題解決管理表No.99
+$obj_sheet->setCellValue("Y18",$payment_normal_calculation_1_end);
+$obj_sheet->setCellValue("AF18",$payment_normal_calculation_2_end);
+$obj_sheet->setCellValue("Y19",str_replace(",", "", $payment_normal_unit_price_1_end));
+$obj_sheet->setCellValue("AF19",str_replace(",", "", $payment_normal_unit_price_2_end));
+$obj_sheet->setCellValue("Y20",$payment_normal_lower_limit_1_end);
+$obj_sheet->setCellValue("AF20",$payment_normal_lower_limit_2_end);
+$obj_sheet->setCellValue("Y21",$payment_normal_upper_limit_1_end);
+$obj_sheet->setCellValue("AF21",$payment_normal_upper_limit_2_end);
+$obj_sheet->setCellValue("Y22",str_replace(",", "", $payment_normal_deduction_unit_price_1_end));
+$obj_sheet->setCellValue("AF22",str_replace(",", "", $payment_normal_deduction_unit_price_2_end));
+$obj_sheet->setCellValue("Y23",str_replace(",", "", $payment_normal_over_unit_price_1_end));
+$obj_sheet->setCellValue("AF23",str_replace(",", "", $payment_normal_over_unit_price_2_end));
 
-$obj_sheet->setCellValue("Y24",$txt_syugyonisu_p13);
-$obj_sheet->setCellValue("AF24",$txt_syugyonisu_p23);
-$obj_sheet->setCellValue("Y25",$txt_zeneigyonisu_p13);
-$obj_sheet->setCellValue("AF25",$txt_zeneigyonisu_p23);
-$obj_sheet->setCellValue("Y26",$opt_contract_calc_p13);
-$obj_sheet->setCellValue("AF26",$opt_contract_calc_p23);
-$obj_sheet->setCellValue("Y27",str_replace(",", "", $txt_tankin_p13));
-$obj_sheet->setCellValue("AF27",str_replace(",", "", $txt_tankin_p23));
-$obj_sheet->setCellValue("Y28",$txt_contract_lower_limit_p13);
-$obj_sheet->setCellValue("AF28",$txt_contract_lower_limit_p23);
-$obj_sheet->setCellValue("Y29",$txt_contract_upper_limit_p13);
-$obj_sheet->setCellValue("AF29",$txt_contract_upper_limit_p23);
-$obj_sheet->setCellValue("Y30",str_replace(",", "", $txt_contract_kojyo_unit_p13));
-$obj_sheet->setCellValue("AF30",str_replace(",", "", $txt_contract_kojyo_unit_p23));
-$obj_sheet->setCellValue("Y31",str_replace(",", "", $txt_contract_zangyo_unit_p13));
-$obj_sheet->setCellValue("AF31",str_replace(",", "", $txt_contract_zangyo_unit_p23));
+#[2018.02.16]課題解決管理表No.99
+$obj_sheet->setCellValue("Y24",$payment_leaving_employment_day_1_end);
+$obj_sheet->setCellValue("AF24",$payment_leaving_employment_day_2_end);
+$obj_sheet->setCellValue("Y25",$payment_leaving_allbusiness_day_1_end);
+$obj_sheet->setCellValue("AF25",$payment_leaving_allbusiness_day_2_end);
+$obj_sheet->setCellValue("Y26",$payment_leaving_calculation_1_end);
+$obj_sheet->setCellValue("AF26",$payment_leaving_calculation_2_end);
+$obj_sheet->setCellValue("Y27",str_replace(",", "", $payment_leaving_unit_price_1_end));
+$obj_sheet->setCellValue("AF27",str_replace(",", "", $payment_leaving_unit_price_2_end));
+$obj_sheet->setCellValue("Y28",$payment_leaving_lower_limit_1_end);
+$obj_sheet->setCellValue("AF28",$payment_leaving_lower_limit_2_end);
+$obj_sheet->setCellValue("Y29",$payment_leaving_upper_limit_1_end);
+$obj_sheet->setCellValue("AF29",$payment_leaving_upper_limit_2_end);
+$obj_sheet->setCellValue("Y30",str_replace(",", "", $payment_leaving_deduction_unit_price_1_end));
+$obj_sheet->setCellValue("AF30",str_replace(",", "", $payment_leaving_deduction_unit_price_2_end));
+$obj_sheet->setCellValue("Y31",str_replace(",", "", $payment_leaving_over_unit_price_1_end));
+$obj_sheet->setCellValue("AF31",str_replace(",", "", $payment_leaving_over_unit_price_2_end));
 
 $obj_sheet->setCellValue("Z32",$opt_m_contract_time_inc_pd);
 $obj_sheet->setCellValue("AF32",$opt_m_contract_time_inc_pm);

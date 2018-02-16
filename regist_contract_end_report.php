@@ -35,6 +35,7 @@ try{
         $a_sql = "INSERT INTO ".$GLOBALS['g_DB_t_contract_end_report']." (";
         #[2018.01.12]追加
         #[2018.01.18]課題解決管理表No.92
+        #[2018.02.16]課題解決管理表No.99
         $a_sql .= "
             cr_id
             ,replace_person
@@ -66,6 +67,48 @@ try{
             ,insurance_card_leave
             ,remarks2
             ,remarks_pay2
+            ,claim_normal_calculation_end
+            ,claim_normal_unit_price_end
+            ,claim_normal_lower_limit_end
+            ,claim_normal_upper_limit_end
+            ,claim_normal_deduction_unit_price_end
+            ,claim_normal_over_unit_price_end
+            ,claim_leaving_employment_day_end
+            ,claim_leaving_allbusiness_day_end
+            ,claim_leaving_calculation_end
+            ,claim_leaving_unit_price_end
+            ,claim_leaving_lower_limit_end
+            ,claim_leaving_upper_limit_end
+            ,claim_leaving_deduction_unit_price_end
+            ,claim_leaving_over_unit_price_end
+            ,payment_normal_calculation_1_end
+            ,payment_normal_calculation_2_end
+            ,payment_normal_unit_price_1_end
+            ,payment_normal_unit_price_2_end
+            ,payment_normal_lower_limit_1_end
+            ,payment_normal_lower_limit_2_end
+            ,payment_normal_upper_limit_1_end
+            ,payment_normal_upper_limit_2_end
+            ,payment_normal_deduction_unit_price_1_end
+            ,payment_normal_deduction_unit_price_2_end
+            ,payment_normal_over_unit_price_1_end
+            ,payment_normal_over_unit_price_2_end
+            ,payment_leaving_employment_day_1_end
+            ,payment_leaving_employment_day_2_end
+            ,payment_leaving_allbusiness_day_1_end
+            ,payment_leaving_allbusiness_day_2_end
+            ,payment_leaving_calculation_1_end
+            ,payment_leaving_calculation_2_end
+            ,payment_leaving_unit_price_1_end
+            ,payment_leaving_unit_price_2_end
+            ,payment_leaving_lower_limit_1_end
+            ,payment_leaving_lower_limit_2_end
+            ,payment_leaving_upper_limit_1_end
+            ,payment_leaving_upper_limit_2_end
+            ,payment_leaving_deduction_unit_price_1_end
+            ,payment_leaving_deduction_unit_price_2_end
+            ,payment_leaving_over_unit_price_1_end
+            ,payment_leaving_over_unit_price_2_end
             ";
         $a_sql .= ") VALUES(";
         #[2018.01.12]追加
@@ -101,12 +144,55 @@ try{
             ,:insurance_card_leave
             ,:remarks2
             ,:remarks_pay2
+            ,:claim_normal_calculation_end
+            ,:claim_normal_unit_price_end
+            ,:claim_normal_lower_limit_end
+            ,:claim_normal_upper_limit_end
+            ,:claim_normal_deduction_unit_price_end
+            ,:claim_normal_over_unit_price_end
+            ,:claim_leaving_employment_day_end
+            ,:claim_leaving_allbusiness_day_end
+            ,:claim_leaving_calculation_end
+            ,:claim_leaving_unit_price_end
+            ,:claim_leaving_lower_limit_end
+            ,:claim_leaving_upper_limit_end
+            ,:claim_leaving_deduction_unit_price_end
+            ,:claim_leaving_over_unit_price_end
+            ,:payment_normal_calculation_1_end
+            ,:payment_normal_calculation_2_end
+            ,:payment_normal_unit_price_1_end
+            ,:payment_normal_unit_price_2_end
+            ,:payment_normal_lower_limit_1_end
+            ,:payment_normal_lower_limit_2_end
+            ,:payment_normal_upper_limit_1_end
+            ,:payment_normal_upper_limit_2_end
+            ,:payment_normal_deduction_unit_price_1_end
+            ,:payment_normal_deduction_unit_price_2_end
+            ,:payment_normal_over_unit_price_1_end
+            ,:payment_normal_over_unit_price_2_end
+            ,:payment_leaving_employment_day_1_end
+            ,:payment_leaving_employment_day_2_end
+            ,:payment_leaving_allbusiness_day_1_end
+            ,:payment_leaving_allbusiness_day_2_end
+            ,:payment_leaving_calculation_1_end
+            ,:payment_leaving_calculation_2_end
+            ,:payment_leaving_unit_price_1_end
+            ,:payment_leaving_unit_price_2_end
+            ,:payment_leaving_lower_limit_1_end
+            ,:payment_leaving_lower_limit_2_end
+            ,:payment_leaving_upper_limit_1_end
+            ,:payment_leaving_upper_limit_2_end
+            ,:payment_leaving_deduction_unit_price_1_end
+            ,:payment_leaving_deduction_unit_price_2_end
+            ,:payment_leaving_over_unit_price_1_end
+            ,:payment_leaving_over_unit_price_2_end
             ";
         $a_sql .= ");";
     }else{
         $a_sql = "UPDATE ".$GLOBALS['g_DB_t_contract_end_report']." SET ";
         #[2018.01.12]追加
         #[2018.01.18]課題解決管理表No.92
+        #[2018.02.16]課題解決管理表No.99
         $a_sql .= "
             replace_person=:replace_person
             ,end_status=:end_status
@@ -137,6 +223,48 @@ try{
             ,insurance_card_leave=:insurance_card_leave
             ,remarks2=:remarks2
             ,remarks_pay2=:remarks_pay2
+            ,claim_normal_calculation_end=:claim_normal_calculation_end
+            ,claim_normal_unit_price_end=:claim_normal_unit_price_end
+            ,claim_normal_lower_limit_end=:claim_normal_lower_limit_end
+            ,claim_normal_upper_limit_end=:claim_normal_upper_limit_end
+            ,claim_normal_deduction_unit_price_end=:claim_normal_deduction_unit_price_end
+            ,claim_normal_over_unit_price_end=:claim_normal_over_unit_price_end
+            ,claim_leaving_employment_day_end=:claim_leaving_employment_day_end
+            ,claim_leaving_allbusiness_day_end=:claim_leaving_allbusiness_day_end
+            ,claim_leaving_calculation_end=:claim_leaving_calculation_end
+            ,claim_leaving_unit_price_end=:claim_leaving_unit_price_end
+            ,claim_leaving_lower_limit_end=:claim_leaving_lower_limit_end
+            ,claim_leaving_upper_limit_end=:claim_leaving_upper_limit_end
+            ,claim_leaving_deduction_unit_price_end=:claim_leaving_deduction_unit_price_end
+            ,claim_leaving_over_unit_price_end=:claim_leaving_over_unit_price_end
+            ,payment_normal_calculation_1_end=:payment_normal_calculation_1_end
+            ,payment_normal_calculation_2_end=:payment_normal_calculation_2_end
+            ,payment_normal_unit_price_1_end=:payment_normal_unit_price_1_end
+            ,payment_normal_unit_price_2_end=:payment_normal_unit_price_2_end
+            ,payment_normal_lower_limit_1_end=:payment_normal_lower_limit_1_end
+            ,payment_normal_lower_limit_2_end=:payment_normal_lower_limit_2_end
+            ,payment_normal_upper_limit_1_end=:payment_normal_upper_limit_1_end
+            ,payment_normal_upper_limit_2_end=:payment_normal_upper_limit_2_end
+            ,payment_normal_deduction_unit_price_1_end=:payment_normal_deduction_unit_price_1_end
+            ,payment_normal_deduction_unit_price_2_end=:payment_normal_deduction_unit_price_2_end
+            ,payment_normal_over_unit_price_1_end=:payment_normal_over_unit_price_1_end
+            ,payment_normal_over_unit_price_2_end=:payment_normal_over_unit_price_2_end
+            ,payment_leaving_employment_day_1_end=:payment_leaving_employment_day_1_end
+            ,payment_leaving_employment_day_2_end=:payment_leaving_employment_day_2_end
+            ,payment_leaving_allbusiness_day_1_end=:payment_leaving_allbusiness_day_1_end
+            ,payment_leaving_allbusiness_day_2_end=:payment_leaving_allbusiness_day_2_end
+            ,payment_leaving_calculation_1_end=:payment_leaving_calculation_1_end
+            ,payment_leaving_calculation_2_end=:payment_leaving_calculation_2_end
+            ,payment_leaving_unit_price_1_end=:payment_leaving_unit_price_1_end
+            ,payment_leaving_unit_price_2_end=:payment_leaving_unit_price_2_end
+            ,payment_leaving_lower_limit_1_end=:payment_leaving_lower_limit_1_end
+            ,payment_leaving_lower_limit_2_end=:payment_leaving_lower_limit_2_end
+            ,payment_leaving_upper_limit_1_end=:payment_leaving_upper_limit_1_end
+            ,payment_leaving_upper_limit_2_end=:payment_leaving_upper_limit_2_end
+            ,payment_leaving_deduction_unit_price_1_end=:payment_leaving_deduction_unit_price_1_end
+            ,payment_leaving_deduction_unit_price_2_end=:payment_leaving_deduction_unit_price_2_end
+            ,payment_leaving_over_unit_price_1_end=:payment_leaving_over_unit_price_1_end
+            ,payment_leaving_over_unit_price_2_end=:payment_leaving_over_unit_price_2_end
             ";
         $a_sql .= " WHERE (cr_id=:cr_id);";
     }
@@ -174,6 +302,90 @@ try{
     $a_stmt->bindParam(':remarks2', $_POST['remarks2'], PDO::PARAM_STR);
     $a_stmt->bindParam(':remarks_pay2', $_POST['remarks_pay2'], PDO::PARAM_STR);
 
+    #[2018.02.16]課題解決管理表No.99↓
+    $a_stmt->bindParam(':claim_normal_calculation_end', $_POST['claim_normal_calculation_end'], PDO::PARAM_STR);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_normal_unit_price_end']));
+    com_pdo_bindValue($a_stmt, ':claim_normal_unit_price_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_normal_lower_limit_end']));
+    com_pdo_bindValue($a_stmt, ':claim_normal_lower_limit_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_normal_upper_limit_end']));
+    com_pdo_bindValue($a_stmt, ':claim_normal_upper_limit_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_normal_deduction_unit_price_end']));
+    com_pdo_bindValue($a_stmt, ':claim_normal_deduction_unit_price_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_normal_over_unit_price_end']));
+    com_pdo_bindValue($a_stmt, ':claim_normal_over_unit_price_end', $a_val);
+    
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_employment_day_end']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_employment_day_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_allbusiness_day_end']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_allbusiness_day_end', $a_val);
+    $a_stmt->bindParam(':claim_leaving_calculation_end', $_POST['claim_leaving_calculation_end'], PDO::PARAM_STR);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_unit_price_end']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_unit_price_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_lower_limit_end']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_lower_limit_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_upper_limit_end']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_upper_limit_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_deduction_unit_price_end']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_deduction_unit_price_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['claim_leaving_over_unit_price_end']));
+    com_pdo_bindValue($a_stmt, ':claim_leaving_over_unit_price_end', $a_val);
+
+    $a_stmt->bindParam(':payment_normal_calculation_1_end', $_POST['payment_normal_calculation_1_end'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':payment_normal_calculation_2_end', $_POST['payment_normal_calculation_2_end'], PDO::PARAM_STR);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_unit_price_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_unit_price_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_unit_price_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_unit_price_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_lower_limit_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_lower_limit_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_lower_limit_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_lower_limit_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_upper_limit_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_upper_limit_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_upper_limit_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_upper_limit_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_deduction_unit_price_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_deduction_unit_price_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_deduction_unit_price_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_deduction_unit_price_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_over_unit_price_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_over_unit_price_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_normal_over_unit_price_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_normal_over_unit_price_2_end', $a_val);
+    
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_employment_day_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_employment_day_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_employment_day_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_employment_day_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_allbusiness_day_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_allbusiness_day_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_allbusiness_day_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_allbusiness_day_2_end', $a_val);
+    $a_stmt->bindParam(':payment_leaving_calculation_1_end', $_POST['payment_leaving_calculation_1_end'], PDO::PARAM_STR);
+    $a_stmt->bindParam(':payment_leaving_calculation_2_end', $_POST['payment_leaving_calculation_2_end'], PDO::PARAM_STR);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_unit_price_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_unit_price_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_unit_price_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_unit_price_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_lower_limit_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_lower_limit_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_lower_limit_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_lower_limit_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_upper_limit_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_upper_limit_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_upper_limit_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_upper_limit_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_deduction_unit_price_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_deduction_unit_price_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_deduction_unit_price_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_deduction_unit_price_2_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_over_unit_price_1_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_over_unit_price_1_end', $a_val);
+    $a_val = str_replace("￥", "", str_replace(",","",$_POST['payment_leaving_over_unit_price_2_end']));
+    com_pdo_bindValue($a_stmt, ':payment_leaving_over_unit_price_2_end', $a_val);
+    #[2018.02.16]課題解決管理表No.99↑
+    
     if ($a_isExists == false) {
         com_pdo_bindValue($a_stmt, ':reg_id', $_POST['reg_id']);
         #com_pdo_bindValue($a_stmt, ':reg_id', $_SESSION['hal_idx']);
