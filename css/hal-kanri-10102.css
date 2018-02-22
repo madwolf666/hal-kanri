@@ -56,6 +56,28 @@ ul.myul2{
 }
 
 /* スマートフォン用　*/
+@media screen and (max-width: 479px){
+	li.myli {
+            margin-left: 4px;
+		/*margin: 0 0 1 0em;*/
+		padding: 0;
+		/*padding-left:0.5%;
+		padding-right: 1%;*/
+		font-size : 14px;
+		vertical-align: middle;
+		text-align: center;
+		width:auto;
+		/*border: 5px dotted #000000;*/
+        }
+        .notice{
+            width: 340px;
+            /*width: 340px;*/
+        }
+        .notice td{
+            /*width: 220px;*/
+            table-layout: fixed;
+        }
+}
 @media screen and (min-width: 480px){
 	li.myli {
 		margin: 0 0 1 0em;
@@ -69,6 +91,7 @@ ul.myul2{
 		/*border: 5px dotted #000000;*/
         }
         .notice{
+            /*width: 360px;*/
             width: 340px;
         }
         .notice td{
@@ -93,6 +116,7 @@ ul.myul2{
 		/*border: 5px dotted #000000;*/
             }
         .notice{
+            /*width: 360px;*/
             width: 340px;
         }
         .notice td{
