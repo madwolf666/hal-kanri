@@ -592,6 +592,7 @@ function calc_bill_middle_admission()
     var a_zangyo_unit = $('#txt_contract_zangyo_unit_b1').val();
     var a_syugyonisu = $('#inp_syugyonisu_b2').val();
     var a_zeneigyonisu = $('#inp_zeneigyonisu_b2').val();
+    var a_contract_calc_b1 = $('[name=opt_contract_calc_b1] option:selected').text();   //[2018.02.27]課題解決管理表No.100
     var a_tmp;
 
     if (a_lower_txt == ''){
@@ -616,12 +617,17 @@ function calc_bill_middle_admission()
     
     //日割り時の割合：手入力⇒★手入力が必要？
     //単金⇒IF(OR(就業日数="",自動計算=""),"",IF(手入力<>"",通常単金*手入力,通常単金*自動計算))
-    if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
-        $('#txt_tankin_b2').val('');
-    } else if (a_wariai_c2 != '') {
-        $('#txt_tankin_b2').val(Number(Math.round(a_tankin*a_wariai_c2)).toLocaleString());
+    //[2018.02.27]課題解決管理表No.100
+    if (a_contract_calc_b1 != '時給'){
+        if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
+            $('#txt_tankin_b2').val('');
+        } else if (a_wariai_c2 != '') {
+            $('#txt_tankin_b2').val(Number(Math.round(a_tankin*a_wariai_c2)).toLocaleString());
+        } else {
+            $('#txt_tankin_b2').val(Number(Math.round(a_tankin*a_wariai_c1)).toLocaleString());
+        }
     } else {
-        $('#txt_tankin_b2').val(Number(Math.round(a_tankin*a_wariai_c1)).toLocaleString());
+        $('#txt_tankin_b2').val(a_tankin);
     }
     
     //下限時間⇒IF(就業日数="","",TRUNC(IF(OR(就業日数="",自動計算=""),"",IF(手入力<>"",通常下限時間*手入力,通常下限時間*自動計算))))
@@ -826,6 +832,7 @@ function calc_bill_midway_retirement()
     var a_zangyo_unit = $('#txt_contract_zangyo_unit_b1').val();
     var a_syugyonisu = $('#inp_syugyonisu_b3').val();
     var a_zeneigyonisu = $('#inp_zeneigyonisu_b3').val();
+    var a_contract_calc_b1 = $('[name=opt_contract_calc_b1] option:selected').text();   //[2018.02.27]課題解決管理表No.100
     var a_tmp;
 
     if (a_lower_txt == ''){
@@ -850,12 +857,17 @@ function calc_bill_midway_retirement()
     
     //日割り時の割合：手入力⇒★手入力が必要？
     //単金⇒IF(OR(就業日数="",自動計算=""),"",IF(手入力<>"",通常単金*手入力,通常単金*自動計算))
-    if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
-        $('#txt_tankin_b3').val('');
-    } else if (a_wariai_c2 != '') {
-        $('#txt_tankin_b3').val(Number(Math.round(a_tankin*a_wariai_c2)).toLocaleString());
+    //[2018.02.27]課題解決管理表No.100
+    if (a_contract_calc_b1 != '時給'){
+        if ((a_syugyonisu == '') || (a_wariai_c1 == '')) {
+            $('#txt_tankin_b3').val('');
+        } else if (a_wariai_c2 != '') {
+            $('#txt_tankin_b3').val(Number(Math.round(a_tankin*a_wariai_c2)).toLocaleString());
+        } else {
+            $('#txt_tankin_b3').val(Number(Math.round(a_tankin*a_wariai_c1)).toLocaleString());
+        }
     } else {
-        $('#txt_tankin_b3').val(Number(Math.round(a_tankin*a_wariai_c1)).toLocaleString());
+        $('#txt_tankin_b3').val(a_tankin);
     }
     
     //下限時間⇒IF(就業日数="","",TRUNC(IF(OR(就業日数="",自動計算=""),"",IF(手入力<>"",通常下限時間*手入力,通常下限時間*自動計算))))
@@ -1119,6 +1131,8 @@ function calc_pay_normal_period()
     var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
     if (a_contract_form == '協'){
         a_kangen = $('#txt_contract_reduction').val();
+    } else if(a_contract_form == '契'){  //[2018.02.23]課題解決管理表No.100②
+        return;
     }
 
     //①エンジニア還元金額
@@ -1345,6 +1359,8 @@ function calc_pay_middle_admission()
     var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
     if (a_contract_form == '協'){
         a_kangen = $('#txt_contract_reduction').val();
+    } else if(a_contract_form == '契'){  //[2018.02.23]課題解決管理表No.100②
+        return;
     }
 
     //①エンジニア還元金額
@@ -1486,6 +1502,8 @@ function calc_pay_midway_retirement()
     var a_contract_form = $('[name=opt_contract_pay_form] option:selected').text();
     if (a_contract_form == '協'){
         a_kangen = $('#txt_contract_reduction').val();
+    } else if(a_contract_form == '契'){  //[2018.02.23]課題解決管理表No.100②
+        return;
     }
     
     //①エンジニア還元金額
