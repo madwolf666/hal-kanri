@@ -132,6 +132,7 @@ function set_10600_selectDB()
 
     #[2018.01.29]課題解決管理表No.87
     $a_sql_src .= " FROM (SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE ";
+    $a_sql_src .= "(claim_contract_form IN ('派遣')) AND ";   #[2018.03.01]課題解決管理表No.201
     if ($_SESSION['contract_del'] == 1){
         $a_sql_src .= "(del_flag='1')";
     }else{

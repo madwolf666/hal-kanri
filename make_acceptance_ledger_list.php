@@ -25,8 +25,43 @@ try{
     #$a_where = "((t1.del_flag IS NULL) OR (t1.del_flag<>'1'))";    #[2018.01.26]課題解決管理表No.87
     #[2018.01.30]課題解決管理表No.87
     if ($_SESSION['contract_del'] != 1){
-        $a_where = com_make_where_session(1, $a_where, 't1.contract_number', 'f_contract_number_10300', "", "");
-        $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10300', "", "f_engineer_number_10300_andor");
+        #[2018.03.02]解決管理表No.102↓
+        $a_where_sub = "";
+        $a_where_andor = "";
+        if (isset($_SESSION['f_contract_number_10300'])){
+            $a_sess = $_SESSION['f_contract_number_10300'];
+            if ($a_sess != ""){
+                $a_where_sub = "(t1.contract_number='".$a_sess."')";
+            }
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= $a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;
+        }
+        #$a_where = com_make_where_session(1, $a_where, 't1.contract_number', 'f_contract_number_10300', "", "");
+        
+        $a_where_sub = "";
+        $a_where_andor = "";
+        if (isset($_SESSION['f_engineer_number_10300'])){
+            $a_sess = $_SESSION['f_engineer_number_10300'];
+            if ($a_sess != ""){
+                $a_where_sub = "(t1.engineer_number='".$a_sess."')";
+            }
+        }
+        if (isset($_SESSION['f_engineer_number_10300_andor'])){
+            $a_where_andor = " ".$_SESSION['f_engineer_number_10300_andor']." ";
+        }else{
+            $a_where_andor = " AND ";
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= " ".$a_where_andor." ".$a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;
+        }
+        #$a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10300', "", "f_engineer_number_10300_andor");
+        #[2018.03.02]解決管理表No.102↑
+        
         $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10300', "", "f_engineer_name_10300_andor");
         $a_where = com_make_where_session(1, $a_where, 't1.customer_name', 'f_customer_name_10300', "", "f_customer_name_10300_andor");
         $a_where = com_make_where_session(3, $a_where, 't1.claim_contract_form', 'f_claim_contract_form_10300', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_10300_andor");
@@ -39,8 +74,43 @@ try{
         $a_where = com_make_where_session(2, $a_where, 't2.payment_acceptance_date', 'f_payment_acceptance_date_10300', "", "f_payment_acceptance_date_10300_andor");
         $a_where = com_make_where_session(3, $a_where, 't1.payment_settlement_paymentday', 'f_payment_settlement_paymentday_10300', $GLOBALS['g_DB_m_contract_pay_pay'], "f_payment_settlement_paymentday_10300_andor");
     }else{
-        $a_where = com_make_where_session(1, $a_where, 't1.contract_number', 'f_contract_number_10300_del', "", "");
-        $a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10300_del', "", "f_engineer_number_10300_andor_del");
+        #[2018.03.02]解決管理表No.102↓
+        $a_where_sub = "";
+        $a_where_andor = "";
+        if (isset($_SESSION['f_contract_number_10300_del'])){
+            $a_sess = $_SESSION['f_contract_number_10300_del'];
+            if ($a_sess != ""){
+                $a_where_sub = "(t1.contract_number='".$a_sess."')";
+            }
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= $a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;
+        }
+        #$a_where = com_make_where_session(1, $a_where, 't1.contract_number', 'f_contract_number_10300_del', "", "");
+        
+        $a_where_sub = "";
+        $a_where_andor = "";
+        if (isset($_SESSION['f_engineer_number_10300_del'])){
+            $a_sess = $_SESSION['f_engineer_number_10300_del'];
+            if ($a_sess != ""){
+                $a_where_sub = "(t1.engineer_number='".$a_sess."')";
+            }
+        }
+        if (isset($_SESSION['f_engineer_number_10300_andor_del'])){
+            $a_where_andor = " ".$_SESSION['f_engineer_number_10300_andor_del']." ";
+        }else{
+            $a_where_andor = " AND ";
+        }
+        if (($a_where != "") && ($a_where_sub != "")){
+            $a_where .= " ".$a_where_andor." ".$a_where_sub;
+        }else{
+            $a_where .= $a_where_sub;
+        }
+        #$a_where = com_make_where_session(1, $a_where, 't1.engineer_number', 'f_engineer_number_10300_del', "", "f_engineer_number_10300_andor_del");
+        #[2018.03.02]解決管理表No.102↑
+
         $a_where = com_make_where_session(1, $a_where, 't1.engineer_name', 'f_engineer_name_10300_del', "", "f_engineer_name_10300_andor_del");
         $a_where = com_make_where_session(1, $a_where, 't1.customer_name', 'f_customer_name_10300_del', "", "f_customer_name_10300_andor_del");
         $a_where = com_make_where_session(3, $a_where, 't1.claim_contract_form', 'f_claim_contract_form_10300_del', $GLOBALS['g_DB_m_contract_bill_form'], "f_claim_contract_form_10300_andor_del");

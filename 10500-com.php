@@ -144,6 +144,8 @@ $guide_ships = "";
 $sex = "";
 $skill_type = "";
 
+#$payment_contract_form = "";    #[2018.03.01]課題解決管理表No.102
+
 function set_10500_selectDB()
 {
     $a_sql_src = "SELECT t1.*,";
@@ -170,6 +172,7 @@ function set_10500_selectDB()
 
     #[2018.01.29]課題解決管理表No.87
     $a_sql_src .= " FROM (SELECT * FROM ".$GLOBALS['g_DB_t_contract_report']." WHERE ";
+    $a_sql_src .= " (payment_contract_form NOT IN ('個','協')) AND ";   #[2018.03.01]課題解決管理表No.102
     if ($_SESSION['contract_del'] == 1){
         $a_sql_src .= "(del_flag='1')";
     }else{
@@ -298,6 +301,7 @@ function set_10500_fromDB($a_result)
     $GLOBALS['sex'] = $a_result['sex'];
     $GLOBALS['skill_type'] = $a_result['skill_type'];
 
+    #$GLOBALS['payment_contract_form'] = $a_result['payment_contract_form']; #課題解決管理表No.102
 }
 
 ?>

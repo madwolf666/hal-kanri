@@ -63,7 +63,7 @@ if (isset($_GET['NO'])) {
 <form action="index.php?mnu=<?php echo $GLOBALS['g_MENU_CONTRACT_10500']; ?>" method="post">
 <center>
     <div class="width">
-        <br>
+        <p style="text-align:right;"><u>発行日　<?php echo $publication;?></u></p>
         <font size="+2"><B><u>就業条件明示書</u></B></font>
         <p style="width:120px; margin-left:auto; text-align:left;"><!-- font color="#ff0000">平成29年4月7日</font --></p>
         <p style="width:150px; margin-right:auto; text-align:right;"><u>　<?php echo $engineer_name; ?>　様</u></p>

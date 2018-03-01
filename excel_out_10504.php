@@ -46,6 +46,9 @@ $obj_book   = $obj_reader->load($target_file);
 //2. ファイルを編集（先頭のシートのA1セルに文字列を書き込み）
 $obj_sheet = $obj_book->getSheet(0);
 
+#[2018.03.01]課題解決管理表No.102
+com_setValue_Date($publication,  $obj_sheet, "AC1", "yyyy年MM月dd日");
+
 $obj_sheet->setCellValue("E6", $engineer_name);
 
 #$obj_sheet->setCellValue("H13", $skill_type);
